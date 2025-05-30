@@ -74,7 +74,7 @@
       #align(left)[
         #text(12pt)[
           #if version != none [
-            *Version* - #version
+            *Version* -- #version
           ]
         ]
       ]
@@ -103,8 +103,8 @@
         columns: (1fr, 1fr),
         [
           #set text(size: 9pt)
-          *Author* - #author\
-          *Version* - #version
+          *Author* -- #author\
+          *Version* -- #version
         ],
         align(right)[
           #set text(size: 11pt, weight: "bold")
