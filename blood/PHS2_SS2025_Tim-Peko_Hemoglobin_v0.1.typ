@@ -156,7 +156,7 @@ Where:
 A is the absorbance (measured at 546 nm)
 
 ε is the molar absorptivity of HiCN (ε = 44,000 L/mol·cm)
-
+gabriel
 l is the path length of the cuvette (usually 1 cm)
 
 c is the concentration in mol/L
