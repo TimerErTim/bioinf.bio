@@ -12,7 +12,7 @@
     Page *#current* / *#total*
   ],
   version: "0.1",
-  date: "2025-05-28",
+  date: "2025-06-04",
 )
 #show link: it => underline(text(fill: blue)[#it])
 
@@ -68,7 +68,7 @@ regenerate functional hemoglobin. However, if someone is exposed to certain oxid
 well water, benzocaine, or dapsone), the rate of $"Fe"^(2+) arrow "Fe"^(3+)$ conversion can overwhelm the repair
 enzymes.
 
-#figure(image("assets/methemoglobin_cycle.png", width: 95%), caption: "Methemoglobin regeneration cycle") <methomoglobin-cycle>
+#figure(image("assets/methemoglobin_cycle.png", width: 95%), caption: "Methemoglobin regeneration cycle") <methemoglobin-cycle>
 
 The result is methemoglobinemia, where a significant fraction of hemoglobin is stuck in the $"Fe"^(3+)$ form. Blood with
 high methemoglobin turns a chocolate-brown color and can cause symptoms of hypoxia (like cyanosis, fatigue or even
@@ -114,13 +114,13 @@ user-friendly results, the $"HiCN"$ method remains the gold standard due to its 
 #pagebreak()
 = Procedure
 
-Due to unfortunate circumstances, the Reflotron during our lab session was defect and therefore no test data using that
+Due to unfortunate circumstances, the Reflotron during our lab session was defective and therefore no test data using that
 method could be collected. As a result, this chapter only covers the hemiglobincyanide method.
 
 == Materials
 
 - Fresh blood sample (capillary or venous)
-- Drabkin’s reagent (contains K₃Fe(CN)₆ and KCN)
+- Drabkin's reagent (contains K₃Fe(CN)₆ and KCN)
 - Spectrophotometer with a 546 nm filter
 - Cuvettes
 - Pipettes and tips
@@ -130,8 +130,8 @@ method could be collected. As a result, this chapter only covers the hemiglobinc
 
 Always wear gloves and handle blood as a biohazard.
 
-Drabkin's reagent contains potassium cyanide, a highly potent neurotoxin. Prevent inhalation or other absorbtion of the
-substance. Be mindful of proper wastedisposal.
+Drabkin's reagent contains potassium cyanide, a highly potent neurotoxin. Prevent inhalation or other absorption of the
+substance. Be mindful of proper waste disposal.
 
 == Steps
 
@@ -164,7 +164,7 @@ Using the Beer-Lambert law from @beer-lambert-law we formulate:
 
 $ \cspace["mol"slash\L] = A/epsilon times 1/ell $
 
-We can calculate our absorbtivity $epsilon$ of $"HiCN"$ for the total sample:
+We can calculate our absorptivity $epsilon$ of $"HiCN"$ for the total sample:
 
 $
   epsilon_"total" &= epsilon_"HiCN"/("MG"_"Hb") times (V_"probe")/(V_"total") \
@@ -191,7 +191,7 @@ $
 
 === Correct formula from instructor
 
-The instructor provided us with a formula containing the precaclulated factor to calculate the hemoglobin concentration:
+The instructor provided us with a formula containing the precalculated factor to calculate the hemoglobin concentration:
 
 $
   \cspace["g"slash"dL"] = A times 14.746 "g"/"dL" \
@@ -206,13 +206,13 @@ $"c"_"Hb" = 1.21 times 14.746 "g"/"dL" = 17.843 "g"/"dL"$
 #pagebreak()
 = Results
 
-We inspected the data of
-+ the conducting class
+We analyzed the data from
++ our class
 + the data of all years, ranging from 2015 to 2024
 
-== Conducting class: MBI24 (current year) <mbi24-results>
+== Our class: MBI24 (current year) <mbi24-results>
 
-@current-year-table-overview-results shows the summary of the conducting class. In total 22 students participated in the experiment, split between 12 females and 10 males. One can observe that the mean $"c"_"Hb"$ of the females is lower than the mean of the males, and the range also suggests that the males hemoglobin concentration tends to be higher.
+@current-year-table-overview-results shows the summary of our class. In total 22 students participated in the experiment, split between 12 females and 10 males. One can observe that the mean $"c"_"Hb"$ of the females is lower than the mean of the males, and the range also suggests that the males hemoglobin concentration tends to be higher.
 
 #figure(
   table(
