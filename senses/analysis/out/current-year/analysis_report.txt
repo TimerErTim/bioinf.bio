@@ -1,0 +1,71 @@
+TACTILE SENSITIVITY ANALYSIS REPORT
+==================================================
+
+1. OVERVIEW
+--------------------
+Total participants analyzed: 10
+Male participants: 5
+Female participants: 5
+
+2. DESCRIPTIVE STATISTICS (mm)
+-----------------------------------
+
+Hand Back:
+  N: 10
+  Mean: 16.30 ± 4.74 mm
+  Median: 16.50 mm
+  Range: 10.00 - 23.00 mm
+
+Fingertip:
+  N: 10
+  Mean: 2.10 ± 1.10 mm
+  Median: 2.00 mm
+  Range: 1.00 - 4.00 mm
+
+Forearm:
+  N: 10
+  Mean: 17.85 ± 9.06 mm
+  Median: 18.50 mm
+  Range: 6.00 - 37.00 mm
+
+Back:
+  N: 2
+  Mean: 24.50 ± 2.12 mm
+  Median: 24.50 mm
+  Range: 23.00 - 26.00 mm
+
+Palm:
+  N: 10
+  Mean: 6.11 ± 3.46 mm
+  Median: 6.00 mm
+  Range: 0.00 - 11.50 mm
+
+3. BODY REGION COMPARISONS
+------------------------------
+Significant differences (p < 0.05):
+  Hand Back vs Fingertip: p = 0.0000
+  Hand Back vs Back: p = 0.0421
+  Hand Back vs Palm: p = 0.0000
+  Fingertip vs Forearm: p = 0.0000
+  Fingertip vs Back: p = 0.0000
+  Fingertip vs Palm: p = 0.0026
+  Forearm vs Palm: p = 0.0012
+  Back vs Palm: p = 0.0000
+
+4. GENDER COMPARISONS
+-------------------------
+Significant gender differences (p < 0.05):
+  No significant gender differences found.
+
+5. INTERPRETATION
+--------------------
+Most sensitive region: Fingertip (2.10 mm)
+Least sensitive region: Back (24.50 mm)
+
+DISCUSSION:
+The results show varying tactile sensitivity across different body regions.
+This variation is consistent with the known distribution of mechanoreceptors:
+- Fingertips typically have the highest density of receptors (smallest threshold)
+- Back and forearm typically have lower receptor density (larger threshold)
+- The results reflect the functional importance of different body parts
+  for tactile discrimination tasks.

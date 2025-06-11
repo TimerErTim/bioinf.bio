@@ -404,8 +404,22 @@ class TactileSensitivityAnalyzer:
 
 def main():
     """Main function to run the analysis"""
-    # Create analyzer instance
-    analyzer = TactileSensitivityAnalyzer()
+    import argparse
+    
+    # Set up argument parser
+    parser = argparse.ArgumentParser(description='Analyze tactile sensitivity data')
+    parser.add_argument('--data-dir', type=str, 
+                      default=TactileSensitivityAnalyzer.__init__.__defaults__[0],
+                      help='Directory containing input data files (default: %(default)s)')
+    parser.add_argument('--output-dir', type=str, 
+                      default=TactileSensitivityAnalyzer.__init__.__defaults__[1], 
+                      help='Directory for output files (default: %(default)s)')
+    
+    # Parse arguments
+    args = parser.parse_args()
+    
+    # Create analyzer instance with specified directories
+    analyzer = TactileSensitivityAnalyzer(data_dir=args.data_dir, output_dir=args.output_dir)
     
     # Run complete analysis
     analyzer.run_complete_analysis()
