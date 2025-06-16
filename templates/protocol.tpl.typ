@@ -4,6 +4,7 @@
   course: none,
   semester: none,
   author: "Tim Peko",
+  members: none,
   version: none,
   date: none,
   show-cover-page: none,
@@ -64,12 +65,23 @@
       
       #v(1fr)
 
-      #text(16pt)[
-        *Author*\
-        #author
-      ]
+      #if author != none {
+        text(16pt)[
+          *Author*\
+          #author
+        ]
+      }
 
-      
+      #if members != none {
+        v(1em)
+        text(16pt)[
+          *Members*\
+          #for member in members {
+            [#member\ ]
+          }
+        ]
+      }
+
       #v(6em)
       #align(left)[
         #text(12pt)[
@@ -103,7 +115,9 @@
         columns: (1fr, 1fr),
         [
           #set text(size: 9pt)
-          *Author* -- #author\
+          #if author != none [
+            *Author* -- #author\
+          ]
           *Version* -- #version
         ],
         align(right)[
@@ -126,6 +140,7 @@
   course: "PHS2",
   semester: "SS 2025",
   author: "Tim Peko",
+  members: ("Tim Peko", "Max Mustermann"),
   version: "1.0",
   language: "en",
   format-page-counter: (current, total) => [
