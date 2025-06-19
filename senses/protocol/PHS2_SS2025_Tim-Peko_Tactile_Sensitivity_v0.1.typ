@@ -37,19 +37,19 @@
 
 == Mechanoreceptors & Tactile Sensitivity
 
-The sense of touch relies on four main mechanoreceptors, as depicted in @mechanoreceptors:
-- *Merkel cells:* Slowly adapting, small receptive fields; sense steady pressure and fine details.
-- *Meissner's corpuscles:* Rapidly adapting, small fields; detect light touch and flutter.
-- *Ruffini endings:* Slowly adapting, large fields; sense skin stretch and sustained tension.
-- *Pacinian corpuscles:* Rapidly adapting, very large fields; detect deep pressure and high-frequency vibration.
+The sense of touch relies on four main mechanoreceptors, as depicted in @mechanoreceptors.
+- *Merkel cells:* Slowly adapting, small receptive fields; senses steady pressure and fine details.
+- *Meissner's corpuscles:* Rapidly adapting, small fields; detects light touch and flutter.
+- *Ruffini endings:* Slowly adapting, large fields; senses skin stretch and sustained tension.
+- *Pacinian corpuscles:* Rapidly adapting, very large fields; detects deep pressure and high-frequency vibration.
 
 #figure(image("assets/tactile_sensors.png", width: 100%), caption: [
   Depiction of mechanoreceptors in the skin
 ]) <mechanoreceptors>
 
-Merkel and Meissner receptors, located superficially, provide high spatial resolution (small receptive fields), crucial
-for fine tactile tasks. Ruffini and Pacinian corpuscles, deeper in the skin, have large receptive fields and contribute
-to broader, less detailed touch perception.
+Merkel and Meissner receptors, located superficially, provide high spatial resolution (small receptive fields), which is
+crucial for fine tactile tasks. Ruffini and Pacinian corpuscles, located deeper in the skin, have large receptive fields
+and contribute to broader, less detailed touch perception.
 
 == Tactile Resolving Power (Two-Point Discrimination)
 
@@ -60,12 +60,13 @@ to broader, less detailed touch perception.
     width: 55%,
   )[
     The *two-point discrimination (2PD) test* measures the minimum distance at which two simultaneous touches are perceived
-    as separate. This threshold reflects mechanoreceptor density and receptive field size. High-acuity regions (fingertips,
-    lips) have low thresholds, low-acuity regions (back, forearm) have much higher thresholds. @tactile_overview_body lists
-    typical 2PD thresholds across the body.
+    as being separate. This threshold reflects both mechanoreceptor density and receptive field size. High-acuity regions
+    (fingertips, lips) have low thresholds, while low-acuity regions (back, forearm) have much higher thresholds.
+    @tactile_overview_body lists typical 2PD thresholds across the body.
 
-    Resolving power in touch is analogous to visual resolution: it quantifies how finely we can distinguish spatial details
-    on the skin. Differences across the body reflect both receptor density and cortical representation.
+    Resolving power in touch is analogous to visual resolution: it quantifies how finely spatial details can be
+    distinguished on the skin. Differences across the body reflect both receptor density and cortical representation in the
+    brain.
   ]
 
   #place(right + top)[
@@ -87,16 +88,16 @@ to broader, less detailed touch perception.
   #box(
     width: 55%,
   )[
-    We use a compass-style two-point aesthesiometer to apply either one or two points to the skin at varying separations.
-    With eyes closed, the subject reports whether they feel one or two points. The smallest distance reliably perceived as
-    two is the 2PD threshold. This is tested across different skin regions.
+    We use a compass-style two-point aesthesiometer to apply either one or two points to the skin at varying distances. With
+    their eyes closed, the subject reports whether they feel one or two points. The smallest distance at which two points
+    are reliably perceived as separate is the 2PD threshold. This is tested on different skin regions.
 
-    The test is repeated for the fingertip, palm, back of hand, forearm, and upper back to compare tactile acuity.
+    The test is repeated on the fingertip, palm, back of the hand, forearm, and upper back to compare tactile acuity.
   ]
 
   #place(right + top)[
     #figure(image("assets/tactile_experiment_scetch.jpg", width: 40%), caption: [
-      Scatch of the experiment\
+      Sketch of the experiment\
       execution
     ])
   ]
@@ -107,18 +108,18 @@ to broader, less detailed touch perception.
 - Two-point divider (aesthesiometer)
 - Ruler (mm scale)
 - Alcohol swabs (for hygiene)
-- Optional: blindfold, notebook for recording
+- Optional: blindfold, notebook (for recording)
 
 == Procedure
 
-1. *Sanitize* the divider's points with alcohol.
-2. *Prepare subject:* Seated, eyes closed. Explain the procedure.
-3. *Select region:* Start with points far apart, gently touch skin.
-4. *Ask:* "One point or two?"
-5. *Adjust distance:* Decrease until only one point is felt; increase slightly to confirm threshold.
-6. *Record threshold* (mm) for each region.
-7. *Repeat* for all regions and participants, cleaning between tests.
-8. *Multiple trials:* Average thresholds for accuracy.
+1. *Sanitize* the points of the divider with alcohol.
+2. *Prepare the subject:* have them seated with eyes closed. Explain the procedure.
+3. *Select a region:* start with the points far apart, and gently touch the skin.
+4. *Ask:* "Do you feel one point or two?"
+5. *Adjust the distance:* decrease it until only one point is felt; then increase slightly to confirm the threshold.
+6. *Record the threshold* (in mm) for each region.
+7. *Repeat* for all regions and participants, cleaning the divider between tests.
+8. *Conduct multiple trials and average the thresholds for accuracy.*
 
 #pagebreak()
 = Results
@@ -198,17 +199,17 @@ The analysis of the "All years" dataset is only for sanity checking and comparis
   Descriptive statistics of our class
 ]) <descriptive-statistics-our-class>
 
-@descriptive-statistics-our-class shows the decriptive analysis of our class dataset. Displayed values are rounded to 2
-decimal places. We can observe that highest standard deviation is in the forearm region, which could be explained by the
-fact that the forearm's sensitivity varies greatly depending on radial distance from the body.
+@descriptive-statistics-our-class shows the descriptive analysis of our class dataset. Displayed values are rounded to
+two decimal places. We observe that the highest standard deviation is in the forearm region, which could be explained by
+the fact that forearm sensitivity varies greatly depending on the radial distance from the body.
 
 #block(
   breakable: false,
   width: 100%,
 )[
 
-  @our-class-body-regions-boxplot clearly demonstrates the difference in tactile sensitivity between the different body
-  regions. We can order the regions from highest to lowest sensitivity as follows:
+  @our-class-body-regions-boxplot clearly demonstrates the differences in tactile sensitivity between the various body
+  regions. The regions can be ordered from highest to lowest sensitivity as follows:
 
   #align(top, grid(columns: 2, gutter: 1em, box(width: auto)[
     + Fingertip
@@ -251,18 +252,19 @@ fact that the forearm's sensitivity varies greatly depending on radial distance 
 
 === Body regions comparison
 
-In order to confirm statistically relevant differences between the body regions, we performed a t-test for each pair of
-regions. @t-test-body-regions-our-class shows the results of the t-test, all numbers are rounded to 3 decimal places. We
-can observe that all pairs of regions are statistically significant, with the exception of the comparison between:
-- back of hand --- forearm
-- back --- forearm
+In order to confirm statistically significant differences between the body regions, we performed a t-test for each pair
+of regions. @t-test-body-regions-our-class shows the results of the t-test, all numbers are rounded to three decimal
+places. We observe that all pairs of regions show statistically significant differences, except for the comparisons
+between:
+- back of hand and forearm
+- back and forearm
 
 #figure(t-test-body-regions("../analysis/out/current-year/region_comparisons.csv"), caption: [
   t-test of tactile sensitivity in our class comparing body regions
 ]) <t-test-body-regions-our-class>
 
-Despite our quite low sample size, we can observe that the results are quite consistent with our expectations of
-different regions having different tactile sensitivity.
+Despite our relatively small sample size, the results are consistent with our expectations that different regions have
+different tactile sensitivities.
 
 === Gender comparison
 
@@ -307,33 +309,33 @@ different regions having different tactile sensitivity.
   Boxplot of tactile sensitivity in our class comparing gender per body region
 ]) <our-class-gender-comparison>
 
-During our analysis of significant differences between genders, we performed a t-test for each body region.
-@gender-comparison-table-our-class shows the results of the t-test, all test results are rounded to 3 decimal places,
-the group means are rounded to 2 decimal places. The results show no significant difference between genders in any of
-the body regions.
+To analyze differences between genders, we performed a t-test for each body region. @gender-comparison-table-our-class
+shows the results of the t-test, all test results are rounded to three decimal places, and group means are rounded to
+two decimal places. The results show no significant differences between genders in any of the body regions.
 
 #figure(gender-comparison-table("../analysis/out/current-year/gender_comparisons.csv"), caption: [
   t-test of tactile sensitivity in our class comparing gender per body region
 ]) <gender-comparison-table-our-class>
 
-We were unable to process the back region, as there is data available from only male participants.
+We were unable to process the back region, as data was available only from male participants.
 
 == All years
 
-The all years dataset covers way more samples than our class dataset and so we expect to see more consistent results and
-correct results.
+The all-years dataset includes many more samples than our class dataset, so we expect to see more consistent and
+reliable results.
 
 === Overview
 
-@descriptive-statistics-all-years shows the descriptive statistics of the all years dataset. There is a higher standard
-deviation in the all years dataset, which is expected due to the higher sample size.
+@descriptive-statistics-all-years shows the descriptive statistics of the all-years dataset. There is a higher standard
+deviation in the all-years dataset, which is expected due to the larger sample size.
 
 #figure(descriptive-statistics("../analysis/out/all-years/descriptive_statistics.csv"), caption: [
   Descriptive statistics of all years
 ]) <descriptive-statistics-all-years>
 
 @all-years-body-regions-distribution displays the distribution of tactile sensitivity in all years per body region. It
-supports our general consensus from @our-class-overview about the order of regions from highest to lowest sensitivity.
+supports our general conclusion from @our-class-overview regarding the order of regions from highest to lowest
+sensitivity.
 
 #figure(image("assets/all-years_distribution.png", width: 100%), caption: [
   Distribution of tactile sensitivity in all years per body region
@@ -341,9 +343,9 @@ supports our general consensus from @our-class-overview about the order of regio
 
 === Body regions comparison
 
-@t-test-body-regions-all-years confirms our hypothesis of different regions having significantly different tactile
-sensitivity. Displayed values are again rounded to 3 decimal places. We suspect that the higher sample size of the all
-years dataset is the reason for the higher accuracy and more pronounced features of the results.
+@t-test-body-regions-all-years confirms our hypothesis that different regions have significantly different tactile
+sensitivities. Displayed values are again rounded to three decimal places. We suspect that the larger sample size of the
+all-years dataset accounts for the higher accuracy and more pronounced features of the results.
 
 #figure(t-test-body-regions("../analysis/out/all-years/region_comparisons.csv"), caption: [
   t-test of tactile sensitivity in all years comparing body regions
@@ -351,28 +353,27 @@ years dataset is the reason for the higher accuracy and more pronounced features
 
 === Gender comparison
 
-Performing the gender analysis on the all years dataset lead to the same results as the analysis of our class dataset:
-We can determine not siginificant differences between genders in any of the body regions.
-@all-years-gender-comparison-table shows the detailed results of the t-tests.
+Performing the gender analysis on the all-years dataset led to the same results as the analysis of our class dataset: We
+found no significant differences between genders in any of the body regions. @all-years-gender-comparison-table shows
+the detailed results of the t-tests.
 
 #figure(gender-comparison-table("../analysis/out/all-years/gender_comparisons.csv"), caption: [
   t-test of tactile sensitivity in all years comparing gender per body region
 ]) <all-years-gender-comparison-table>
 
-Various studies have shown that female participants seem to have a higher tactile sensitivity than male participants.
-This could not be replicated in our analysis. A possible explanation could be that the sample size of the all years
-dataset is too small to detect a significant difference, or that the experiment was not conducted consistently enough
-between executors and teams to detect a significant difference.
+Various studies have shown that female participants tend to have higher tactile sensitivity than male participants. This
+could not be replicated in our analysis. Possible explanations include an insufficient sample size in the all-years
+dataset or inconsistent experimental procedures between experimenters and teams.
 
 #pagebreak()
 = Summary & Conclusion
 
 The two-point discrimination test quantifies tactile resolving power, revealing large differences across body regions.
-Statistical tests (t-tests) confirm significant differences in thresholds between regions. Sex differences should be
-present according to other literature, but are absent in our experiment. Mechanoreceptor density and cortical
-representation underlie these differences. Our results show fingertips have the finest acuity, back the poorest. Females
-showed no difference in tactile sensitivity. Understanding these patterns informs neuroscience, clinical practice,
-evolutionary biology and technology design.
+Statistical tests (t-tests) confirm significant differences in thresholds between regions. According to other
+literature, sex differences should be present, but they are absent in our experiment. These differences are underpinned
+by mechanoreceptor density and cortical representation. Our results show fingertips have the finest acuity, back the
+poorest. Females showed no significant difference in tactile sensitivity. Understanding these patterns informs
+neuroscience, clinical practice, evolutionary biology, and technology design.
 
 #pagebreak()
 #set heading(numbering: none)
