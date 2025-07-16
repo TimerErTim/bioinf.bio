@@ -135,6 +135,40 @@ def load_clean_lipase_results(path):
     return df
 
 
+def plot_average(df, plot_title, filename, group_by_col=None, plot_type='both', window_size=15):
+    """Generates and saves a smoothed average plot."""
+    plt.figure(figsize=(12, 7))
+
+    if plot_type == 'both':
+        # Assumes df is pre-averaged by time
+        df_sorted = df.sort_values(by='Zeit').reset_index(drop=True)
+        gekocht_smooth = df_sorted['pH_gekocht'].rolling(window=window_size, center=True, min_periods=1).mean()
+        plt.plot(df_sorted['Zeit'], gekocht_smooth, marker='o', linestyle='-', label='Gekocht (Durchschnitt, geglättet)')
+        
+        ungekocht_smooth = df_sorted['pH_ungekocht'].rolling(window=window_size, center=True, min_periods=1).mean()
+        plt.plot(df_sorted['Zeit'], ungekocht_smooth, marker='x', linestyle='--', label='Ungekocht (Durchschnitt, geglättet)')
+    
+    else:  # 'gekocht' or 'ungekocht'
+        # Assumes df is the full lipase_df, and groups it by the group_by_col
+        value_col = f'pH_{plot_type}'
+        marker = 'o' if plot_type == 'gekocht' else 'x'
+        linestyle = '-' if plot_type == 'gekocht' else '--'
+
+        for name, group in df.groupby(group_by_col):
+            avg_group_df = group.groupby('Zeit')[value_col].mean().reset_index()
+            avg_group_df = avg_group_df.sort_values(by='Zeit').reset_index(drop=True)
+            smooth_ph = avg_group_df[value_col].rolling(window=window_size, center=True, min_periods=1).mean()
+            plt.plot(avg_group_df['Zeit'], smooth_ph, marker=marker, linestyle=linestyle, label=f'Menge {name}')
+
+    plt.title(plot_title)
+    plt.xlabel('Zeit (min)')
+    plt.ylabel('Durchschnittlicher pH-Wert')
+    plt.legend()
+    plt.grid(True)
+    plt.savefig(os.path.join(PLOTS_DIR, filename))
+    plt.close()
+
+
 def main():
     """Main function to run the analysis."""
     # Create plots directory if it doesn't exist
@@ -151,7 +185,7 @@ def main():
     print(lipase_df.head())
 
 
-    # Analysis and plotting
+    # --- Individual Group Plots ---
     for (stdgang, gruppe), group_df in lipase_df.groupby(['Stdgang', 'Gruppe']):
         plt.figure(figsize=(10, 6))
         
@@ -168,6 +202,35 @@ def main():
         filename = f"{stdgang}_Gruppe_{gruppe}.png".replace("/", "_")
         plt.savefig(os.path.join(PLOTS_DIR, filename))
         plt.close()
+
+    if lipase_df.empty:
+        print("\nLipase DataFrame is empty. Skipping plotting.")
+        return
+
+    # --- Overall Average Plot ---
+    avg_df_all = lipase_df.groupby('Zeit')[['pH_gekocht', 'pH_ungekocht']].mean().reset_index()
+    plot_average(avg_df_all, 'Durchschnittlicher pH-Verlauf über alle Gruppen (geglättet)', "average_ph_verlauf.png")
+
+    # --- Average Plots per "Menge" ---
+    for menge, menge_df in lipase_df.groupby('Menge'):
+        avg_menge_df = menge_df.groupby('Zeit')[['pH_gekocht', 'pH_ungekocht']].mean().reset_index()
+        plot_title = f'Durchschnittlicher pH-Verlauf für Menge {menge} (geglättet)'
+        filename = f"average_ph_verlauf_menge_{menge}.png"
+        plot_average(avg_menge_df, plot_title, filename)
+
+    # --- Comparative Plot for Gekocht by Menge ---
+    plot_average(lipase_df,
+                 'Vergleich pH-Verlauf (Gekocht) nach Menge',
+                 "vergleich_gekocht_nach_menge.png",
+                 group_by_col='Menge',
+                 plot_type='gekocht')
+
+    # --- Comparative Plot for Ungekocht by Menge ---
+    plot_average(lipase_df,
+                 'Vergleich pH-Verlauf (Ungekocht) nach Menge',
+                 "vergleich_ungekocht_nach_menge.png",
+                 group_by_col='Menge',
+                 plot_type='ungekocht')
 
     print(f"\nPlots saved to '{PLOTS_DIR}' directory.")
 
