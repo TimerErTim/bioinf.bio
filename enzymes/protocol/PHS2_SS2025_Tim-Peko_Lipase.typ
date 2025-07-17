@@ -44,7 +44,14 @@ The experiment uses phenolphthalein indicator in an alkaline milk solution. Phen
 
 == Experimental Rationale
 
-This protocol demonstrates the fundamental principle that pancreatic lipase cleaves milk triglycerides to free fatty acids and glycerol, and that free fatty acids cause a measurable drop in pH (observed via phenolphthalein) when hydrolysis occurs. The contrast with boiled (inactive) enzyme and with low-fat milk reinforces the roles of enzyme activity and substrate availability. The experiment models intestinal fat digestion in vitro, showing that only active lipase can catalyze the reaction, and that more substrate (fat) yields more acid for neutralization.
+This protocol demonstrates the fundamental principle that pancreatic lipase cleaves milk triglycerides to free fatty acids and glycerol, and that free fatty acids cause a measurable drop in pH (observed via phenolphthalein) when hydrolysis occurs. The contrast with boiled (inactive) enzyme and with low-fat milk reinforces the roles of enzyme activity and substrate availability. The experiment models intestinal fat digestion in vitro, showing that only active lipase can catalyze the reaction, and that more substrate (fat) yields more acid for neutralization. 
+
+#figure(
+  image("assets/lipase_functioning.png", width: 50%),
+  caption: [
+     Lipase acts like scissors, cutting a fat molecule (triglyceride) into three fatty acids and one glycerol.
+  ]
+) <lipase-functioning>
 
 #pagebreak()
 = Experimental Setup
@@ -93,59 +100,75 @@ Repeat as needed: For comparison, repeat the experiment using low-fat milk (e.g.
 #pagebreak()
 = Data Analysis & Results
 
+// Load data from CSV files
+#let stats_overall = csv("assets/descriptive_statistics_overall.csv", row-type: dictionary)
+#let stats_menge = csv("assets/descriptive_statistics_mengen.csv", row-type: dictionary)
+#let stats_tests = csv("assets/statistical_analysis.csv", row-type: dictionary)
+
+// Extract key values for easy reference
+#let t_test_row = stats_tests.at(0)
+#let anova_row = stats_tests.at(1)
+
+#let boiled_stats = stats_overall.map(row => (row.at(""), row.at("drop_gekocht"))).to-dict()
+#let unboiled_stats = stats_overall.map(row => (row.at(""), row.at("drop_ungekocht"))).to-dict()
+
 == Descriptive Statistics
 
-@table-desc-overall shows a clear difference between the two conditions. The mean pH drop for samples with active (unboiled) lipase was _1.70_, more than triple the mean drop of _0.53_ for samples with inactive (boiled) lipase. This strongly indicates that the enzymatic hydrolysis of milk fat was the primary driver of acidification.
+@table-desc-overall shows a clear difference between the two conditions. The mean pH drop for samples with active (unboiled) lipase was _#calc.round(float(unboiled_stats.at("mean")), digits: 2)_, more than triple the mean drop of _#calc.round(float(boiled_stats.at("mean")), digits: 2)_ for the inactive (boiled) samples. This provides strong initial evidence of enzymatic activity.
 
 #figure(
   table(
     columns: (1fr, 1.5fr, 1.5fr),
     align: center,
-    table.header(
-      [], [*Boiled (Inactive)*], [*Unboiled (Active)*]
-    ),
-    [Count], [65], [66],
-    [Mean pH Drop], [0.53], [1.70],
-    [Std. Deviation], [0.86], [1.73],
-    [Min. pH Drop], [-0.87], [-0.42],
-    [Max. pH Drop], [4.65], [10.01],
+    table.header([], [*Boiled (Inactive)*], [*Unboiled (Active)*]),
+    ..for row in stats_overall {
+      (
+        [#row.at("")],
+        [#calc.round(float(row.at("drop_gekocht")), digits: 2)],
+        [#calc.round(float(row.at("drop_ungekocht")), digits: 2)],
+      )
+    }
   ),
   caption: [Overall descriptive statistics for the total pH drop. Values are rounded to two decimal places.]
 ) <table-desc-overall>
 
-@table-desc-menge breaks down the pH drop by the amount of enzyme solution added. While the ANOVA test did not find a statistically significant effect, this table reveals a weak trend: larger volumes of unboiled lipase tend to correspond to a greater average pH drop. For instance, the mean drop for 200 #sym.mu\L was 1.42, while for 600 #sym.mu\L it was 3.30. The high standard deviation in each group likely contributed to the non-significant ANOVA result.
+@table-desc-menge breaks down the pH drop by the amount of enzyme solution added. While the ANOVA test did not find a statistically significant effect, this table reveals a weak trend: larger volumes of unboiled lipase tend to correspond to a greater average pH drop. For instance, the mean drop for 200 #sym.mu\L was #calc.round(float(stats_menge.find(row => row.at("Menge") == "200" and row.at("Group") == "ungekocht").at("mean")), digits: 2), while for 600 #sym.mu\L it was #calc.round(float(stats_menge.find(row => row.at("Menge") == "600" and row.at("Group") == "ungekocht").at("mean")), digits: 2). The high standard deviation in each group likely contributed to the non-significant ANOVA result.
 
 #figure(
   table(
     columns: (1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
     align: center,
-    table.header(
-      [*Menge (µL)*], [*Group*], [*N*], [*Mean Drop*], [*Std. Dev.*], [*Max Drop*]
-    ),
-    table.cell(rowspan: 2)[200], [Boiled], [11], [0.62], [1.04], [3.67],
-    [Unboiled], [12], [1.42], [2.74], [10.01],
-    table.cell(rowspan: 2)[350], [Boiled], [18], [0.46], [0.60], [1.86],
-    [Unboiled], [18], [0.91], [0.85], [2.66],
-    table.cell(rowspan: 2)[400], [Boiled], [3], [0.44], [0.12], [0.55],
-    [Unboiled], [3], [2.11], [1.38], [3.44],
-    table.cell(rowspan: 2)[500], [Boiled], [25], [0.57], [1.11], [4.65],
-    [Unboiled], [25], [2.01], [1.55], [4.70],
-    table.cell(rowspan: 2)[600], [Boiled], [3], [0.49], [0.29], [0.80],
-    [Unboiled], [3], [3.30], [1.98], [4.63],
+    table.header([*Menge (µL)*], [*Group*], [*N*], [*Mean Drop*], [*Std. Dev.*], [*Max Drop*]),
+    ..for row in stats_menge {
+      let is_boiled = row.at("Group") == "gekocht"
+      let menge = int(row.at("Menge"))
+      let group_label = if is_boiled { "Boiled" } else { "Unboiled" }
+      
+      if calc.rem(int(row.at("Menge")), 50) == 0 or int(row.at("Menge")) < 300 {
+        (
+          if is_boiled {table.cell(rowspan: 2)[#menge]},
+          [#group_label],
+          [#row.at("count")],
+          [#calc.round(float(row.at("mean")), digits: 2)],
+          [#if row.at("std") != "" { calc.round(float(row.at("std")), digits: 2) } else { "-" }],
+          [#calc.round(float(row.at("max")), digits: 2)],
+        ).slice(if is_boiled { 0 } else { 1 })
+      }
+    }
   ),
-  caption: [Descriptive statistics for pH drop grouped by enzyme volume. Statistics for amounts with fewer than 3 samples were omitted for brevity. Values are rounded.]
+  caption: [Descriptive statistics for pH drop grouped by enzyme volume. Values are rounded.]
 ) <table-desc-menge>
 
-== Visual and Statistical Interpretation
+== Visualizations and Statistical Interpretation
 
-The average pH change over time is visualized in @fig-avg-ph. The curve for the active enzyme shows a clear, steady decline, while the boiled enzyme's curve remains nearly flat. A paired t-test confirms this observation with a highly significant result (p < 0.0001), validating that active lipase is responsible for the acidification.
+The plot of the average pH over time for all groups (@fig-avg-ph) clearly visualizes the conclusion from our t-test. The curve for the unboiled enzyme shows a steady decline, indicating continuous acid production, while the boiled enzyme's curve remains nearly flat, confirming its inactivity.
 
 #figure(
   image("assets/plots/average_ph_verlauf.png", width: 80%),
   caption: [Smoothed average pH vs. time for all groups, comparing boiled (inactive) and unboiled (active) lipase.]
 ) <fig-avg-ph>
 
-The plots in @fig-vergleich-menge illustrate the effect of enzyme concentration. For active lipase, larger amounts show a trend towards a faster pH drop. An ANOVA test, however, found this trend not to be statistically significant (p = 0.20), likely due to the high inter-experiment variability visible in the plot. The boiled lipase shows no dose-dependent effect.
+The plots in @fig-vergleich-menge illustrate the dose-response relationship, or lack thereof. For the unboiled enzyme, there is a visible trend where larger amounts of lipase lead to a faster and deeper pH drop. The plot for the boiled enzyme shows no such trend, with all lines clustered together. This visual evidence supports the ANOVA result: while a trend exists for the active enzyme, the high variance within each group prevents the differences from being statistically significant.
 
 #figure(
   grid(
@@ -171,10 +194,10 @@ An individual group's plot, like the one in @fig-group-example, shows the raw da
 To validate these observations, two main statistical tests were performed:
 
 1.  *Paired T-Test (Active vs. Inactive Lipase):*
-    A paired t-test was used to compare the pH drop between the unboiled and boiled samples from the same experimental run. The test yielded a _p-value of 7.56 x 10⁻⁶_, which is far below the standard significance level of 0.05. This result is *highly statistically significant* and confirms that the active, unboiled lipase produces a much greater pH drop than the denatured, boiled lipase.
+    A paired t-test was used to compare the pH drop between the unboiled and boiled samples from the same experimental run. The test yielded a _p-value of #t_test_row.at("p-value")_, which is far below the standard significance level of 0.05. This result is *highly statistically significant* and confirms that the active, unboiled lipase produces a much greater pH drop than the denatured, boiled lipase.
 
 2.  *ANOVA (Effect of Enzyme Amount):*
-    An ANOVA test was conducted to determine if the amount of lipase added (from 200 #sym.mu\L to 600 #sym.mu\L) had a statistically significant effect on the magnitude of the pH drop. The p-value from this test was _0.20_. Since this value is greater than 0.05, we conclude that there is *no statistically significant difference* in the pH drop between the different amounts of enzyme used in this set of experiments. While a trend is visible in the data and plots, the high variability in the data prevented this trend from being statistically significant.
+    An ANOVA test was conducted to determine if the amount of lipase added (from 200 #sym.mu\L to 600 #sym.mu\L) had a statistically significant effect on the magnitude of the pH drop. The p-value from this test was _#calc.round(float(anova_row.at("p-value")), digits: 2)_. Since this value is greater than 0.05, we conclude that there is *no statistically significant difference* in the pH drop between the different amounts of enzyme used in this set of experiments. While a trend is visible in the data and plots, the high variability in the data prevented this trend from being statistically significant.
 
 #pagebreak()
 = Conclusion

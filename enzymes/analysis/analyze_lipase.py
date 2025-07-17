@@ -175,21 +175,23 @@ def perform_descriptive_analysis(ph_drops):
     overall_desc_formatted.to_csv(overall_output_path)
     print(f"\nOverall descriptive statistics saved to '{overall_output_path}'")
 
-    # 2. Descriptive statistics by 'Menge'
-    # Clean 'Menge' for grouping
+    # 2. Descriptive statistics by 'Menge' in a tidy format
     ph_drops_cleaned = ph_drops.copy()
     ph_drops_cleaned['Menge'] = pd.to_numeric(ph_drops_cleaned['Menge'], errors='coerce')
     ph_drops_cleaned.dropna(subset=['Menge'], inplace=True)
     
     menge_desc = ph_drops_cleaned.groupby('Menge')[['drop_gekocht', 'drop_ungekocht']].describe()
     
-    # Convert 'count' columns to integer type for cleaner output
-    for col in ['drop_gekocht', 'drop_ungekocht']:
-        if (col, 'count') in menge_desc.columns:
-            menge_desc[(col, 'count')] = menge_desc[(col, 'count')].astype(int)
+    # Tidy the data by stacking the top-level column index
+    menge_desc_tidy = menge_desc.stack(0).reset_index()
+    menge_desc_tidy.rename(columns={'level_1': 'Group'}, inplace=True)
+    menge_desc_tidy['Group'] = menge_desc_tidy['Group'].str.replace('drop_', '')
 
+    # Convert count to int
+    menge_desc_tidy['count'] = menge_desc_tidy['count'].astype(int)
+    
     menge_output_path = os.path.join(OUT_DIR, 'descriptive_statistics_mengen.csv')
-    menge_desc.to_csv(menge_output_path)
+    menge_desc_tidy.to_csv(menge_output_path, index=False)
     print(f"Descriptive statistics by Menge saved to '{menge_output_path}'")
 
 

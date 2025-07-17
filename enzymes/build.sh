@@ -33,6 +33,7 @@ PLOT_DEST_DIR="$PROTOCOL_DIR/assets/plots"
 echo "--- Copying plots to $PLOT_DEST_DIR... ---"
 mkdir -p "$PLOT_DEST_DIR"
 cp -r "$PLOT_SOURCE_DIR"/* "$PLOT_DEST_DIR/"
+cp -r "$ANALYSIS_DIR/out"/* "$PROTOCOL_DIR/assets/"
 
 # 5. Compile the Typst protocol
 echo "--- Compiling Typst protocol... ---"
