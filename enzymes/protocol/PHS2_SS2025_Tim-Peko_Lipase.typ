@@ -1,4 +1,4 @@
-#import "../templates/protocol.tpl.typ": bio-template
+#import "../../templates/protocol.tpl.typ": bio-template
 
 #show: bio-template.with(
   show-cover-page: true,
