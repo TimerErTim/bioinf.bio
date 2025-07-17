@@ -93,13 +93,9 @@ Repeat as needed: For comparison, repeat the experiment using low-fat milk (e.g.
 #pagebreak()
 = Data Analysis & Results
 
-In this section, we analyze the collected data from multiple experimental runs to draw comprehensive, data-driven conclusions about lipase activity.
-
 == Descriptive Statistics
 
-The primary metric for this analysis is the total pH drop (initial pH - final pH). A larger drop indicates greater acid production and, therefore, higher enzyme activity.
-
-@table-desc-overall summarizes the findings for all experimental groups combined. The mean pH drop for the active lipase samples was _1.70_, more than triple the mean drop of _0.53_ for the inactive (boiled) samples. This provides strong initial evidence of enzymatic activity.
+@table-desc-overall shows a clear difference between the two conditions. The mean pH drop for samples with active (unboiled) lipase was _1.70_, more than triple the mean drop of _0.53_ for samples with inactive (boiled) lipase. This strongly indicates that the enzymatic hydrolysis of milk fat was the primary driver of acidification.
 
 #figure(
   table(
@@ -140,16 +136,16 @@ The primary metric for this analysis is the total pH drop (initial pH - final pH
   caption: [Descriptive statistics for pH drop grouped by enzyme volume. Statistics for amounts with fewer than 3 samples were omitted for brevity. Values are rounded.]
 ) <table-desc-menge>
 
-== Visualizations and Statistical Interpretation
+== Visual and Statistical Interpretation
 
-The plot of the average pH over time for all groups (@fig-avg-ph) clearly visualizes the conclusion from our t-test. The curve for the unboiled enzyme shows a steady decline, indicating continuous acid production, while the boiled enzyme's curve remains nearly flat, confirming its inactivity.
+The average pH change over time is visualized in @fig-avg-ph. The curve for the active enzyme shows a clear, steady decline, while the boiled enzyme's curve remains nearly flat. A paired t-test confirms this observation with a highly significant result (p < 0.0001), validating that active lipase is responsible for the acidification.
 
 #figure(
   image("assets/plots/average_ph_verlauf.png", width: 80%),
   caption: [Smoothed average pH vs. time for all groups, comparing boiled (inactive) and unboiled (active) lipase.]
 ) <fig-avg-ph>
 
-The plots in @fig-vergleich-menge illustrate the dose-response relationship, or lack thereof. For the unboiled enzyme, there is a visible trend where larger amounts of lipase lead to a faster and deeper pH drop. The plot for the boiled enzyme shows no such trend, with all lines clustered together. This visual evidence supports the ANOVA result: while a trend exists for the active enzyme, the high variance within each group prevents the differences from being statistically significant.
+The plots in @fig-vergleich-menge illustrate the effect of enzyme concentration. For active lipase, larger amounts show a trend towards a faster pH drop. An ANOVA test, however, found this trend not to be statistically significant (p = 0.20), likely due to the high inter-experiment variability visible in the plot. The boiled lipase shows no dose-dependent effect.
 
 #figure(
   grid(
@@ -174,32 +170,18 @@ An individual group's plot, like the one in @fig-group-example, shows the raw da
 
 To validate these observations, two main statistical tests were performed:
 
-1.  **Paired T-Test (Active vs. Inactive Lipase):**
-    A paired t-test was used to compare the pH drop between the unboiled and boiled samples from the same experimental run. The test yielded a **p-value of 7.56 x 10⁻⁶**, which is far below the standard significance level of 0.05. This result is **highly statistically significant** and confirms that the active, unboiled lipase produces a much greater pH drop than the denatured, boiled lipase.
+1.  *Paired T-Test (Active vs. Inactive Lipase):*
+    A paired t-test was used to compare the pH drop between the unboiled and boiled samples from the same experimental run. The test yielded a _p-value of 7.56 x 10⁻⁶_, which is far below the standard significance level of 0.05. This result is *highly statistically significant* and confirms that the active, unboiled lipase produces a much greater pH drop than the denatured, boiled lipase.
 
-2.  **ANOVA (Effect of Enzyme Amount):**
-    An ANOVA test was conducted to determine if the amount of lipase added (from 200 µL to 600 µL) had a statistically significant effect on the magnitude of the pH drop. The p-value from this test was **0.20**. Since this value is greater than 0.05, we conclude that there is **no statistically significant difference** in the pH drop between the different amounts of enzyme used in this set of experiments. While a trend is visible in the data and plots, the high variability in the data prevented this trend from being statistically significant.
-
-#pagebreak()
-= Expected Results & Discussion
-
-- *Active vs. Denatured Lipase:* Tube 2 (with active lipase) should show a gradual color change from pink toward colorless as fatty acids accumulate. Correspondingly, the pH will fall steadily over time. Our analysis confirms this with high statistical confidence (p < 0.0001), showing an average pH drop of *1.70* for active lipase compared to only *0.53* for the inactive enzyme (see @table-desc-overall). Tube 1 (boiled lipase) should remain pink with little or no pH change, since heat inactivation destroys the enzyme's catalytic site. This confirms that the color change and pH drop depend on enzyme activity.
-- *pH vs. Time Plot:* Plotting pH against time for each tube yields a flat line for the boiled-enzyme control and a falling curve for the active-enzyme sample, as clearly shown in @fig-avg-ph. The curve typically shows a rapid initial drop as many short-chain esters are cleaved quickly, then it may level off as substrate or base is depleted.
-- *Effect of Milk Fat Content:* With regular whole milk (3-4% fat), a larger amount of fatty acids is released than with low-fat milk. Thus, the pH drop in the whole-milk sample should be more pronounced and occur faster than in the low-fat sample. In low-fat milk the reaction may slow sooner and may not reach as low a pH. This directly reflects that more substrate (fat) yields more acid for neutralization.
-- *Mechanism Confirmation:* These observations align with the known behavior of lipase: it hydrolyzes triglycerides at the oil-water interface. Milk's tiny fat droplets (with protective MFGM) nonetheless allow rapid enzyme access. Pancreatic lipase digests short-chain triglycerides much faster than long-chain ones, so the short-chain-rich milk fat is hydrolyzed efficiently in vitro. The released free fatty acids are weak acids, so as they accumulate they neutralize the added NaOH, lowering pH. Phenolphthalein, which turns colorless below pH #sym.tilde\8.3, signals this acidification.
-- *Graphical Interpretation:* The expected graph has a steep decline of pH in the active lipase tube (@fig-avg-ph and @fig-vergleich-menge), crossing the phenolphthalein threshold (≈8.3) at some point, whereas the boiled-lipase control remains near the initial high pH. Comparing curves for different milk fat levels or enzyme amounts can illustrate the kinetics. Our analysis of enzyme amount showed no statistically significant effect on the final pH drop, suggesting that within the tested range (200-600 µL), the enzyme concentration might not have been the limiting factor, or the experimental variability was too high to detect a significant effect.
-- *Relation to Physiology:* Although the experiment is in vitro, it models intestinal fat digestion. In the body, the free fatty acids generated would be absorbed by enterocytes (especially the short/medium-chain ones) and sent to the liver. Pancreatic lipase is the main enzyme for dietary fat breakdown, and our controls show that denatured enzyme is inactive.
-
-In summary, this protocol demonstrates the fundamental principle that pancreatic lipase cleaves milk triglycerides to free fatty acids and glycerol, and that free fatty acids cause a measurable drop in pH (observed via phenolphthalein) when hydrolysis occurs. The contrast with boiled (inactive) enzyme and with low-fat milk reinforces the roles of enzyme activity and substrate availability.
+2.  *ANOVA (Effect of Enzyme Amount):*
+    An ANOVA test was conducted to determine if the amount of lipase added (from 200 #sym.mu\L to 600 #sym.mu\L) had a statistically significant effect on the magnitude of the pH drop. The p-value from this test was _0.20_. Since this value is greater than 0.05, we conclude that there is *no statistically significant difference* in the pH drop between the different amounts of enzyme used in this set of experiments. While a trend is visible in the data and plots, the high variability in the data prevented this trend from being statistically significant.
 
 #pagebreak()
-= Summary & Discussion
+= Conclusion
 
-- Summarize your observations: How did pH change over time in each tube?
-- Was there a difference between boiled and unboiled enzyme?
-- How did low-fat milk compare to regular milk?
-- Discuss possible sources of error and compare with other groups.
+This experiment successfully demonstrated that pancreatic lipase actively hydrolyzes triglycerides in milk, leading to a release of free fatty acids and a measurable drop in pH. The difference in activity between unboiled (active) and boiled (denatured) lipase was statistically highly significant. This confirms that the observed effect is due to the enzyme's catalytic function.
 
+While there was a visible trend suggesting that a higher concentration of lipase leads to a faster reaction, this effect was not statistically significant across the tested range (200-500 µL), likely due to high variability between individual experiments. Overall, the experiment provides a clear and effective model for enzymatic fat digestion.
 #pagebreak()
 #set heading(numbering: none)
 = Appendix
