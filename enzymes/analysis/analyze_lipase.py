@@ -4,6 +4,8 @@ import matplotlib.pyplot as plt
 import os
 import csv
 from io import StringIO
+from scipy import stats
+import itertools
 
 """
 Analysis script for Lipase experiment data.
@@ -16,6 +18,7 @@ Analysis script for Lipase experiment data.
 LIPASE_CSV = os.path.join('..', 'data', 'UE_Sonstiges_Ergebnisse-Lipase.csv')
 TN_LIST_CSV = os.path.join('..', 'data', 'UE_Sonstiges_Ergebnisse-TN-Liste.csv')
 PLOTS_DIR = 'plots'
+OUT_DIR = 'out'
 
 
 def load_clean_participant_list(path):
@@ -25,9 +28,9 @@ def load_clean_participant_list(path):
         'Datum', 'Stdgang', 'Nummer', 'Gruppe', 'Alter', 'Geschlecht', 'Raucher',
         'Sportler', 'Brillenträger', 'Dioptrie li', 'Dioptrie re'
     ]
-    df = df.dropna(how='all', subset=df.columns[1:])
-    df['Datum'] = pd.to_datetime(df['Datum'], format='%d.%m.%Y', errors='coerce').fillna(method='ffill')
-    df['Stdgang'] = df['Stdgang'].fillna(method='ffill')
+    df = df.dropna(how='all', subset=list(df.columns[1:]))
+    df['Datum'] = pd.to_datetime(df['Datum'], format='%d.%m.%Y', errors='coerce').ffill()
+    df['Stdgang'] = df['Stdgang'].ffill()
 
     # Clean 'Geschlecht'
     df['Geschlecht'] = df['Geschlecht'].replace({'w': 'female', 'm': 'male', 'd': 'diverse', 'wm': 'female/male'})
@@ -135,6 +138,141 @@ def load_clean_lipase_results(path):
     return df
 
 
+def calculate_ph_drop(df):
+    """Calculates the pH drop for each experimental group."""
+    # Ensure Zeit is sorted within each group
+    df = df.sort_values(by=['Stdgang', 'Gruppe', 'Zeit'])
+
+    # Get initial and final measurements for each group
+    initial_ph = df.loc[df.groupby(['Stdgang', 'Gruppe'])['Zeit'].idxmin()]
+    final_ph = df.loc[df.groupby(['Stdgang', 'Gruppe'])['Zeit'].idxmax()]
+
+    # Merge to get initial and final on the same row
+    merged = pd.merge(
+        initial_ph, final_ph,
+        on=['Stdgang', 'Gruppe', 'Menge', 'Datum', 'Sonstiges'],
+        suffixes=('_initial', '_final')
+    )
+
+    # Calculate drop
+    merged['drop_gekocht'] = merged['pH_gekocht_initial'] - merged['pH_gekocht_final']
+    merged['drop_ungekocht'] = merged['pH_ungekocht_initial'] - merged['pH_ungekocht_final']
+
+    return merged[['Stdgang', 'Gruppe', 'Menge', 'drop_gekocht', 'drop_ungekocht']]
+
+
+def perform_descriptive_analysis(ph_drops):
+    """Calculates descriptive statistics and saves them to two separate CSV files."""
+    if not os.path.exists(OUT_DIR):
+        os.makedirs(OUT_DIR)
+
+    # 1. Overall descriptive statistics
+    overall_desc = ph_drops[['drop_gekocht', 'drop_ungekocht']].describe()
+    overall_desc.loc['count'] = overall_desc.loc['count'].astype(int)
+    overall_output_path = os.path.join(OUT_DIR, 'descriptive_statistics_overall.csv')
+    overall_desc.to_csv(overall_output_path)
+    print(f"\nOverall descriptive statistics saved to '{overall_output_path}'")
+
+    # 2. Descriptive statistics by 'Menge'
+    # Clean 'Menge' for grouping
+    ph_drops_cleaned = ph_drops.copy()
+    ph_drops_cleaned['Menge'] = pd.to_numeric(ph_drops_cleaned['Menge'], errors='coerce')
+    ph_drops_cleaned.dropna(subset=['Menge'], inplace=True)
+    
+    menge_desc = ph_drops_cleaned.groupby('Menge')[['drop_gekocht', 'drop_ungekocht']].describe()
+    
+    # Convert 'count' columns to integer type for cleaner output
+    for col in ['drop_gekocht', 'drop_ungekocht']:
+        if (col, 'count') in menge_desc.columns:
+            menge_desc[(col, 'count')] = menge_desc[(col, 'count')].astype(int)
+
+    menge_output_path = os.path.join(OUT_DIR, 'descriptive_statistics_mengen.csv')
+    menge_desc.to_csv(menge_output_path)
+    print(f"Descriptive statistics by Menge saved to '{menge_output_path}'")
+
+
+def perform_statistical_analysis(ph_drops):
+    """Performs statistical analysis and saves results to CSV."""
+    if not os.path.exists(OUT_DIR):
+        os.makedirs(OUT_DIR)
+        
+    analysis_results = []
+
+    # 1. Paired T-test: Gekocht vs. Ungekocht
+    
+    # Drop rows with NaN in either column to ensure fair pairing
+    paired_data = ph_drops[['drop_gekocht', 'drop_ungekocht']].dropna()
+
+    if len(paired_data) > 1:
+        t_stat, p_val = stats.ttest_rel(paired_data['drop_ungekocht'], paired_data['drop_gekocht'])
+        analysis_results.append({
+            'Test': 'Paired T-test',
+            'Comparison': 'pH Drop (Ungekocht vs. Gekocht)',
+            'Statistic': f't = {t_stat:.3f}',
+            'p-value': f'{p_val:.3e}',
+            'Significance': 'Yes' if p_val < 0.05 else 'No'
+        })
+    else:
+        analysis_results.append({
+            'Test': 'Paired T-test',
+            'Comparison': 'pH Drop (Ungekocht vs. Gekocht)',
+            'Statistic': 'Not enough data',
+            'p-value': 'N/A',
+            'Significance': 'N/A'
+        })
+
+
+    # 2. ANOVA: Effect of 'Menge' on pH drop for 'ungekocht'
+    menge_groups = ph_drops[['Menge', 'drop_ungekocht']].dropna()
+    menge_groups['Menge'] = pd.to_numeric(menge_groups['Menge'], errors='coerce').dropna()
+    unique_mengen = sorted(menge_groups['Menge'].unique())
+    
+    if len(unique_mengen) > 1:
+        grouped_data = [menge_groups['drop_ungekocht'][menge_groups['Menge'] == m] for m in unique_mengen]
+        
+        f_stat, p_val_anova = stats.f_oneway(*grouped_data)
+        analysis_results.append({
+            'Test': 'ANOVA',
+            'Comparison': "Effect of 'Menge' on pH Drop (Ungekocht)",
+            'Statistic': f'F = {f_stat:.3f}',
+            'p-value': f'{p_val_anova:.3e}',
+            'Significance': 'Yes' if p_val_anova < 0.05 else 'No'
+        })
+
+        # 3. Pairwise T-tests (post-hoc) if ANOVA is significant
+        if p_val_anova < 0.05:
+            pairs = list(itertools.combinations(unique_mengen, 2))
+            num_comparisons = len(pairs)
+            bonferroni_alpha = 0.05 / num_comparisons
+
+            for m1, m2 in pairs:
+                group1 = menge_groups['drop_ungekocht'][menge_groups['Menge'] == m1]
+                group2 = menge_groups['drop_ungekocht'][menge_groups['Menge'] == m2]
+                
+                t_stat_pair, p_val_pair = stats.ttest_ind(group1, group2, nan_policy='omit')
+                
+                analysis_results.append({
+                    'Test': 'Pairwise T-test (Bonferroni)',
+                    'Comparison': f"'Menge' {m1} vs {m2}",
+                    'Statistic': f't = {t_stat_pair:.3f}',
+                    'p-value': f'{p_val_pair:.3e}',
+                    'Significance': 'Yes' if p_val_pair < bonferroni_alpha else 'No'
+                })
+    else:
+        analysis_results.append({
+            'Test': 'ANOVA',
+            'Comparison': "Effect of 'Menge' on pH Drop (Ungekocht)",
+            'Statistic': 'Only one "Menge" group',
+            'p-value': 'N/A',
+            'Significance': 'N/A'
+        })
+
+    # Save results to CSV
+    results_df = pd.DataFrame(analysis_results)
+    results_df.to_csv(os.path.join(OUT_DIR, 'statistical_analysis.csv'), index=False)
+    print(f"\nStatistical analysis saved to '{os.path.join(OUT_DIR, 'statistical_analysis.csv')}'")
+
+
 def plot_average(df, plot_title, filename, group_by_col=None, plot_type='both', window_size=15):
     """Generates and saves a smoothed average plot."""
     plt.figure(figsize=(12, 7))
@@ -172,8 +310,9 @@ def plot_average(df, plot_title, filename, group_by_col=None, plot_type='both', 
 def main():
     """Main function to run the analysis."""
     # Create plots directory if it doesn't exist
-    if not os.path.exists(PLOTS_DIR):
-        os.makedirs(PLOTS_DIR)
+    for dir_path in [PLOTS_DIR, OUT_DIR]:
+        if not os.path.exists(dir_path):
+            os.makedirs(dir_path)
 
     # Load and clean data
     tn_df = load_clean_participant_list(TN_LIST_CSV)
@@ -186,6 +325,7 @@ def main():
 
 
     # --- Individual Group Plots ---
+    # Use a list for groupby to avoid tuple unpacking issues with some linters
     for (stdgang, gruppe), group_df in lipase_df.groupby(['Stdgang', 'Gruppe']):
         plt.figure(figsize=(10, 6))
         
@@ -204,8 +344,11 @@ def main():
         plt.close()
 
     if lipase_df.empty:
-        print("\nLipase DataFrame is empty. Skipping plotting.")
+        print("\nLipase DataFrame is empty. Skipping plotting and analysis.")
         return
+
+    # Calculate pH drops for analysis
+    ph_drops = calculate_ph_drop(lipase_df)
 
     # --- Overall Average Plot ---
     avg_df_all = lipase_df.groupby('Zeit')[['pH_gekocht', 'pH_ungekocht']].mean().reset_index()
@@ -233,6 +376,10 @@ def main():
                  plot_type='ungekocht')
 
     print(f"\nPlots saved to '{PLOTS_DIR}' directory.")
+
+    # --- Statistical and Descriptive Analysis ---
+    perform_statistical_analysis(ph_drops)
+    perform_descriptive_analysis(ph_drops)
 
 
 if __name__ == '__main__':
