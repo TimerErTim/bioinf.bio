@@ -168,9 +168,11 @@ def perform_descriptive_analysis(ph_drops):
 
     # 1. Overall descriptive statistics
     overall_desc = ph_drops[['drop_gekocht', 'drop_ungekocht']].describe()
-    overall_desc.loc['count'] = overall_desc.loc['count'].astype(int)
+    # Convert to object type to allow mixed types in columns, then set count to int
+    overall_desc_formatted = overall_desc.astype(object)
+    overall_desc_formatted.loc['count'] = overall_desc_formatted.loc['count'].astype(int)
     overall_output_path = os.path.join(OUT_DIR, 'descriptive_statistics_overall.csv')
-    overall_desc.to_csv(overall_output_path)
+    overall_desc_formatted.to_csv(overall_output_path)
     print(f"\nOverall descriptive statistics saved to '{overall_output_path}'")
 
     # 2. Descriptive statistics by 'Menge'
