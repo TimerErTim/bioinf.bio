@@ -1,8 +1,8 @@
 #import "../templates/protocol.tpl.typ": bio-template
 
+#set document(title: "Hemiglobincyanide Method")
 #show: bio-template.with(
   show-cover-page: true,
-  title: "Hemiglobincyanide Method",
   subtitle: "Determination of Methemoglobin in Blood",
   author: "Tim Peko",
   course: "PHS2",

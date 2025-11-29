@@ -1,5 +1,9 @@
+#let format-equation(it) = {
+  set text(font: "Libertinus Math")
+  it
+}
+
 #let bio-template(
-  title: none,
   subtitle: "",
   course: none,
   semester: none,
@@ -21,11 +25,6 @@
     align: (col, row) => if col == 0 { right } else { left },
     stroke: 1pt
   )
-  show outline.entry: it => {
-    block(above: 0.25em, text(size: 12pt - 6pt * calc.log(it.element.level))[
-      #h(2em * (it.element.level - 1))#it
-    ])
-  }
   set heading(numbering: none)
   show heading: it => {
     set block(above: 1.5em, below: 0.8em)
@@ -55,9 +54,9 @@
         #semester
       ]
       #v(2em)
-      #text(24pt, weight: "bold")[
-        #title
-      ]
+      #show title: set text(size: 24pt, weight: "bold")
+      #show title: set block(spacing: 2em)
+      #title(auto)
 
       #text(20pt)[
         #subtitle
@@ -110,7 +109,7 @@
 
   // Set up the header and footer
   set page(
-    header: [
+    header: context [
       #grid(
         columns: (1fr, 1fr),
         [
@@ -122,7 +121,7 @@
         ],
         align(right)[
           #set text(size: 11pt, weight: "bold")
-          #title
+          #document.title
         ]
       )
       #line(length: 100%)
@@ -130,11 +129,12 @@
     header-ascent: 12pt,
   )
 
+  show math.equation: format-equation
+
   doc
 }
 
 #show: bio-template.with(
-  title: "Hemiglobincyanide Method",
   subtitle: "Vergleich & Entscheidung",
   date: "14. März 2025",
   course: "PHS2",
