@@ -16,27 +16,62 @@
   format-page-counter: (current, total) => [
     Seite *#current* von *#total*
   ],
-  doc
+  doc,
 ) = {
   // Set document-wide styles
   set text(font: "Lato", lang: language)
   set table(
-    fill: (_, row) => if calc.even(row) { rgb(230,   230, 230) } else { white },
+    fill: (_, row) => if calc.even(row) { rgb(230, 230, 230) } else { white },
     align: (col, row) => if col == 0 { right } else { left },
-    stroke: 1pt
+    stroke: 1pt,
   )
+  let top-heading = state("_top_heading", none)
   set heading(numbering: none)
   show heading: it => {
     set block(above: 1.5em, below: 0.8em)
+    block[
+      #if it.numbering != none {
+        box(width: 1.25cm, clip: true, counter(heading).display())
+      }
+      #it.body
+    ]
+  }
+  show heading.where(level: 1): it => {
+    colbreak(weak: true)
+    it
+    top-heading.update(it)
+  }
+  show heading.where(numbering: none): it => {
+    set align(right)
     it
   }
   set page(
-    footer: grid(
-      columns: (1fr, 1fr, auto),
-      [#date], [], context[
-        #format-page-counter(counter(page).display("1"), counter(page).final().at(0))
-      ]
-    )
+    footer: context [
+      #line(length: 100%) <_footer>
+      #set text(size: 9pt)
+      #grid(
+        columns: (auto, 1fr),
+        align: (left, right),
+        [
+          #set align(left)
+          #set text(size: 9pt)
+          #set table.cell(inset: 0pt)
+          #table(
+            columns: (auto, auto),
+            [Date:], [#date],
+            [Version:], [#version],
+            fill: none,
+            stroke: none,
+            align: left,
+            gutter: 0.5em,
+            column-gutter: 1em,
+          )],
+        format-page-counter(
+          counter(page).display("1"),
+          counter(page).final().first(),
+        ),
+      )
+    ],
   )
 
   // Cover page
@@ -46,7 +81,7 @@
         *Fachhochschule Hagenberg*
       ]
       #image("assets/fh-hagenberg-logo.png", height: 8em)
-      #v(10em)
+      #v(8em)
       #text(16pt)[
         #course#if semester != none and course != none {
           ","
@@ -61,9 +96,8 @@
       #text(20pt)[
         #subtitle
       ]
-      
-      #v(1fr)
 
+      #v(2em)
       #if author != none {
         text(16pt)[
           *Author*\
@@ -81,26 +115,18 @@
         ]
       }
 
-      #v(6em)
-      #align(left)[
-        #text(12pt)[
-          #if version != none [
-            *Version* -- #version
-          ]
-        ]
-      ]
-      #v(1em)
+      #v(1fr)
     ]
 
     pagebreak()
   }
 
   // By default, show the cover page if the document has at least 3 pages
-  context[
-    #let cover-page-visible = if show-cover-page == none { 
+  context [
+    #let cover-page-visible = if show-cover-page == none {
       counter(page).final().first() >= 3
     } else {
-      show-cover-page 
+      show-cover-page
     }
     #if cover-page-visible {
       cover-page
@@ -110,26 +136,23 @@
   // Set up the header and footer
   set page(
     header: context [
-      #grid(
-        columns: (1fr, 1fr),
-        [
-          #set text(size: 9pt)
-          #if author != none [
-            *Author* -- #author\
-          ]
-          *Version* -- #version
-        ],
-        align(right)[
-          #set text(size: 11pt, weight: "bold")
-          #document.title
-        ]
-      )
+      #let top-heading = top-heading.at(query(selector(<_footer>).after(here())).first().location())
+      #set text(size: 9pt)
+      #document.title
+      #h(1fr)
+      #if top-heading != none [
+        #set text(size: 10pt)
+        #underline[*#top-heading.body*]
+      ]
       #line(length: 100%)
     ],
     header-ascent: 12pt,
   )
 
   show math.equation: format-equation
+
+  show cite.where(form: "prose"): super
+  set cite(form: "prose")
 
   doc
 }
@@ -146,6 +169,6 @@
   format-page-counter: (current, total) => [
     Page *#current* of *#total*
   ],
-  show-cover-page: true
+  show-cover-page: true,
 )
 This is a test
