@@ -151,8 +151,7 @@
 
   show math.equation: format-equation
 
-  show cite.where(form: "prose"): super
-  set cite(form: "prose")
+  show cite: super
 
   doc
 }
