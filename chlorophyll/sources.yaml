@@ -1,0 +1,60 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mkdjr/hayagriva/refs/heads/main/hayagriva.schema.json
+
+src_chlorophyll-a-photochem:
+  type: web
+  url: 
+    value: https://www.photochemcad.com/databases/common-compounds/chlorins-bacteriochlorins/chlorophyll-a
+    date: 2025-12-01
+  title: PhotochemCAD | Chlorophyll a
+  author:
+  - Lindsey, Jonathan S.
+  - Taniguchi, Masahiko
+  - Du, Hai
+  organization: North Carolina State University
+  parent: 
+    type: article
+    title: Database of Absorption and Fluorescence Spectra of >300 Common Compounds for use in PhotochemCAD
+    author:
+    - Taniguchi, Masahiko
+    - Lindsey, Jonathan S.
+    date: 2018
+    page-range: 290-327
+    url: https://onlinelibrary.wiley.com/doi/abs/10.1111/php.12860
+    serial-number:
+      doi: https://doi.org/10.1111/php.12860
+    abstract: Abstract The design of new molecules for photochemical studies typically requires knowledge of spectral features of pertinent chromophores beginning with the absorption spectrum (λabs) and accompanying molar absorption coefficient (ε, m−1 cm−1) and often extending to the fluorescence spectrum (λem) and fluorescence quantum yield (Φf), where the fluorescence properties may be of direct relevance or useful as proxies to gain insight into the nature of the first excited singlet state. PhotochemCAD databases, developed over a period of 30 years, are described here. The previous databases for 150 compounds have been expanded to encompass 339 compounds for which absorption spectra (including ε values), fluorescence spectra (including Φf values) and references to the primary literature have been included where available (552 spectra altogether). The compounds exhibit spectra in the ultraviolet, visible and/or near-infrared spectral regions. The compound classes and number of members include acridines (21), aromatic hydrocarbons (41), arylmethane dyes (11), azo dyes (18), biomolecules (18), chlorins/bacteriochlorins (16), coumarins (14), cyanine dyes (19), dipyrrins (7), heterocycles (26), miscellaneous dyes (13), oligophenylenes (13), oligopyrroles (6), perylenes (5), phthalocyanines (11), polycyclic aromatic hydrocarbons (16), polyenes/polyynes (10), porphyrins (34), quinones (24) and xanthenes (15). A database of 31 solar spectra also is included.
+    parent:
+      type: periodical
+      title: Photochemistry and Photobiology
+      issue: 2
+      volume: 94
+
+src_chlorophyll-b-photochem:
+  type: web
+  url: 
+    value: https://www.photochemcad.com/databases/common-compounds/chlorins-bacteriochlorins/chlorophyll-b
+    date: 2025-12-01
+  title: PhotochemCAD | Chlorophyll b
+  author:
+  - Lindsey, Jonathan S.
+  - Taniguchi, Masahiko
+  - Du, Hai
+  organization: North Carolina State University
+  parent: 
+    type: article
+    title: Database of Absorption and Fluorescence Spectra of >300 Common Compounds for use in PhotochemCAD
+    author:
+    - Taniguchi, Masahiko
+    - Lindsey, Jonathan S.
+    date: 2018
+    page-range: 290-327
+    url: https://onlinelibrary.wiley.com/doi/abs/10.1111/php.12860
+    serial-number:
+      doi: https://doi.org/10.1111/php.12860
+    abstract: Abstract The design of new molecules for photochemical studies typically requires knowledge of spectral features of pertinent chromophores beginning with the absorption spectrum (λabs) and accompanying molar absorption coefficient (ε, m−1 cm−1) and often extending to the fluorescence spectrum (λem) and fluorescence quantum yield (Φf), where the fluorescence properties may be of direct relevance or useful as proxies to gain insight into the nature of the first excited singlet state. PhotochemCAD databases, developed over a period of 30 years, are described here. The previous databases for 150 compounds have been expanded to encompass 339 compounds for which absorption spectra (including ε values), fluorescence spectra (including Φf values) and references to the primary literature have been included where available (552 spectra altogether). The compounds exhibit spectra in the ultraviolet, visible and/or near-infrared spectral regions. The compound classes and number of members include acridines (21), aromatic hydrocarbons (41), arylmethane dyes (11), azo dyes (18), biomolecules (18), chlorins/bacteriochlorins (16), coumarins (14), cyanine dyes (19), dipyrrins (7), heterocycles (26), miscellaneous dyes (13), oligophenylenes (13), oligopyrroles (6), perylenes (5), phthalocyanines (11), polycyclic aromatic hydrocarbons (16), polyenes/polyynes (10), porphyrins (34), quinones (24) and xanthenes (15). A database of 31 solar spectra also is included.
+    parent:
+      type: periodical
+      title: Photochemistry and Photobiology
+      issue: 2
+      volume: 94
+
