@@ -1,9 +1,9 @@
-#import "../templates/protocol.tpl.typ": bio-template
+#import "../templates/protocol.tpl.typ": bio-template, new-chapter
 
 #set document(title: "Chlorophyll Determination")
 #show: bio-template.with(
   show-cover-page: true,
-  subtitle: "Determination of Chlorophyll in Biomatter using Spectrophotometry",
+  subtitle: "Determination of Chlorophyll Concentration in Biomatter using Spectrophotometry",
   author: "Tim Peko",
   members: ("Dijana Panic", "David Kaiser", "Tim Peko"),
   course: "GBC1",
@@ -15,6 +15,7 @@
   version: "0.1",
   date: datetime.today(offset: auto).display("[year]-[month]-[day]"),
 )
+#import "analysis/visualizations.typ": *
 #show link: it => {
   set text(fill: blue)
   underline(it)
@@ -36,7 +37,34 @@
 }
 #show image: rect.with(stroke: 0.5pt)
 
-= Background
+#new-chapter[Background]
+
+== Chlorophyll
+
+Chlorophyll is a green pigment found in plants and some bacteria. It is responsible for the green color of plants and is essential for photosynthesis. It consists of two main types: Chlorophyll a ($"Chl"_"a"$) and Chlorophyll b ($"Chl"_"b"$).
+
+#box(figure(image("assets/chla.structure.png", width: 48%), caption: [Chlorophyll A structure @src_chlorophyll-a-photochem])) <chla-structure>
+#h(1fr)
+#box(figure(image("assets/chlb.structure.png", width: 48%), caption: [Chlorophyll B structure @src_chlorophyll-b-photochem])) <chlb-structure>
+
+=== Solvatochromism
+
+The solvent effect, known as "Solvatochromism", is a phenomenon that occurs when the absorption spectrum of a compound changes between different solvents used. This solvent-dependent effect arises from the interaction between the solvent molecules and the chlorophyll's $pi$-electron cloud. @src_wikipedia-solvatochromism 
+
+Consequently, absorption coefficients derived for methanol cannot be used for acetone extracts, and coefficients for 100% acetone cannot be used for 80% acetone. The specific equations discussed in Section 5 (using 11.78 and 2.29) are strictly valid only for 80% Acetone extracts. @src_wikipedia-solvatochromism @src_chlorophyll-lichtenthaler
+
+== Spectrophotometry
+
+#new-chapter("Execution")
+
+#new-chapter("Results")
+#let results-data = csv("data/results.absorption.txt", delimiter: "\t").slice(1)
+#let chla-data = csv("data/chla.absorption.txt", delimiter: "\t").slice(1)
+#let chlb-data = csv("data/chlb.absorption.txt", delimiter: "\t").slice(1)
+
+#visualize-results-absorption(results-data, chla-data, chlb-data)
+
+#visualize-reference-absorption(chla-data, chlb-data)
 
 == Hemoglobin
 
@@ -83,8 +111,8 @@ potassium cyanide $"KCN"$. @drabkin-reaction describes: The ferricyanide oxidize
 cyanide then binds to $"MetHb"$ to form $"HiCN"$.
 
 $
-  "Hb" + upright("K")_3 "Fe"^(3+)("CN")_6 + upright("K")^+ &arrow "MetHb" + upright("K")_4 "Fe"^(2+)("CN")_6 \
-  "MetHb" + "KCN"                                          &arrow "HiCN" + upright("K")^+
+  "Hb" + upright("K")_3 "Fe"^(3+)("CN")_6 + upright("K")^+ & arrow "MetHb" + upright("K")_4 "Fe"^(2+)("CN")_6 \
+                                           "MetHb" + "KCN" & arrow "HiCN" + upright("K")^+
 $ <drabkin-reaction>
 
 The resulting $"HiCN"$ complex is stable and has a specific absorbance peak at wavelengths around $540 - 546"nm"$. This
@@ -94,10 +122,10 @@ hemoglobin concentration is determined based on the Beer–Lambert law, shown in
 $
   A = epsilon * c * ell \ \
   #block[
-    $A       & ... "total absorbance" \
+    $A & ... "total absorbance" \
     epsilon & ... "molar absorptivity of the substance" \
-    c       & ... "concentration of substance in the sample" \
-    ell     & ... "path length through sample"$
+    c & ... "concentration of substance in the sample" \
+    ell & ... "path length through sample"$
   ]
 $ <beer-lambert-law>
 
@@ -108,8 +136,7 @@ strips and reflectance photometry. A drop of whole blood is applied to a test st
 intensity reflected from the strip to calculate hemoglobin concentration. While the Reflotron provides rapid and
 user-friendly results, the $"HiCN"$ method remains the gold standard due to its accuracy and standardization.
 
-#pagebreak()
-= Procedure
+#new-chapter("Procedure")
 
 Due to unfortunate circumstances, the Reflotron during our lab session was defective and therefore no test data using that
 method could be collected. As a result, this chapter only covers the hemiglobincyanide method.
@@ -134,17 +161,18 @@ substance. Be mindful of proper waste disposal.
 
 #block(width: 100%)[
   #block(
-    width: 70%, height: 21em
+    width: 70%,
+    height: 21em,
   )[
-  + Prepare sample and reference cuvettes.
-    + Fill both cuvettes with 5mL of Drabkin's reagent.
-    + Add 20µL of blood to the sample cuvette.
-  + Gently shake the sample cuvette to mix the contents.
-  + Incubate for #sym.gt.eq 5 minutes in the dark for full conversion to cyanmethemoglobin $"HiCN"$.
-  + Set the spectrophotometer to 546 nm.
-  + Zero the device using the reference cuvette.
-  + Insert the sample cuvette and record the absorbance (E#sub("546") = $A$).
-  + Calculate the hemoglobin concentration using @instructor-concentration-formula.
+    + Prepare sample and reference cuvettes.
+      + Fill both cuvettes with 5mL of Drabkin's reagent.
+      + Add 20µL of blood to the sample cuvette.
+    + Gently shake the sample cuvette to mix the contents.
+    + Incubate for #sym.gt.eq 5 minutes in the dark for full conversion to cyanmethemoglobin $"HiCN"$.
+    + Set the spectrophotometer to 546 nm.
+    + Zero the device using the reference cuvette.
+    + Insert the sample cuvette and record the absorbance (E#sub("546") = $A$).
+    + Calculate the hemoglobin concentration using @instructor-concentration-formula.
   ]
 ]
 
@@ -159,9 +187,9 @@ $ \cspace["mol"slash\L] = A/epsilon times 1/ell $
 We can calculate our absorptivity $epsilon$ of $"HiCN"$ for the total sample:
 
 $
-  epsilon_"total" &= epsilon_"HiCN"/("MG"_"Hb") times (V_"probe")/(V_"total") \
-                  &= (44thin\000 "L"/("mol" dot "cm"))/(64thin\458 "g"/"mol") times (20 mu\L)/(5.02\m\L) \
-                  &tilde.eq 0.272 m^2 / "kg" = 2.72 "L"/("kg" dot "cm")
+  epsilon_"total" & = epsilon_"HiCN"/("MG"_"Hb") times (V_"probe")/(V_"total") \
+                  & = (44thin\000 "L"/("mol" dot "cm"))/(64thin\458 "g"/"mol") times (20 mu\L)/(5.02\m\L) \
+                  & tilde.eq 0.272 m^2 / "kg" = 2.72 "L"/("kg" dot "cm")
 $
 
 This was calculated using the following values:
@@ -173,12 +201,12 @@ This was calculated using the following values:
 Since we know that our cuvette has a thickness of $ell = 1"cm"$ we can calculate the concentration of $"Hb"$ in the sample:
 
 $
-  \cspace["kg"slash"L"]                &= A / epsilon_"total" times 1/ell \
-                                       &= A / (2.72 "L"/("kg" dot "cm")) times 1/(0.01"m") \
-                                       &= A times 1 / (2.72 "L"/("kg" dot "cm") times 1"cm") \
-                                       &= A times 1 / (2.72 ) space "kg"/L \
-                                       &tilde.eq A times 0.368 "kg"/L \
-  arrow.r.double \cspace["g"slash"dL"] &= A times 36.77 "g"/("d"L) \
+                 \cspace["kg"slash"L"] & = A / epsilon_"total" times 1/ell \
+                                       & = A / (2.72 "L"/("kg" dot "cm")) times 1/(0.01"m") \
+                                       & = A times 1 / (2.72 "L"/("kg" dot "cm") times 1"cm") \
+                                       & = A times 1 / (2.72 ) space "kg"/L \
+                                       & tilde.eq A times 0.368 "kg"/L \
+  arrow.r.double \cspace["g"slash"dL"] & = A times 36.77 "g"/("d"L) \
 $
 
 === Correct formula from instructor
@@ -189,7 +217,7 @@ $
   \cspace["g"slash"dL"] = A times 14.746 "g"/"dL" \
 $ <instructor-concentration-formula>
 
-We will use this factor in all further applications, even though there seems to be no explanation for the significant difference between the two formulas. Plugging in the values in their formula $A times "MG"_"Hb"/"epsilon"_"HiCN" times "V"_"total"/"V"_"probe" times 1/d [g/l] $ does not yield the same result for me.
+We will use this factor in all further applications, even though there seems to be no explanation for the significant difference between the two formulas. Plugging in the values in their formula $A times "MG"_"Hb"/"epsilon"_"HiCN" times "V"_"total"/"V"_"probe" times 1/d [g/l]$ does not yield the same result for me.
 
 Example calculation using placeholder values:\
 $A = 1.21$\
@@ -213,7 +241,7 @@ We analyzed the data from
     [Male], [10], [10.9 #sym.dash 23.0], [16.7 #sym.plus.minus 3.5], [13.5],
     [Female], [12], [10.1 #sym.dash 17.3], [12.1 #sym.plus.minus 4.3], [19.9],
   ),
-  caption: "MBI24 results summary male vs. female"
+  caption: "MBI24 results summary male vs. female",
 ) <current-year-table-overview-results>
 
 
@@ -241,7 +269,7 @@ We analyzed the data from
       [*p-value*], [0.81%],
       [*Cohen's d*], [0.32],
     ),
-    caption: "MBI24 t-test values"
+    caption: "MBI24 t-test values",
   ) <class-key-values>
 ]
 
@@ -256,20 +284,20 @@ The analysis is repeated for the years 2015 to 2024 (including MBI24). The resul
     [Male], [117], [2.32 #sym.dash 53.2], [16.72 #sym.plus.minus 7.83], [61.36],
     [Female], [126], [0.37 #sym.dash 59.8], [14.87 #sym.plus.minus 7.24], [52.35],
   ),
-  caption: "All years results summary male vs. female"
+  caption: "All years results summary male vs. female",
 ) <all-years-table-overview-results>
 
 #h(1em)
 #box(width: 1fr, baseline: -3em)[
-  For this dataset we also performed a two-sample t-test with different variances using an #math.alpha of 5%. 
-  
+  For this dataset we also performed a two-sample t-test with different variances using an #math.alpha of 5%.
+
   The results are shown in @all-years-key-values. The t-statistic is 1.66, the critical t-value is 1.65, the p-value is 4.98% and the Cohen's d is 0.026.
 ]
 
 #box(width: 1fr, baseline: 0em)[
   Since the p-value is less than the chosen #math.alpha = 5%, we reject the null hypothesis and conclude that the difference in $"c"_"Hb"$ between males and females is statistically significant. This is also supported by the t-statistic of 1.66 being slightly greater than the critical t-value of 1.65.
 
-  The Cohen's d of 0.026 indicates a very small effect size, which means that the difference in $"c"_"Hb"$ between males and females is tiny. 
+  The Cohen's d of 0.026 indicates a very small effect size, which means that the difference in $"c"_"Hb"$ between males and females is tiny.
 ]
 #h(1em)
 #box(width: 38%)[
@@ -283,7 +311,7 @@ The analysis is repeated for the years 2015 to 2024 (including MBI24). The resul
       [*p-value*], [4.98%],
       [*Cohen's d*], [0.026],
     ),
-    caption: "All years t-test values"
+    caption: "All years t-test values",
   ) <all-years-key-values>
 ]
 
@@ -295,12 +323,43 @@ The results of both t-tests show that the difference in $"c"_"Hb"$ between males
 
 In @mbi24-results covering the class of the current year (MBI24), we can observe a significant difference in $"c"_"Hb"$ between males and females, despite the comparatively small sample size. This indicates high accuracy of the hemiglobincyanide method.
 
-#pagebreak()
+
+#figure(
+  image("assets/chla.structure.png", width: 50%),
+  caption: [Chlorophyll A structure @src_chlorophyll-a-photochem],
+)
+#csv("data/results.absorption.txt", delimiter: "\t").last()
+
 #set heading(numbering: none)
-#show heading: set align(right)
-= Appendix
+#new-chapter("Appendix")
 
 == Sources
 
-#bibliography("assets/sources.yaml", title: none, style: "ieee")
+#bibliography("sources.yaml", title: none, style: "ieee")
 
+
+// Attachments
+#pdf.attach(
+  "instructions/F_Spektralphotometrie.doc",
+  mime-type: "application/msword",
+  relationship: "supplement",
+  description: "Instructions for Experiment",
+)
+#pdf.attach(
+  "data/chla.absorption.txt",
+  mime-type: "text/tab-separated-values",
+  relationship: "data",
+  description: "Chlorophyll A absorption data",
+)
+#pdf.attach(
+  "data/chlb.absorption.txt",
+  mime-type: "text/tab-separated-values",
+  relationship: "data",
+  description: "Chlorophyll B absorption data",
+)
+#pdf.attach(
+  "data/results.absorption.txt",
+  mime-type: "text/tab-separated-values",
+  relationship: "data",
+  description: "Experiment results absorption data",
+)

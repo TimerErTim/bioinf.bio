@@ -3,6 +3,11 @@
   it
 }
 
+#let new-chapter(title) = [
+  #colbreak(weak: true)
+  = #title
+]
+
 #let bio-template(
   subtitle: "",
   course: none,
@@ -25,7 +30,6 @@
     align: (col, row) => if col == 0 { right } else { left },
     stroke: 1pt,
   )
-  let top-heading = state("_top_heading", none)
   set heading(numbering: none)
   show heading: it => {
     set block(above: 1.5em, below: 0.8em)
@@ -35,11 +39,6 @@
       }
       #it.body
     ]
-  }
-  show heading.where(level: 1): it => {
-    colbreak(weak: true)
-    it
-    top-heading.update(it)
   }
   show heading.where(numbering: none): it => {
     set align(right)
@@ -136,7 +135,8 @@
   // Set up the header and footer
   set page(
     header: context [
-      #let top-heading = top-heading.at(query(selector(<_footer>).after(here())).first().location())
+      #let next-footer = query(selector(<_footer>).after(here())).first()
+      #let top-heading = query(selector(heading.where(level: 1)).before(next-footer.location())).last(default: none)
       #set text(size: 9pt)
       #document.title
       #h(1fr)

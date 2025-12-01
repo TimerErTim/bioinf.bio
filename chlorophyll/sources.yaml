@@ -58,3 +58,21 @@ src_chlorophyll-b-photochem:
       issue: 2
       volume: 94
 
+src_wikipedia-solvatochromism:
+  type: web
+  url: 
+    value: https://en.wikipedia.org/wiki/Solvatochromism
+    date: 2025-12-05
+  title: Solvatochromism - Wikipedia
+  organization: Wikipedia
+  parent:
+    type: article
+
+src_chlorophyll-lichtenthaler:
+  type: article
+  title: Chlorophyll and Carotenoid Determination
+  author: Lichtenthaler, Hartmut K.
+  organization: Karlsruhe Institute of Technology (KIT)
+  url:
+    value: https://www.jkip.kit.edu/molbio/download/1A_Chlorophylls_Carotenoid_determin-HKLi_2010.pdf
+    date: 2025-12-05
