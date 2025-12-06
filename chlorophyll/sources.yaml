@@ -76,3 +76,21 @@ src_chlorophyll-lichtenthaler:
   url:
     value: https://www.jkip.kit.edu/molbio/download/1A_Chlorophylls_Carotenoid_determin-HKLi_2010.pdf
     date: 2025-12-05
+
+src_plants-in-action:
+  type: book
+  url:
+    value: https://rseco.org/content/122-chlorophyll-absorption-and-photosynthetic-action-spectra.html
+    date: 2025-12-06
+  title: Plants in Action
+  author:
+  - Australian Society of Plant Scientists
+  editor:
+  - Munns, Rana
+  - Schmidt, Susanne
+  - Beveridge, Christine
+  - Mathesius, Ulrike
+  edition: 2
+  chapter: 1.2.2
+  language: en
+  date: 2018

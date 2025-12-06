@@ -43,30 +43,76 @@
 
 Chlorophyll is a green pigment found in plants and some bacteria. It is responsible for the green color of plants and is essential for photosynthesis. It consists of two main types: Chlorophyll a ($"Chl"_"a"$) and Chlorophyll b ($"Chl"_"b"$).
 
-#box(figure(image("assets/chla.structure.png", width: 48%), caption: [Chlorophyll A structure @src_chlorophyll-a-photochem])) <chla-structure>
+#box(figure(
+  image("assets/chla.structure.png", width: 48%),
+  caption: [Chlorophyll A structure @src_chlorophyll-a-photochem],
+)) <chla-structure>
 #h(1fr)
-#box(figure(image("assets/chlb.structure.png", width: 48%), caption: [Chlorophyll B structure @src_chlorophyll-b-photochem])) <chlb-structure>
+#box(figure(
+  image("assets/chlb.structure.png", width: 48%),
+  caption: [Chlorophyll B structure @src_chlorophyll-b-photochem],
+)) <chlb-structure>
 
-=== Solvatochromism
+=== Solvatochromism <solvatochromism>
 
-The solvent effect, known as "Solvatochromism", is a phenomenon that occurs when the absorption spectrum of a compound changes between different solvents used. This solvent-dependent effect arises from the interaction between the solvent molecules and the chlorophyll's $pi$-electron cloud. @src_wikipedia-solvatochromism 
+The solvent effect, known as "Solvatochromism", is a phenomenon that occurs when the absorption spectrum of a compound changes between different solvents used. @src_wikipedia-solvatochromism
+This solvent-dependent effect applies to chlorophyll and arises from the interaction between the solvent molecules and the chlorophyll's $pi$-electron cloud. 
+@src_wikipedia-solvatochromism
+@src_plants-in-action
 
-Consequently, absorption coefficients derived for methanol cannot be used for acetone extracts, and coefficients for 100% acetone cannot be used for 80% acetone. The specific equations discussed in Section 5 (using 11.78 and 2.29) are strictly valid only for 80% Acetone extracts. @src_wikipedia-solvatochromism @src_chlorophyll-lichtenthaler
+Consequently, absorption coefficients derived for methanol cannot be used for acetone extracts, and coefficients for 100% acetone cannot be used for 80% acetone. The specific equations discussed in Section 5 (using 11.78 and 2.29) #footnote[replace with actual section used in this document] are strictly valid only for 80% Acetone extracts. @src_wikipedia-solvatochromism @src_chlorophyll-lichtenthaler
 
 == Spectrophotometry
 
 #new-chapter("Execution")
 
 #new-chapter("Results")
-#let results-data = csv("data/results.absorption.txt", delimiter: "\t").slice(1)
-#let chla-data = csv("data/chla.absorption.txt", delimiter: "\t").slice(1)
-#let chlb-data = csv("data/chlb.absorption.txt", delimiter: "\t").slice(1)
 
-#visualize-results-absorption(results-data, chla-data, chlb-data)
+We performed various analysis tasks in order to gain a better understanding of the data and the results. These were done in isolation to avoid any confounding factors.
 
-#visualize-reference-absorption(chla-data, chlb-data)
+== Spectral Analysis
+#let results-spect-data = csv("data/results.absorption.txt", delimiter: "\t").slice(1)
+#let chla-spect-data = csv("data/chla.absorption.txt", delimiter: "\t").slice(1)
+#let chlb-spect-data = csv("data/chlb.absorption.txt", delimiter: "\t").slice(1)
 
-== Hemoglobin
+We decided to take a detailed full spectrum sample using ... #footnote[hier einfügen von welcher Gruppe und Sample aus Excel Datei online]. The full spectrum data was derived by sampling absorption rates at $10"n" "m"$ intervals from the spectrophotometer's automatic full spectrum curve. Results are shown in @spectral-analysis-sample.
+
+=== Reference spectrum
+
+We compare our full spectrum data with the reference spectra of chlorophyll a and chlorophyll b in diethyl ether. This is used for reference even though we used
+acetone in our experiment, because we failed to find other publically available full spectrum reference data.
+
+#figure(
+  rect(inset: 0.5cm, visualize-reference-absorption(chla-spect-data, chlb-spect-data)),
+  caption: [Reference Chlorophyll Absorption Spectra in Diethyl Ether @src_chlorophyll-a-photochem @src_chlorophyll-b-photochem\ Blue shows $"Chl"_"a"$ and red shows $"Chl"_"b"$],
+) <spectral-analysis-reference>
+
+In @spectral-analysis-reference we can observe the blue spectrum peaks at
+$~430"n" "m"$ for $"Chl"_"a"$ and
+$~452"n" "m"$ for $"Chl"_"b"$.
+The red spectrum peaks at $~660"n" "m"$ for $"Chl"_"a"$ and $~642"n" "m"$ for $"Chl"_"b"$.
+
+These match the characteristics of the chlorophylls absorption spectrum in diethyl ether. @src_plants-in-action
+We can observe the spectrum line of $"Chl"_"a"$ buckles when crossing the line of $"Chl"_"b"$ in the blue region, which is also characteristic for both chlorophyll variants. @src_plants-in-action
+Therefore, we conclude the found dataset to be a viable and accurate source of reference.
+
+=== Sample spectrum
+
+#figure(
+  rect(inset: 0.5cm, visualize-results-absorption(results-spect-data, chla-spect-data, chlb-spect-data)),
+  caption: [Absorption Spectrum of the Sample (shown in blue) and combined $"Chl"_"a" + "Chl"_"b"$ Reference from @spectral-analysis-reference (shown in dotted black)],
+) <spectral-analysis-sample>
+
+The sample spectrum shows the absoprtion of the total, non-isolated chlorophylls ($"Chl"_"a" + "Chl"_"b"$) in the sample. We can observe three peaks: two in the blue region at $~430 "n" "m"$ and $~445"n" "m"$ with one in the red region at $~660"n" "m"$. 
+
+=== Spectrum Statistics
+
+
+
+
+#pagebreak()
+#pagebreak()
+= Hemoglobin
 
 #block(
   width: 100%,
