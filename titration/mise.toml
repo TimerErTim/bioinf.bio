@@ -1,0 +1,5 @@
+[tasks.build]
+description = "Build the protocol document"
+sources = ["BCH3_WS2025_Glycin_Titration.typ", "assets/**/*", "data/**/*"]
+outputs = ["BCH3_WS2025_Glycin_Titration.pdf"]
+run = "typst compile BCH3_WS2025_Glycin_Titration.typ"
