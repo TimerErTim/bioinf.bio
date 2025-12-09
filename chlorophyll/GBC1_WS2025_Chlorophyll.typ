@@ -53,6 +53,14 @@ Chlorophyll is a green pigment found in plants and some bacteria. It is responsi
   caption: [Chlorophyll B structure @src_chlorophyll-b-photochem],
 )) <chlb-structure>
 
+=== Solutability
+
+Chlorophyll has a long fatty chain called phytol ($C_(20) H_(39)$) attached to it. This chain makes chlorophyll dissolve well in oils and organic solvents, but not in water. The phytol chain acts like an anchor that holds the chlorophyll in place within the plant's membrane structures.
+
+Because of this fatty chain, organic solvents like acetone, methanol, or ethanol are needed to extract chlorophyll from plant tissues. 
+80% acetone (mixed with 20% water) is commonly used because the small amount of water helps break apart the protein structures that hold the chlorophyll. @src_chlorophyll-lichtenthaler @src_chlorophyll-extraction-protocol
+100% acetone is very suitable for leave extracts. @src_chlorophyll-lichtenthaler 
+
 === Solvatochromism <solvatochromism>
 
 The solvent effect, known as "Solvatochromism", is a phenomenon that occurs when the absorption spectrum of a compound changes between different solvents used. @src_wikipedia-solvatochromism

@@ -94,3 +94,14 @@ src_plants-in-action:
   chapter: 1.2.2
   language: en
   date: 2018
+
+src_chlorophyll-extraction-protocol:
+  type: report
+  title: Chlorophyll Extraction and Determination
+  author:
+  - Hendrik Poorter
+  - Yvonne de Jong-Van Berkel
+  language: en
+  url:
+    value: https://prometheusprotocols.net/function/tissue-chemistry/pigments/chlorophyll-extraction-and-determination/
+    date: 2025-12-09
