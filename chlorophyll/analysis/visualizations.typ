@@ -1,11 +1,10 @@
 #import "@preview/lilaq:0.5.0" as lq
 
 #let visualize-results-absorption(results-data, chla-data, chlb-data) = {
+  let results-data = results-data.map(it => (float(it.at(0)), float(it.at(1))))
   let chla-dict = chla-data.to-dict()
   let chlb-dict = chlb-data.to-dict()
   let combinded-data = chla-dict.keys().filter(it => it in chlb-dict).map(it => (float(it), float(chla-dict.at(it)) + float(chlb-dict.at(it))))
-
-  
 
   lq.diagram(
     xlim: (400, 800),
@@ -17,8 +16,8 @@
     title: "Results Chlorophyll Absorption Spectra",
     cycle: (blue, black),
     lq.plot(
-      results-data.map(it => float(it.at(0))),
-      results-data.map(it => float(it.at(1))),
+      results-data.map(it => it.at(0)),
+      results-data.map(it => it.at(1)),
       label: [Sample absorbance],
       mark: none,
       smooth: true
@@ -33,8 +32,8 @@
         mark: none,
         smooth: true,
         stroke: stroke(dash: "dotted", thickness: 1.25pt)
-      )
-    )
+      ),
+    ),
   )
 }
 
