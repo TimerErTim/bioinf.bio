@@ -1,4 +1,4 @@
-#import "../templates/protocol.tpl.typ": bio-template, new-chapter
+#import "../../templates/protocol.tpl.typ": bio-template, new-chapter
 
 #set document(title: "Chlorophyll Determination")
 #show: bio-template.with(
@@ -15,7 +15,7 @@
   version: "0.1",
   date: datetime.today(offset: auto).display("[year]-[month]-[day]"),
 )
-#import "analysis/visualizations.typ": *
+#import "../analysis/visualizations.typ": *
 #show link: it => {
   set text(fill: blue)
   underline(it)
@@ -44,12 +44,12 @@
 Chlorophyll is a green pigment found in plants and some bacteria. It is responsible for the green color of plants and is essential for photosynthesis. It consists of two main types: Chlorophyll a ($"Chl"_"a"$) and Chlorophyll b ($"Chl"_"b"$).
 
 #box(figure(
-  image("assets/chla.structure.png", width: 48%),
+  image("../assets/chla.structure.png", width: 48%),
   caption: [Chlorophyll A structure @src_chlorophyll-a-photochem],
 )) <chla-structure>
 #h(1fr)
 #box(figure(
-  image("assets/chlb.structure.png", width: 48%),
+  image("../assets/chlb.structure.png", width: 48%),
   caption: [Chlorophyll B structure @src_chlorophyll-b-photochem],
 )) <chlb-structure>
 
@@ -79,9 +79,9 @@ Consequently, absorption coefficients derived for methanol cannot be used for ac
 We performed various analysis tasks in order to gain a better understanding of the data and the results. These were done in isolation to avoid any confounding factors.
 
 == Spectral Analysis
-#let results-spect-data = csv("data/results.absorption.txt", delimiter: "\t").slice(1)
-#let chla-spect-data = csv("data/chla.absorption.txt", delimiter: "\t").slice(1)
-#let chlb-spect-data = csv("data/chlb.absorption.txt", delimiter: "\t").slice(1)
+#let results-spect-data = csv("../data/results.absorption.txt", delimiter: "\t").slice(1)
+#let chla-spect-data = csv("../data/chla.absorption.txt", delimiter: "\t").slice(1)
+#let chlb-spect-data = csv("../data/chlb.absorption.txt", delimiter: "\t").slice(1)
 
 We decided to take a detailed full spectrum sample using ... #footnote[hier einfügen von welcher Gruppe und Sample aus Excel Datei online]. The full spectrum data was derived by sampling absorption rates at $10"n" "m"$ intervals from the spectrophotometer's automatic full spectrum curve. Results are shown in @spectral-analysis-sample.
 
@@ -379,10 +379,10 @@ In @mbi24-results covering the class of the current year (MBI24), we can observe
 
 
 #figure(
-  image("assets/chla.structure.png", width: 50%),
+  image("../assets/chla.structure.png", width: 50%),
   caption: [Chlorophyll A structure @src_chlorophyll-a-photochem],
 )
-#csv("data/results.absorption.txt", delimiter: "\t").last()
+#csv("../data/results.absorption.txt", delimiter: "\t").last()
 
 #set heading(numbering: none)
 #new-chapter("Appendix")
@@ -394,25 +394,25 @@ In @mbi24-results covering the class of the current year (MBI24), we can observe
 
 // Attachments
 #pdf.attach(
-  "instructions/F_Spektralphotometrie.doc",
+  "../instructions/F_Spektralphotometrie.doc",
   mime-type: "application/msword",
   relationship: "supplement",
   description: "Instructions for Experiment",
 )
 #pdf.attach(
-  "data/chla.absorption.txt",
+  "../data/chla.absorption.txt",
   mime-type: "text/tab-separated-values",
   relationship: "data",
   description: "Chlorophyll A absorption data",
 )
 #pdf.attach(
-  "data/chlb.absorption.txt",
+  "../data/chlb.absorption.txt",
   mime-type: "text/tab-separated-values",
   relationship: "data",
   description: "Chlorophyll B absorption data",
 )
 #pdf.attach(
-  "data/results.absorption.txt",
+  "../data/results.absorption.txt",
   mime-type: "text/tab-separated-values",
   relationship: "data",
   description: "Experiment results absorption data",

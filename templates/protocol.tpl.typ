@@ -1,5 +1,5 @@
 #let format-equation(it) = {
-  set text(font: "Libertinus Math")
+  set text(font: "Fira Math")
   it
 }
 

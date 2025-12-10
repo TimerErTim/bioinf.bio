@@ -1,5 +1,5 @@
 [tasks.build]
 description = "Build the protocol document"
-sources = ["GBC1_WS2025_Chlorophyll.typ", "assets/**/*", "data/**/*"]
-outputs = ["GBC1_WS2025_Chlorophyll.pdf"]
-run = "typst compile GBC1_WS2025_Chlorophyll.typ"
+sources = ["protocol/GBC1_WS2025_Chlorophyll.typ", "assets/**/*", "data/**/*"]
+outputs = ["protocol/GBC1_WS2025_Chlorophyll.pdf"]
+run = "typst compile protocol/GBC1_WS2025_Chlorophyll.typ"
