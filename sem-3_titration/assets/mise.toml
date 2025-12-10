@@ -1,0 +1,15 @@
+[tasks.build]
+description = "Build the assets"
+depends = ["assets:*"]
+
+[tasks."assets:aminoacid-zitterion"]
+sources = ["illustration/**/*.typ"]
+outputs = ["zwitterion.svg"]
+description = "Build the amino acid zwitterion diagram"
+run = "typst compile -f svg illustration/zwitterion.typ --pages 1 zwitterion.svg"
+
+[tasks."assets:pk-behavior"]
+sources = ["illustration/**/*.typ"]
+outputs = ["pk-behavior.svg"]
+description = "Build the PK behavior diagram"
+run = "typst compile -f svg illustration/pk-behavior.typ --pages 1 pk-behavior.svg"

@@ -1,6 +1,13 @@
 [tasks.build]
 description = "Build the protocol document"
 dir = "protocol"
-sources = ["BCH3_WS2025_Glycin_Titration.typ", "assets/**/*", "data/**/*"]
+depends = ["build:assets"]
+sources = ["BCH3_WS2025_Glycin_Titration.typ", "assets/*", "data/*"]
 outputs = ["BCH3_WS2025_Glycin_Titration.pdf"]
 run = "typst compile BCH3_WS2025_Glycin_Titration.typ"
+
+[tasks."build:assets"]
+description = "Build the assets"
+dir = "assets"
+run = "mise run build"
+
