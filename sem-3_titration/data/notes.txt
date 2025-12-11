@@ -1,0 +1,21 @@
+20ml 0.1M Glycinlösung -> Becherglas
+75,07 g pro mol sind gleich 7,507 g pro Liter  0,7507 g pro 100 mililiter
+
+0,2M f[r Salzsäure + nochmal 1 Mol pipette salzsäure hinzugegebn (am anfang war ph-wert änderung recht langsam)
+
+ph wert anfang 5,91
++ 2ml salzsäure - 5,47
++ 2ml - 5,25
+-> reine salzsäure 1M
++ 200m mycro liter reine salzsäure -> 4,25
+--- 3,84
+--- 2,86 
+---- 2,7
+--- 2,54
+--- 2,42
+--- 2,32
+--- 2,19
+--- 2,05
+
+steht am Anfang bei 0 ml NaOH pro Maßlösung
+Tim hat verkakt daher wurde der isoelektrische punkt übersprungen
