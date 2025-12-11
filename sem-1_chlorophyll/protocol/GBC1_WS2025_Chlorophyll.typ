@@ -63,12 +63,13 @@ Because of this fatty chain, organic solvents like acetone, methanol, or ethanol
 
 === Solvatochromism <solvatochromism>
 
-The solvent effect, known as "Solvatochromism", is a phenomenon that occurs when the absorption spectrum of a compound changes between different solvents used. @src_wikipedia-solvatochromism
-This solvent-dependent effect applies to chlorophyll and arises from the interaction between the solvent molecules and the chlorophyll's $pi$-electron cloud. 
+The solvent effect, known as "Solvatochromism", is a phenomenon that occurs when the absorption spectrum of a compound changes between different solvents used.
+This solvent-dependent effect applies to chlorophyll and arises from the interaction between the solvent molecules and the chlorophyll's $pi$-electron cloud
+@src_plants-in-action. 
 @src_wikipedia-solvatochromism
-@src_plants-in-action
 
-Consequently, absorption coefficients derived for methanol cannot be used for acetone extracts, and coefficients for 100% acetone cannot be used for 80% acetone. The specific equations discussed in Section 5 (using 11.78 and 2.29) #footnote[replace with actual section used in this document] are strictly valid only for 80% Acetone extracts. @src_wikipedia-solvatochromism @src_chlorophyll-lichtenthaler
+Consequently, absorption coefficients derived for methanol cannot be used for acetone extracts, and coefficients for 100% acetone cannot be used for 80% acetone. The specific equations discussed in Section 5 (using 11.78 and 2.29) #footnote[replace with actual section used in this document] are strictly valid only for 80% Acetone extracts. @src_plants-in-action 
+@src_chlorophyll-lichtenthaler
 
 == Spectrophotometry
 
@@ -91,7 +92,7 @@ We compare our full spectrum data with the reference spectra of chlorophyll a an
 acetone in our experiment, because we failed to find other publically available full spectrum reference data.
 
 #figure(
-  rect(inset: 0.5cm, visualize-reference-absorption(chla-spect-data, chlb-spect-data)),
+  rect(inset: 0.5cm, pad(visualize-reference-absorption(chla-spect-data, chlb-spect-data), right: 1em)),
   caption: [Reference Chlorophyll Absorption Spectra in Diethyl Ether @src_chlorophyll-a-photochem @src_chlorophyll-b-photochem\ Blue shows $"Chl"_"a"$ and red shows $"Chl"_"b"$],
 ) <spectral-analysis-reference>
 
@@ -100,8 +101,10 @@ $~430"n" "m"$ for $"Chl"_"a"$ and
 $~452"n" "m"$ for $"Chl"_"b"$.
 The red spectrum peaks at $~660"n" "m"$ for $"Chl"_"a"$ and $~642"n" "m"$ for $"Chl"_"b"$.
 
-These match the characteristics of the chlorophylls absorption spectrum in diethyl ether. @src_plants-in-action
-We can observe the spectrum line of $"Chl"_"a"$ buckles when crossing the line of $"Chl"_"b"$ in the blue region, which is also characteristic for both chlorophyll variants. @src_plants-in-action
+These match the characteristics of the chlorophylls absorption spectrum in diethyl ether.
+We can observe the spectrum line of $"Chl"_"a"$ buckles when crossing the line of $"Chl"_"b"$ in the blue region, which is also characteristic for both chlorophyll variants.
+@src_plants-in-action
+
 Therefore, we conclude the found dataset to be a viable and accurate source of reference.
 
 === Sample spectrum
@@ -111,7 +114,14 @@ Therefore, we conclude the found dataset to be a viable and accurate source of r
   caption: [Absorption Spectrum of the Sample (shown in blue) and combined $"Chl"_"a" + "Chl"_"b"$ Reference from @spectral-analysis-reference (shown in dotted black)],
 ) <spectral-analysis-sample>
 
-The sample spectrum shows the absoprtion of the total, non-isolated chlorophylls ($"Chl"_"a" + "Chl"_"b"$) in the sample. We can observe three peaks: two in the blue region at $~430 "n" "m"$ and $~445"n" "m"$ with one in the red region at $~660"n" "m"$. 
+The sample spectrum shows the absorption of the total, non-isolated chlorophylls ($"Chl"_"a" + "Chl"_"b"$) in the sample. We can observe three peaks: two in the blue region at $~430 "n" "m"$ and $~445"n" "m"$ with one in the red region at $~660"n" "m"$. 
+
+We can observe similar peaks as in the reference spectrum, but with slight distortions and more or less pronounced features. This is because the sample consists of total, non-isolated chlorophylls ($"Chl"_"a" + "Chl"_"b"$) and possibly other pigments dissolved in acetone. Furthermore, as mentioned in @solvatochromism, shifts are to be expected when comparing our sample with diethyl ether dissolved reference @src_plants-in-action.
+Despite this, one can even spot fine features in our spectrum. For example the valley at the $~650 "n" "m"$ wavelength that is clearly visible in the reference spectrum is present in our data in form of a small bump.
+
+The most claring difference compared to reference is the samples gradually increasing absorption in the green spectrum (read from right/red to left/blue), whereas according to the reference the absorption should slightly decrease. 
+One possible explanation for this is the presence of other pigments in the sample that absorb in the green spectrum, such as carotenoids 
+@src_chlorophyll-extraction-protocol @src_plants-in-action.
 
 === Spectrum Statistics
 
