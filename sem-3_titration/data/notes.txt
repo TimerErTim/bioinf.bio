@@ -1,5 +1,5 @@
 20ml 0.1M Glycinlösung -> Becherglas
-75,07 g pro mol sind gleich 7,507 g pro Liter  0,7507 g pro 100 mililiter
+75,07 g pro mol sind gleich 7,507 g pro Liter  0,7507 g pro 100 Milliliter
 
 0,2M f[r Salzsäure + nochmal 1 Mol pipette salzsäure hinzugegebn (am anfang war ph-wert änderung recht langsam)
 
@@ -19,3 +19,15 @@ ph wert anfang 5,91
 
 steht am Anfang bei 0 ml NaOH pro Maßlösung
 Tim hat verkakt daher wurde der isoelektrische punkt übersprungen
+
+
+
+Histidin
+1,5516 g pro 100 Milliliter
+0,1 Mol pro Liter, auf 100 Millilier hergerichtet und 20ml entnommen
+Becherglas mit 20ml markierung
+1molare salzsäure damits schneller geht
+insgesamt 3ml hinzugegeben
+
+start 0,8ml bei maßlösung
+
