@@ -57,21 +57,51 @@ Chlorophyll is a green pigment found in plants and some bacteria. It is responsi
 
 Chlorophyll has a long fatty chain called phytol ($C_(20) H_(39)$) attached to it. This chain makes chlorophyll dissolve well in oils and organic solvents, but not in water. The phytol chain acts like an anchor that holds the chlorophyll in place within the plant's membrane structures.
 
-Because of this fatty chain, organic solvents like acetone, methanol, or ethanol are needed to extract chlorophyll from plant tissues. 
+Because of this fatty chain, organic solvents like acetone, methanol, or ethanol are needed to extract chlorophyll from plant tissues.
 80% acetone (mixed with 20% water) is commonly used because the small amount of water helps break apart the protein structures that hold the chlorophyll. @src_chlorophyll-lichtenthaler @src_chlorophyll-extraction-protocol
-100% acetone is very suitable for leave extracts. @src_chlorophyll-lichtenthaler 
+100% acetone is very suitable for leave extracts. @src_chlorophyll-lichtenthaler
 
 === Solvatochromism <solvatochromism>
 
 The solvent effect, known as "Solvatochromism", is a phenomenon that occurs when the absorption spectrum of a compound changes between different solvents used.
 This solvent-dependent effect applies to chlorophyll and arises from the interaction between the solvent molecules and the chlorophyll's $pi$-electron cloud
-@src_plants-in-action. 
+@src_plants-in-action.
 @src_wikipedia-solvatochromism
 
-Consequently, absorption coefficients derived for methanol cannot be used for acetone extracts, and coefficients for 100% acetone cannot be used for 80% acetone. The specific equations discussed in Section 5 (using 11.78 and 2.29) #footnote[replace with actual section used in this document] are strictly valid only for 80% Acetone extracts. @src_plants-in-action 
+Consequently, absorption coefficients derived for methanol cannot be used for acetone extracts, and coefficients for 100% acetone cannot be used for 80% acetone. The specific equations discussed in Section 5 (using 11.78 and 2.29) #footnote[replace with actual section used in this document] are strictly valid only for 80% Acetone extracts. @src_plants-in-action
 @src_chlorophyll-lichtenthaler
 
 == Spectrophotometry
+
+
+=== Beer-Lambert law <beer-lambert-law>
+
+The Beer-Lambert law, shown in @beer-lambert-equation, describes the correlation between the dimensionles total absorbance $E_lambda$, the molar extinctioncoefficent $epsilon_lambda$ ($"l"/("mol" dot "cm")$ @src_wikipedia-molar-extinction-coefficient) and concentration $c$ ($"mol"/"l"$) of the substance of interest in the sample, and the light path length $d$ ($"cm"$) through the sample, where $lambda$ is an arbitary wavelength of light.
+
+$
+  E_lambda = epsilon_lambda dot c dot d
+$ <beer-lambert-equation>
+
+For example $"Chl"_"a"$ has $epsilon_420 = (85thin 000)/("mol" dot thin "l")$. This however depends on a multitude of factors, such as pH, temperature or solvent, and is therefore not a constant @src_wikipedia-molar-extinction-coefficient.
+
+=== Calculation of Chlorophyll Concentration <calculation-chlorophyll-concentration>
+
+By rearranging @beer-lambert-equation we get:
+
+$
+  c space ["mol"/"l"] & = E_lambda / epsilon_lambda dot cancel(1 / d)
+$ <beer-lambert-equation-concentration>
+
+$d$ is the path length through the sample or in other words the thickness of the cuvette. The global standard for this is $d = 1"cm"$ @src_quartz-cuvette. Therefore we can effectively cancel out $d$ in the equation.
+
+While @beer-lambert-equation-concentration is a general equation yielding $"mol"/"l"$, we can convert to mass concentration $"g"/"l"$ by multiplying with the molar mass $"MG"_S$ of our substance $S$ and factoring in the dilution factor $V_E / V_P$, where $V_E$ is the volume of the extraction solvent and $V_P$ is the volume of the biological source material.
+
+$
+  c space ["g"/"l"_E] & = E_lambda / epsilon_lambda dot "MG"_S dot cancel(1 / d) => \
+  c space ["g"/"l"_P] & = c space ["g"/"l"_E] dot V_E / V_P
+$ <mass-concentration-equations>
+
+Here $c ["g"/"l"_E]$ is the mass concentration of the substance $S$ in the extraction solvent and $c ["g"/"l"_P]$ is the mass concentration of the substance $S$ in the biological source material.
 
 #new-chapter("Execution")
 
@@ -114,17 +144,149 @@ Therefore, we conclude the found dataset to be a viable and accurate source of r
   caption: [Absorption Spectrum of the Sample (shown in blue) and combined $"Chl"_"a" + "Chl"_"b"$ Reference from @spectral-analysis-reference (shown in dotted black)],
 ) <spectral-analysis-sample>
 
-The sample spectrum shows the absorption of the total, non-isolated chlorophylls ($"Chl"_"a" + "Chl"_"b"$) in the sample. We can observe three peaks: two in the blue region at $~430 "n" "m"$ and $~445"n" "m"$ with one in the red region at $~660"n" "m"$. 
+The sample spectrum shows the absorption of the total, non-isolated chlorophylls ($"Chl"_"a" + "Chl"_"b"$) in the sample. We can observe three peaks: two in the blue region at $~430 "n" "m"$ and $~445"n" "m"$ with one in the red region at $~660"n" "m"$.
 
 We can observe similar peaks as in the reference spectrum, but with slight distortions and more or less pronounced features. This is because the sample consists of total, non-isolated chlorophylls ($"Chl"_"a" + "Chl"_"b"$) and possibly other pigments dissolved in acetone. Furthermore, as mentioned in @solvatochromism, shifts are to be expected when comparing our sample with diethyl ether dissolved reference @src_plants-in-action.
 Despite this, one can even spot fine features in our spectrum. For example the valley at the $~650 "n" "m"$ wavelength that is clearly visible in the reference spectrum is present in our data in form of a small bump.
 
-The most claring difference compared to reference is the samples gradually increasing absorption in the green spectrum (read from right/red to left/blue), whereas according to the reference the absorption should slightly decrease. 
-One possible explanation for this is the presence of other pigments in the sample that absorb in the green spectrum, such as carotenoids 
-@src_chlorophyll-extraction-protocol @src_plants-in-action.
+The most claring difference compared to reference is the samples gradually increasing absorption in the green spectrum (read from right/red to left/blue), whereas according to the reference the absorption should slightly decrease.
+One possible explanation for this is the presence of other pigments in the sample that absorb in the green spectrum, such as carotenoids
+@src_chlorophyll-extraction-protocol @src_plants-in-action. Another plausible explanation is incomplete calibration: Calibration did not happen across the entire spectrum but only once on the higher end of the wavelength. The level of unfamiliarity with the spectrophotometer and the spectrometer itself might have contributed to this.
 
-=== Spectrum Statistics
+== Chlorophyll Concentration with Given Formula <calculation-with-given-formula>
 
+#let results-spect-dict = results-spect-data.map(it => (it.at(0), float(it.at(1)))).to-dict()
+
+The instructor provided us with a formula to calculate the chlorophyll concentration:
+
+$
+  c_a space ["mg"/"l"] & = 11.78 space E_664 - 2.29 space E_647 \
+  c_b space ["mg"/"l"] & = 20.05 space E_647 - 4.77 space E_664 \
+             c_"total" & = c_a + c_b = 27.8 space E_652
+$
+
+Plugging in the concrete values, shown in @results-important-wavelengths-given-formula, for our sample we get:
+
+#let chla-given-formula = 11.78 * results-spect-dict.at("664") - 2.29 * results-spect-dict.at("647")
+#let chlb-given-formula = 20.05 * results-spect-dict.at("647") - 4.77 * results-spect-dict.at("664")
+#let total-given-formula = 27.8 * results-spect-dict.at("652")
+$c_a space ["mg"/"l"] = 11.78 dot #results-spect-dict.at("664") - 2.29 dot #results-spect-dict.at("647") = bold(#str(chla-given-formula))$ <results-chla-given-formula>
+
+$c_b space ["mg"/"l"] = 20.05 dot #results-spect-dict.at("647") - 4.77 dot #results-spect-dict.at("664") = bold(#str(chlb-given-formula))$ <results-chlb-given-formula>
+
+$c_"total" space ["mg"/"l"] &= c_a + c_b = #str(chla-given-formula) + #str(chlb-given-formula) = bold(#str(chla-given-formula + chlb-given-formula))\ &= 27.8 space E_652 = 27.8 dot #results-spect-dict.at("652") = bold(#str(total-given-formula))$ <results-total-given-formula>
+
+#figure(
+  table(
+    columns: (auto, auto),
+    table.header[*Wavelength*][*Absorbance*],
+    ..for wavelength in (664, 647, 652) {
+      ([#wavelength], [#results-spect-dict.at(str(wavelength))])
+    },
+  ),
+  caption: "Wavelengths and absorbance of the results from our sample needed for calculating the chlorophyll concentration using the given formulas",
+) <results-important-wavelengths-given-formula>
+
+A quick sanity check with the Gemini LLM for the plausability of these values was positive. Lab extracts have a common range of $10 - 30 "mg"/"l"$. This aligns with our values.
+
+We can see a significant difference between the total result using the standalone aborbance factor and the addition of $"Chl"_"a"$ and $"Chl"_"b"$, with an absolute difference of $#(calc.round(digits: 4, calc.abs(total-given-formula - (chla-given-formula + chlb-given-formula)))) space "mg"/"l"$ and a relative difference of $#(calc.round(digits: 2, calc.abs(total-given-formula - (chla-given-formula + chlb-given-formula)) / total-given-formula * 100)) space "%"$.
+
+=== Interpretation of the difference <given-formula-difference-interpretation>
+
+It proves difficult to reason for a possible explanation for this discrepancy without knowing where the given formulas originate from and how they were derived. Measurement or execution errors are a possibility, even though seeming unlikely due to the high difference.
+
+== Chlorophyll Concentration using Beer-Lambert law
+
+In order to find both the $"Chl"_"a"$ and $"Chl"_"b"$ concentration, we need to use the Beer-Lambert law. We arrange the @beer-lambert-equation into a linear equation system to solve for both concentrations:
+
+$
+  E_664 = epsilon_(a, 664) dot c_a + epsilon_(b, 664) dot c_b\
+  E_647 = epsilon_(a, 647) dot c_a + epsilon_(b, 647) dot c_b\
+$
+
+Because we use the standard path length of $d = 1"cm"$ we can ignore $1/d$ in our calculations.\
+Using substitution we can solve for $c_a$ and $c_b$:
+
+$
+  c_a space ["mol"/"l"] = (E_664 space epsilon_(b, 647) - E_647 space epsilon_(a, 664)) / (epsilon_(a, 664) space epsilon_(b, 647) - epsilon_(a, 647) space epsilon_(b, 664))\
+  c_b space ["mol"/"l"] = (E_647 space epsilon_(a, 664) - E_664 space epsilon_(b, 647)) / (epsilon_(a, 664) space epsilon_(b, 647) - epsilon_(b, 664) space epsilon_(a, 647))\
+$
+
+We arrive at final formula for calculating the total chlorophyll concentration, accounting for the mass concentration and dilution factor:
+
+$
+        c_a space ["g"/"l"_E] & = c_a space ["mol"/"l"] dot "MG"_"Chl"_a \
+        c_b space ["g"/"l"_E] & = c_b space ["mol"/"l"] dot "MG"_"Chl"_b \
+  c_"total" space ["g"/"l"_E] & = c_a space ["g"/"l"_E] + c_b space ["g"/"l"_E] \
+  c_"total" space ["g"/"l"_P] & = c_"total" space ["g"/"l"_E] dot V_E / V_P \
+$
+
+By plugging in the values from @concentration-value-table-beer-lambert for this equation we arrive at the final values for the mass concentration in the extraction solvent:
+
+#let epsilon_a_647 = 17464
+#let epsilon_a_664 = 76790
+#let epsilon_b_647 = 47040
+#let epsilon_b_664 = 9121
+#let E_664 = results-spect-dict.at("664")
+#let E_647 = results-spect-dict.at("647")
+#let MG_a = 893.5
+#let MG_b = 907.5
+#let P_V = 5  // ml
+#let E_V = 20  // ml
+
+#let c_a_mol = (
+  (E_664 * epsilon_b_647 - E_647 * epsilon_b_664) / (epsilon_a_664 * epsilon_b_647 - epsilon_a_647 * epsilon_b_664)
+)
+#let c_b_mol = (
+  (E_647 * epsilon_a_664 - E_664 * epsilon_a_647) / (epsilon_a_664 * epsilon_b_647 - epsilon_a_647 * epsilon_b_664)
+)
+
+#let c_a_g_dil = c_a_mol * MG_a
+#let c_b_g_dil = c_b_mol * MG_b
+#let c_total_g_dil = c_a_g_dil + c_b_g_dil
+#let c_total_g_undil = c_total_g_dil * E_V / P_V
+
+$c_a space ["mg"/"l"_E] & = bold(#calc.round(digits: 2, c_a_g_dil * 1000) wj) \
+c_b space ["mg"/"l"_E] & = bold(#calc.round(digits: 2, c_b_g_dil * 1000) wj) \
+c_"total" space ["mg"/"l"_E] & = bold(#calc.round(digits: 2, c_total_g_dil * 1000) wj)$
+
+Accounted for the dilution factor from the source material, the final determined mass concentration in the biological source material is:
+
+$c_"total" space ["mg"/"l"_P] & = c_"total" space ["mg"/"l"_E] dot V_E / V_P = bold(#calc.round(digits: 2, c_total_g_undil * 1000) wj)$
+
+#let fmt-extinction-coeff(value) = {
+  $#str(value).split("").rev().slice(1).chunks(3).map(it => it.rev().join("")).rev().join(thin) space "l" thin "mol"^(-1) thin "cm"^(-1)$
+}
+#figure(
+  table(
+    columns: 7,
+    table.header[#table.cell(
+      stroke: none,
+      fill: none,
+    )[]][$bold("MG")_S$][$bold(epsilon_647)$][$bold(epsilon_664)$][$bold(E_647)$][$bold(E_664)$][$bold(V_E div V_P)$],
+    table.cell(x: 4, y: 1, rowspan: 2, align: horizon)[$#E_647$],
+    table.cell(x: 5, y: 1, rowspan: 2, align: horizon)[$#E_664$],
+    table.cell(x: 6, y: 1, rowspan: 2, align: horizon)[$(#E_V"ml") / (#P_V"ml") = #(E_V / P_V)$],
+    [$"Chl"_a$],
+    [$#MG_a space "g" thin "mol"^(-1)$],
+    [#fmt-extinction-coeff(epsilon_a_647)],
+    [#fmt-extinction-coeff(epsilon_a_664)],
+    [$"Chl"_b$],
+    [$#MG_b space "g" thin "mol"^(-1)$],
+    [#fmt-extinction-coeff(epsilon_b_647)],
+    [#fmt-extinction-coeff(epsilon_b_664)],
+  ),
+  caption: [Extinction coefficients @src_coeffecients, molecular weights, absorbance values and dilution factor needed for calculating the chlorophyll concentration using the Beer-Lambert law.],
+  placement: bottom,
+) <concentration-value-table-beer-lambert>
+
+=== Comparison to given formula
+
+The values calculated using the Beer-Lambert law are in line with the values calculated using the given formulas in @calculation-with-given-formula. The difference is small ($#(calc.round(digits: 2, calc.abs((chla-given-formula + chlb-given-formula) / 1000 - c_total_g_dil) / c_total_g_dil  * 100)) space "%"$) and indicates that the Beer-Lambert law and our calculations are a valid method for determining the chlorophyll concentration. Small differences can be attributed to different extinction coefficients of the chlorophylls used when precalculating the given formulas' factors.
+
+@given-formula-difference-interpretation describes the unknown origin of the instructor-provided formulas. After performing the calculations ourselves, we can observe that once the extinction coefficients $epsilon$ and molecular weights $"MG"$ are known for both chlorophylls, the concentration equation reduces to simple multilinear functions with constant factors applied to the remaining variables $E_lambda$. This suggests that the given formulas are simplified versions of the complete calculation chain we performed based on the Beer-Lambert law.
+
+== Descriptive Statistics
 
 
 
@@ -191,7 +353,7 @@ $
     c & ... "concentration of substance in the sample" \
     ell & ... "path length through sample"$
   ]
-$ <beer-lambert-law>
+$ <beer-lambert>
 
 == Reflotron Method
 
@@ -413,17 +575,17 @@ In @mbi24-results covering the class of the current year (MBI24), we can observe
   "../data/chla.absorption.txt",
   mime-type: "text/tab-separated-values",
   relationship: "data",
-  description: "Chlorophyll A absorption data",
+  description: "Chlorophyll A reference absorption data",
 )
 #pdf.attach(
   "../data/chlb.absorption.txt",
   mime-type: "text/tab-separated-values",
   relationship: "data",
-  description: "Chlorophyll B absorption data",
+  description: "Chlorophyll B reference absorption data",
 )
 #pdf.attach(
   "../data/results.absorption.txt",
   mime-type: "text/tab-separated-values",
   relationship: "data",
-  description: "Experiment results absorption data",
+  description: "Experiment spectrum results absorption data",
 )

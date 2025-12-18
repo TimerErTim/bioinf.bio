@@ -105,3 +105,42 @@ src_chlorophyll-extraction-protocol:
   url:
     value: https://prometheusprotocols.net/function/tissue-chemistry/pigments/chlorophyll-extraction-and-determination/
     date: 2025-12-09
+
+src_quartz-cuvette:
+  type: web
+  url:
+    value: https://qvarz.com/quartz-cuvette/
+    date: 2025-12-29
+  organization: Qvarz LLC
+
+src_wikipedia-molar-extinction-coefficient:
+  type: web
+  url:
+    value: https://en.wikipedia.org/wiki/Molar_absorption_coefficient
+    date: 2025-12-29
+  title: Molar extinction coefficient - Wikipedia
+  organization: Wikipedia
+  parent:
+    type: article
+
+src_coeffecients:
+  type: article
+  title: Precise estimation of chlorophyll a, b and carotenoid content by deconvolution of the absorption spectrum and new simultaneous equations for Chl determination
+  author:
+  - Chazaux, Marie
+  - Schiphorst, Christo
+  - Lazzari, Gioele
+  - Caffarri, Stefano
+  date: 2022
+  page-range: 1630-1648
+  url: 
+    value: https://onlinelibrary.wiley.com/doi/abs/10.1111/tpj.15643
+    date: 2025-12-29
+  serial-number:
+    doi: https://doi.org/10.1111/tpj.15643
+  abstract: SUMMARY The precise determination of photosynthetic pigment content in green organisms, chlorophylls (Chls) and carotenoids (Cars), is important to investigate many photosynthetic processes such as responses to environmental fluctuations or to gene mutations, as well as to interpret biochemical and structural results obtained on purified membranes and photosynthetic complexes. The most utilized methods for determination by spectrophotometry of Chl content in solution, usually 80% acetone, are based on the use of simultaneous equations. The advantages are the easiness and speed over chromatography, which also requires less common equipment. The disadvantage is that issues in sample preparation or in the measurement are not detectable, which could lead to wrong results. Here we propose a fast, accurate and (almost) error-proof method to measure Chl a, Chl b and also total Car content in a solution of pigments extracted from tissue, membranes or purified complexes. The method is based on the fit of the absorption spectrum of the acetone extract using the spectra of purified pigments as references. We show how this method allows a more precise and accurate estimation of pigment content as compared to classical equations, even in incorrectly prepared acetone solutions. Moreover, the method allows the discovery of artifacts in sample preparation or measurement and thus drastically reduces the risk of mistakes. Examples obtained on purified complexes are also discussed. Based on newly acquired Chl spectra, we also propose a new set of improved simultaneous equations that provide slightly different but more reliable results in comparison with the currently used equations.
+  parent:
+    type: periodical
+    title: The Plant Journal
+    issue: 6
+    volume: 109
