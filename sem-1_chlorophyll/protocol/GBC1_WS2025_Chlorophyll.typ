@@ -589,3 +589,15 @@ In @mbi24-results covering the class of the current year (MBI24), we can observe
   relationship: "data",
   description: "Experiment spectrum results absorption data",
 )
+#pdf.attach(
+  "../data/GBC1UE_Spectometry_Grp1_2025.pdf",
+  mime-type: "application/pdf",
+  relationship: "data",
+  description: "Group 1 raw PDF results from 2025",
+)
+#pdf.attach(
+  "../data/GBC1UE_Spectometry_Grp2_2025.pdf",
+  mime-type: "application/pdf",
+  relationship: "data",
+  description: "Group 2 raw PDF results from 2025",
+)
