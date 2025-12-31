@@ -4,7 +4,7 @@
 #show: bio-template.with(
   show-cover-page: true,
   subtitle: "Determination of Chlorophyll Concentration in Biomatter using Spectrophotometry",
-  author: "Tim Peko",
+  author: none,
   members: ("Dijana Panic", "David Kaiser", "Tim Peko"),
   course: "GBC1",
   semester: "WS 2025",
