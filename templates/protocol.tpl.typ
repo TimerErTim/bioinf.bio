@@ -152,6 +152,7 @@
   show math.equation: format-equation
 
   show cite: super
+  show footnote: it => box(pad(left: 2pt, it))
 
   doc
 }
