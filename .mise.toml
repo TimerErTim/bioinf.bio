@@ -1,6 +1,6 @@
 [tools]
 "cargo:hayagriva" = {version = "0.9.1", features = "cli"}
-typst = "0.14.0"
+typst = "0.14.2"
 
 [env]
 TYPST_FONT_PATHS = "{{config_root}}/templates/fonts"
