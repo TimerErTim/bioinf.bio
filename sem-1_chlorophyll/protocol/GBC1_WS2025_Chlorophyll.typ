@@ -99,9 +99,15 @@ While @beer-lambert-equation-concentration is a general equation yielding $"mol"
 $
   c space ["g"/"l"_E] & = E_lambda / epsilon_lambda dot "MG"_S dot cancel(1 / d) => \
   c space ["g"/"l"_P] & = c space ["g"/"l"_E] dot V_E / V_P
-$ <mass-concentration-equations>
+$ <mass-concentration-equations-l>
 
-Here $c ["g"/"l"_E]$ is the mass concentration of the substance $S$ in the extraction solvent and $c ["g"/"l"_P]$ is the mass concentration of the substance $S$ in the biological source material.
+Here $c ["g"/"l"_E]$ is the mass concentration of the substance $S$ in the extraction solvent and $c ["g"/"l"_P]$ is the mass concentration of the substance $S$ per volume of the biological source material.
+
+*Note*: We can use the same approach as for removing the dilution factor $V_E / V_P$ to convert from $"g"/"l"_E$ to $"mg"/"g"_P$ by multiplying with the dilution factor $V_E / M_P$, as shown in @mass-concentration-equation-mg.
+
+$ c space ["g"/"g"_P] = c space ["g"/"l"_E] dot V_E / M_P dot 1000 $ <mass-concentration-equation-mg>
+
+Where $M_P$ is the mass of the biological source material in $"g"$, and $c space ["g"/"g"_P]$ is the mass of the substance $S$ per weight of biological source material.
 
 #new-chapter("Execution")
 
@@ -114,7 +120,7 @@ We performed various analysis tasks in order to gain a better understanding of t
 #let chla-spect-data = csv("../data/chla.absorption.txt", delimiter: "\t").slice(1)
 #let chlb-spect-data = csv("../data/chlb.absorption.txt", delimiter: "\t").slice(1)
 
-We decided to take a detailed full spectrum sample using ... #footnote[hier einfügen von welcher Gruppe und Sample aus Excel Datei online]. The full spectrum data was derived by sampling absorption rates at $10"n" "m"$ intervals from the spectrophotometer's automatic full spectrum curve. Results are shown in @spectral-analysis-sample.
+We decided to take a detailed full spectrum sample using a mixture of brussels sprouts and maggi herbs #footnote[Group 1, subgroup 6 from the results sheet]. The full spectrum data was derived by sampling absorption rates at $10"n" "m"$ intervals from the spectrophotometer's automatic full spectrum curve. Results are shown in @spectral-analysis-sample.
 
 === Reference spectrum
 
@@ -191,6 +197,8 @@ A quick sanity check with the Gemini LLM for the plausability of these values wa
 
 We can see a significant difference between the total result using the standalone aborbance factor and the addition of $"Chl"_"a"$ and $"Chl"_"b"$, with an absolute difference of $#(calc.round(digits: 4, calc.abs(total-given-formula - (chla-given-formula + chlb-given-formula)))) space "mg"/"l"$ and a relative difference of $#(calc.round(digits: 2, calc.abs(total-given-formula - (chla-given-formula + chlb-given-formula)) / total-given-formula * 100)) space "%"$.
 
+#footnote[Add interpretation and sanity check values (also for undiluted values), here and/or for beer-lambert approach.]
+
 === Interpretation of the difference <given-formula-difference-interpretation>
 
 It proves difficult to reason for a possible explanation for this discrepancy without knowing where the given formulas originate from and how they were derived. Measurement or execution errors are a possibility, even though seeming unlikely due to the high difference.
@@ -218,7 +226,7 @@ $
         c_a space ["g"/"l"_E] & = c_a space ["mol"/"l"] dot "MG"_"Chl"_a \
         c_b space ["g"/"l"_E] & = c_b space ["mol"/"l"] dot "MG"_"Chl"_b \
   c_"total" space ["g"/"l"_E] & = c_a space ["g"/"l"_E] + c_b space ["g"/"l"_E] \
-  c_"total" space ["g"/"l"_P] & = c_"total" space ["g"/"l"_E] dot V_E / V_P \
+  c_"total" space ["g"/"g"_P] & = c_"total" space ["g"/"l"_E] dot V_E / M_P \
 $
 
 By plugging in the values from @concentration-value-table-beer-lambert for this equation we arrive at the final values for the mass concentration in the extraction solvent:
@@ -231,8 +239,8 @@ By plugging in the values from @concentration-value-table-beer-lambert for this 
 #let E_647 = results-spect-dict.at("647")
 #let MG_a = 893.5
 #let MG_b = 907.5
-#let P_V = 5  // ml
-#let E_V = 20  // ml
+#let M_P = 1910  // mg
+#let V_E = 19.98  // ml
 
 #let c_a_mol = (
   (E_664 * epsilon_b_647 - E_647 * epsilon_b_664) / (epsilon_a_664 * epsilon_b_647 - epsilon_a_647 * epsilon_b_664)
@@ -244,15 +252,15 @@ By plugging in the values from @concentration-value-table-beer-lambert for this 
 #let c_a_g_dil = c_a_mol * MG_a
 #let c_b_g_dil = c_b_mol * MG_b
 #let c_total_g_dil = c_a_g_dil + c_b_g_dil
-#let c_total_g_undil = c_total_g_dil * E_V / P_V
+#let c_total_g_undil = c_total_g_dil * V_E / M_P
 
 $c_a space ["mg"/"l"_E] & = bold(#calc.round(digits: 2, c_a_g_dil * 1000) wj) \
 c_b space ["mg"/"l"_E] & = bold(#calc.round(digits: 2, c_b_g_dil * 1000) wj) \
 c_"total" space ["mg"/"l"_E] & = bold(#calc.round(digits: 2, c_total_g_dil * 1000) wj)$
 
-Accounted for the dilution factor from the source material, the final determined mass concentration in the biological source material is:
+Accounted for the dilution factor, the final determined mass concentration in the biological source material is:
 
-$c_"total" space ["mg"/"l"_P] & = c_"total" space ["mg"/"l"_E] dot V_E / V_P = bold(#calc.round(digits: 2, c_total_g_undil * 1000) wj)$
+$c_"total" space ["mg"/"g"_P] & = c_"total" space ["mg"/"l"_E] dot V_E / M_P = bold(#calc.round(digits: 4, c_total_g_undil * 1000) wj)$
 
 #let fmt-extinction-coeff(value) = {
   $#str(value).split("").rev().slice(1).chunks(3).map(it => it.rev().join("")).rev().join(thin) space "l" thin "mol"^(-1) thin "cm"^(-1)$
@@ -260,13 +268,14 @@ $c_"total" space ["mg"/"l"_P] & = c_"total" space ["mg"/"l"_E] dot V_E / V_P = b
 #figure(
   table(
     columns: 7,
+    rows: (auto, 2em, 2em),
     table.header[#table.cell(
       stroke: none,
       fill: none,
-    )[]][$bold("MG")_S$][$bold(epsilon_647)$][$bold(epsilon_664)$][$bold(E_647)$][$bold(E_664)$][$bold(V_E div V_P)$],
+    )[]][$bold("MG")_S$][$bold(epsilon_647)$][$bold(epsilon_664)$][$bold(E_647)$][$bold(E_664)$][$bold(V_E div M_P)$],
     table.cell(x: 4, y: 1, rowspan: 2, align: horizon)[$#E_647$],
     table.cell(x: 5, y: 1, rowspan: 2, align: horizon)[$#E_664$],
-    table.cell(x: 6, y: 1, rowspan: 2, align: horizon)[$(#E_V"ml") / (#P_V"ml") = #(E_V / P_V)$],
+    table.cell(x: 6, y: 1, rowspan: 2, align: horizon, inset: (top: 1em))[$(#V_E"ml") / (#M_P"mg") =\ #calc.round(digits: 5, V_E / M_P)$],
     [$"Chl"_a$],
     [$#MG_a space "g" thin "mol"^(-1)$],
     [#fmt-extinction-coeff(epsilon_a_647)],
@@ -282,13 +291,17 @@ $c_"total" space ["mg"/"l"_P] & = c_"total" space ["mg"/"l"_E] dot V_E / V_P = b
 
 === Comparison to given formula
 
-The values calculated using the Beer-Lambert law are in line with the values calculated using the given formulas in @calculation-with-given-formula. The difference is small ($#(calc.round(digits: 2, calc.abs((chla-given-formula + chlb-given-formula) / 1000 - c_total_g_dil) / c_total_g_dil  * 100)) space "%"$) and indicates that the Beer-Lambert law and our calculations are a valid method for determining the chlorophyll concentration. Small differences can be attributed to different extinction coefficients of the chlorophylls used when precalculating the given formulas' factors.
+The values calculated using the Beer-Lambert law are in line with the values calculated using the given formulas in @calculation-with-given-formula. The difference is small ($#(calc.round(digits: 2, calc.abs((chla-given-formula + chlb-given-formula) / 1000 - c_total_g_dil) / c_total_g_dil * 100)) space "%"$) and indicates that the Beer-Lambert law and our calculations are a valid method for determining the chlorophyll concentration. Small differences can be attributed to different extinction coefficients of the chlorophylls used when precalculating the given formulas' factors.
 
 @given-formula-difference-interpretation describes the unknown origin of the instructor-provided formulas. After performing the calculations ourselves, we can observe that once the extinction coefficients $epsilon$ and molecular weights $"MG"$ are known for both chlorophyll types, the concentration equation reduces to simple multilinear functions with constant factors applied to the remaining variables $E_lambda$. This suggests that the given formulas are simplified versions of the complete calculation chain we performed based on the Beer-Lambert law.
 
 == Descriptive Statistics
 
-
+#footnote[Calculate all concentrations purely on the given formula based on extinction.]
+#footnote[All and by source material type.]
+#footnote[
+  Compare concentrations filled out on sheet vs newly calculated. Compare filled out total concentrations vs.newly calculated vs. 652nm formula.
+]
 
 #pagebreak()
 #pagebreak()
@@ -592,12 +605,18 @@ In @mbi24-results covering the class of the current year (MBI24), we can observe
 #pdf.attach(
   "../data/GBC1UE_Spectometry_Grp1_2025.pdf",
   mime-type: "application/pdf",
-  relationship: "data",
+  relationship: "supplement",
   description: "Group 1 raw PDF results from 2025",
 )
 #pdf.attach(
   "../data/GBC1UE_Spectometry_Grp2_2025.pdf",
   mime-type: "application/pdf",
-  relationship: "data",
+  relationship: "supplement",
   description: "Group 2 raw PDF results from 2025",
+)
+#pdf.attach(
+  "../data/group_results.json",
+  mime-type: "application/json",
+  relationship: "data",
+  description: "Group results data (digitalized from the raw group PDFs)",
 )
