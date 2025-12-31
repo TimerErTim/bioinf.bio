@@ -1,6 +1,6 @@
 #import "../../templates/protocol.tpl.typ": bio-template, new-chapter
 
-#set document(title: "Chlorophyll Determination")
+#set document(title: "Chlorophyll Determination", author: "Tim Peko")
 #show: bio-template.with(
   show-cover-page: true,
   subtitle: "Determination of Chlorophyll Concentration in Biomatter using Spectrophotometry",
