@@ -2,7 +2,7 @@
     {
       "file_source": "GBC1UE_Spectometry_Grp1_2025.pdf",
       "group_id": "1",
-      "sample_source": "Chlorophyll Lösung",
+      "sample_source": "Chlorophyll Solution",
       "weight_mg": 640,
       "volume_ml": 1,
       "extinction_647": 0.169,
@@ -16,7 +16,7 @@
     {
       "file_source": "GBC1UE_Spectometry_Grp1_2025.pdf",
       "group_id": "2",
-      "sample_source": "Herb (MAGGI)",
+      "sample_source": "Maggi",
       "weight_mg": 4130,
       "volume_ml": 19.9,
       "extinction_647": 2.531,
@@ -30,7 +30,7 @@
     {
       "file_source": "GBC1UE_Spectometry_Grp1_2025.pdf",
       "group_id": "5",
-      "sample_source": "MAGGI",
+      "sample_source": "Maggi",
       "weight_mg": 3030,
       "volume_ml": 20.1,
       "extinction_647": 2.464,
@@ -44,7 +44,7 @@
     {
       "file_source": "GBC1UE_Spectometry_Grp1_2025.pdf",
       "group_id": "4",
-      "sample_source": "Kohlsprossen",
+      "sample_source": "Brussels Sprouts",
       "weight_mg": 4330,
       "volume_ml": 19.98,
       "extinction_647": 0.599,
@@ -58,10 +58,10 @@
     {
       "file_source": "GBC1UE_Spectometry_Grp1_2025.pdf",
       "group_id": "6",
-      "sample_source": "Mischung ans Kohlsprossen & Maggi",
+      "sample_source": "Brussels Sprouts & Maggi",
       "weight_mg": 1910,
       "volume_ml": 19.98,
-      "extinction_647": 1.1715,
+      "extinction_647": 1.715,
       "extinction_652": 2.049,
       "extinction_664": 2.253,
       "concentration_chla": 22.62,
@@ -72,7 +72,7 @@
     {
       "file_source": "GBC1UE_Spectometry_Grp1_2025.pdf",
       "group_id": "3",
-      "sample_source": "Shine Mischung",
+      "sample_source": "Shine Mix",
       "weight_mg": 4900,
       "volume_ml": 12,
       "extinction_647": 1.724,
@@ -86,7 +86,7 @@
     {
       "file_source": "GBC1UE_Spectometry_Grp2_2025.pdf",
       "group_id": "1",
-      "sample_source": "Chlorophyll",
+      "sample_source": "Chlorophyll Solution",
       "weight_mg": 10,
       "volume_ml": 0.95,
       "extinction_647": 0.299,
@@ -100,7 +100,7 @@
     {
       "file_source": "GBC1UE_Spectometry_Grp2_2025.pdf",
       "group_id": "2",
-      "sample_source": "Rosenkohl",
+      "sample_source": "Cabbage",
       "weight_mg": null,
       "volume_ml": null,
       "extinction_647": 0.825,
@@ -114,7 +114,7 @@
     {
       "file_source": "GBC1UE_Spectometry_Grp2_2025.pdf",
       "group_id": "3",
-      "sample_source": "Schnittlauch",
+      "sample_source": "Parsley",
       "weight_mg": 4000,
       "volume_ml": 20,
       "extinction_647": 0.912,
@@ -128,7 +128,7 @@
     {
       "file_source": "GBC1UE_Spectometry_Grp2_2025.pdf",
       "group_id": "4",
-      "sample_source": "Edamame-Hülse",
+      "sample_source": "Edamame (Pod)",
       "weight_mg": 2304,
       "volume_ml": 20,
       "extinction_647": 0.654,
@@ -142,7 +142,7 @@
     {
       "file_source": "GBC1UE_Spectometry_Grp2_2025.pdf",
       "group_id": "5",
-      "sample_source": "Rosenkohl",
+      "sample_source": "Cabbage",
       "weight_mg": 3250,
       "volume_ml": 11,
       "extinction_647": 0.610,
@@ -156,7 +156,7 @@
     {
       "file_source": "GBC1UE_Spectometry_Grp2_2025.pdf",
       "group_id": "6",
-      "sample_source": "Edamame ohne Hülse",
+      "sample_source": "Edamame (without Pod)",
       "weight_mg": 2975,
       "volume_ml": 11.5,
       "extinction_647": 1.125,

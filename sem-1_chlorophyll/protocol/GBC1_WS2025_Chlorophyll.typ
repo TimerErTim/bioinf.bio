@@ -115,12 +115,14 @@ Where $M_P$ is the mass of the biological source material in $"g"$, and $c space
 
 We performed various analysis tasks in order to gain a better understanding of the data and the results. These were done in isolation to avoid any confounding factors.
 
+We decided to take a detailed full spectrum sample using a mixture of brussels sprouts and maggi herbs #footnote[Group 1, subgroup 6 from the results sheet]. We will use this sample for all single sample analysis, especially in @calculation-with-instructor-formula and @calculation-with-beer-lambert-law. We refer to this sample as "our's" going forward. 
+
 == Spectral Analysis
 #let results-spect-data = csv("../data/results.absorption.txt", delimiter: "\t").slice(1)
 #let chla-spect-data = csv("../data/chla.absorption.txt", delimiter: "\t").slice(1)
 #let chlb-spect-data = csv("../data/chlb.absorption.txt", delimiter: "\t").slice(1)
 
-We decided to take a detailed full spectrum sample using a mixture of brussels sprouts and maggi herbs #footnote[Group 1, subgroup 6 from the results sheet]. We will use this sample for all single sample analysis, namely @calculation-with-instructor-formula and @calculation-with-beer-lambert-law. The full spectrum data was derived by sampling absorption rates at $10"n" "m"$ intervals from the spectrophotometer's automatic full spectrum curve. Results are shown in @spectral-analysis-sample.
+The full spectrum data was derived by sampling absorption rates at $10"n" "m"$ intervals from the spectrophotometer's automatic full spectrum curve. Results are shown in @spectral-analysis-sample.
 
 === Reference spectrum
 
@@ -133,9 +135,9 @@ acetone in our experiment, because we failed to find other publically available 
 ) <spectral-analysis-reference>
 
 In @spectral-analysis-reference we can observe the blue spectrum peaks at
-$~430"n" "m"$ for $"Chl"_"a"$ and
-$~452"n" "m"$ for $"Chl"_"b"$.
-The red spectrum peaks at $~660"n" "m"$ for $"Chl"_"a"$ and $~642"n" "m"$ for $"Chl"_"b"$.
+$~430"nm"$ for $"Chl"_"a"$ and
+$~452"nm"$ for $"Chl"_"b"$.
+The red spectrum peaks at $~660"nm"$ for $"Chl"_"a"$ and $~642"nm"$ for $"Chl"_"b"$.
 
 These match the characteristics of the chlorophylls absorption spectrum in diethyl ether.
 We can observe the spectrum line of $"Chl"_"a"$ buckles when crossing the line of $"Chl"_"b"$ in the blue region, which is also characteristic for both chlorophyll variants.
@@ -150,7 +152,7 @@ Therefore, we conclude the found dataset to be a viable and accurate source of r
   caption: [Absorption Spectrum of the Sample (shown in blue) and combined $"Chl"_"a" + "Chl"_"b"$ Reference from @spectral-analysis-reference (shown in dotted black)],
 ) <spectral-analysis-sample>
 
-The sample spectrum shows the absorption of the total, non-isolated chlorophylls ($"Chl"_"a" + "Chl"_"b"$) in the sample. We can observe three peaks: two in the blue region at $~430 "n" "m"$ and $~445"n" "m"$ with one in the red region at $~660"n" "m"$.
+The sample spectrum shows the absorption of the total, non-isolated chlorophylls ($"Chl"_"a" + "Chl"_"b"$) in the sample. We can observe three peaks: two in the blue region at $~430"nm"$ and $~445"nm"$ with one in the red region at $~660"nm"$.
 
 We can observe similar peaks as in the reference spectrum, but with slight distortions and more or less pronounced features. This is because the sample consists of total, non-isolated chlorophylls ($"Chl"_"a" + "Chl"_"b"$) and possibly other pigments dissolved in acetone. Furthermore, as mentioned in @solvatochromism, shifts are to be expected when comparing our sample with diethyl ether dissolved reference @src_plants-in-action.
 Despite this, one can even spot fine features in our spectrum. For example the valley at the $~650 "n" "m"$ wavelength that is clearly visible in the reference spectrum is present in our data in form of a small bump.
@@ -173,14 +175,20 @@ $
 
 Plugging in the concrete values, shown in @results-important-wavelengths-given-formula, for our sample we get:
 
-#let chla-given-formula = 11.78 * results-spect-dict.at("664") - 2.29 * results-spect-dict.at("647")
-#let chlb-given-formula = 20.05 * results-spect-dict.at("647") - 4.77 * results-spect-dict.at("664")
-#let total-given-formula = 27.8 * results-spect-dict.at("652")
+#let calc-instructor-chla-mg(E_647, E_664) = 11.78 * E_664 - 2.29 * E_647
+#let calc-instructor-chlb-mg(E_647, E_664) = 20.05 * E_647 - 4.77 * E_664
+#let calc-instructor-total-mg(E_652) = 27.8 * E_652
+
+#let chla-given-formula = calc-instructor-chla-mg(results-spect-dict.at("647"), results-spect-dict.at("664"))
+#let chlb-given-formula = calc-instructor-chlb-mg(results-spect-dict.at("647"), results-spect-dict.at("664"))
+#let total-given-formula = calc-instructor-total-mg(results-spect-dict.at("652"))
+
 $c_a space ["mg"/"l"] = 11.78 dot #results-spect-dict.at("664") - 2.29 dot #results-spect-dict.at("647") = bold(#str(chla-given-formula))$ <results-chla-given-formula>
 
 $c_b space ["mg"/"l"] = 20.05 dot #results-spect-dict.at("647") - 4.77 dot #results-spect-dict.at("664") = bold(#str(chlb-given-formula))$ <results-chlb-given-formula>
 
 $c_"total" space ["mg"/"l"] &= c_a + c_b = #str(chla-given-formula) + #str(chlb-given-formula) = bold(#str(chla-given-formula + chlb-given-formula))\ &= 27.8 space E_652 = 27.8 dot #results-spect-dict.at("652") = bold(#str(total-given-formula))$ <results-total-given-formula>
+
 
 #figure(
   table(
@@ -234,32 +242,38 @@ By plugging in the values from @concentration-value-table-beer-lambert for this 
 #let epsilon_a_664 = 76790
 #let epsilon_b_647 = 47040
 #let epsilon_b_664 = 9121
-#let E_664 = results-spect-dict.at("664")
-#let E_647 = results-spect-dict.at("647")
 #let MG_a = 893.5
 #let MG_b = 907.5
+#let E_647 = results-spect-dict.at("647")
+#let E_664 = results-spect-dict.at("664")
 #let M_P = 1910  // mg
 #let V_E = 19.98  // ml
 
-#let c_a_mol = (
+#let calc-lambert-chla-mol(E_647, E_664) = (
   (E_664 * epsilon_b_647 - E_647 * epsilon_b_664) / (epsilon_a_664 * epsilon_b_647 - epsilon_a_647 * epsilon_b_664)
 )
-#let c_b_mol = (
+#let calc-lambert-chlb-mol(E_647, E_664) = (
   (E_647 * epsilon_a_664 - E_664 * epsilon_a_647) / (epsilon_a_664 * epsilon_b_647 - epsilon_a_647 * epsilon_b_664)
 )
+#let calc-chla-mol-to-mg(c_a_mol) = c_a_mol * MG_a * 1000
+#let calc-chlb-mol-to-mg(c_b_mol) = c_b_mol * MG_b * 1000
+#let calc-undilute-mg_l-mg_g(c_g, M_P, V_E) = c_g * V_E / M_P
 
-#let c_a_g_dil = c_a_mol * MG_a
-#let c_b_g_dil = c_b_mol * MG_b
-#let c_total_g_dil = c_a_g_dil + c_b_g_dil
-#let c_total_g_undil = c_total_g_dil * V_E / M_P
+#let c_a_mol = calc-lambert-chla-mol(E_647, E_664)
+#let c_b_mol = calc-lambert-chlb-mol(E_647, E_664)
 
-$c_a space ["mg"/"l"_E] & = bold(#calc.round(digits: 2, c_a_g_dil * 1000) wj) \
-c_b space ["mg"/"l"_E] & = bold(#calc.round(digits: 2, c_b_g_dil * 1000) wj) \
-c_"total" space ["mg"/"l"_E] & = bold(#calc.round(digits: 2, c_total_g_dil * 1000) wj)$
+#let c_a_mg_dil = calc-chla-mol-to-mg(c_a_mol)
+#let c_b_mg_dil = calc-chlb-mol-to-mg(c_b_mol)
+#let c_total_mg_dil = c_a_mg_dil + c_b_mg_dil
+#let c_total_mg_undil = calc-undilute-mg_l-mg_g(c_total_mg_dil, M_P, V_E)
+
+$c_a space ["mg"/"l"_E] & = bold(#calc.round(digits: 2, c_a_mg_dil) wj) \
+c_b space ["mg"/"l"_E] & = bold(#calc.round(digits: 2, c_b_mg_dil) wj) \
+c_"total" space ["mg"/"l"_E] & = bold(#calc.round(digits: 2, c_total_mg_dil) wj)$
 
 Accounted for the dilution factor, the final determined mass concentration in the biological source material (fresh weight) is:
 
-$c_"total" space ["mg"/"g"_P] & = c_"total" space ["mg"/"l"_E] dot V_E / M_P = bold(#calc.round(digits: 4, c_total_g_undil * 1000) wj)$
+$c_"total" space ["mg"/"g"_P] & = c_"total" space ["mg"/"l"_E] dot V_E / M_P = bold(#calc.round(digits: 4, c_total_mg_undil) wj)$
 
 #let fmt-extinction-coeff(value) = {
   $#str(value).split("").rev().slice(1).chunks(3).map(it => it.rev().join("")).rev().join(thin) space "l" thin "mol"^(-1) thin "cm"^(-1)$
@@ -292,7 +306,7 @@ $c_"total" space ["mg"/"g"_P] & = c_"total" space ["mg"/"l"_E] dot V_E / M_P = b
 
 === Comparison to instructor's formula
 
-The values calculated using the Beer-Lambert law are in line with the values calculated using the instructor's formulas in @calculation-with-instructor-formula. The difference is small ($#(calc.round(digits: 2, calc.abs((chla-given-formula + chlb-given-formula) / 1000 - c_total_g_dil) / c_total_g_dil * 100)) space "%"$) and indicates that the Beer-Lambert law and our calculations are a valid method for determining the chlorophyll concentration. Small differences can be attributed to different extinction coefficients of the chlorophylls used when precalculating the given formulas' factors.
+The values calculated using the Beer-Lambert law are in line with the values calculated using the instructor's formulas in @calculation-with-instructor-formula. The difference is small ($#(calc.round(digits: 2, calc.abs((chla-given-formula + chlb-given-formula) - c_total_mg_dil) / c_total_mg_dil * 100)) space "%"$) and indicates that the Beer-Lambert law and our calculations are a valid method for determining the chlorophyll concentration. Small differences can be attributed to different extinction coefficients of the chlorophylls used when precalculating the given formulas' factors.
 
 @instructor-formula-difference-interpretation describes the unknown origin of the instructor-provided formulas. After performing the calculations ourselves, we can observe that once the extinction coefficients $epsilon$ and molecular weights $"MG"$ are known for both chlorophyll types, the concentration equation reduces to simple multilinear functions with constant factors applied to the remaining variables $E_lambda$. This suggests that the given formulas are simplified versions of the complete calculation chain we performed based on the Beer-Lambert law.
 
@@ -337,7 +351,7 @@ With the calculated concentration value in fresh weight for our sample, we want 
     table.header(..common-leafy-vegetables-concentrations.map(it => [#it.at(0)])),
     ..common-leafy-vegetables-concentrations.map(it => [#it.at(1)]),
   ),
-  caption: [Known concentrations of common leafy vegetables, queried from Gemini 2025, normalized to $"mg"/"g"$ of fresh weight.],
+  caption: [Known concentrations of common leafy vegetables, queried from Gemini 2025, normalized to $"mg"slash"g"$ of fresh weight.],
   placement: bottom,
 ) <known-concentrations-normalized>
 
@@ -345,12 +359,64 @@ Using this information and normalizing to $"mg"slash"g"$ of fresh weight, the re
 
 *Note*: Even though Gemini is no scientific source, we only use it for a basic plausability check of our own results. It can therefore be deemed a reliable enough source for this specific usecase.
 
-The total chlorophyll concentration of our sample is $#(calc.round(digits: 4, c_total_g_undil * 1000)) "mg"slash"g"$ of fresh weight. This is less than known concentrations of both brussel sprouts and maggi herbs, which are the only components of our analysed sample. This is unexpected and suggests multiple potential error sources. These could include inadequate processing/grinding with quartz sand, the fact that the material was cooled and partially frozen during preparation, incomplete extraction due to insufficient contact time with the solvent, or degradation of chlorophyll during sample handling.
+The total chlorophyll concentration of our sample is $#(calc.round(digits: 4, c_total_mg_undil)) "mg"slash"g"$ of fresh weight. This is less than known concentrations of both brussel sprouts and maggi herbs, which are the only components of our analysed sample. This is unexpected and suggests multiple potential error sources. These could include inadequate processing/grinding with quartz sand, the fact that the material was cooled and partially frozen during preparation, incomplete extraction due to insufficient contact time with the solvent, or degradation of chlorophyll during sample handling.
 
-Nevertheless, the results are within general ranges of our expected results, and are therefore deemed plausible. We do not suspect a great systematic error in our measurements, but rather a combination of multiple smaller errors.
+Nevertheless, the results are within general ranges of our expected values, and are therefore deemed plausible. We do not suspect a great systematic error in our measurements, but rather a combination of multiple smaller errors.
 
 
 == Descriptive Statistics
+
+#let groups-results-data = json("../data/group_results.json")
+
+We analyze the results of all groups in our class and compare them to our own results. We also compare different source materials with each other. Except for explicitly stated otherwise, the concentrations in fresh weight are computed using the instructor's formula for individual chlorophyll types and adding them together, after which dilution compensation is performed. We do not use the pre-calculated concentrations from the results sheet.
+
+=== General results
+
+#let groups-results-addedformula-concentration = (
+  groups-results-data
+    .filter(it => it.volume_ml != none)
+    .map(it => (
+      ..it,
+      total_added_mg_freshweight: calc-undilute-mg_l-mg_g(
+        calc-instructor-chla-mg(it.extinction_647, it.extinction_664)
+          + calc-instructor-chlb-mg(it.extinction_647, it.extinction_664),
+        it.weight_mg,
+        it.volume_ml,
+      ),
+      total_instructor_mg_freshweight: calc-undilute-mg_l-mg_g(
+        calc-instructor-total-mg(it.extinction_652),
+        it.weight_mg,
+        it.volume_ml,
+      ),
+    ))
+)
+
+#figure(
+  table(
+    columns: 4,
+    align: horizon + start,
+    table.header[*Mean* $bold(dash(x))$][*Standard Deviation $bold("std"(x))$*][*Median $bold(tilde(x))$*][*Range $bold(max(x) - min(x))$*],
+    [$#(calc.round(digits: 4, mean(groups-results-addedformula-concentration.map(it => it.total_added_mg_freshweight)))) "mg"slash"g"$],
+    [$#(calc.round(digits: 4, std(groups-results-addedformula-concentration.map(it => it.total_added_mg_freshweight)))) "mg"slash"g"$],
+    [$#(calc.round(digits: 4, median(groups-results-addedformula-concentration.map(it => it.total_added_mg_freshweight)))) "mg"slash"g"$],
+    [$
+    #(calc.round(digits: 4, max-value(groups-results-addedformula-concentration.map(it => it.total_added_mg_freshweight))))
+    -
+    #(calc.round(digits: 4, min-value(groups-results-addedformula-concentration.map(it => it.total_added_mg_freshweight))))
+    "mg"slash"g"$],
+  ),
+  caption: [Descriptive statistics of the total chlorophyll concentration for all groups],
+) <descriptive-statistics-table-all-groups>
+
+@descriptive-statistics-table-all-groups shows all descriptive statistics of the total chlorophyll concentration in fresh weight for all groups. We can use this information to put our group's results in context.
+
+#let c_total_instructor_undil = calc-undilute-mg_l-mg_g(chla-given-formula + chlb-given-formula, M_P, V_E)
+
+Based on the instructor's formula for the total chlorophyll concentration, our total chlorophyll concentration in fresh weight is $#(calc.round(digits: 4, c_total_instructor_undil)) "mg"slash"g"$. This belongs to the higher end of our value range, but is not an outlier. It indicates a result value fitting for our experiment. The high value makes sense, as @known-concentrations-normalized shows that brussels sprouts have a very high concentration of chlorophyll.
+
+
+
+#groups-results-addedformula-concentration
 
 #footnote[Calculate all concentrations purely on the given formula based on extinction.]
 #footnote[All and by source material type.]
