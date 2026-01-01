@@ -107,7 +107,7 @@ Here $c ["g"/"l"_E]$ is the mass concentration of the substance $S$ in the extra
 
 $ c space ["g"/"g"_P] = c space ["g"/"l"_E] dot V_E / M_P dot 1000 $ <mass-concentration-equation-mg>
 
-Where $M_P$ is the mass of the biological source material in $"g"$, and $c space ["g"/"g"_P]$ is the mass of the substance $S$ per weight of biological source material.
+Where $M_P$ is the mass of the biological source material in $"g"$, and $c space ["g"/"g"_P]$ is the mass of the substance $S$ per weight of biological source material. This is often used to determine the concentration in fresh weight.
 
 #new-chapter("Execution")
 
@@ -120,7 +120,7 @@ We performed various analysis tasks in order to gain a better understanding of t
 #let chla-spect-data = csv("../data/chla.absorption.txt", delimiter: "\t").slice(1)
 #let chlb-spect-data = csv("../data/chlb.absorption.txt", delimiter: "\t").slice(1)
 
-We decided to take a detailed full spectrum sample using a mixture of brussels sprouts and maggi herbs #footnote[Group 1, subgroup 6 from the results sheet]. The full spectrum data was derived by sampling absorption rates at $10"n" "m"$ intervals from the spectrophotometer's automatic full spectrum curve. Results are shown in @spectral-analysis-sample.
+We decided to take a detailed full spectrum sample using a mixture of brussels sprouts and maggi herbs #footnote[Group 1, subgroup 6 from the results sheet]. We will use this sample for all single sample analysis, namely @calculation-with-given-formula and @calculation-with-beer-lambert-law. The full spectrum data was derived by sampling absorption rates at $10"n" "m"$ intervals from the spectrophotometer's automatic full spectrum curve. Results are shown in @spectral-analysis-sample.
 
 === Reference spectrum
 
@@ -197,13 +197,12 @@ A quick sanity check with the Gemini LLM for the plausability of these values wa
 
 We can see a significant difference between the total result using the standalone aborbance factor and the addition of $"Chl"_"a"$ and $"Chl"_"b"$, with an absolute difference of $#(calc.round(digits: 4, calc.abs(total-given-formula - (chla-given-formula + chlb-given-formula)))) space "mg"/"l"$ and a relative difference of $#(calc.round(digits: 2, calc.abs(total-given-formula - (chla-given-formula + chlb-given-formula)) / total-given-formula * 100)) space "%"$.
 
-#footnote[Add interpretation and sanity check values (also for undiluted values), here and/or for beer-lambert approach.]
 
 === Interpretation of the difference <given-formula-difference-interpretation>
 
 It proves difficult to reason for a possible explanation for this discrepancy without knowing where the given formulas originate from and how they were derived. Measurement or execution errors are a possibility, even though seeming unlikely due to the high difference.
 
-== Chlorophyll Concentration using Beer-Lambert law
+== Chlorophyll Concentration using Beer-Lambert Law <calculation-with-beer-lambert-law>
 
 In order to find both the $"Chl"_"a"$ and $"Chl"_"b"$ concentration, we need to use the Beer-Lambert law. We arrange the @beer-lambert-equation into a linear equation system to solve for both concentrations:
 
@@ -258,7 +257,7 @@ $c_a space ["mg"/"l"_E] & = bold(#calc.round(digits: 2, c_a_g_dil * 1000) wj) \
 c_b space ["mg"/"l"_E] & = bold(#calc.round(digits: 2, c_b_g_dil * 1000) wj) \
 c_"total" space ["mg"/"l"_E] & = bold(#calc.round(digits: 2, c_total_g_dil * 1000) wj)$
 
-Accounted for the dilution factor, the final determined mass concentration in the biological source material is:
+Accounted for the dilution factor, the final determined mass concentration in the biological source material (fresh weight) is:
 
 $c_"total" space ["mg"/"g"_P] & = c_"total" space ["mg"/"l"_E] dot V_E / M_P = bold(#calc.round(digits: 4, c_total_g_undil * 1000) wj)$
 
@@ -275,7 +274,9 @@ $c_"total" space ["mg"/"g"_P] & = c_"total" space ["mg"/"l"_E] dot V_E / M_P = b
     )[]][$bold("MG")_S$][$bold(epsilon_647)$][$bold(epsilon_664)$][$bold(E_647)$][$bold(E_664)$][$bold(V_E div M_P)$],
     table.cell(x: 4, y: 1, rowspan: 2, align: horizon)[$#E_647$],
     table.cell(x: 5, y: 1, rowspan: 2, align: horizon)[$#E_664$],
-    table.cell(x: 6, y: 1, rowspan: 2, align: horizon, inset: (top: 1em))[$(#V_E"ml") / (#M_P"mg") =\ #calc.round(digits: 5, V_E / M_P)$],
+    table.cell(x: 6, y: 1, rowspan: 2, align: horizon, inset: (
+      top: 1em,
+    ))[$(#V_E"ml") / (#M_P"mg") =\ #calc.round(digits: 5, V_E / M_P)$],
     [$"Chl"_a$],
     [$#MG_a space "g" thin "mol"^(-1)$],
     [#fmt-extinction-coeff(epsilon_a_647)],
