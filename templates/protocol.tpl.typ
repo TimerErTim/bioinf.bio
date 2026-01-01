@@ -161,7 +161,7 @@
   show quote: format-quote
 
   show cite: super
-  show footnote: it => box(pad(left: 2pt, it))
+  show footnote: box
 
   doc
 }
