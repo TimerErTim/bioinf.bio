@@ -68,7 +68,7 @@ This solvent-dependent effect applies to chlorophyll and arises from the interac
 @src_plants-in-action.
 @src_wikipedia-solvatochromism
 
-Consequently, absorption coefficients derived for methanol cannot be used for acetone extracts, and coefficients for 100% acetone cannot be used for 80% acetone. The specific equations discussed in Section 5 (using 11.78 and 2.29) #footnote[replace with actual section used in this document] are strictly valid only for 80% Acetone extracts. @src_plants-in-action
+Consequently, absorption coefficients derived for methanol cannot be used for acetone extracts, and coefficients for 100% acetone cannot be used for 80% acetone. The specific equations discussed in @calculation-with-given-formula are strictly valid only for 100% Acetone extracts. @src_plants-in-action
 @src_chlorophyll-lichtenthaler
 
 == Spectrophotometry
