@@ -3,6 +3,14 @@
   it
 }
 
+#let format-quote(it) = {
+  if it.block {
+    block(stroke: (x: gray), radius: 0.5em, inset: (y: 0.5em), spacing: 1em, it)
+  } else {
+    it
+  }
+}
+
 #let new-chapter(title) = [
   #colbreak(weak: true)
   = #title
@@ -150,6 +158,7 @@
   )
 
   show math.equation: format-equation
+  show quote: format-quote
 
   show cite: super
   show footnote: it => box(pad(left: 2pt, it))
