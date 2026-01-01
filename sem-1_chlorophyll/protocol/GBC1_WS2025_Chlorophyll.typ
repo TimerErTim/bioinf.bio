@@ -314,9 +314,9 @@ With the calculated concentration value in fresh weight for our sample, we want 
 
 #quote(block: true, attribution: [Gemini LLM 2025])[
   Chlorophyll Content Comparison:
-  
+
   Lovage generally has higher chlorophyll concentrations than most lettuce varieties but slightly lower levels than the most dense leafy herbs like parsley.
-  
+
   - *Lovage (Maggi Herb)*: ~0.68 mg/g (68.5 mg/100g)
   - *Brussels Sprouts*: ~2.41 mg/g
   - *Lettuce*: ~0.12 - 1.0 mg/g
@@ -326,10 +326,10 @@ With the calculated concentration value in fresh weight for our sample, we want 
 #let common-leafy-vegetables-concentrations = (
   ("Spinach", [$#(120 / 100) - #(150 / 100)$]),
   ("Chard", [$#(121 / 100)$]),
-  ("Lovage (Maggi Herb)", [$#(0.68)$]),
-  ("Brussels Sprouts", [$#(2.41)$]),
-  ("Lettuce", [$#(0.12) - #(1.0)$]),
-  ("Parsley", [$#(2.18) - #(2.23)$]),
+  ("Lovage (Maggi Herb)", [$#0.68$]),
+  ("Brussels Sprouts", [$#2.41$]),
+  ("Lettuce", [$#0.12 - #1.0$]),
+  ("Parsley", [$#2.18 - #2.23$]),
 )
 #figure(
   table(
