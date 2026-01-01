@@ -577,6 +577,14 @@ In @mbi24-results covering the class of the current year (MBI24), we can observe
 
 #bibliography("sources.yaml", title: none, style: "ieee")
 
+#colbreak()
+
+== List of Figures
+#outline(title: none, target: figure.where(kind: image))
+
+== List of Tables
+#outline(title: none, target: figure.where(kind: table))
+
 
 // Attachments
 #pdf.attach(
