@@ -68,7 +68,7 @@ This solvent-dependent effect applies to chlorophyll and arises from the interac
 @src_plants-in-action.
 @src_wikipedia-solvatochromism
 
-Consequently, absorption coefficients derived for methanol cannot be used for acetone extracts, and coefficients for 100% acetone cannot be used for 80% acetone. The specific equations discussed in @calculation-with-given-formula are strictly valid only for 100% Acetone extracts. @src_plants-in-action
+Consequently, absorption coefficients derived for methanol cannot be used for acetone extracts, and coefficients for 100% acetone cannot be used for 80% acetone. The specific equations discussed in @calculation-with-instructor-formula are strictly valid only for 100% Acetone extracts. @src_plants-in-action
 @src_chlorophyll-lichtenthaler
 
 == Spectrophotometry
@@ -120,7 +120,7 @@ We performed various analysis tasks in order to gain a better understanding of t
 #let chla-spect-data = csv("../data/chla.absorption.txt", delimiter: "\t").slice(1)
 #let chlb-spect-data = csv("../data/chlb.absorption.txt", delimiter: "\t").slice(1)
 
-We decided to take a detailed full spectrum sample using a mixture of brussels sprouts and maggi herbs #footnote[Group 1, subgroup 6 from the results sheet]. We will use this sample for all single sample analysis, namely @calculation-with-given-formula and @calculation-with-beer-lambert-law. The full spectrum data was derived by sampling absorption rates at $10"n" "m"$ intervals from the spectrophotometer's automatic full spectrum curve. Results are shown in @spectral-analysis-sample.
+We decided to take a detailed full spectrum sample using a mixture of brussels sprouts and maggi herbs #footnote[Group 1, subgroup 6 from the results sheet]. We will use this sample for all single sample analysis, namely @calculation-with-instructor-formula and @calculation-with-beer-lambert-law. The full spectrum data was derived by sampling absorption rates at $10"n" "m"$ intervals from the spectrophotometer's automatic full spectrum curve. Results are shown in @spectral-analysis-sample.
 
 === Reference spectrum
 
@@ -159,7 +159,7 @@ The most claring difference compared to reference is the samples gradually incre
 One possible explanation for this is the presence of other pigments in the sample that absorb in the green spectrum, such as carotenoids
 @src_chlorophyll-extraction-protocol @src_plants-in-action. Another plausible explanation is incomplete calibration: Calibration did not happen across the entire spectrum but only once on the higher end of the wavelength. The level of unfamiliarity with the spectrophotometer and the spectrometer itself might have contributed to this.
 
-== Chlorophyll Concentration with Given Formula <calculation-with-given-formula>
+== Chlorophyll Concentration with Instructor's Formula <calculation-with-instructor-formula>
 
 #let results-spect-dict = results-spect-data.map(it => (it.at(0), float(it.at(1)))).to-dict()
 
@@ -198,7 +198,7 @@ A quick sanity check with the Gemini LLM for the plausability of these values wa
 We can see a significant difference between the total result using the standalone aborbance factor and the addition of $"Chl"_"a"$ and $"Chl"_"b"$, with an absolute difference of $#(calc.round(digits: 4, calc.abs(total-given-formula - (chla-given-formula + chlb-given-formula)))) space "mg"/"l"$ and a relative difference of $#(calc.round(digits: 2, calc.abs(total-given-formula - (chla-given-formula + chlb-given-formula)) / total-given-formula * 100)) space "%"$.
 
 
-=== Interpretation of the difference <given-formula-difference-interpretation>
+=== Interpretation of the difference <instructor-formula-difference-interpretation>
 
 It proves difficult to reason for a possible explanation for this discrepancy without knowing where the given formulas originate from and how they were derived. Measurement or execution errors are a possibility, even though seeming unlikely due to the high difference.
 
@@ -290,11 +290,65 @@ $c_"total" space ["mg"/"g"_P] & = c_"total" space ["mg"/"l"_E] dot V_E / M_P = b
   placement: bottom,
 ) <concentration-value-table-beer-lambert>
 
-=== Comparison to given formula
+=== Comparison to instructor's formula
 
-The values calculated using the Beer-Lambert law are in line with the values calculated using the given formulas in @calculation-with-given-formula. The difference is small ($#(calc.round(digits: 2, calc.abs((chla-given-formula + chlb-given-formula) / 1000 - c_total_g_dil) / c_total_g_dil * 100)) space "%"$) and indicates that the Beer-Lambert law and our calculations are a valid method for determining the chlorophyll concentration. Small differences can be attributed to different extinction coefficients of the chlorophylls used when precalculating the given formulas' factors.
+The values calculated using the Beer-Lambert law are in line with the values calculated using the instructor's formulas in @calculation-with-instructor-formula. The difference is small ($#(calc.round(digits: 2, calc.abs((chla-given-formula + chlb-given-formula) / 1000 - c_total_g_dil) / c_total_g_dil * 100)) space "%"$) and indicates that the Beer-Lambert law and our calculations are a valid method for determining the chlorophyll concentration. Small differences can be attributed to different extinction coefficients of the chlorophylls used when precalculating the given formulas' factors.
 
-@given-formula-difference-interpretation describes the unknown origin of the instructor-provided formulas. After performing the calculations ourselves, we can observe that once the extinction coefficients $epsilon$ and molecular weights $"MG"$ are known for both chlorophyll types, the concentration equation reduces to simple multilinear functions with constant factors applied to the remaining variables $E_lambda$. This suggests that the given formulas are simplified versions of the complete calculation chain we performed based on the Beer-Lambert law.
+@instructor-formula-difference-interpretation describes the unknown origin of the instructor-provided formulas. After performing the calculations ourselves, we can observe that once the extinction coefficients $epsilon$ and molecular weights $"MG"$ are known for both chlorophyll types, the concentration equation reduces to simple multilinear functions with constant factors applied to the remaining variables $E_lambda$. This suggests that the given formulas are simplified versions of the complete calculation chain we performed based on the Beer-Lambert law.
+
+Interestingly enough, even though the extinction coefficients $epsilon$ used in our manual calculations are for 80% acetone solutions @src_coeffecients, the Beer-Lambert law calculations still yield results in line with the instructors formulas, despite the solvatochromism effect, stated in @solvatochromism. The small difference between the results of the instructor's formula and the Beer-Lambert law calculations could then be explained by this and the hypothesis, that the absorption difference between 80% acetone and 100% acetone is not significant enough to cause a noticeable difference in the calculated concentration.
+
+=== Checking for alignment with known concentrations
+
+With the calculated concentration value in fresh weight for our sample, we want to check for plausability by comparing to other well known concentrations of common leafy vegetables in fresh weight.
+
+#quote(block: true, attribution: [Gemini LLM 2025])[
+  Chlorophyll content varies widely by species, leaf age, and sunlight exposure.
+  - Total Chlorophyll (a+b): Generally ranges from 0.08 to 19.2 mg/g fresh weight.
+  - Common Leafy Vegetables:
+    - Spinach: ~120-150 mg/100g (~1.2-1.5 mg/g).
+    - Chard: ~121 mg/100g.
+    - Lettuce: ~19-58 mg/100g.
+    - Parsley: ~5-20 μg/g.
+]
+
+#quote(block: true, attribution: [Gemini LLM 2025])[
+  Chlorophyll Content Comparison:
+  
+  Lovage generally has higher chlorophyll concentrations than most lettuce varieties but slightly lower levels than the most dense leafy herbs like parsley.
+  
+  - *Lovage (Maggi Herb)*: ~0.68 mg/g (68.5 mg/100g)
+  - *Brussels Sprouts*: ~2.41 mg/g
+  - *Lettuce*: ~0.12 - 1.0 mg/g
+  - *Parsley*: ~2.18 - 2.23 mg/g
+]
+
+#let common-leafy-vegetables-concentrations = (
+  ("Spinach", [$#(120 / 100) - #(150 / 100)$]),
+  ("Chard", [$#(121 / 100)$]),
+  ("Lovage (Maggi Herb)", [$#(0.68)$]),
+  ("Brussels Sprouts", [$#(2.41)$]),
+  ("Lettuce", [$#(0.12) - #(1.0)$]),
+  ("Parsley", [$#(2.18) - #(2.23)$]),
+)
+#figure(
+  table(
+    columns: common-leafy-vegetables-concentrations.len(),
+    table.header(..common-leafy-vegetables-concentrations.map(it => [#it.at(0)])),
+    ..common-leafy-vegetables-concentrations.map(it => [#it.at(1)]),
+  ),
+  caption: [Known concentrations of common leafy vegetables, queried from Gemini 2025, normalized to $"mg"/"g"$ of fresh weight.],
+  placement: bottom,
+) <known-concentrations-normalized>
+
+Using this information and normalizing to $"mg"slash"g"$ of fresh weight, the results of which are shown in @known-concentrations-normalized, we can compare our results in fresh weight to the known concentrations of common leafy vegetables.
+
+*Note*: Even though Gemini is no scientific source, we only use it for a basic plausability check of our own results. It can therefore be deemed a reliable enough source for this specific usecase.
+
+The total chlorophyll concentration of our sample is $#(calc.round(digits: 4, c_total_g_undil * 1000)) "mg"slash"g"$ of fresh weight. This is less than known concentrations of both brussel sprouts and maggi herbs, which are the only components of our analysed sample. This is unexpected and suggests multiple potential error sources. These could include inadequate processing/grinding with quartz sand, the fact that the material was cooled and partially frozen during preparation, incomplete extraction due to insufficient contact time with the solvent, or degradation of chlorophyll during sample handling.
+
+Nevertheless, the results are within general ranges of our expected results, and are therefore deemed plausible. We do not suspect a great systematic error in our measurements, but rather a combination of multiple smaller errors.
+
 
 == Descriptive Statistics
 
