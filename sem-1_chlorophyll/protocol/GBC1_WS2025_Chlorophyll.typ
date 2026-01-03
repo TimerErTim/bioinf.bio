@@ -115,7 +115,7 @@ Where $M_P$ is the mass of the biological source material in $"g"$, and $c space
 
 We performed various analysis tasks in order to gain a better understanding of the data and the results. These were done in isolation to avoid any confounding factors.
 
-We decided to take a detailed full spectrum sample using a mixture of brussels sprouts and maggi herbs #footnote[Group 1, subgroup 6 from the results sheet]. We will use this sample for all single sample analysis, especially in @calculation-with-instructor-formula and @calculation-with-beer-lambert-law. We refer to this sample as "our's" going forward. 
+We decided to take a detailed full spectrum sample using a mixture of brussels sprouts and maggi herbs #footnote[File group 1, subgroup 6 from the results sheet]. We will use this sample for all single sample analysis, especially in @calculation-with-instructor-formula and @calculation-with-beer-lambert-law. We refer to this sample as "our's" going forward.
 
 == Spectral Analysis
 #let results-spect-data = csv("../data/results.absorption.txt", delimiter: "\t").slice(1)
@@ -131,7 +131,7 @@ acetone in our experiment, because we failed to find other publically available 
 
 #figure(
   rect(inset: 0.5cm, pad(visualize-reference-absorption(chla-spect-data, chlb-spect-data), right: 1em)),
-  caption: [Reference Chlorophyll Absorption Spectra in Diethyl Ether @src_chlorophyll-a-photochem @src_chlorophyll-b-photochem\ Blue shows $"Chl"_"a"$ and red shows $"Chl"_"b"$],
+  caption: [Reference Chlorophyll Absorption Spectra in Diethyl Ether @src_chlorophyll-a-photochem @src_chlorophyll-b-photochem. Blue shows $"Chl"_"a"$ and red shows $"Chl"_"b"$],
 ) <spectral-analysis-reference>
 
 In @spectral-analysis-reference we can observe the blue spectrum peaks at
@@ -171,7 +171,7 @@ $
   c_a space ["mg"/"l"] & = 11.78 space E_664 - 2.29 space E_647 \
   c_b space ["mg"/"l"] & = 20.05 space E_647 - 4.77 space E_664 \
              c_"total" & = c_a + c_b = 27.8 space E_652
-$
+$ <instructor-formula-equations>
 
 Plugging in the concrete values, shown in @results-important-wavelengths-given-formula, for our sample we get:
 
@@ -364,31 +364,45 @@ The total chlorophyll concentration of our sample is $#(calc.round(digits: 4, c_
 Nevertheless, the results are within general ranges of our expected values, and are therefore deemed plausible. We do not suspect a great systematic error in our measurements, but rather a combination of multiple smaller errors.
 
 
-== Descriptive Statistics
+== Descriptive Statistics <descriptive-statistics>
 
 #let groups-results-data = json("../data/group_results.json")
 
 We analyze the results of all groups in our class and compare them to our own results. We also compare different source materials with each other. Except for explicitly stated otherwise, the concentrations in fresh weight are computed using the instructor's formula for individual chlorophyll types and adding them together, after which dilution compensation is performed. We do not use the pre-calculated concentrations from the results sheet.
 
-=== General results
+=== Overall results
 
 #let groups-results-addedformula-concentration = (
   groups-results-data
     .filter(it => it.volume_ml != none)
-    .map(it => (
-      ..it,
-      total_added_mg_freshweight: calc-undilute-mg_l-mg_g(
+    .map(it => {
+      let total_added_mg_l = (
         calc-instructor-chla-mg(it.extinction_647, it.extinction_664)
-          + calc-instructor-chlb-mg(it.extinction_647, it.extinction_664),
-        it.weight_mg,
-        it.volume_ml,
-      ),
-      total_instructor_mg_freshweight: calc-undilute-mg_l-mg_g(
-        calc-instructor-total-mg(it.extinction_652),
-        it.weight_mg,
-        it.volume_ml,
-      ),
-    ))
+          + calc-instructor-chlb-mg(it.extinction_647, it.extinction_664)
+      )
+      let total_instructor_mg_l = calc-instructor-total-mg(it.extinction_652)
+      return (
+        ..it,
+        total_added_mg_freshweight: calc-undilute-mg_l-mg_g(
+          total_added_mg_l,
+          it.weight_mg,
+          it.volume_ml,
+        ),
+        total_instructor_mg_freshweight: calc-undilute-mg_l-mg_g(
+          total_instructor_mg_l,
+          it.weight_mg,
+          it.volume_ml,
+        ),
+        total_instructor_mg_l: total_instructor_mg_l,
+        total_added_mg_l: total_added_mg_l,
+        concentration_total: it.concentration_chla + it.concentration_chlb,
+        concentration_freshweight: calc-undilute-mg_l-mg_g(
+          it.concentration_chla + it.concentration_chlb,
+          it.weight_mg,
+          it.volume_ml,
+        ),
+      )
+    })
 )
 
 #figure(
@@ -399,8 +413,7 @@ We analyze the results of all groups in our class and compare them to our own re
     [$#(calc.round(digits: 4, mean(groups-results-addedformula-concentration.map(it => it.total_added_mg_freshweight)))) "mg"slash"g"$],
     [$#(calc.round(digits: 4, std(groups-results-addedformula-concentration.map(it => it.total_added_mg_freshweight)))) "mg"slash"g"$],
     [$#(calc.round(digits: 4, median(groups-results-addedformula-concentration.map(it => it.total_added_mg_freshweight)))) "mg"slash"g"$],
-    [$
-    #(calc.round(digits: 4, max-value(groups-results-addedformula-concentration.map(it => it.total_added_mg_freshweight))))
+    [$#(calc.round(digits: 4, max-value(groups-results-addedformula-concentration.map(it => it.total_added_mg_freshweight))))
     -
     #(calc.round(digits: 4, min-value(groups-results-addedformula-concentration.map(it => it.total_added_mg_freshweight))))
     "mg"slash"g"$],
@@ -414,281 +427,104 @@ We analyze the results of all groups in our class and compare them to our own re
 
 Based on the instructor's formula for the total chlorophyll concentration, our total chlorophyll concentration in fresh weight is $#(calc.round(digits: 4, c_total_instructor_undil)) "mg"slash"g"$. This belongs to the higher end of our value range, but is not an outlier. It indicates a result value fitting for our experiment. The high value makes sense, as @known-concentrations-normalized shows that brussels sprouts have a very high concentration of chlorophyll.
 
+#figure(
+  rect(inset: 0.5cm, boxplot-all-with-our-value(
+    groups-results-addedformula-concentration.map(it => it.total_added_mg_freshweight),
+    c_total_instructor_undil,
+  )),
+  caption: [Boxplot of all groups' results compared to our results],
+) <boxplot-all-groups-compared-to-our-results>
 
+@boxplot-all-groups-compared-to-our-results shows a boxplot of all groups' results compared to our results. It demonstrated we lie between the third and fourth quartile of the data, and supports our claims above.
 
-#groups-results-addedformula-concentration
+=== Results per source material
 
-#footnote[Calculate all concentrations purely on the given formula based on extinction.]
-#footnote[All and by source material type.]
-#footnote[
-  Compare concentrations filled out on sheet vs newly calculated. Compare filled out total concentrations vs.newly calculated vs. 652nm formula.
-]
+#figure(
+  rect(inset: 0.5cm, boxplot-all-per-type(
+    groups-results-addedformula-concentration.map(it => it.sample_source),
+    groups-results-addedformula-concentration.map(it => it.total_added_mg_freshweight),
+  )),
+  caption: [Boxplot of all groups' results per source material],
+) <boxplot-all-groups-per-source-material>
 
-#pagebreak()
-#pagebreak()
-= Hemoglobin
+@boxplot-all-groups-per-source-material shows interesting insights. Most of the source materials have only a singular entry and are therefore shown flat in the plot.
 
-#block(
-  width: 100%,
-)[
-  #block(
-    width: 22.5%,
-  )[
-    Hemoglobin $"Hb"$ is a vital oxygen-carrying protein found in red blood cells. It consists of
-    four subunits:
-    - 2x #math.alpha\-chains
-    - 2x #math.beta\-chains
+For the shine mix, parsley, edamame (with or without pods), and cabbage, the results are very similar. This is quite surprising, as @known-concentrations-normalized lists parsley with about $15times$ higher concentration than we see in the boxplot.
 
-    Each chain contains a heme group with a central iron ion in the ferrous state $"Fe"^(2+)$, which is responsible for
-    binding oxygen.
-  ]
-]
+The brussels sprouts and maggi mix has the highest concentration of the natural source materials (which excludes the chlorophyll solution). This should not be the case, as it should be somewhere in between the concentration for pure maggi herbs and brussels sprouts, yet it exceeds both.
 
-== Methemoglobin
+One would expect the chlorophyll solution to have a very high concentration, as theoretically there should be a fresh weight concentration of $1"mg"slash"g"$ (due to assuming $0.1%$ solution to be the fresh weight). We can see that trend reflected in the boxplot, even though the median is below the theoretical value.
 
-When the iron in $"Hb"$ is oxidized to the ferric state $"Fe"^(3+)$, it forms methemoglobin $"MetHb"$, which cannot bind
-oxygen and therefore cannot participate in oxygen transport.
+This deviation is not unique to the chlorophyll solution, as virtually all natural source materials have a lower concentration than their expected value, based on @known-concentrations-normalized.
 
-The oxidation of $"Hb"$ to $"MetHb"$ is a normal process, but the human body tries to keep the amount of $"MetHb"$ at $< 1%$ of
-the total $"Hb"$. Enzymes in red blood cells (like NADPH methemoglobin reductase) continuously reduce the iron back to $"Fe"^(2+)$ to
-regenerate functional hemoglobin. However, if someone is exposed to certain oxidizing agents (for example, nitrates in
-well water, benzocaine, or dapsone), the rate of $"Fe"^(2+) arrow "Fe"^(3+)$ conversion can overwhelm the repair
-enzymes.
+==== Explanation for the deviation
 
-The result is methemoglobinemia, where a significant fraction of hemoglobin is stuck in the $"Fe"^(3+)$ form. Blood with
-high methemoglobin turns a chocolate-brown color and can cause symptoms of hypoxia (like cyanosis, fatigue or even
-neurological symptoms at very high levels)
+Several factors explain why our measured values may be lower than expected:
+- *Incomplete extraction*: The acetone may not have extracted all chlorophyll from the plant cells. Different plants have different cell wall structures, making some harder to extract from than others.
+- *Chlorophyll breakdown*: Chlorophyll is sensitive to light and heat. Some may have broken down during extraction and measurement, reducing the final concentration.
+- *Measurement errors*: Small errors in weighing samples, measuring volumes, or reading the spectrophotometer can add up and affect the results.
+- *Natural variation*: Real plants vary in chlorophyll content depending on age, growing conditions, and storage. The reference values are averages that may not match our specific samples.
 
-== Hemiglobincyanide Method
+We do not conclude the calculations or values to be catastrophically wrong, as even though there are wildy different raw data points, the overall end results of the calcualation chain seem to settle in sensible values, as illustrated in @difference-raw-final-values-plot. Instead, we assume that error sources are small but consistent across all groups.
 
-To measure the concentration of hemoglobin in blood samples, one reliable laboratory method is the hemiglobincyanide $"HiCN"$ method,
-also known as the cyanmethemoglobin method. This technique converts all forms of hemoglobin (except sulfhemoglobin) into
-a single, stable colored complex, cyanmethemoglobin = hemiglobincyanide, which can be measured photometrically. This
-approach is recommended by the World Health Organization (WHO) due to its high accuracy and reproducibility.
-
-The conversion is achieved using Drabkin's reagent, which contains potassium ferricyanide $"K"_3"Fe(CN)"_6$ and
-potassium cyanide $"KCN"$. @drabkin-reaction describes: The ferricyanide oxidizes hemoglobin to $"MetHb"$, and the
-cyanide then binds to $"MetHb"$ to form $"HiCN"$.
-
-$
-  "Hb" + upright("K")_3 "Fe"^(3+)("CN")_6 + upright("K")^+ & arrow "MetHb" + upright("K")_4 "Fe"^(2+)("CN")_6 \
-                                           "MetHb" + "KCN" & arrow "HiCN" + upright("K")^+
-$ <drabkin-reaction>
-
-The resulting $"HiCN"$ complex is stable and has a specific absorbance peak at wavelengths around $540 - 546"nm"$. This
-property allows for photometric measurement of hemoglobin concentration using a spectrophotometer. Finally the
-hemoglobin concentration is determined based on the Beer–Lambert law, shown in @beer-lambert-law.
-
-$
-  A = epsilon * c * ell \ \
-  #block[
-    $A & ... "total absorbance" \
-    epsilon & ... "molar absorptivity of the substance" \
-    c & ... "concentration of substance in the sample" \
-    ell & ... "path length through sample"$
-  ]
-$ <beer-lambert>
-
-== Reflotron Method
-
-An alternative method for hemoglobin determination is the Reflotron system, a point-of-care device that uses dry reagent
-strips and reflectance photometry. A drop of whole blood is applied to a test strip, and the device measures the color
-intensity reflected from the strip to calculate hemoglobin concentration. While the Reflotron provides rapid and
-user-friendly results, the $"HiCN"$ method remains the gold standard due to its accuracy and standardization.
-
-#new-chapter("Procedure")
-
-Due to unfortunate circumstances, the Reflotron during our lab session was defective and therefore no test data using that
-method could be collected. As a result, this chapter only covers the hemiglobincyanide method.
-
-== Materials
-
-- Fresh blood sample (capillary or venous)
-- Drabkin's reagent (contains K₃Fe(CN)₆ and KCN)
-- Spectrophotometer with a 546 nm filter
-- Cuvettes
-- Pipettes and tips
-- Gloves, lab coat, protective eyewear
-
-== Safety Notes
-
-Always wear gloves and handle blood as a biohazard.
-
-Drabkin's reagent contains potassium cyanide, a highly potent neurotoxin. Prevent inhalation or other absorption of the
-substance. Be mindful of proper waste disposal.
-
-== Steps
-
-#block(width: 100%)[
-  #block(
-    width: 70%,
-    height: 21em,
-  )[
-    + Prepare sample and reference cuvettes.
-      + Fill both cuvettes with 5mL of Drabkin's reagent.
-      + Add 20µL of blood to the sample cuvette.
-    + Gently shake the sample cuvette to mix the contents.
-    + Incubate for #sym.gt.eq 5 minutes in the dark for full conversion to cyanmethemoglobin $"HiCN"$.
-    + Set the spectrophotometer to 546 nm.
-    + Zero the device using the reference cuvette.
-    + Insert the sample cuvette and record the absorbance (E#sub("546") = $A$).
-    + Calculate the hemoglobin concentration using @instructor-concentration-formula.
-  ]
-]
-
-== Calculation of Hemoglobin Concentration
-
-=== Seemingly wrong formula
-
-Using the Beer-Lambert law from @beer-lambert-law we formulate:
-
-$ \cspace["mol"slash\L] = A/epsilon times 1/ell $
-
-We can calculate our absorptivity $epsilon$ of $"HiCN"$ for the total sample:
-
-$
-  epsilon_"total" & = epsilon_"HiCN"/("MG"_"Hb") times (V_"probe")/(V_"total") \
-                  & = (44thin\000 "L"/("mol" dot "cm"))/(64thin\458 "g"/"mol") times (20 mu\L)/(5.02\m\L) \
-                  & tilde.eq 0.272 m^2 / "kg" = 2.72 "L"/("kg" dot "cm")
-$
-
-This was calculated using the following values:
-- molar absorptivity of $"HiCN"$: $epsilon_"HiCN" = 44thin\000 "L"/("mol" dot "cm")$
-- molar mass of $"Hb"$: $"MG"_"Hb" = 64thin\458 "g"/"mol"$
-- volume of the blood probe: $V_"probe" = 20 mu\L$
-- volume of the total sample: $V_"total" = 5.02\m\L$
-
-Since we know that our cuvette has a thickness of $ell = 1"cm"$ we can calculate the concentration of $"Hb"$ in the sample:
-
-$
-                 \cspace["kg"slash"L"] & = A / epsilon_"total" times 1/ell \
-                                       & = A / (2.72 "L"/("kg" dot "cm")) times 1/(0.01"m") \
-                                       & = A times 1 / (2.72 "L"/("kg" dot "cm") times 1"cm") \
-                                       & = A times 1 / (2.72 ) space "kg"/L \
-                                       & tilde.eq A times 0.368 "kg"/L \
-  arrow.r.double \cspace["g"slash"dL"] & = A times 36.77 "g"/("d"L) \
-$
-
-=== Correct formula from instructor
-
-The instructor provided us with a formula containing the precalculated factor to calculate the hemoglobin concentration:
-
-$
-  \cspace["g"slash"dL"] = A times 14.746 "g"/"dL" \
-$ <instructor-concentration-formula>
-
-We will use this factor in all further applications, even though there seems to be no explanation for the significant difference between the two formulas. Plugging in the values in their formula $A times "MG"_"Hb"/"epsilon"_"HiCN" times "V"_"total"/"V"_"probe" times 1/d [g/l]$ does not yield the same result for me.
-
-Example calculation using placeholder values:\
-$A = 1.21$\
-$"c"_"Hb" = 1.21 times 14.746 "g"/"dL" = 17.843 "g"/"dL"$
-
-#pagebreak()
-= Results
-
-We analyzed the data from
-+ our class
-+ the data of all years, ranging from 2015 to 2024
-
-== Our class: MBI24 (current year) <mbi24-results>
-
-@current-year-table-overview-results shows the summary of our class. In total 22 students participated in the experiment, split between 12 females and 10 males. One can observe that the mean $"c"_"Hb"$ of the females is lower than the mean of the males, and the range also suggests that the males hemoglobin concentration tends to be higher.
+#figure(
+  rect(inset: 0.5cm, plot-difference-raw-final-values(
+    groups-results-addedformula-concentration.map(it => it.total_instructor_mg_l),
+    groups-results-addedformula-concentration.map(it => it.total_added_mg_freshweight),
+  )),
+  caption: [Difference between chlorophyll concentration in solution and in fresh weight for all groups, showing the diverge],
+) <difference-raw-final-values-plot>
 
 #figure(
   table(
-    columns: (1fr, 1fr, 1fr, 1fr, 1fr),
-    table.header[*Group*][*Amount*][*Range ($"g"/"dL"$)*][*Mean #sym.plus.minus SD ($"g"/"dL"$)*][*Variance*],
-    [Male], [10], [10.9 #sym.dash 23.0], [16.7 #sym.plus.minus 3.5], [13.5],
-    [Female], [12], [10.1 #sym.dash 17.3], [12.1 #sym.plus.minus 4.3], [19.9],
+    columns: 3,
+    table.header[*Data Points*][*Standard Deviation*][*Normalized Standard Deviation*],
+    [Concentration $"mg"slash"l"$ in solution],
+    [$plus.minus #(calc.round(digits: 4, std(groups-results-addedformula-concentration.map(it => it.total_instructor_mg_l)))) "mg"slash"l"$],
+    [$plus.minus #(calc.round(digits: 4, std(groups-results-addedformula-concentration.map(it => it.total_instructor_mg_l / mean(groups-results-addedformula-concentration.map(it => it.total_instructor_mg_l))))))$],
+
+    [Concentration $"mg"slash"g"$ in fresh weight],
+    [$plus.minus#(calc.round(digits: 4, std(groups-results-addedformula-concentration.map(it => it.total_added_mg_freshweight)))) "mg"slash"g"$],
+    [$plus.minus #(calc.round(digits: 4, std(groups-results-addedformula-concentration.map(it => it.total_added_mg_freshweight / mean(groups-results-addedformula-concentration.map(it => it.total_added_mg_freshweight))))))$],
   ),
-  caption: "MBI24 results summary male vs. female",
-) <current-year-table-overview-results>
+  caption: [Standard deviation of the data points for concentration in solution and in fresh weight],
+) <standard-deviation-raw-final-concentrations>
 
+We can also compare the standard deviation of the soluted data points and the fresh weight data points. @standard-deviation-raw-final-concentrations shows that the compensation of the dilution factor works well, since we can effectively map all data points to a smaller more concrete range. This however is not perfect, as the _normalized_ #footnote[normalized: data points divided by their common mean] standard deviation of the fresh weight data points is slightly higher than the standard deviation of the solution data points. It shows that when accounted for unit differences, the fresh weight data points are more scattered than the solution data points.
 
-#h(1em)
-#box(width: 1fr, baseline: -0.5em)[
-  We expect the difference in $"c"_"Hb"$ between males and females to be statistically significant. Therefore we performed a two-sample t-test with different variances using an #math.alpha of 5% to test the null hypothesis that the difference in $"c"_"Hb"$ between males and females is zero.
-]
+=== Comparison between different calculations per data point
 
-#box(width: 1fr, baseline: 4em)[
-  The results of the test are shown in @class-key-values. The t-statistic is 2.63, the critical t-value is 1.72, the p-value is 0.81% and the Cohen's d is 0.32.
+As mentioned in the introduction of @descriptive-statistics, until now we have ignored the filled out concentrations on the results sheet, and instead recalculated using the instructor's formula based on the written down extinction coefficients. We will now compare these freshly recalculated concentrations with the concentrations filled out on the results sheets.
 
-  Since the p-value is less than the chosen #math.alpha = 5%, we reject the null hypothesis and conclude that the difference in $"c"_"Hb"$ between males and females is statistically significant. This is also supported by the t-statistic of 2.63 exceeding the critical t-value of 1.72.
+Afterwards, we compare the recalculated total concentration with a total concentration calculated using the instructor's formula based on the 652nm extinction coefficient.
 
-  The Cohen's d of 0.32 indicates a small effect size, which means that the difference in $"c"_"Hb"$ between males and females is not very large.
-]
-#h(1em)
-#box(width: 38%)[
-  #figure(
-    table(
-      columns: (1fr, 1fr),
-      table.header(table.cell(colspan: 2, align: center)[*Key Values*]),
-      [*chosen #math.alpha*], [5%],
-      [*t-statistic*], [2.63],
-      [*critical t-value*], [1.72],
-      [*p-value*], [0.81%],
-      [*Cohen's d*], [0.32],
-    ),
-    caption: "MBI24 t-test values",
-  ) <class-key-values>
-]
-
-== All years: 2015 - 2024
-
-The analysis is repeated for the years 2015 to 2024 (including MBI24). The results are shown in @all-years-table-overview-results. We can observe the same tendency as in @mbi24-results of a higher $"c"_"Hb"$ in males than in females.
+==== Filled out & freshly calculated
 
 #figure(
-  table(
-    columns: (1fr, 1fr, 1fr, 1fr, 1fr),
-    table.header[*Group*][*Amount*][*Range ($"g"/"dL"$)*][*Mean #sym.plus.minus SD ($"g"/"dL"$)*][*Variance*],
-    [Male], [117], [2.32 #sym.dash 53.2], [16.72 #sym.plus.minus 7.83], [61.36],
-    [Female], [126], [0.37 #sym.dash 59.8], [14.87 #sym.plus.minus 7.24], [52.35],
-  ),
-  caption: "All years results summary male vs. female",
-) <all-years-table-overview-results>
+  rect(inset: 0.5cm, plot-filled-out-vs-freshly-calculated(
+    groups-results-addedformula-concentration.map(it => it.concentration_freshweight),
+    groups-results-addedformula-concentration.map(it => it.total_added_mg_freshweight),
+  )),
+  caption: [Comparison between filled out concentrations and freshly calculated concentrations],
+) <filled-out-vs-freshly-calculated-plot>
 
-#h(1em)
-#box(width: 1fr, baseline: -3em)[
-  For this dataset we also performed a two-sample t-test with different variances using an #math.alpha of 5%.
+There is almost no difference between the filled out and freshly calculated concentrations. @filled-out-vs-freshly-calculated-plot shows that there is only one entry with a difference of $tilde 1"mg"slash"g"$ between the two values. This discrepancy is likely due to an error in writing down the concentration values on the results sheet, rather than a systematic calculation error, as the difference is isolated to a single data point and not significant enough to indicate a fundamental issue with the calculation methodology itself.
 
-  The results are shown in @all-years-key-values. The t-statistic is 1.66, the critical t-value is 1.65, the p-value is 4.98% and the Cohen's d is 0.026.
-]
+Furthermore, the correlation coefficient between the filled out and freshly calculated concentrations is $#(calc.round(digits: 6, empiric-corr(groups-results-addedformula-concentration.map(it => it.concentration_freshweight), groups-results-addedformula-concentration.map(it => it.total_added_mg_freshweight))))$, which is very close to $1$, indicating a strong correlation between the two values. It shows, that there was little error in the group individual calculations, as the filled out concentrations are very close to the freshly calculated concentrations.
 
-#box(width: 1fr, baseline: 0em)[
-  Since the p-value is less than the chosen #math.alpha = 5%, we reject the null hypothesis and conclude that the difference in $"c"_"Hb"$ between males and females is statistically significant. This is also supported by the t-statistic of 1.66 being slightly greater than the critical t-value of 1.65.
+==== Direct $652"nm"$ formula & freshly calculated
 
-  The Cohen's d of 0.026 indicates a very small effect size, which means that the difference in $"c"_"Hb"$ between males and females is tiny.
-]
-#h(1em)
-#box(width: 38%)[
-  #figure(
-    table(
-      columns: (1fr, 1fr),
-      table.header(table.cell(colspan: 2, align: center)[*Key Values*]),
-      [*chosen #math.alpha*], [5%],
-      [*t-statistic*], [1.66],
-      [*critical t-value*], [1.65],
-      [*p-value*], [4.98%],
-      [*Cohen's d*], [0.026],
-    ),
-    caption: "All years t-test values",
-  ) <all-years-key-values>
-]
-
-This matches the intuitive interpretation of the data based on the boxplots seen in, where the observed difference is rather marginal.
-
-== Conclusion
-
-The results of both t-tests show that the difference in $"c"_"Hb"$ between males and females is statistically significant. This is also supported by the boxplots and the key values. We can observe less pronounced differences in the all years dataset, which can probably be attributed to the higher sample size and therefore more noise accumulation.
-
-In @mbi24-results covering the class of the current year (MBI24), we can observe a significant difference in $"c"_"Hb"$ between males and females, despite the comparatively small sample size. This indicates high accuracy of the hemiglobincyanide method.
-
+The instructor's formulas in @instructor-formula-equations  for calculating the total chlorophyll concentration describe, how to use the 652nm extinction coefficient for that purpose. @652nm-instructor-vs-freshly-calculated-plot displays the 
 
 #figure(
-  image("../assets/chla.structure.png", width: 50%),
-  caption: [Chlorophyll A structure @src_chlorophyll-a-photochem],
-)
-#csv("../data/results.absorption.txt", delimiter: "\t").last()
+  rect(inset: 0.5cm, plot-652nm-instructor-vs-freshly-calculated(
+    groups-results-addedformula-concentration.map(it => it.total_instructor_mg_freshweight),
+    groups-results-addedformula-concentration.map(it => it.total_added_mg_freshweight),
+  )),
+  caption: [Comparison between filled out concentrations and freshly calculated concentrations],
+) <652nm-instructor-vs-freshly-calculated-plot>
+
+
 
 #set heading(numbering: none)
 #new-chapter("Appendix")
