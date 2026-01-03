@@ -162,6 +162,9 @@
 
   show cite: super
   show footnote: box
+  show figure: set align(left)
+  show figure.caption: set align(left)
+  show figure.caption: set text(size: 10pt)
 
   doc
 }
