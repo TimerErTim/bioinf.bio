@@ -3,7 +3,7 @@
       "file_source": "GBC1UE_Spectometry_Grp1_2025.pdf",
       "group_id": "1",
       "sample_source": "Chlorophyll Solution",
-      "weight_mg": 640,
+      "weight_mg": 10,
       "volume_ml": 1,
       "extinction_647": 0.169,
       "extinction_652": 0.166,
