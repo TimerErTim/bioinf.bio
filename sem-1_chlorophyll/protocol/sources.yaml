@@ -107,6 +107,7 @@ src_chlorophyll-extraction-protocol:
     date: 2025-12-09
 
 src_quartz-cuvette:
+  title: Quartz cuvette - Qvarz LLC
   type: web
   url:
     value: https://qvarz.com/quartz-cuvette/
