@@ -492,13 +492,26 @@ We do not conclude the calculations or values to be catastrophically wrong, as e
 
 We can also compare the standard deviation of the soluted data points and the fresh weight data points. @standard-deviation-raw-final-concentrations shows that the compensation of the dilution factor works well, since we can effectively map all data points to a smaller more concrete range. This however is not perfect, as the _normalized_ #footnote[normalized: data points divided by their common mean] standard deviation of the fresh weight data points is slightly higher than the standard deviation of the solution data points. It shows that when accounted for unit differences, the fresh weight data points are more scattered than the solution data points.
 
-=== Comparison between different calculations per data point
+=== Comparison between fresh weight concentration sources
 
-As mentioned in the introduction of @descriptive-statistics, until now we have ignored the filled out concentrations on the results sheet, and instead recalculated using the instructor's formula based on the written down extinction coefficients. We will now compare these freshly recalculated concentrations with the concentrations filled out on the results sheets.
+As mentioned in the introduction of @descriptive-statistics, until now we have ignored the filled out concentrations on the results sheet, and instead recalculated using the instructor's formula based on the written down extinction coefficients. We will now compare these freshly recalculated concentrations with the concentrations filled out on the results sheets. For this purpose, we take the $"Chl"_a$ and $"Chl"_b$ concentrations filled out on the results sheet, add them together and compensate for the dilution factor to get the total chlorophyll concentration in fresh weight.
 
-Afterwards, we compare the recalculated total concentration with a total concentration calculated using the instructor's formula based on the 652nm extinction coefficient.
+Afterwards, we compare the freshly recalculated total concentration with a total concentration calculated using the instructor's formula based on the 652nm extinction coefficient.
 
-==== Filled out & freshly calculated
+#figure(
+  rect(inset: 0.5cm, plot-calculation-sources-comparisons(
+    groups-results-addedformula-concentration.map(it => it.concentration_freshweight),
+    groups-results-addedformula-concentration.map(it => it.total_instructor_mg_freshweight),
+    groups-results-addedformula-concentration.map(it => it.total_added_mg_freshweight),
+  )),
+  caption: [Comparison between freshly calculated concentrations and other sources using a scatter plot for correlation visualization, showing strong linear correlation between the sources],
+) <concentration-sources-comparison-plot>
+
+==== Filled out & freshly calculated <filled-out-vs-freshly-calculated-comparison>
+
+There is almost no difference between the filled out and freshly calculated concentrations. @filled-out-vs-freshly-calculated-plot shows that there is only one entry with a difference of $tilde 1"mg"slash"g"$ between the two values. This discrepancy is likely due to an error in writing down the concentration values on the results sheet, rather than a systematic calculation error, as the difference is isolated to a single data point and not significant enough to indicate a fundamental issue with the calculation methodology itself.
+
+Furthermore, @concentration-sources-comparison-plot implies a strong linear correlation between the filled out and freshly calculated concentrations, with a correlation coefficient of $#(calc.round(digits: 6, empiric-corr(groups-results-addedformula-concentration.map(it => it.concentration_freshweight), groups-results-addedformula-concentration.map(it => it.total_added_mg_freshweight))))$, which is very close to $1$, supporting this observation. It shows, that there was little error in the group individual calculations, as the filled out concentrations are very close to the freshly calculated concentrations.
 
 #figure(
   rect(inset: 0.5cm, plot-filled-out-vs-freshly-calculated(
@@ -508,23 +521,25 @@ Afterwards, we compare the recalculated total concentration with a total concent
   caption: [Comparison between filled out concentrations and freshly calculated concentrations],
 ) <filled-out-vs-freshly-calculated-plot>
 
-There is almost no difference between the filled out and freshly calculated concentrations. @filled-out-vs-freshly-calculated-plot shows that there is only one entry with a difference of $tilde 1"mg"slash"g"$ between the two values. This discrepancy is likely due to an error in writing down the concentration values on the results sheet, rather than a systematic calculation error, as the difference is isolated to a single data point and not significant enough to indicate a fundamental issue with the calculation methodology itself.
 
-Furthermore, the correlation coefficient between the filled out and freshly calculated concentrations is $#(calc.round(digits: 6, empiric-corr(groups-results-addedformula-concentration.map(it => it.concentration_freshweight), groups-results-addedformula-concentration.map(it => it.total_added_mg_freshweight))))$, which is very close to $1$, indicating a strong correlation between the two values. It shows, that there was little error in the group individual calculations, as the filled out concentrations are very close to the freshly calculated concentrations.
 
 ==== Direct $652"nm"$ formula & freshly calculated
 
-The instructor's formulas in @instructor-formula-equations  for calculating the total chlorophyll concentration describe, how to use the 652nm extinction coefficient for that purpose. @652nm-instructor-vs-freshly-calculated-plot displays the 
+The instructor's formulas in @instructor-formula-equations  for calculating the total chlorophyll concentration describe, how to use the 652nm extinction coefficient for that purpose. @concentration-sources-comparison-plot shows the correlation between the freshly calculated concentrations and the concentrations calculated using the 652nm instructor's formula. There we can also see a strong linear correlation between the two sources, with a correlation coefficient of $#(calc.round(digits: 6, empiric-corr(groups-results-addedformula-concentration.map(it => it.total_instructor_mg_freshweight), groups-results-addedformula-concentration.map(it => it.total_added_mg_freshweight))))$.
 
 #figure(
   rect(inset: 0.5cm, plot-652nm-instructor-vs-freshly-calculated(
     groups-results-addedformula-concentration.map(it => it.total_instructor_mg_freshweight),
     groups-results-addedformula-concentration.map(it => it.total_added_mg_freshweight),
   )),
-  caption: [Comparison between filled out concentrations and freshly calculated concentrations],
+  caption: [Comparison between 652nm instructor's formula and freshly calculated concentrations],
 ) <652nm-instructor-vs-freshly-calculated-plot>
 
+@652nm-instructor-vs-freshly-calculated-plot shows that there is only a small difference between the two sources. Apart from the same outlier as in @filled-out-vs-freshly-calculated-comparison, there seems to be a positive offset in regards to the the $652"nm"$ formula. This offset seems to grow proportionally to the concentration and therefore classifies it as a fractional offset. 
 
+Interestingly enough, at closer observation of @concentration-sources-comparison-plot, a strong correlation between the 652nm instructor's formula and the filled out concentrations is visible. Indeed, the correlation coefficient is $#(calc.round(digits: 6, empiric-corr(groups-results-addedformula-concentration.map(it => it.total_instructor_mg_freshweight), groups-results-addedformula-concentration.map(it => it.concentration_freshweight))))$, which is practically equivalent to $1$. 
+
+All of the above observations lead us to conclude, that the instructor's formula is very precise, but has a certain constant percentile accuracy offset. Lowering the factor of $27.8 thin E_652$ by a nodge might result in a more accurate calculation (assuming the addition of $"Chl"_a$ and $"Chl"_b$ is the accurate baseline).
 
 #set heading(numbering: none)
 #new-chapter("Appendix")

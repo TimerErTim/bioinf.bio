@@ -208,7 +208,7 @@
     xaxis: (
       format-ticks: lq.tick-format.linear.with(suffix: $"mg"slash"g"$),
     ),
-    ylabel: [Other sources' fresh weight concentration],
+    ylabel: [Other sources' concentrations],
     xlabel: [Freshly calculated concentration],
     width: 100%,
     height: 7cm,
@@ -218,13 +218,82 @@
       freshly-calculated-values,
       filled-out-values,
       size: (50,) * freshly-calculated-values.len(),
-      label: [Filled out concentration],
+      label: [Filled out],
     ),
     lq.scatter(
       freshly-calculated-values,
       calculated-652nm-values,
       size: (50,) * freshly-calculated-values.len(),
-      label: [652nm instructor's formula],
+      label: [Instructor's $652"nm"$ formula],
+    ),
+  )
+}
+
+#let plot-filled-out-vs-freshly-calculated(filled-out-values, freshly-calculated-values) = {
+  show: lq.set-errorbar(stroke: red, cap: 1em)
+  lq.diagram(
+    yaxis: (
+      format-ticks: lq.tick-format.linear.with(suffix: $"mg"slash"g"$),
+    ),
+    xaxis: (
+      tick-distance: 1,
+      subticks: none,
+      format-ticks: none,
+    ),
+    xlim: (-0.8, freshly-calculated-values.len() - 0.2),
+    ylabel: [Concentration in fresh weight],
+    width: 100%,
+    height: 7cm,
+    title: "Filled out vs. freshly calculated concentrations",
+    legend: (position: top + left),
+    lq.bar(
+      range(freshly-calculated-values.len()),
+      freshly-calculated-values,
+      label: [Freshly calculated concentrations],
+      offset: 0.2,
+      width: 0.4,
+    ),
+    lq.bar(
+      range(filled-out-values.len()),
+      filled-out-values,
+      label: [Filled out concentrations],
+      offset: -0.2,
+      width: 0.4,
+    ),
+  )
+}
+
+
+#let plot-652nm-instructor-vs-freshly-calculated(instructor-values, freshly-calculated-values) = {
+  show: lq.set-errorbar(stroke: red, cap: 1em)
+  lq.diagram(
+    yaxis: (
+      format-ticks: lq.tick-format.linear.with(suffix: $"mg"slash"g"$),
+    ),
+    xaxis: (
+      tick-distance: 1,
+      subticks: none,
+      format-ticks: none,
+    ),
+    xlim: (-0.8, freshly-calculated-values.len() - 0.2),
+    ylabel: [Concentration in fresh weight],
+    width: 100%,
+    height: 7cm,
+    title: "652nm instructor's formula vs. freshly calculated concentrations",
+    legend: (position: top + left),
+    lq.bar(
+      range(freshly-calculated-values.len()),
+      freshly-calculated-values,
+      label: [Freshly calculated concentrations],
+      offset: 0.2,
+      width: 0.4,
+    ),
+    lq.bar(
+      range(instructor-values.len()),
+      instructor-values,
+      label: [Concentration based on $652"nm"$ formula],
+      offset: -0.2,
+      width: 0.4,
     ),
   )
 }
