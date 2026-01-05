@@ -71,7 +71,17 @@ This solvent-dependent effect applies to chlorophyll and arises from the interac
 Consequently, absorption coefficients derived for methanol cannot be used for acetone extracts, and coefficients for 100% acetone cannot be used for 80% acetone. The specific equations discussed in @calculation-with-instructor-formula are strictly valid only for 100% Acetone extracts. @src_plants-in-action
 @src_chlorophyll-lichtenthaler
 
+=== Photophysics and structural distinctions
+
+Chlorophylls are Mg-coordinated chlorins (porphyrin derivatives) with an extended conjugated $pi$-system that gives rise to two dominant absorption regions: an intense Soret band in the blue (~430–460 nm) and a weaker Q band in the red (~640–670 nm). The weak absorption in the green explains the perceived color of foliage @src_plants-in-action.
+
+The only structural difference between $"Chl"_"a"$ and $"Chl"_"b"$ at C-7 (methyl vs. formyl) shifts the spectra: in 80% acetone, $"Chl"_"a"$ peaks near $664"nm"$ and $"Chl"_"b"$ near $647"nm"$, enabling simultaneous quantification in mixtures @src_chlorophyll-a-photochem @src_chlorophyll-b-photochem. The hydrophobic phytol tail anchors chlorophylls in thylakoid membranes and dictates solubility in organic solvents @src_chlorophyll-extraction-protocol.
+
 == Spectrophotometry
+
+=== Historical evolution of quantification
+
+From the first isolations and naming of the “green matter” (Pelletier & Caventou) and early structural elucidation (Willstätter & Stoll) to modern spectrophotometry, the methodology evolved substantially @src_pelletier_caventou_1818 @src_willstatter_stoll_1913. Early quantitative work (e.g. Arnon’s 80% acetone method at 663/645 nm) established practical lab protocols but used coefficients limited by instrument resolution @src_arnon_1949. Later high-resolution work by Lichtenthaler, Wellburn and Porra refined solvent-specific extinction coefficients and simultaneous equations for 80% acetone, methanol, and other solvents, which underpin the factors we use in this report @src_chlorophyll-lichtenthaler @src_wellburn_1994 @src_porra_1989.
 
 
 === Beer-Lambert law <beer-lambert-law>
@@ -83,6 +93,16 @@ $
 $ <beer-lambert-equation>
 
 For example $"Chl"_"a"$ has $epsilon_420 = (85thin 000)/("mol" dot thin "l")$. This however depends on a multitude of factors, such as pH, temperature or solvent, and is therefore not a constant @src_wikipedia-molar-extinction-coefficient.
+
+=== Mixtures and additivity
+
+In an extract, total absorbance at a given wavelength is the sum of each pigment's absorbance: 
+
+$
+E_lambda = limits(sum)_i epsilon_(i, lambda) dot c_i dot d
+$ <mixtures-additivity>
+
+
 
 === Calculation of Chlorophyll Concentration <calculation-chlorophyll-concentration>
 
@@ -110,6 +130,19 @@ $ c space ["g"/"g"_P] = c space ["g"/"l"_E] dot V_E / M_P dot 1000 $ <mass-conce
 Where $M_P$ is the mass of the biological source material in $"g"$, and $c space ["g"/"g"_P]$ is the mass of the substance $S$ per weight of biological source material. This is often used to determine the concentration in fresh weight.
 
 #new-chapter("Execution")
+
+#heading[Methodological Notes]
+
+- Grinding with quartz/sea sand improves mechanical rupture of cell walls and thylakoids, increasing extraction efficiency @src_chlorophyll-extraction-protocol.
+- Add a small amount of $"CaCO"_3$ during grinding to neutralize organic acids and prevent pheophytinization (loss of $"Mg"^(2+)$ and spectral shifts) @src_chlorophyll-extraction-protocol.
+- Work in dim light and keep samples cool to limit photo-oxidation and pigment degradation @src_chlorophyll-extraction-protocol.
+- 80% acetone balances membrane disruption with protein hydration and has well-defined coefficients for simultaneous equations; use solvent-specific equations only for their matching solvent @src_chlorophyll-lichtenthaler.
+- Clarify extracts (preferably by centrifugation); if available, correct for scatter with $E_750$ subtraction before pigment calculations @src_chlorophyll-lichtenthaler.
+
+#heading[Instrument limits and alternative solvents]
+
+- Spectral bandwidth and stray light can flatten sharp peaks and bias $E_lambda$; low-resolution colorimeters may underestimate chlorophyll if high-resolution coefficients are used @src_wellburn_1994.
+- Alternative solvents exist: DMF (high efficiency, but hazardous) and methanol (efficient yet can promote allomerization). Use solvent-specific coefficients/equations accordingly @src_porra_1989 @src_wellburn_1994.
 
 #new-chapter("Results")
 
@@ -155,7 +188,7 @@ Therefore, we conclude the found dataset to be a viable and accurate source of r
 The sample spectrum shows the absorption of the total, non-isolated chlorophylls ($"Chl"_"a" + "Chl"_"b"$) in the sample. We can observe three peaks: two in the blue region at $~430"nm"$ and $~445"nm"$ with one in the red region at $~660"nm"$.
 
 We can observe similar peaks as in the reference spectrum, but with slight distortions and more or less pronounced features. This is because the sample consists of total, non-isolated chlorophylls ($"Chl"_"a" + "Chl"_"b"$) and possibly other pigments dissolved in acetone. Furthermore, as mentioned in @solvatochromism, shifts are to be expected when comparing our sample with diethyl ether dissolved reference @src_plants-in-action.
-Despite this, one can even spot fine features in our spectrum. For example the valley at the $~650 "n" "m"$ wavelength that is clearly visible in the reference spectrum is present in our data in form of a small bump.
+Despite this, one can even spot fine features in our spectrum. For example the valley at the $~650"nm"$ wavelength that is clearly visible in the reference spectrum is present in our data in form of a small bump.
 
 The most claring difference compared to reference is the samples gradually increasing absorption in the green spectrum (read from right/red to left/blue), whereas according to the reference the absorption should slightly decrease.
 One possible explanation for this is the presence of other pigments in the sample that absorb in the green spectrum, such as carotenoids
@@ -172,6 +205,13 @@ $
   c_b space ["mg"/"l"] & = 20.05 space E_647 - 4.77 space E_664 \
              c_"total" & = c_a + c_b = 27.8 space E_652
 $ <instructor-formula-equations>
+
+==== Origin of the coefficients (80% acetone)
+
+Using solvent-specific specific absorption coefficients (80% acetone) for $"Chl"_"a"$ and $"Chl"_"b"$ at $664"nm"$ and $647"nm"$ (e.g. $alpha_(a,664) approx 89.0$, $alpha_(b,664) approx 10.2$, $alpha_(a,647) approx 21.2$, $alpha_(b,647) approx 52.3$ in $"L" dot "g"^(-1) dot "cm"^(-1)$) and solving the two-equation system yields:
+
+$"Chl"_a ["mg"/"l"] = 11.78 space E_664 - 2.29 space E_647$, $"Chl"_b ["mg"/"l"] = 20.05 space E_647 - 4.77 space E_664$.
+These correspond to the factors we use in this report and are consistent with refined equations reported in the literature for 80% acetone @src_chlorophyll-lichtenthaler @src_porra_1989 @src_wellburn_1994.
 
 Plugging in the concrete values, shown in @results-important-wavelengths-given-formula, for our sample we get:
 
@@ -304,6 +344,14 @@ $c_"total" space ["mg"/"g"_P] & = c_"total" space ["mg"/"l"_E] dot V_E / M_P = b
   placement: bottom,
 ) <concentration-value-table-beer-lambert>
 
+=== Carotenoids (optional, single extract)
+
+When $E_470$ is available (same 80% acetone extract), a widely used estimator for total carotenoids $C_(x+c)$ corrects for chlorophyll overlap in the blue:
+
+$ C_(x+c) = (1000 space E_470^* - 1.90 space "Chl"_a - 63.14 space "Chl"_b) / 214 $
+
+with baseline-corrected $E_470^* = E_470 - E_750$ and $"mg"/"l"$ units for $"Chl"_a$ and $"Chl"_b$ @src_chlorophyll-lichtenthaler.
+
 === Comparison to instructor's formula
 
 The values calculated using the Beer-Lambert law are in line with the values calculated using the instructor's formulas in @calculation-with-instructor-formula. The difference is small ($#(calc.round(digits: 2, calc.abs((chla-given-formula + chlb-given-formula) - c_total_mg_dil) / c_total_mg_dil * 100)) space "%"$) and indicates that the Beer-Lambert law and our calculations are a valid method for determining the chlorophyll concentration. Small differences can be attributed to different extinction coefficients of the chlorophylls used when precalculating the given formulas' factors.
@@ -363,6 +411,13 @@ The total chlorophyll concentration of our sample is $#(calc.round(digits: 4, c_
 
 Nevertheless, the results are within general ranges of our expected values, and are therefore deemed plausible. We do not suspect a great systematic error in our measurements, but rather a combination of multiple smaller errors.
 
+
+== Physiological interpretation
+
+- Chl a/b ratio reflects light acclimation: higher in sun-exposed leaves (smaller antennae), lower in shade (larger LHCs). Typical ranges ~3.0–4.0 (sun) vs. ~2.0–2.5 (shade) @src_wellburn_1994.
+- Total chlorophyll ($c_(a+b)$) declines under stress (chlorosis), including N or Mg limitation (biosynthetic constraints) and during senescence (nutrient remobilization) @src_plants-in-action.
+- The “green gap”: although solutions absorb little at ~550 nm, green light penetrates deeper in intact leaves and is utilized by lower chloroplast layers @src_plants-in-action.
+- Olive-brown color and anomalously low $"Chl"_"a"$ can indicate pheophytinization (acid-induced $"Mg"^(2+)$ loss); timely processing, cooling, dim light and $"CaCO"_3$ help prevent this artifact @src_chlorophyll-extraction-protocol.
 
 == Descriptive Statistics <descriptive-statistics>
 
