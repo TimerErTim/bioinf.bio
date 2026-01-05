@@ -344,14 +344,6 @@ $c_"total" space ["mg"/"g"_P] & = c_"total" space ["mg"/"l"_E] dot V_E / M_P = b
   placement: bottom,
 ) <concentration-value-table-beer-lambert>
 
-=== Carotenoids (optional, single extract)
-
-When $E_470$ is available (same 80% acetone extract), a widely used estimator for total carotenoids $C_(x+c)$ corrects for chlorophyll overlap in the blue:
-
-$ C_(x+c) = (1000 space E_470^* - 1.90 space "Chl"_a - 63.14 space "Chl"_b) / 214 $
-
-with baseline-corrected $E_470^* = E_470 - E_750$ and $"mg"/"l"$ units for $"Chl"_a$ and $"Chl"_b$ @src_chlorophyll-lichtenthaler.
-
 === Comparison to instructor's formula
 
 The values calculated using the Beer-Lambert law are in line with the values calculated using the instructor's formulas in @calculation-with-instructor-formula. The difference is small ($#(calc.round(digits: 2, calc.abs((chla-given-formula + chlb-given-formula) - c_total_mg_dil) / c_total_mg_dil * 100)) space "%"$) and indicates that the Beer-Lambert law and our calculations are a valid method for determining the chlorophyll concentration. Small differences can be attributed to different extinction coefficients of the chlorophylls used when precalculating the given formulas' factors.
@@ -411,13 +403,6 @@ The total chlorophyll concentration of our sample is $#(calc.round(digits: 4, c_
 
 Nevertheless, the results are within general ranges of our expected values, and are therefore deemed plausible. We do not suspect a great systematic error in our measurements, but rather a combination of multiple smaller errors.
 
-
-== Physiological interpretation
-
-- Chl a/b ratio reflects light acclimation: higher in sun-exposed leaves (smaller antennae), lower in shade (larger LHCs). Typical ranges ~3.0–4.0 (sun) vs. ~2.0–2.5 (shade) @src_wellburn_1994.
-- Total chlorophyll ($c_(a+b)$) declines under stress (chlorosis), including N or Mg limitation (biosynthetic constraints) and during senescence (nutrient remobilization) @src_plants-in-action.
-- The “green gap”: although solutions absorb little at ~550 nm, green light penetrates deeper in intact leaves and is utilized by lower chloroplast layers @src_plants-in-action.
-- Olive-brown color and anomalously low $"Chl"_"a"$ can indicate pheophytinization (acid-induced $"Mg"^(2+)$ loss); timely processing, cooling, dim light and $"CaCO"_3$ help prevent this artifact @src_chlorophyll-extraction-protocol.
 
 == Descriptive Statistics <descriptive-statistics>
 
@@ -549,9 +534,18 @@ We can also compare the standard deviation of the soluted data points and the fr
 
 === Comparison between fresh weight concentration sources
 
+#figure(
+  rect(inset: 0.5cm, scale(85%, visualize-calculation-paths(
+  ), reflow: true)),
+  caption: [Diagram of the different calculation paths for the total chlorophyll concentration in fresh weight],
+) <calculation-paths-diagram>
+
 As mentioned in the introduction of @descriptive-statistics, until now we have ignored the filled out concentrations on the results sheet, and instead recalculated using the instructor's formula based on the written down extinction coefficients. We will now compare these freshly recalculated concentrations with the concentrations filled out on the results sheets. For this purpose, we take the $"Chl"_a$ and $"Chl"_b$ concentrations filled out on the results sheet, add them together and compensate for the dilution factor to get the total chlorophyll concentration in fresh weight.
 
 Afterwards, we compare the freshly recalculated total concentration with a total concentration calculated using the instructor's formula based on the 652nm extinction coefficient.
+
+
+The different calculation paths are visualized in @calculation-paths-diagram. It shows the different steps of the calculation process and the different sources of data used. It especially highlights the difference between individual concentrations used for the freshly calculated concentrations and filled out concentrations paths.
 
 #figure(
   rect(inset: 0.5cm, plot-calculation-sources-comparisons(

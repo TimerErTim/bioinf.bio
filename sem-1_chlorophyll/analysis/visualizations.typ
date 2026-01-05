@@ -1,4 +1,5 @@
 #import "@preview/lilaq:0.5.0" as lq
+#import "@preview/fletcher:0.5.8" as fl
 
 #let visualize-results-absorption(results-data, chla-data, chlb-data) = {
   let results-data = results-data.map(it => (float(it.at(0)), float(it.at(1))))
@@ -191,13 +192,82 @@
       range(sorted-raw-values.len()),
       sorted-raw-values,
       y2: sorted-final-values,
-      fill: color-map.at(1).transparentize(75%),
+      fill: color-map.at(1).transparentize(80%),
     ),
   )
 }
 
+#let visualize-calculation-paths() = {
+  set par(justify: false)
+  let color-map = lq.color.map.petroff10
+  fl.diagram(
+    spacing: (5em, 3em),
+    node-shape: rect,
+    node-corner-radius: 1em,
+    node-fill: white,
+    node-stroke: 0.6pt,
+    edge-stroke: 1pt,
+    label-wrapper: edge => box(
+      edge.label,
+      inset: (left: -1em),
+      width: 2.5em,
+      fill: edge.label-fill
+    ),
+    fl.node((0, 0), [Extinction coefficients], width: 4cm),
+    fl.node((0, 1), [Individual concentrations in solution], width: 4cm),
+    fl.node(
+      enclose: ((0, 0), (0, 1)),
+      [
+        #show: align.with(left + top)
+        #show: pad.with(left: -1.5em, top: -1.5em)
+        #set text(size: 9pt, fill: teal.darken(50%))
+        Results sheet
+      ],
+      shape: rect,
+      stroke: teal,
+      fill: teal.lighten(90%),
+      inset: 2em,
+      corner-radius: 0pt,
+      snap: -1,
+    ),
+    fl.node(
+      (2, 1),
+      [Concentration in fresh weight],
+      shape: fl.shapes.hexagon,
+      fill: blue.lighten(80%),
+      stroke: blue,
+      width: 4cm,
+    ),
+    fl.node((1, 1), [Total concentration in solution], width: 4cm),
+    fl.node((1, 0), [Individual concentrations in solution], width: 4cm),
+
+
+    fl.edge((0, 0), (0, 1), "-|>", label: [???], stroke: color-map.at(2)),
+    fl.edge((0, 0), (1, 0), "-|>", label: [Instructor's formula], stroke: color-map.at(0)),
+    fl.edge((0, 0), (1, 1), "-|>", label: [$652"nm"$ formula], stroke: color-map.at(1)),
+    fl.edge((0, 1), (1, 1), "-|>", label: [Addition], stroke: color-map.at(2)),
+    fl.edge((1, 0), (1, 1), "-|>", label: [Addition], stroke: color-map.at(0)),
+    fl.edge((1, 1), (2, 1), "-|>", label: align(right)[Dilution factor], stroke: color-map.at(0), shift: 0.15),
+    fl.edge((1, 1), (2, 1), "-|>", stroke: color-map.at(1), shift: 0),
+    fl.edge((1, 1), (2, 1), "-|>", stroke: color-map.at(2), shift: -0.15),
+  )
+  place(
+    top + right
+  )[
+    #grid(
+      columns: 2,
+      align: horizon,
+      column-gutter: 1em,
+      row-gutter: 1.5mm,
+        [Freshly calculated concentrations],[#line(length: 2em, stroke: color-map.at(0) + 2pt)],
+        [Instructor's $652"nm"$ formula],[#line(length: 2em, stroke: color-map.at(1) + 2pt)],
+        [Filled out concentrations],[#line(length: 2em, stroke: color-map.at(2) + 2pt)],
+      )
+  ]
+}
+
 #let plot-calculation-sources-comparisons(
-  filled-out-values, 
+  filled-out-values,
   calculated-652nm-values,
   freshly-calculated-values,
 ) = {
