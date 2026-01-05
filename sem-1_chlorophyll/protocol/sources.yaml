@@ -146,67 +146,38 @@ src_coeffecients:
     issue: 6
     volume: 109
 
-src_arnon_1949:
-  type: article
-  title: Copper enzymes in isolated chloroplasts. Polyphenoloxidase in Beta vulgaris
-  author: Arnon, Daniel I.
-  date: 1949
-  parent:
-    type: periodical
-    title: Plant Physiology
-    volume: 24
-    page-range: 1-15
+src_photoplethysmography:
+  type: anthos
+  title: 2 - The origin of photoplethysmography
+  author:
+  - Kyriacou, Panicos A
+  - Chatterjee, Subhasri
+  date: 2022
+  editor:
+  - Allen, John
+  - Kyriacou, Panicos
+  page-range: 17-43
   url:
-    value: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC437905/
-    date: 2025-12-30
-
-src_porra_1989:
-  type: article
-  title: Determination of accurate extinction coefficients and simultaneous equations for assaying chlorophylls a and b extracted with four different solvents
-  author:
-  - Porra, Robert J.
-  - Thompson, W. A.
-  - Kriedemann, P. E.
-  date: 1989
-  parent:
-    type: periodical
-    title: Biochimica et Biophysica Acta (BBA) - Bioenergetics
-    volume: 975
-    page-range: 384-394
+    value: https://www.sciencedirect.com/science/article/pii/B9780128233740000049
+    date: 2026-01-05
   serial-number:
-    doi: https://doi.org/10.1016/S0005-2728(89)80347-0
+    doi: https://doi.org/10.1016/B978-0-12-823374-0.00004-9
+    isbn: 978-0-12-823374-0
+  abstract: This chapter covers comprehensively all available theories and hypotheses relating to the origin of the photoplethysmogram (PPG). The basic principles of PPG, based on the modified Beer–Lambert law, and its relation to blood volume variations, mechanical movements of the tissue-components, and the orientation of the red blood cells are presented. Furthermore, the chapter covers in detail the principles of light–tissue interactions in PPG and presents UpToDate research utilizing advanced Monte Carlo simulations relating to light–tissue interaction variables (i.e., optical pathlength, light penetration, absorbance, etc.) for both reflectance and transmittance PPG. This most recent research enables further understanding and knowledge in the contribution of different tissue layers and sublayers in the formation of the PPG waveform and hence aids further with the “quest” of understanding and explaining the origin of the PPG.
+  parent:
+    type: anthology
+    title: Photoplethysmography
+    publisher: Academic Press
 
-src_wellburn_1994:
-  type: article
-  title: The spectral determination of chlorophylls a and b, as well as total carotenoids, using various solvents with spectrophotometers of different resolution
-  author: Wellburn, A. R.
-  date: 1994
-  parent:
-    type: periodical
-    title: Journal of Plant Physiology
-    volume: 144
-    page-range: 307-313
-  serial-number:
-    doi: https://doi.org/10.1016/S0176-1617(11)81192-2
-    
-src_willstatter_stoll_1913:
-  type: book
-  title: Untersuchungen über Chlorophyll
+src_spectrophotometry:
+  type: web
+  url:
+    value: https://chem.libretexts.org/Bookshelves/Physical_and_Theoretical_Chemistry_Textbook_Maps/Supplemental_Modules_(Physical_and_Theoretical_Chemistry)/Kinetics/02%3A_Reaction_Rates/2.01%3A_Experimental_Determination_of_Kinetics/2.1.05%3A_Spectrophotometry
+    date: 2026-01-05
+  title: Spectrophotometry - LibreTexts (CC BY-NC-SA 4.0)
+  organization: LibreTexts
   author:
-  - Willstätter, Richard
-  - Stoll, Arthur
-  date: 1913
-  publisher: Springer
-  language: de
-src_pelletier_caventou_1818:
-  type: article
-  title: Recherches chimiques sur la matière verte des feuilles
-  author:
-  - Pelletier, Pierre Joseph
-  - Caventou, Joseph Bienaimé
-  date: 1818
+  - Kevin Vo (UCD)
   parent:
-    type: periodical
-    title: Annales de Chimie et de Physique
-    volume: 9
-    page-range: 194-202
+    type: article
+  

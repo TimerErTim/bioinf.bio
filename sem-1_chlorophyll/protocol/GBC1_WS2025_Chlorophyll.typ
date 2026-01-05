@@ -53,6 +53,8 @@ Chlorophyll is a green pigment found in plants and some bacteria. It is responsi
   caption: [Chlorophyll B structure @src_chlorophyll-b-photochem],
 )) <chlb-structure>
 
+It is the foundation of life for plants, algae, and cyanobacteria, due to converting sunlight into chemical energy. It is a key component of the photosynthetic process and is essential for the production of oxygen and food. @src_plants-in-action
+
 === Solutability
 
 Chlorophyll has a long fatty chain called phytol ($C_(20) H_(39)$) attached to it. This chain makes chlorophyll dissolve well in oils and organic solvents, but not in water. The phytol chain acts like an anchor that holds the chlorophyll in place within the plant's membrane structures.
@@ -73,20 +75,45 @@ Consequently, absorption coefficients derived for methanol cannot be used for ac
 
 === Photophysics and structural distinctions
 
-Chlorophylls are Mg-coordinated chlorins (porphyrin derivatives) with an extended conjugated $pi$-system that gives rise to two dominant absorption regions: an intense Soret band in the blue (~430–460 nm) and a weaker Q band in the red (~640–670 nm). The weak absorption in the green explains the perceived color of foliage @src_plants-in-action.
+Chlorophylls are Mg-coordinated chlorins (porphyrin derivatives) with an extended conjugated $pi$-system that gives rise to two dominant absorption regions: an intense Soret band in the blue ($tilde 430-460"nm"$) and a weaker Q band in the red ($tilde 640-670"nm"$) region. The weak absorption in the green explains the perceived color of foliage. @src_plants-in-action
 
-The only structural difference between $"Chl"_"a"$ and $"Chl"_"b"$ at C-7 (methyl vs. formyl) shifts the spectra: in 80% acetone, $"Chl"_"a"$ peaks near $664"nm"$ and $"Chl"_"b"$ near $647"nm"$, enabling simultaneous quantification in mixtures @src_chlorophyll-a-photochem @src_chlorophyll-b-photochem. The hydrophobic phytol tail anchors chlorophylls in thylakoid membranes and dictates solubility in organic solvents @src_chlorophyll-extraction-protocol.
+The only structural difference between $"Chl"_"a"$ and $"Chl"_"b"$ at $C-7$ (methyl vs. formyl) shifts the spectra: $"Chl"_"a"$ peaks near $664"nm"$ and $"Chl"_"b"$ near $647"nm"$, enabling simultaneous quantification in mixtures @src_chlorophyll-a-photochem @src_chlorophyll-b-photochem. The hydrophobic phytol tail anchors chlorophylls in thylakoid membranes and dictates solubility in organic solvents @src_chlorophyll-extraction-protocol.
 
 == Spectrophotometry
 
-=== Historical evolution of quantification
+=== Principle
 
-From the first isolations and naming of the “green matter” (Pelletier & Caventou) and early structural elucidation (Willstätter & Stoll) to modern spectrophotometry, the methodology evolved substantially @src_pelletier_caventou_1818 @src_willstatter_stoll_1913. Early quantitative work (e.g. Arnon’s 80% acetone method at 663/645 nm) established practical lab protocols but used coefficients limited by instrument resolution @src_arnon_1949. Later high-resolution work by Lichtenthaler, Wellburn and Porra refined solvent-specific extinction coefficients and simultaneous equations for 80% acetone, methanol, and other solvents, which underpin the factors we use in this report @src_chlorophyll-lichtenthaler @src_wellburn_1994 @src_porra_1989.
+#figure(
+  image("../assets/spectrophotometrie.png", width: 100%),
+  caption: [Principle of spectrophotometry (CC BY-4.0; Heesung Shim via LibreTexts) @src_spectrophotometry],
+) <spectrophotometry-principle-image>
 
+Spectrophotometry is an analytical technique used to quantify the concentration of a substance by measuring its ability to absorb light at specific wavelengths. When a beam of monochromatic light with an initial intensity $I_0$ passes through a sample, the molecules within the solution interact with the photons, leading to a reduction in intensity to a transmitted value $I$. This interaction is governed by the electronic structure of the analyte, where photons are absorbed if their energy matches the electronic transition states of the molecule, as discussed in @solvatochromism. @src_spectrophotometry
+
+The relationship between the incident and transmitted light is expressed through transmittance $T$ and absorbance $A$:
+
+$
+  T = I / I_0
+$ <transmittance-equation>
+
+$
+  A = -log_(10)(T)
+$ <absorbance-equation>
+
+While transmittance describes the fraction of light passing through the sample, absorbance is the preferred metric in quantitative analysis because of its linear relationship with concentration $c$ and path length $d$, as stated by the Beer-Lambert law. This linearity typically holds within a specific concentration range, beyond which chemical or instrumental deviations occur. In standard laboratory settings, cuvettes with a path length of $1"cm"$ are utilized to simplify the mathematical conversion of absorbance into concentration @src_spectrophotometry.
+
+=== General process
+
+The experimental procedure begins with selecting the diagnostic wavelengths relevant to the pigments of interest—most notably the red absorption maxima for chlorophylls—and allowing the spectrophotometer to warm up to ensure a stable light source. A baseline is established by "blanking" the instrument using a cuvette filled with pure solvent (e.g., 80% acetone), which defines $I_0$ and accounts for any absorption or reflection by the cuvette and solvent itself @src_spectrophotometry.
+
+Once the baseline is set, the sample extract is measured to determine the transmitted intensity $I$, from which the absorbance $A$ is calculated. It is critical to ensure that the measured absorbance stays within the instrument's linear dynamic range (typically between 0.1 and 1.0); samples exceeding this range must be diluted and remeasured to preserve accuracy. For mixtures like leaf extracts, measurements are taken at multiple wavelengths (e.g., $647"nm"$ and $664"nm"$) to resolve the individual contributions of $"Chl"_"a"$ and $"Chl"_"b"$ using simultaneous equations based on the principle of additivity (see @mixtures-additivity). In cases where turbidity or light scattering from cell debris is suspected, a measurement at a non-absorbing wavelength such as $750"nm"$ is performed to subtract the background noise from the pigment readings. 
+@src_chlorophyll-lichtenthaler 
+@src_chlorophyll-extraction-protocol
+Finally, the calculated concentrations in the extract are converted to fresh weight values by accounting for the initial sample weight and extraction volume @src_spectrophotometry.
 
 === Beer-Lambert law <beer-lambert-law>
 
-The Beer-Lambert law, shown in @beer-lambert-equation, describes the correlation between the dimensionles total absorbance $E_lambda$, the molar extinctioncoefficent $epsilon_lambda$ ($"l"/("mol" dot "cm")$ @src_wikipedia-molar-extinction-coefficient) and concentration $c$ ($"mol"/"l"$) of the substance of interest in the sample, and the light path length $d$ ($"cm"$) through the sample, where $lambda$ is an arbitary wavelength of light.
+The Beer-Lambert law, shown in @beer-lambert-equation and based on @transmittance-equation, describes the correlation between the dimensionles total absorbance $E_lambda$, the molar extinctioncoefficent $epsilon_lambda$ ($"l"/("mol" dot "cm")$ @src_wikipedia-molar-extinction-coefficient) and concentration $c$ ($"mol"/"l"$) of the substance of interest in the sample, and the light path length $d$ ($"cm"$) through the sample, where $lambda$ is an arbitary wavelength of light.
 
 $
   E_lambda = epsilon_lambda dot c dot d
@@ -99,9 +126,10 @@ For example $"Chl"_"a"$ has $epsilon_420 = (85thin 000)/("mol" dot thin "l")$. T
 In an extract, total absorbance at a given wavelength is the sum of each pigment's absorbance: 
 
 $
-E_lambda = limits(sum)_i epsilon_(i, lambda) dot c_i dot d
+E_lambda = d dot limits(sum)_i epsilon_(i, lambda) dot c_i
 $ <mixtures-additivity>
 
+@mixtures-additivity must be taken into account when calculating concentrations of real world samples, since there is rarely any purely isolated sample available. @src_photoplethysmography
 
 
 === Calculation of Chlorophyll Concentration <calculation-chlorophyll-concentration>
@@ -125,24 +153,13 @@ Here $c ["g"/"l"_E]$ is the mass concentration of the substance $S$ in the extra
 
 *Note*: We can use the same approach as for removing the dilution factor $V_E / V_P$ to convert from $"g"/"l"_E$ to $"mg"/"g"_P$ by multiplying with the dilution factor $V_E / M_P$, as shown in @mass-concentration-equation-mg.
 
-$ c space ["g"/"g"_P] = c space ["g"/"l"_E] dot V_E / M_P dot 1000 $ <mass-concentration-equation-mg>
+$ c space ["mg"/"g"_P] = c space ["g"/"l"_E] dot V_E / M_P dot 1000 $ <mass-concentration-equation-mg>
 
-Where $M_P$ is the mass of the biological source material in $"g"$, and $c space ["g"/"g"_P]$ is the mass of the substance $S$ per weight of biological source material. This is often used to determine the concentration in fresh weight.
+Where $M_P$ is the mass of the biological source material in $"g"$, and $c space ["mg"/"g"_P]$ is the mass of the substance $S$ per weight of biological source material. This is often used to determine the concentration in fresh weight.
 
 #new-chapter("Execution")
 
-#heading[Methodological Notes]
 
-- Grinding with quartz/sea sand improves mechanical rupture of cell walls and thylakoids, increasing extraction efficiency @src_chlorophyll-extraction-protocol.
-- Add a small amount of $"CaCO"_3$ during grinding to neutralize organic acids and prevent pheophytinization (loss of $"Mg"^(2+)$ and spectral shifts) @src_chlorophyll-extraction-protocol.
-- Work in dim light and keep samples cool to limit photo-oxidation and pigment degradation @src_chlorophyll-extraction-protocol.
-- 80% acetone balances membrane disruption with protein hydration and has well-defined coefficients for simultaneous equations; use solvent-specific equations only for their matching solvent @src_chlorophyll-lichtenthaler.
-- Clarify extracts (preferably by centrifugation); if available, correct for scatter with $E_750$ subtraction before pigment calculations @src_chlorophyll-lichtenthaler.
-
-#heading[Instrument limits and alternative solvents]
-
-- Spectral bandwidth and stray light can flatten sharp peaks and bias $E_lambda$; low-resolution colorimeters may underestimate chlorophyll if high-resolution coefficients are used @src_wellburn_1994.
-- Alternative solvents exist: DMF (high efficiency, but hazardous) and methanol (efficient yet can promote allomerization). Use solvent-specific coefficients/equations accordingly @src_porra_1989 @src_wellburn_1994.
 
 #new-chapter("Results")
 
@@ -206,13 +223,6 @@ $
              c_"total" & = c_a + c_b = 27.8 space E_652
 $ <instructor-formula-equations>
 
-==== Origin of the coefficients (80% acetone)
-
-Using solvent-specific specific absorption coefficients (80% acetone) for $"Chl"_"a"$ and $"Chl"_"b"$ at $664"nm"$ and $647"nm"$ (e.g. $alpha_(a,664) approx 89.0$, $alpha_(b,664) approx 10.2$, $alpha_(a,647) approx 21.2$, $alpha_(b,647) approx 52.3$ in $"L" dot "g"^(-1) dot "cm"^(-1)$) and solving the two-equation system yields:
-
-$"Chl"_a ["mg"/"l"] = 11.78 space E_664 - 2.29 space E_647$, $"Chl"_b ["mg"/"l"] = 20.05 space E_647 - 4.77 space E_664$.
-These correspond to the factors we use in this report and are consistent with refined equations reported in the literature for 80% acetone @src_chlorophyll-lichtenthaler @src_porra_1989 @src_wellburn_1994.
-
 Plugging in the concrete values, shown in @results-important-wavelengths-given-formula, for our sample we get:
 
 #let calc-instructor-chla-mg(E_647, E_664) = 11.78 * E_664 - 2.29 * E_647
@@ -252,7 +262,7 @@ It proves difficult to reason for a possible explanation for this discrepancy wi
 
 == Chlorophyll Concentration using Beer-Lambert Law <calculation-with-beer-lambert-law>
 
-In order to find both the $"Chl"_"a"$ and $"Chl"_"b"$ concentration, we need to use the Beer-Lambert law. We arrange the @beer-lambert-equation into a linear equation system to solve for both concentrations:
+In order to find both the $"Chl"_"a"$ and $"Chl"_"b"$ concentration, we need to use the Beer-Lambert law. We arrange @beer-lambert-equation and @mixtures-additivity into a linear equation system to solve for both concentrations:
 
 $
   E_664 = epsilon_(a, 664) dot c_a + epsilon_(b, 664) dot c_b\
@@ -534,18 +544,9 @@ We can also compare the standard deviation of the soluted data points and the fr
 
 === Comparison between fresh weight concentration sources
 
-#figure(
-  rect(inset: 0.5cm, scale(85%, visualize-calculation-paths(
-  ), reflow: true)),
-  caption: [Diagram of the different calculation paths for the total chlorophyll concentration in fresh weight],
-) <calculation-paths-diagram>
-
 As mentioned in the introduction of @descriptive-statistics, until now we have ignored the filled out concentrations on the results sheet, and instead recalculated using the instructor's formula based on the written down extinction coefficients. We will now compare these freshly recalculated concentrations with the concentrations filled out on the results sheets. For this purpose, we take the $"Chl"_a$ and $"Chl"_b$ concentrations filled out on the results sheet, add them together and compensate for the dilution factor to get the total chlorophyll concentration in fresh weight.
 
 Afterwards, we compare the freshly recalculated total concentration with a total concentration calculated using the instructor's formula based on the 652nm extinction coefficient.
-
-
-The different calculation paths are visualized in @calculation-paths-diagram. It shows the different steps of the calculation process and the different sources of data used. It especially highlights the difference between individual concentrations used for the freshly calculated concentrations and filled out concentrations paths.
 
 #figure(
   rect(inset: 0.5cm, plot-calculation-sources-comparisons(
@@ -555,6 +556,17 @@ The different calculation paths are visualized in @calculation-paths-diagram. It
   )),
   caption: [Comparison between freshly calculated concentrations and other sources using a scatter plot for correlation visualization, showing strong linear correlation between the sources],
 ) <concentration-sources-comparison-plot>
+
+#figure(
+  rect(inset: 0.5cm, scale(85%, visualize-calculation-paths(
+  ), reflow: true)),
+  caption: [Diagram of the different calculation paths for the total chlorophyll concentration in fresh weight],
+  placement: bottom
+) <calculation-paths-diagram>
+
+The different calculation paths are visualized in @calculation-paths-diagram. It shows the different steps of the calculation process and the different sources of data used. It especially highlights the difference between individual concentrations used for the freshly calculated concentrations and filled out concentrations paths.
+
+
 
 ==== Filled out & freshly calculated <filled-out-vs-freshly-calculated-comparison>
 
