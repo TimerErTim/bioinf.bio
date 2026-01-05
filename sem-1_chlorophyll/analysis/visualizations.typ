@@ -1,6 +1,26 @@
 #import "@preview/lilaq:0.5.0" as lq
 #import "@preview/fletcher:0.5.8" as fl
 
+#let visualize-execution-steps() = {
+  let color-map = lq.color.map.okabe-ito
+  let contents = (
+    [Cut up plant material],
+    [Add sand and calcium carbonate],
+    [Grind plant material],
+    [Add acetone],
+    [Filter extract],
+    [Measure absorbance],
+  )
+  let nodes = contents.enumerate(start: 0).map(((ix, ct)) => fl.node((0, ix), ct, fill: color-map.at(calc.rem(ix, color-map.len())).lighten(90%), stroke: color-map.at(calc.rem(ix, color-map.len())), width: 5cm))
+  let diagram-data = nodes.intersperse(fl.edge(marks: "-|>"))
+
+  fl.diagram(
+    spacing: 2em,
+    node-shape: fl.shapes.octagon,
+    ..diagram-data,
+  )
+}
+
 #let visualize-results-absorption(results-data, chla-data, chlb-data) = {
   let results-data = results-data.map(it => (float(it.at(0)), float(it.at(1))))
   let chla-dict = chla-data.to-dict()

@@ -20,6 +20,7 @@
   set text(fill: blue)
   underline(it)
 }
+#import "@preview/wrap-it:0.1.1": wrap-content
 
 
 #heading(depth: 1, outlined: false)[Contents]
@@ -159,7 +160,59 @@ Where $M_P$ is the mass of the biological source material in $"g"$, and $c space
 
 #new-chapter("Execution")
 
+The experiment could be performed in two variants, where the first variant was only performed as per the instruction of the instructor. In this variant a diluted chlorophyll solution was used as reference. The second variant will be described going forward. @execution-steps-diagram displays the experimental workflow for this second variant.
 
+#wrap-content(align: right + horizon, [
+  #show: box.with(inset: 0.5em)
+  #show figure.caption: box.with(width: 6cm)
+  #figure(
+    rect(inset: 0.5cm, visualize-execution-steps()),
+    caption: [Experimental workflow for the extraction and isolation of crude chlorophyll from plant tissue.],
+  ) <execution-steps-diagram>
+])[
+
+== Preparation
+
+=== Materials needed <execution-materials>
+
+As per instruction sheet, we need the following materials:
+
+- Scissors
+- Mortar and pestle
+- Spatula
+- Paper filter
+- Funnel
+- Beaker glass
+- Glass cuvettes
+- Spectrophotometer
+
+*Chemicals:*
+- Acetone ($tilde\20"ml"$)
+- Sea sand
+- Calcium carbonate
+- Plant material ($2-5"g"$)
+
+Instead of sea sand and calcium carbonate, we used quartz sand for the mortar, as the experiment was prepared that way in our lab session.
+]
+
+=== Chlorophyll extraction
+
+About $2-5"g"$ of fresh plant material was cut up with scissors and put into a mortar. A small amount (spatula tip) of sea sand (or quartz sand, as noted in @execution-materials) and calcium carbonate ($"CaCO"_3$) was added to help break down the plant cells and neutralize acids. The plant material was then ground thoroughly with a pestle to break open all the cells.
+
+Next, about $20"ml"$ of acetone was added, and the mixture was ground further until a dark green liquid formed. This chlorophyll extract was then filtered through filter paper into a beaker. The filter paper was folded twice to make a cone shape that fit into the funnel.
+
+== Spectrophotometric measurement
+
+The chlorophyll concentration was measured using a spectrophotometer. First, the machine was calibrated (Base Corr) using a glass cuvette filled with pure acetone to set the baseline from $400-800"nm"$. This step removes the effect of the acetone and cuvette on the measurements. After calibration, the chlorophyll sample was measured across the same wavelength range to get the full absorption spectrum.
+
+== Explanation
+
+The specific methodology employed in this experiment serves to maximize extraction efficiency and ensure the chemical stability of the pigments:
+
+- *Mechanical Disruption:* The use of scissors for comminution and sand during mortar homogenization provides the necessary abrasive force to breach the rigid cellulosic cell walls of the plant material. This increases the surface area for the solvent to interact with the intracellular components.
+- *Neutralization with $"CaCO"_3$:* When plant cells are crushed, organic acids are released from the vacuoles. An acidic environment promotes the loss of the central magnesium ion ($"Mg"^(2+)$) from the chlorophyll porphyrin ring, converting it into pheophytin. This conversion significantly alters the absorption spectrum, leading to inaccurate quantification. The addition of calcium carbonate neutralizes these acids, preserving the chlorophyll in its native state.
+- *Cuvette Material:* Standard plastic cuvettes (typically made of polystyrene or PMMA) are chemically incompatible with acetone, which acts as a solvent that can dissolve or cloud the plastic. Using glass cuvettes is mandatory to maintain optical clarity and structural integrity throughout the measurement.
+- *Base Correction:* Calibration with pure acetone accounts for any light absorption or reflection caused by the solvent itself and the glass-air interfaces of the cuvette. By subtracting this baseline, the resulting spectrum represents the absorbance of the dissolved pigments alone.
 
 #new-chapter("Results")
 
@@ -172,7 +225,7 @@ We decided to take a detailed full spectrum sample using a mixture of brussels s
 #let chla-spect-data = csv("../data/chla.absorption.txt", delimiter: "\t").slice(1)
 #let chlb-spect-data = csv("../data/chlb.absorption.txt", delimiter: "\t").slice(1)
 
-The full spectrum data was derived by sampling absorption rates at $10"n" "m"$ intervals from the spectrophotometer's automatic full spectrum curve. Results are shown in @spectral-analysis-sample.
+The full spectrum data was derived by sampling absorption rates at $10"nm"$ intervals from the spectrophotometer's automatic full spectrum curve. Results are shown in @spectral-analysis-sample.
 
 === Reference spectrum
 
