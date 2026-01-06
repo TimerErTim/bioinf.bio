@@ -54,15 +54,15 @@ Chlorophyll is a green pigment found in plants and some bacteria. It is responsi
   caption: [Chlorophyll B structure @src_chlorophyll-b-photochem],
 )) <chlb-structure>
 
-It is the foundation of life for plants, algae, and cyanobacteria, due to converting sunlight into chemical energy. It is a key component of the photosynthetic process and is essential for the production of oxygen and food. @src_plants-in-action
+It is the foundation of life for plants, algae, and cyanobacteria, by converting sunlight into chemical energy. It is a key component of the photosynthetic process and is essential for the production of oxygen and food. @src_plants-in-action
 
-=== Solutability
+=== Solubility <solubility>
 
 Chlorophyll has a long fatty chain called phytol ($C_(20) H_(39)$) attached to it. This chain makes chlorophyll dissolve well in oils and organic solvents, but not in water. The phytol chain acts like an anchor that holds the chlorophyll in place within the plant's membrane structures.
 
 Because of this fatty chain, organic solvents like acetone, methanol, or ethanol are needed to extract chlorophyll from plant tissues.
 80% acetone (mixed with 20% water) is commonly used because the small amount of water helps break apart the protein structures that hold the chlorophyll. @src_chlorophyll-lichtenthaler @src_chlorophyll-extraction-protocol
-100% acetone is very suitable for leave extracts. @src_chlorophyll-lichtenthaler
+100% acetone is very suitable for leaf extracts. @src_chlorophyll-lichtenthaler
 
 === Solvatochromism <solvatochromism>
 
@@ -114,13 +114,13 @@ Finally, the calculated concentrations in the extract are converted to fresh wei
 
 === Beer-Lambert law <beer-lambert-law>
 
-The Beer-Lambert law, shown in @beer-lambert-equation and based on @transmittance-equation, describes the correlation between the dimensionles total absorbance $E_lambda$, the molar extinctioncoefficent $epsilon_lambda$ ($"l"/("mol" dot "cm")$ @src_wikipedia-molar-extinction-coefficient) and concentration $c$ ($"mol"/"l"$) of the substance of interest in the sample, and the light path length $d$ ($"cm"$) through the sample, where $lambda$ is an arbitary wavelength of light.
+The Beer-Lambert law, shown in @beer-lambert-equation and based on @transmittance-equation, describes the correlation between the dimensionless total absorbance $E_lambda$, the molar extinction coefficient $epsilon_lambda$ ($"l"/("mol" dot "cm")$ @src_wikipedia-molar-extinction-coefficient) and concentration $c$ ($"mol"/"l"$) of the substance of interest in the sample, and the light path length $d$ ($"cm"$) through the sample, where $lambda$ is an arbitrary wavelength of light.
 
 $
   E_lambda = epsilon_lambda dot c dot d
 $ <beer-lambert-equation>
 
-For example $"Chl"_"a"$ has $epsilon_420 = (85thin 000)/("mol" dot thin "l")$. This however depends on a multitude of factors, such as pH, temperature or solvent, and is therefore not a constant @src_wikipedia-molar-extinction-coefficient.
+For example $"Chl"_"a"$ has $epsilon_420 = 85thin 000 space "l" thin "mol"^(-1) thin "cm"^(-1)$. This, however, depends on a multitude of factors such as pH, temperature, or solvent, and is therefore not a constant @src_wikipedia-molar-extinction-coefficient.
 
 === Mixtures and additivity
 
@@ -141,7 +141,7 @@ $
   c space ["mol"/"l"] & = E_lambda / epsilon_lambda dot cancel(1 / d)
 $ <beer-lambert-equation-concentration>
 
-$d$ is the path length through the sample or in other words the thickness of the cuvette. The global standard for this is $d = 1"cm"$ @src_quartz-cuvette. Therefore we can effectively cancel out $d$ in the equation.
+$d$ is the path length through the sample or in other words the thickness of the cuvette. The global standard for this is $d = 1"cm"$ @src_quartz-cuvette. Therefore, we can effectively cancel out $d$ in the equation.
 
 While @beer-lambert-equation-concentration is a general equation yielding $"mol"/"l"$, we can convert to mass concentration $"g"/"l"$ by multiplying with the molar mass $"MG"_S$ of our substance $S$ and factoring in the dilution factor $V_E / V_P$, where $V_E$ is the volume of the extraction solvent and $V_P$ is the volume of the biological source material.
 
@@ -160,7 +160,7 @@ Where $M_P$ is the mass of the biological source material in $"g"$, and $c space
 
 #new-chapter("Execution")
 
-The experiment could be performed in two variants, where the first variant was only performed as per the instruction of the instructor. In this variant a diluted chlorophyll solution was used as reference. The second variant will be described going forward. @execution-steps-diagram displays the experimental workflow for this second variant.
+The experiment was performed in two variants, where the first variant was performed according to the instructor's guidance. In this variant, a diluted chlorophyll solution was used as reference. The second variant will be described going forward. @execution-steps-diagram displays the experimental workflow for this second variant.
 
 #wrap-content(align: right + horizon, [
   #show: box.with(inset: 0.5em)
@@ -175,7 +175,7 @@ The experiment could be performed in two variants, where the first variant was o
 
 === Materials needed <execution-materials>
 
-As per instruction sheet, we need the following materials:
+According to the instruction sheet, we need the following materials:
 
 - Scissors
 - Mortar and pestle
@@ -187,17 +187,17 @@ As per instruction sheet, we need the following materials:
 - Spectrophotometer
 
 *Chemicals:*
-- Acetone ($tilde\20"ml"$)
+- Acetone ($~20"ml"$)
 - Sea sand
 - Calcium carbonate
 - Plant material ($2-5"g"$)
 
-Instead of sea sand and calcium carbonate, we used quartz sand for the mortar, as the experiment was prepared that way in our lab session.
+Instead of sea sand and calcium carbonate, we used quartz sand for the mortar, as the experiment was set up that way in our lab session.
 ]
 
 === Chlorophyll extraction
 
-About $2-5"g"$ of fresh plant material was cut up with scissors and put into a mortar. A small amount (spatula tip) of sea sand (or quartz sand, as noted in @execution-materials) and calcium carbonate ($"CaCO"_3$) was added to help break down the plant cells and neutralize acids. The plant material was then ground thoroughly with a pestle to break open all the cells.
+About $2-5"g"$ of fresh plant material was cut up with scissors and put into a mortar. A small amount (tip of a spatula) of sea sand (or quartz sand, as noted in @execution-materials) and calcium carbonate ($"CaCO"_3$) was added to help break down the plant cells and neutralize acids. The plant material was then ground thoroughly with a pestle to break open all the cells.
 
 Next, about $20"ml"$ of acetone was added, and the mixture was ground further until a dark green liquid formed. This chlorophyll extract was then filtered through filter paper into a beaker. The filter paper was folded twice to make a cone shape that fit into the funnel.
 
@@ -216,34 +216,34 @@ The specific methodology employed in this experiment serves to maximize extracti
 
 #new-chapter("Results")
 
-We performed various analysis tasks in order to gain a better understanding of the data and the results. These were done in isolation to avoid any confounding factors.
+Various analysis tasks were performed to better understand the data and the results. These were done in isolation to avoid any confounding factors.
 
-We decided to take a detailed full spectrum sample using a mixture of brussels sprouts and maggi herbs #footnote[File group 1, subgroup 6 from the results sheet]. We will use this sample for all single sample analysis, especially in @calculation-with-instructor-formula and @calculation-with-beer-lambert-law. We refer to this sample as "our's" going forward.
+We decided to take a detailed full spectrum sample using a mixture of brussels sprouts and maggi herbs #footnote[File group 1, subgroup 6 from the results sheet]. We will use this sample for all single sample analysis, especially in @calculation-with-instructor-formula and @calculation-with-beer-lambert-law. We refer to this sample as "ours" going forward.
 
 == Spectral Analysis
 #let results-spect-data = csv("../data/results.absorption.txt", delimiter: "\t").slice(1)
 #let chla-spect-data = csv("../data/chla.absorption.txt", delimiter: "\t").slice(1)
 #let chlb-spect-data = csv("../data/chlb.absorption.txt", delimiter: "\t").slice(1)
 
-The full spectrum data was derived by sampling absorption rates at $10"nm"$ intervals from the spectrophotometer's automatic full spectrum curve. Results are shown in @spectral-analysis-sample.
+The full spectrum data was derived by sampling absorption rates at $10"nm"$ intervals from the spectrophotometer's automatic full spectrum curve. The results are shown in @spectral-analysis-sample.
 
 === Reference spectrum
 
 We compare our full spectrum data with the reference spectra of chlorophyll a and chlorophyll b in diethyl ether. This is used for reference even though we used
-acetone in our experiment, because we failed to find other publically available full spectrum reference data.
+acetone in our experiment, because we failed to find other publicly available full spectrum reference data.
 
 #figure(
   rect(inset: 0.5cm, pad(visualize-reference-absorption(chla-spect-data, chlb-spect-data), right: 1em)),
   caption: [Reference Chlorophyll Absorption Spectra in Diethyl Ether @src_chlorophyll-a-photochem @src_chlorophyll-b-photochem. Blue shows $"Chl"_"a"$ and red shows $"Chl"_"b"$],
 ) <spectral-analysis-reference>
 
-In @spectral-analysis-reference we can observe the blue spectrum peaks at
+In @spectral-analysis-reference we can observe the blue-region spectrum peaks at
 $~430"nm"$ for $"Chl"_"a"$ and
 $~452"nm"$ for $"Chl"_"b"$.
-The red spectrum peaks at $~660"nm"$ for $"Chl"_"a"$ and $~642"nm"$ for $"Chl"_"b"$.
+The red-region spectrum peaks at $~660"nm"$ for $"Chl"_"a"$ and $~642"nm"$ for $"Chl"_"b"$.
 
-These match the characteristics of the chlorophylls absorption spectrum in diethyl ether.
-We can observe the spectrum line of $"Chl"_"a"$ buckles when crossing the line of $"Chl"_"b"$ in the blue region, which is also characteristic for both chlorophyll variants.
+These match the characteristics of the chlorophyll absorption spectra in diethyl ether.
+We can observe that the spectrum of $"Chl"_"a"$ shows a characteristic shoulder when crossing the line of $"Chl"_"b"$ in the blue region, which is also characteristic for both chlorophyll types.
 @src_plants-in-action
 
 Therefore, we conclude the found dataset to be a viable and accurate source of reference.
@@ -258,11 +258,11 @@ Therefore, we conclude the found dataset to be a viable and accurate source of r
 The sample spectrum shows the absorption of the total, non-isolated chlorophylls ($"Chl"_"a" + "Chl"_"b"$) in the sample. We can observe three peaks: two in the blue region at $~430"nm"$ and $~445"nm"$ with one in the red region at $~660"nm"$.
 
 We can observe similar peaks as in the reference spectrum, but with slight distortions and more or less pronounced features. This is because the sample consists of total, non-isolated chlorophylls ($"Chl"_"a" + "Chl"_"b"$) and possibly other pigments dissolved in acetone. Furthermore, as mentioned in @solvatochromism, shifts are to be expected when comparing our sample with diethyl ether dissolved reference @src_plants-in-action.
-Despite this, one can even spot fine features in our spectrum. For example the valley at the $~650"nm"$ wavelength that is clearly visible in the reference spectrum is present in our data in form of a small bump.
+Despite this, one can even spot fine features in our spectrum. For example, the valley at the $~650"nm"$ wavelength that is clearly visible in the reference spectrum is present in our data in the form of a small bump.
 
-The most claring difference compared to reference is the samples gradually increasing absorption in the green spectrum (read from right/red to left/blue), whereas according to the reference the absorption should slightly decrease.
+The most glaring difference compared to reference is the sample's gradually increasing absorption in the green spectrum (read from right/red to left/blue), whereas according to the reference the absorption should slightly decrease.
 One possible explanation for this is the presence of other pigments in the sample that absorb in the green spectrum, such as carotenoids
-@src_chlorophyll-extraction-protocol @src_plants-in-action. Another plausible explanation is incomplete calibration: Calibration did not happen across the entire spectrum but only once on the higher end of the wavelength. The level of unfamiliarity with the spectrophotometer and the spectrometer itself might have contributed to this.
+@src_chlorophyll-extraction-protocol @src_plants-in-action. Another plausible explanation is incomplete calibration: Calibration did not happen across the entire spectrum but only once on the higher end of the wavelength. The level of unfamiliarity with the spectrophotometer might have contributed to this.
 
 == Chlorophyll Concentration with Instructor's Formula <calculation-with-instructor-formula>
 
@@ -304,14 +304,14 @@ $c_"total" space ["mg"/"l"] &= c_a + c_b = #str(chla-given-formula) + #str(chlb-
   caption: "Wavelengths and absorbance of the results from our sample needed for calculating the chlorophyll concentration using the given formulas",
 ) <results-important-wavelengths-given-formula>
 
-A quick sanity check with the Gemini LLM for the plausability of these values was positive. Lab extracts have a common range of $10 - 30 "mg"/"l"$. This aligns with our values.
+A quick sanity check with the Gemini LLM for the plausibility of these values was positive. Lab extracts have a common range of $10 - 30 "mg"/"l"$. This aligns with our values.
 
-We can see a significant difference between the total result using the standalone aborbance factor and the addition of $"Chl"_"a"$ and $"Chl"_"b"$, with an absolute difference of $#(calc.round(digits: 4, calc.abs(total-given-formula - (chla-given-formula + chlb-given-formula)))) space "mg"/"l"$ and a relative difference of $#(calc.round(digits: 2, calc.abs(total-given-formula - (chla-given-formula + chlb-given-formula)) / total-given-formula * 100)) space "%"$.
+We can see a significant difference between the total result using the standalone absorbance factor and the addition of $"Chl"_"a"$ and $"Chl"_"b"$, with an absolute difference of $#(calc.round(digits: 4, calc.abs(total-given-formula - (chla-given-formula + chlb-given-formula)))) space "mg"/"l"$ and a relative difference of $#(calc.round(digits: 2, calc.abs(total-given-formula - (chla-given-formula + chlb-given-formula)) / total-given-formula * 100)) space "%"$.
 
 
 === Interpretation of the difference <instructor-formula-difference-interpretation>
 
-It proves difficult to reason for a possible explanation for this discrepancy without knowing where the given formulas originate from and how they were derived. Measurement or execution errors are a possibility, even though seeming unlikely due to the high difference.
+It proves difficult to find a possible explanation for this discrepancy without knowing where the given formulas originate from and how they were derived. Measurement or execution errors are a possibility, although this seems unlikely due to the high difference.
 
 == Chlorophyll Concentration using Beer-Lambert Law <calculation-with-beer-lambert-law>
 
@@ -326,11 +326,11 @@ Because we use the standard path length of $d = 1"cm"$ we can ignore $1/d$ in ou
 Using substitution we can solve for $c_a$ and $c_b$:
 
 $
-  c_a space ["mol"/"l"] = (E_664 space epsilon_(b, 647) - E_647 space epsilon_(a, 664)) / (epsilon_(a, 664) space epsilon_(b, 647) - epsilon_(a, 647) space epsilon_(b, 664))\
-  c_b space ["mol"/"l"] = (E_647 space epsilon_(a, 664) - E_664 space epsilon_(b, 647)) / (epsilon_(a, 664) space epsilon_(b, 647) - epsilon_(b, 664) space epsilon_(a, 647))\
+  c_a space ["mol"/"l"] = (E_664 space epsilon_(b, 647) - E_647 space epsilon_(b, 664)) / (epsilon_(a, 664) space epsilon_(b, 647) - epsilon_(a, 647) space epsilon_(b, 664))\
+  c_b space ["mol"/"l"] = (E_647 space epsilon_(a, 664) - E_664 space epsilon_(a, 647)) / (epsilon_(a, 664) space epsilon_(b, 647) - epsilon_(b, 664) space epsilon_(a, 647))\
 $
 
-We arrive at final formula for calculating the total chlorophyll concentration, accounting for the mass concentration and dilution factor:
+We arrive at the final formula for calculating the total chlorophyll concentration, accounting for the mass concentration and dilution factor:
 
 $
         c_a space ["g"/"l"_E] & = c_a space ["mol"/"l"] dot "MG"_"Chl"_a \
@@ -339,7 +339,7 @@ $
   c_"total" space ["g"/"g"_P] & = c_"total" space ["g"/"l"_E] dot V_E / M_P \
 $
 
-By plugging in the values from @concentration-value-table-beer-lambert for this equation we arrive at the final values for the mass concentration in the extraction solvent:
+By plugging the values from @concentration-value-table-beer-lambert into these equations, we arrive at the final values for the mass concentration in the extraction solvent:
 
 #let epsilon_a_647 = 17464
 #let epsilon_a_664 = 76790
@@ -374,7 +374,7 @@ $c_a space ["mg"/"l"_E] & = bold(#calc.round(digits: 2, c_a_mg_dil) wj) \
 c_b space ["mg"/"l"_E] & = bold(#calc.round(digits: 2, c_b_mg_dil) wj) \
 c_"total" space ["mg"/"l"_E] & = bold(#calc.round(digits: 2, c_total_mg_dil) wj)$
 
-Accounted for the dilution factor, the final determined mass concentration in the biological source material (fresh weight) is:
+Accounting for the dilution factor, the final determined mass concentration in the biological source material (fresh weight) is:
 
 $c_"total" space ["mg"/"g"_P] & = c_"total" space ["mg"/"l"_E] dot V_E / M_P = bold(#calc.round(digits: 4, c_total_mg_undil) wj)$
 
@@ -413,11 +413,11 @@ The values calculated using the Beer-Lambert law are in line with the values cal
 
 @instructor-formula-difference-interpretation describes the unknown origin of the instructor-provided formulas. After performing the calculations ourselves, we can observe that once the extinction coefficients $epsilon$ and molecular weights $"MG"$ are known for both chlorophyll types, the concentration equation reduces to simple multilinear functions with constant factors applied to the remaining variables $E_lambda$. This suggests that the given formulas are simplified versions of the complete calculation chain we performed based on the Beer-Lambert law.
 
-Interestingly enough, even though the extinction coefficients $epsilon$ used in our manual calculations are for 80% acetone solutions @src_coeffecients, the Beer-Lambert law calculations still yield results in line with the instructors formulas, despite the solvatochromism effect, stated in @solvatochromism. The small difference between the results of the instructor's formula and the Beer-Lambert law calculations could then be explained by this and the hypothesis, that the absorption difference between 80% acetone and 100% acetone is not significant enough to cause a noticeable difference in the calculated concentration.
+Interestingly enough, even though the extinction coefficients $epsilon$ used in our manual calculations are for 80% acetone solutions @src_coeffecients, the Beer-Lambert law calculations still yield results in line with the instructor's formulas, despite the solvatochromism effect stated in @solvatochromism. The small difference between the results of the instructor's formula and the Beer-Lambert law calculations could then be explained by this and the hypothesis that the absorption difference between 80% acetone and 100% acetone is not significant enough to cause a noticeable difference in the calculated concentration.
 
 === Checking for alignment with known concentrations
 
-With the calculated concentration value in fresh weight for our sample, we want to check for plausability by comparing to other well known concentrations of common leafy vegetables in fresh weight.
+With the calculated concentration value in fresh weight for our sample, we want to check for plausibility by comparing to other well known concentrations of common leafy vegetables in fresh weight.
 
 #quote(block: true, attribution: [Gemini LLM 2025])[
   Chlorophyll content varies widely by species, leaf age, and sunlight exposure.
@@ -460,18 +460,16 @@ With the calculated concentration value in fresh weight for our sample, we want 
 
 Using this information and normalizing to $"mg"slash"g"$ of fresh weight, the results of which are shown in @known-concentrations-normalized, we can compare our results in fresh weight to the known concentrations of common leafy vegetables.
 
-*Note*: Even though Gemini is no scientific source, we only use it for a basic plausability check of our own results. It can therefore be deemed a reliable enough source for this specific usecase.
+*Note*: Even though Gemini is no scientific source, we only use it for a basic plausibility check of our own results. It can therefore be deemed a reliable enough source for this specific usecase.
 
-The total chlorophyll concentration of our sample is $#(calc.round(digits: 4, c_total_mg_undil)) "mg"slash"g"$ of fresh weight. This is less than known concentrations of both brussel sprouts and maggi herbs, which are the only components of our analysed sample. This is unexpected and suggests multiple potential error sources. These could include inadequate processing/grinding with quartz sand, the fact that the material was cooled and partially frozen during preparation, incomplete extraction due to insufficient contact time with the solvent, or degradation of chlorophyll during sample handling.
-
-Nevertheless, the results are within general ranges of our expected values, and are therefore deemed plausible. We do not suspect a great systematic error in our measurements, but rather a combination of multiple smaller errors.
+The total chlorophyll concentration of our sample is $#(calc.round(digits: 4, c_total_mg_undil)) "mg"slash"g"$ of fresh weight. While lower than some literature values, it is within the expected physiological range and thus deemed plausible. We do not suspect a great systematic error in our measurements, but rather a combination of multiple smaller errors. These could include inadequate processing/grinding with quartz sand, the fact that the material was cooled and partially frozen during preparation, incomplete extraction due to insufficient contact time with the solvent, or degradation of chlorophyll during sample handling.
 
 
 == Descriptive Statistics <descriptive-statistics>
 
 #let groups-results-data = json("../data/group_results.json")
 
-We analyze the results of all groups in our class and compare them to our own results. We also compare different source materials with each other. Except for explicitly stated otherwise, the concentrations in fresh weight are computed using the instructor's formula for individual chlorophyll types and adding them together, after which dilution compensation is performed. We do not use the pre-calculated concentrations from the results sheet.
+We analyze the results of all groups in our class and compare them to our own results. We also compare different source materials with each other. Unless explicitly stated otherwise, the concentrations in fresh weight are computed using the instructor's formula for individual chlorophyll types and adding them together, after which dilution compensation is performed. We do not use the pre-calculated concentrations from the results sheet.
 
 === Overall results
 
@@ -528,7 +526,7 @@ We analyze the results of all groups in our class and compare them to our own re
 
 #let c_total_instructor_undil = calc-undilute-mg_l-mg_g(chla-given-formula + chlb-given-formula, M_P, V_E)
 
-Based on the instructor's formula for the total chlorophyll concentration, our total chlorophyll concentration in fresh weight is $#(calc.round(digits: 4, c_total_instructor_undil)) "mg"slash"g"$. This belongs to the higher end of our value range, but is not an outlier. It indicates a result value fitting for our experiment. The high value makes sense, as @known-concentrations-normalized shows that brussels sprouts have a very high concentration of chlorophyll.
+Based on the instructor's formula for the total chlorophyll concentration, our total chlorophyll concentration in fresh weight is $#(calc.round(digits: 4, c_total_instructor_undil)) "mg"slash"g"$. This value lies at the higher end of our data range but is not an outlier; it indicates a result consistent with our experiment. The high value makes sense, as @known-concentrations-normalized shows that brussels sprouts have a very high concentration of chlorophyll.
 
 #figure(
   rect(inset: 0.5cm, boxplot-all-with-our-value(
@@ -538,7 +536,7 @@ Based on the instructor's formula for the total chlorophyll concentration, our t
   caption: [Boxplot of all groups' results compared to our results],
 ) <boxplot-all-groups-compared-to-our-results>
 
-@boxplot-all-groups-compared-to-our-results shows a boxplot of all groups' results compared to our results. It demonstrated we lie between the third and fourth quartile of the data, and supports our claims above.
+@boxplot-all-groups-compared-to-our-results shows a boxplot of all groups' results compared to our results. It demonstrates that our value lies between the third and fourth quartile of the data, and supports our claims above.
 
 === Results per source material
 
@@ -568,7 +566,7 @@ Several factors explain why our measured values may be lower than expected:
 - *Measurement errors*: Small errors in weighing samples, measuring volumes, or reading the spectrophotometer can add up and affect the results.
 - *Natural variation*: Real plants vary in chlorophyll content depending on age, growing conditions, and storage. The reference values are averages that may not match our specific samples.
 
-We do not conclude the calculations or values to be catastrophically wrong, as even though there are wildy different raw data points, the overall end results of the calcualation chain seem to settle in sensible values, as illustrated in @difference-raw-final-values-plot. Instead, we assume that error sources are small but consistent across all groups.
+We do not conclude that the calculations or values are catastrophically wrong; although there are wildly different raw data points, the overall results of the calculation chain seem to settle at sensible values, as illustrated in @difference-raw-final-values-plot. Instead, we assume that the error sources are small but consistent across all groups.
 
 #figure(
   rect(inset: 0.5cm, plot-difference-raw-final-values(
@@ -593,7 +591,7 @@ We do not conclude the calculations or values to be catastrophically wrong, as e
   caption: [Standard deviation of the data points for concentration in solution and in fresh weight],
 ) <standard-deviation-raw-final-concentrations>
 
-We can also compare the standard deviation of the soluted data points and the fresh weight data points. @standard-deviation-raw-final-concentrations shows that the compensation of the dilution factor works well, since we can effectively map all data points to a smaller more concrete range. This however is not perfect, as the _normalized_ #footnote[normalized: data points divided by their common mean] standard deviation of the fresh weight data points is slightly higher than the standard deviation of the solution data points. It shows that when accounted for unit differences, the fresh weight data points are more scattered than the solution data points.
+We can also compare the standard deviation of the soluted data points and the fresh weight data points. @standard-deviation-raw-final-concentrations shows that the compensation of the dilution factor works well, since we can effectively map all data points to a smaller more concrete range. This, however, is not perfect, as the _normalized_ #footnote[normalized: data points divided by their common mean] standard deviation of the fresh weight data points is slightly higher than that of the solution data points. This shows that when accounting for unit differences, the fresh weight data points are more scattered than the solution data points.
 
 === Comparison between fresh weight concentration sources
 
@@ -649,11 +647,11 @@ The instructor's formulas in @instructor-formula-equations  for calculating the 
   caption: [Comparison between 652nm instructor's formula and freshly calculated concentrations],
 ) <652nm-instructor-vs-freshly-calculated-plot>
 
-@652nm-instructor-vs-freshly-calculated-plot shows that there is only a small difference between the two sources. Apart from the same outlier as in @filled-out-vs-freshly-calculated-comparison, there seems to be a positive offset in regards to the the $652"nm"$ formula. This offset seems to grow proportionally to the concentration and therefore classifies it as a fractional offset. 
+@652nm-instructor-vs-freshly-calculated-plot shows that there is only a small difference between the two sources. Apart from the same outlier as in @filled-out-vs-freshly-calculated-comparison, there seems to be a positive offset in regards to the $652"nm"$ formula. This offset seems to grow proportionally to the concentration and therefore classifies it as a proportional offset. 
 
 Interestingly enough, at closer observation of @concentration-sources-comparison-plot, a strong correlation between the 652nm instructor's formula and the filled out concentrations is visible. Indeed, the correlation coefficient is $#(calc.round(digits: 6, empiric-corr(groups-results-addedformula-concentration.map(it => it.total_instructor_mg_freshweight), groups-results-addedformula-concentration.map(it => it.concentration_freshweight))))$, which is practically equivalent to $1$. 
 
-All of the above observations lead us to conclude, that the instructor's formula is very precise, but has a certain constant percentile accuracy offset. Lowering the factor of $27.8 thin E_652$ by a nodge might result in a more accurate calculation (assuming the addition of $"Chl"_a$ and $"Chl"_b$ is the accurate baseline).
+All of the above observations lead us to conclude that the instructor's formula is very precise, but has a certain constant percentage accuracy offset. Slightly lowering the factor of $27.8$ in the $E_652$ formula might result in a more accurate calculation (assuming the addition of $"Chl"_a$ and $"Chl"_b$ is the accurate baseline).
 
 #set heading(numbering: none)
 #new-chapter("Appendix")
