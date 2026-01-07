@@ -1,0 +1,12 @@
+[tasks."compile"]
+description = "Compile all analysis visualizations"
+run = "mise run visualize:*"
+
+
+[tasks."visualize:glycin-curve"]
+description = "Compile the glycin derivative visualization"
+run = "typst compile --format png --ppi 600  illustrations/glycin-curve.typ ../assets/glycin-curve.png"
+
+[tasks."visualize:histidin-curve"]
+description = "Compile the histidin derivative visualization"
+run = "typst compile --format png --ppi 600  illustrations/histidin-curve.typ ../assets/histidin-curve-{p}.png"
