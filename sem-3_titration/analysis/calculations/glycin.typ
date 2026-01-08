@@ -18,6 +18,7 @@
 
 #let wendepunkte = find-linear-intersections(x.zip(d2y.map(it => it + 0.01)), 0, window: 10, degree: 2)
 #let pl_derivative = wendepunkte.sorted(key: it => interpolate-smooth(x.zip(d3y), it, window: 10, degree: 2)).first()
+#let pl_derivative = (pl_derivative, interpolate-smooth(x.zip(y), pl_derivative, window: 10, degree: 2))
 #let (pk1, pk2) = (
   wendepunkte
     .sorted(key: it => interpolate-smooth(x.zip(d3y), it, window: 10, degree: 2))

@@ -127,3 +127,10 @@
   calc.sqrt(sum-sq / data.len())
 }
 
+
+#let q-factor(data) = {
+  assert(data.len() > 0, message: "Cannot calculate Q-factor of empty array.")
+  let max-val = calc.max(..data)
+  let min-val = calc.min(..data)
+  (max-val - min-val) / max-val
+}
