@@ -16,7 +16,7 @@
           height: 0.15cm,
           stroke: or-preview(white, green) + 0.5pt,
           align: center + horizon,
-          label: pad(top: 1mm)[$"pl"$ mittels $("pk"_1 + "pk"_2) / 2$],
+          label: pad(top: 1mm)[$"pl"$ mittels $("pk"_3 + "pk"_2) / 2$],
         )
       } else if it == 1 {
         lq.ellipse(
@@ -39,7 +39,7 @@
       }
 
       let iep-value = if it == 0 [
-        $("pk"_1 + "pk"_2) / 2$\
+        $("pk"_3 + "pk"_2) / 2$\
         $= #calc.round(digits: 2, pl_average.at(1))$
       ] else if it == 1 [
         Schnittpunkt\
@@ -95,8 +95,8 @@
           ],
         ),
         lq.line(
-          pk2,
           pk3,
+          pk2,
           stroke: or-preview(white, red).transparentize(50%) + 0.5pt,
         ),
         lq.line(

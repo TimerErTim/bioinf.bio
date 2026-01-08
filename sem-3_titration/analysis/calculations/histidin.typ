@@ -19,7 +19,7 @@
 #let wendepunkte = find-linear-intersections(x.zip(d2y), 0, window: 10, degree: 2)
 #let pl_derivative = wendepunkte.sorted(key: it => interpolate-smooth(x.zip(d3y), it, window: 10, degree: 2)).first()
 #let pl_derivative = (pl_derivative, interpolate-smooth(x.zip(y), pl_derivative, window: 10, degree: 2))
-#let (pk1, pk2, pk3) = (
+#let (pk1, pk3, pk2) = (
   wendepunkte
     .sorted(key: it => interpolate-smooth(x.zip(d3y), it, window: 10, degree: 2))
     .rev()
@@ -30,13 +30,13 @@
 #let pk1 = (pk1, interpolate-smooth(x.zip(y), pk1, window: 10, degree: 2))
 #let pk2 = (pk2, interpolate-smooth(x.zip(y), pk2, window: 10, degree: 2))
 #let pk3 = (pk3, interpolate-smooth(x.zip(y), pk3, window: 10, degree: 2))
-#let _pl_slope = (pk3.at(1) - pk2.at(1)) / (pk3.at(0) - pk2.at(0))
-#let _pl_intercept = pk2.at(1) - _pl_slope * pk2.at(0)
+#let _pl_slope = (pk2.at(1) - pk3.at(1)) / (pk2.at(0) - pk3.at(0))
+#let _pl_intercept = pk3.at(1) - _pl_slope * pk3.at(0)
 #let pl_intercept = (
   find-linear-intersections(x.zip(y), slope: _pl_slope, _pl_intercept, window: 10, degree: 2)
-    .filter(it => it > pk2.at(0) + 0.01 and it < pk3.at(0) - 0.01)
+    .filter(it => it > pk3.at(0) + 0.01 and it < pk2.at(0) - 0.01)
     .first()
 )
 #let pl_intercept = (pl_intercept, interpolate-smooth(x.zip(y), pl_intercept, window: 10, degree: 2))
-#let pl_average = (pk2.at(1) + pk3.at(1)) / 2
+#let pl_average = (pk3.at(1) + pk2.at(1)) / 2
 #let pl_average = (find-linear-intersections(x.zip(y), pl_average, window: 10, degree: 2).map(it => (it, calc.abs(it - pl_average))).sorted(key: it => it.at(1)).last().at(0), pl_average)
