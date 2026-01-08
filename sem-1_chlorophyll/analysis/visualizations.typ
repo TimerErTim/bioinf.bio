@@ -1,5 +1,6 @@
 #import "@preview/lilaq:0.5.0" as lq
 #import "@preview/fletcher:0.5.8" as fl
+#import "../../lib/maths/statistics.typ": *
 
 #let visualize-execution-steps() = {
   let color-map = lq.color.map.okabe-ito
@@ -88,34 +89,6 @@
     ),
   )
 }
-
-#let mean(values) = values.sum() / values.len()
-#let std(values) = {
-  let mean = mean(values)
-  calc.sqrt(
-    values.map(it => calc.pow(it - mean, 2)).sum() / (values.len() - 1),
-  )
-}
-#let empiric-var(values) = {
-  let mean = mean(values)
-  values.map(it => calc.pow(it - mean, 2)).sum() / values.len()
-}
-#let empiric-corr(x, y) = {
-  let mean-x = mean(x)
-  let mean-y = mean(y)
-  let var-x = empiric-var(x)
-  let var-y = empiric-var(y)
-  let cov = x.zip(y).map(it => (it.at(0) - mean-x) * (it.at(1) - mean-y)).sum() / x.len()
-  cov / calc.sqrt(var-x * var-y)
-}
-#let median(values) = if calc.rem(values.len(), 2) == 0 {
-  (values.sorted().at(values.len() / 2) + values.sorted().at(values.len() / 2 - 1)) / 2
-} else {
-  values.sorted().at(int(values.len() / 2))
-}
-#let min-value(values) = values.sorted().at(0)
-#let max-value(values) = values.sorted().at(values.len() - 1)
-#let range-values(values) = max-value(values) - min-value(values)
 
 #let boxplot-all-with-our-value(values, our-value) = {
   lq.diagram(

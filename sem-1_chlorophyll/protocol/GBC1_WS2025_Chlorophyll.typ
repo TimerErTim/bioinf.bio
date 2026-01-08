@@ -15,12 +15,13 @@
   version: "0.1-RC",
   date: datetime.today(offset: auto).display("[year]-[month]-[day]"),
 )
+#import "../../lib/maths/statistics.typ": *
 #import "../analysis/visualizations.typ": *
+#import "@preview/wrap-it:0.1.1": wrap-content
 #show link: it => {
   set text(fill: blue)
   underline(it)
 }
-#import "@preview/wrap-it:0.1.1": wrap-content
 
 
 #heading(depth: 1, outlined: false)[Contents]
@@ -512,11 +513,11 @@ We analyze the results of all groups in our class and compare them to our own re
     align: horizon + start,
     table.header[*Mean* $bold(dash(x))$][*Standard Deviation $bold("std"(x))$*][*Median $bold(tilde(x))$*][*Range $bold(max(x) - min(x))$*],
     [$#(calc.round(digits: 4, mean(groups-results-addedformula-concentration.map(it => it.total_added_mg_freshweight)))) "mg"slash"g"$],
-    [$#(calc.round(digits: 4, std(groups-results-addedformula-concentration.map(it => it.total_added_mg_freshweight)))) "mg"slash"g"$],
+    [$#(calc.round(digits: 4, stddev(groups-results-addedformula-concentration.map(it => it.total_added_mg_freshweight)))) "mg"slash"g"$],
     [$#(calc.round(digits: 4, median(groups-results-addedformula-concentration.map(it => it.total_added_mg_freshweight)))) "mg"slash"g"$],
-    [$#(calc.round(digits: 4, max-value(groups-results-addedformula-concentration.map(it => it.total_added_mg_freshweight))))
+    [$#(calc.round(digits: 4, calc.max(..groups-results-addedformula-concentration.map(it => it.total_added_mg_freshweight))))
     -
-    #(calc.round(digits: 4, min-value(groups-results-addedformula-concentration.map(it => it.total_added_mg_freshweight))))
+    #(calc.round(digits: 4, calc.min(..groups-results-addedformula-concentration.map(it => it.total_added_mg_freshweight))))
     "mg"slash"g"$],
   ),
   caption: [Descriptive statistics of the total chlorophyll concentration for all groups],
@@ -581,12 +582,12 @@ We do not conclude that the calculations or values are catastrophically wrong; a
     columns: 3,
     table.header[*Data Points*][*Standard Deviation*][*Normalized Standard Deviation*],
     [Concentration $"mg"slash"l"$ in solution],
-    [$plus.minus #(calc.round(digits: 4, std(groups-results-addedformula-concentration.map(it => it.total_instructor_mg_l)))) "mg"slash"l"$],
-    [$plus.minus #(calc.round(digits: 4, std(groups-results-addedformula-concentration.map(it => it.total_instructor_mg_l / mean(groups-results-addedformula-concentration.map(it => it.total_instructor_mg_l))))))$],
+    [$plus.minus #(calc.round(digits: 4, stddev(groups-results-addedformula-concentration.map(it => it.total_instructor_mg_l)))) "mg"slash"l"$],
+    [$plus.minus #(calc.round(digits: 4, stddev(groups-results-addedformula-concentration.map(it => it.total_instructor_mg_l / mean(groups-results-addedformula-concentration.map(it => it.total_instructor_mg_l))))))$],
 
     [Concentration $"mg"slash"g"$ in fresh weight],
-    [$plus.minus#(calc.round(digits: 4, std(groups-results-addedformula-concentration.map(it => it.total_added_mg_freshweight)))) "mg"slash"g"$],
-    [$plus.minus #(calc.round(digits: 4, std(groups-results-addedformula-concentration.map(it => it.total_added_mg_freshweight / mean(groups-results-addedformula-concentration.map(it => it.total_added_mg_freshweight))))))$],
+    [$plus.minus#(calc.round(digits: 4, stddev(groups-results-addedformula-concentration.map(it => it.total_added_mg_freshweight)))) "mg"slash"g"$],
+    [$plus.minus #(calc.round(digits: 4, stddev(groups-results-addedformula-concentration.map(it => it.total_added_mg_freshweight / mean(groups-results-addedformula-concentration.map(it => it.total_added_mg_freshweight))))))$],
   ),
   caption: [Standard deviation of the data points for concentration in solution and in fresh weight],
 ) <standard-deviation-raw-final-concentrations>
@@ -623,7 +624,7 @@ The different calculation paths are visualized in @calculation-paths-diagram. It
 
 There is almost no difference between the filled out and freshly calculated concentrations. @filled-out-vs-freshly-calculated-plot shows that there is only one entry with a difference of $tilde 1"mg"slash"g"$ between the two values. This discrepancy is likely due to an error in writing down the concentration values on the results sheet, rather than a systematic calculation error, as the difference is isolated to a single data point and not significant enough to indicate a fundamental issue with the calculation methodology itself.
 
-Furthermore, @concentration-sources-comparison-plot implies a strong linear correlation between the filled out and freshly calculated concentrations, with a correlation coefficient of $#(calc.round(digits: 6, empiric-corr(groups-results-addedformula-concentration.map(it => it.concentration_freshweight), groups-results-addedformula-concentration.map(it => it.total_added_mg_freshweight))))$, which is very close to $1$, supporting this observation. It shows, that there was little error in the group individual calculations, as the filled out concentrations are very close to the freshly calculated concentrations.
+Furthermore, @concentration-sources-comparison-plot implies a strong linear correlation between the filled out and freshly calculated concentrations, with a correlation coefficient of $#(calc.round(digits: 6, correlation(groups-results-addedformula-concentration.map(it => it.concentration_freshweight), groups-results-addedformula-concentration.map(it => it.total_added_mg_freshweight))))$, which is very close to $1$, supporting this observation. It shows, that there was little error in the group individual calculations, as the filled out concentrations are very close to the freshly calculated concentrations.
 
 #figure(
   rect(inset: 0.5cm, plot-filled-out-vs-freshly-calculated(
@@ -637,7 +638,7 @@ Furthermore, @concentration-sources-comparison-plot implies a strong linear corr
 
 ==== Direct $652"nm"$ formula & freshly calculated
 
-The instructor's formulas in @instructor-formula-equations  for calculating the total chlorophyll concentration describe, how to use the 652nm extinction coefficient for that purpose. @concentration-sources-comparison-plot shows the correlation between the freshly calculated concentrations and the concentrations calculated using the 652nm instructor's formula. There we can also see a strong linear correlation between the two sources, with a correlation coefficient of $#(calc.round(digits: 6, empiric-corr(groups-results-addedformula-concentration.map(it => it.total_instructor_mg_freshweight), groups-results-addedformula-concentration.map(it => it.total_added_mg_freshweight))))$.
+The instructor's formulas in @instructor-formula-equations  for calculating the total chlorophyll concentration describe, how to use the 652nm extinction coefficient for that purpose. @concentration-sources-comparison-plot shows the correlation between the freshly calculated concentrations and the concentrations calculated using the 652nm instructor's formula. There we can also see a strong linear correlation between the two sources, with a correlation coefficient of $#(calc.round(digits: 6, correlation(groups-results-addedformula-concentration.map(it => it.total_instructor_mg_freshweight), groups-results-addedformula-concentration.map(it => it.total_added_mg_freshweight))))$.
 
 #figure(
   rect(inset: 0.5cm, plot-652nm-instructor-vs-freshly-calculated(
@@ -649,7 +650,7 @@ The instructor's formulas in @instructor-formula-equations  for calculating the 
 
 @652nm-instructor-vs-freshly-calculated-plot shows that there is only a small difference between the two sources. Apart from the same outlier as in @filled-out-vs-freshly-calculated-comparison, there seems to be a positive offset in regards to the $652"nm"$ formula. This offset seems to grow proportionally to the concentration and therefore classifies it as a proportional offset. 
 
-Interestingly enough, at closer observation of @concentration-sources-comparison-plot, a strong correlation between the 652nm instructor's formula and the filled out concentrations is visible. Indeed, the correlation coefficient is $#(calc.round(digits: 6, empiric-corr(groups-results-addedformula-concentration.map(it => it.total_instructor_mg_freshweight), groups-results-addedformula-concentration.map(it => it.concentration_freshweight))))$, which is practically equivalent to $1$. 
+Interestingly enough, at closer observation of @concentration-sources-comparison-plot, a strong correlation between the 652nm instructor's formula and the filled out concentrations is visible. Indeed, the correlation coefficient is $#(calc.round(digits: 6, correlation(groups-results-addedformula-concentration.map(it => it.total_instructor_mg_freshweight), groups-results-addedformula-concentration.map(it => it.concentration_freshweight))))$, which is practically equivalent to $1$. 
 
 All of the above observations lead us to conclude that the instructor's formula is very precise, but has a certain constant percentage accuracy offset. Slightly lowering the factor of $27.8$ in the $E_652$ formula might result in a more accurate calculation (assuming the addition of $"Chl"_a$ and $"Chl"_b$ is the accurate baseline).
 
