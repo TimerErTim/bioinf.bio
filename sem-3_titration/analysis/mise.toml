@@ -10,3 +10,7 @@ run = "typst compile --format png --ppi 600  illustrations/glycin-curve.typ ../a
 [tasks."visualize:histidin-curve"]
 description = "Compile the histidin derivative visualization"
 run = "typst compile --format png --ppi 600  illustrations/histidin-curve.typ ../assets/histidin-curve-{p}.png"
+
+[tasks."visualize:glycin-derivatives"]
+description = "Compile the glycin derivatives visualization"
+run = "typst compile --format png --ppi 600  illustrations/glycin-derivatives.typ ../assets/glycin-derivatives-{p}.png"
