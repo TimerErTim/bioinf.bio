@@ -1,7 +1,9 @@
 #import "../../../templates/illustration.tpl.typ": *
 #show: illustration
 #set text(font: "Love Ya Like A Sister")
+#show math.equation: set text(font: "Love Ya Like A Sister")
 #import "../calculations/histidin.typ": d2y, d3y, dy, pk1, pk2, pk3, pl_average, pl_derivative, pl_intercept, x, y
+#import "../calculations/comparison.typ": expected-values-hist
 
 #import "@preview/lilaq:0.5.0" as lq
 #show lq.selector(lq.legend): scale.with(60%, reflow: true)
@@ -16,7 +18,7 @@
           height: 0.15cm,
           stroke: or-preview(white, green) + 0.5pt,
           align: center + horizon,
-          label: pad(top: 1mm)[$"pl"$ mittels $("pk"_3 + "pk"_2) / 2$],
+          label: pad(top: 1mm)[pl mittels $(#[pk]_3 + #[pk]_2) / 2$],
         )
       } else if it == 1 {
         lq.ellipse(
@@ -25,7 +27,7 @@
           height: 0.15cm,
           stroke: or-preview(white, green) + 0.5pt,
           align: center + horizon,
-          label: [$"pl"$ mittels Schnittpunkt],
+          label: [pl mittels Schnittpunkt],
         )
       } else {
         lq.ellipse(
@@ -34,12 +36,12 @@
           height: 0.15cm,
           stroke: or-preview(white, green) + 0.5pt,
           align: center + horizon,
-          label: [$"pl"$ mittels Wendepunkt],
+          label: [pl mittels Wendepunkt],
         )
       }
 
       let iep-value = if it == 0 [
-        $("pk"_3 + "pk"_2) / 2$\
+        $(#[pk]_3 + #[pk]_2) / 2$\
         $= #calc.round(digits: 2, pl_average.at(1))$
       ] else if it == 1 [
         Schnittpunkt\
@@ -111,12 +113,12 @@
         columns: (auto, auto),
         align: horizon,
         [
-          $"pk"_1 = #calc.round(digits: 2, pk1.at(1))$\
-          $"pk"_2 = #calc.round(digits: 2, pk2.at(1))$\
-          $"pk"_3 = #calc.round(digits: 2, pk3.at(1))$
+          pk#sub[1] (#calc.round(digits: 2, expected-values-hist.pk1)) = #calc.round(digits: 2, pk1.at(1))\
+          pk#sub[2] (#calc.round(digits: 2, expected-values-hist.pk2)) = #calc.round(digits: 2, pk2.at(1))\
+          pk#sub[3] (#calc.round(digits: 2, expected-values-hist.pk3)) = #calc.round(digits: 2, pk3.at(1))\
           #v(-0.5em)
           #line(length: 100%, stroke: or-preview(white, black))
-          Isoelektrischer\ Punkt
+          Isoelektrischer\ Punkt (#calc.round(digits: 2, expected-values-hist.pl))
 
           #iep-value
         ],

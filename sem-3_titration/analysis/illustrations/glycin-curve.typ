@@ -1,7 +1,10 @@
 #import "../../../templates/illustration.tpl.typ": *
 #show: illustration
 #set text(font: "Love Ya Like A Sister")
+#show math.equation: set text(font: "Love Ya Like A Sister")
+
 #import "../calculations/glycin.typ": x, y, pl_average, pk1, pk2, pl_intercept
+#import "../calculations/comparison.typ": expected-values-gly
 
 #import "@preview/lilaq:0.5.0" as lq
 #show lq.selector(lq.legend): scale.with(60%, reflow: true)
@@ -74,14 +77,14 @@
   columns: (auto, auto),
   align: horizon,
   [
-    $"pk"_1 = #calc.round(digits: 2, pk1.at(1))$\
-    $"pk"_2 = #calc.round(digits: 2, pk2.at(1))$
+    pk#sub[1] (#calc.round(digits: 2, expected-values-gly.pk1)) = #calc.round(digits: 2, pk1.at(1))\
+    pk#sub[2] (#calc.round(digits: 2, expected-values-gly.pk2)) = #calc.round(digits: 2, pk2.at(1))\
     #v(-0.5em)
     #line(length: 100%, stroke: or-preview(white, black))
-    Isoelektrischer\ Punkt
+    Isoelektrischer\ Punkt (#calc.round(digits: 2, expected-values-gly.pl))
 
-    $("pk"_1 + "pk"_2) / 2 = #calc.round(digits: 2, pl_average.at(1))$\
-    $"Schnittpunkt" = #calc.round(digits: 2, pl_intercept.at(1))$
+    $(#[pk]_1 + #[pk]_2) / 2 = #calc.round(digits: 2, pl_average.at(1))$\
+    Schnittpunkt = #calc.round(digits: 2, pl_intercept.at(1))
   ],
   diagram,
 )
