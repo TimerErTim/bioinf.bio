@@ -12,7 +12,7 @@
   format-page-counter: (current, total) => [
     Page #current / #total
   ],
-  version: "0.1-RC",
+  version: "1.0",
   date: datetime.today(offset: auto).display("[year]-[month]-[day]"),
 )
 #import "../../lib/maths/statistics.typ": *
