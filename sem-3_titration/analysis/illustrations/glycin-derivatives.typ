@@ -22,13 +22,10 @@
   let label = if it == 0 [
     y
   ] else if it == 1 [
-    #show math.equation: set text(font: "Love Ya Like A Sister")
     $#text[dy]/#text[dx]$
   ] else if it == 2 [
-    #show math.equation: set text(font: "Love Ya Like A Sister")
     $(#[d]^2#[y])/#[dx]^2$
   ] else [
-    #show math.equation: set text(font: "Love Ya Like A Sister")
     $(#[d]^3#[y])/#[dx]^3$
   ]
 
