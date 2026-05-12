@@ -65,7 +65,7 @@
           #set table.cell(inset: 0pt)
           #table(
             columns: (auto, auto),
-            [Date:], [#date],
+            context if text.lang == "de" { [Datum:] } else { [Date:] }, [#date],
             [Version:], [#version],
             fill: none,
             stroke: none,
