@@ -1,0 +1,80 @@
+{
+  "Erwachsene": {
+    "Stabkernige neutrophile Granulozyten": {
+      "relativer_anteil_prozent": [3, 5],
+      "absolute_anzahl_pro_ul": [150, 400]
+    },
+    "Segmentkernige neutrophile Granulozyten": {
+      "relativer_anteil_prozent": [50, 70],
+      "absolute_anzahl_pro_ul": [3000, 5800]
+    },
+    "Eosinophile Granulozyten": {
+      "relativer_anteil_prozent": [1, 4],
+      "absolute_anzahl_pro_ul": [50, 250]
+    },
+    "Basophile Granulozyten": {
+      "relativer_anteil_prozent": [0, 1],
+      "absolute_anzahl_pro_ul": [15, 50]
+    },
+    "Monozyten": {
+      "relativer_anteil_prozent": [3, 7],
+      "absolute_anzahl_pro_ul": [285, 500]
+    },
+    "Lymphozyten": {
+      "relativer_anteil_prozent": [25, 45],
+      "absolute_anzahl_pro_ul": [1500, 3000]
+    }
+  },
+  "Kinder": {
+    "Stabkernige neutrophile Granulozyten": {
+      "relativer_anteil_prozent": [0, 10],
+      "absolute_anzahl_pro_ul": [0, 1200]
+    },
+    "Segmentkernige neutrophile Granulozyten": {
+      "relativer_anteil_prozent": [25, 65],
+      "absolute_anzahl_pro_ul": [2000, 7800]
+    },
+    "Eosinophile Granulozyten": {
+      "relativer_anteil_prozent": [1, 5],
+      "absolute_anzahl_pro_ul": [80, 600]
+    },
+    "Basophile Granulozyten": {
+      "relativer_anteil_prozent": [0, 1],
+      "absolute_anzahl_pro_ul": [0, 120]
+    },
+    "Monozyten": {
+      "relativer_anteil_prozent": [1, 6],
+      "absolute_anzahl_pro_ul": [80, 720]
+    },
+    "Lymphozyten": {
+      "relativer_anteil_prozent": [25, 50],
+      "absolute_anzahl_pro_ul": [2000, 6000]
+    }
+  },
+  "Säuglinge": {
+    "Stabkernige neutrophile Granulozyten": {
+      "relativer_anteil_prozent": [0, 10],
+      "absolute_anzahl_pro_ul": [0, 1500]
+    },
+    "Segmentkernige neutrophile Granulozyten": {
+      "relativer_anteil_prozent": [22, 65],
+      "absolute_anzahl_pro_ul": [2250, 9750]
+    },
+    "Eosinophile Granulozyten": {
+      "relativer_anteil_prozent": [1, 7],
+      "absolute_anzahl_pro_ul": [90, 1050]
+    },
+    "Basophile Granulozyten": {
+      "relativer_anteil_prozent": [0, 2],
+      "absolute_anzahl_pro_ul": [0, 300]
+    },
+    "Monozyten": {
+      "relativer_anteil_prozent": [7, 20],
+      "absolute_anzahl_pro_ul": [630, 3000]
+    },
+    "Lymphozyten": {
+      "relativer_anteil_prozent": [20, 70],
+      "absolute_anzahl_pro_ul": [1800, 10500]
+    }
+  }
+}

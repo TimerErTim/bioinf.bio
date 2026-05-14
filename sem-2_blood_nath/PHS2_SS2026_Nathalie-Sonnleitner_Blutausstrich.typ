@@ -132,6 +132,25 @@ Die Vorgehensweise wird vorgegeben #cite(<src_angabe>, form: "full") und die tat
 #pagebreak()
 = Ergebnisse
 
+== Beobachtung
+
+== Statistik
+
+#{
+  show: it => [#it <reference-values-adult-table>]
+  show: figure.with(caption: [Referenzwerte für die relative Zellanzahl bei Erwachsenen. @src_doccheck_differential_blutbild])
+  let data = json("analysis/data/reference_values.json")
+  let adult-data = data.at("Erwachsene")
+  table(
+    columns: 2,
+    table.header[*Zelltyp*][*Relativer Anteil [%]*],
+    ..for (cell-type, values) in adult-data {
+      ([#cell-type], [#values.at("relativer_anteil_prozent").map(str).join(" - ")])
+    }
+  )
+}
+
+== Messungen
 
 #pagebreak()
 

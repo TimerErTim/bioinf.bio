@@ -39,3 +39,11 @@ src_hämatologische_standardfärbung:
     value: https://www.sysmex.de/fileadmin/media/f101/Xtra/Themenblaetter/16.2.04_Pappenheim_Faerbung.pdf
     date: 2026-05-14
 
+src_doccheck_differential_blutbild:
+  type: web
+  title: Differentialblutbild
+  publisher: DocCheck Flexikon
+  url: 
+    value: https://flexikon.doccheck.com/de/Differentialblutbild
+    date: 2026-05-14
+
