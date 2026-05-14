@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mkdjr/hayagriva/refs/heads/main/hayagriva.schema.json
+
+src_bloodsmear_macro:
+  type: artwork
+  author: Steven Glenn
+  organization: Laboratory and Consultation Division, USCDCP
+  note: "Licensed under CC0"
+  url: https://pixnio.com/science/biology-pictures/this-prepared-slide-offers-a-good-example-of-a-thick-and-thin-blood-smear-to-be-examined-under-the-microscope
+  archive: Pixnio
+
+src_bloodsmear_microscopy:
+  type: artwork
+  author: Fayette A Reynolds M.S.
+  title: "Connective Tissue: Human Blood"
+  note: "Licensed under CC0"
+  url: 
+    value: https://www.flickr.com/photos/146824358@N03/39982278130/in/photostream/
+    date: 2015-06-03
+  archive: Flickr
+
+src_angabe:
+  type: reference
+  title: Instructions Blood experiments
+  organization: University of applied sciences Upper Austria
+  page-range: 2-3
+  archive: E-Learning, University of applied sciences Upper Austria
+
+src_hämatologische_standardfärbung:
+  type: article
+  title: "Die hämatologische Standardfärbung der DGHO nach Pappenheim bei  Verwendung eines Sysmex Ausstrich- und Färbeautomaten der SP-Reihe"
+  date: 2012
+  volume: "16.2"
+  call-number: "04"
+  parent: 
+    type: periodical
+    title: Xtra
+  organization: Sysmex Deutschland GmbH
+  url:
+    value: https://www.sysmex.de/fileadmin/media/f101/Xtra/Themenblaetter/16.2.04_Pappenheim_Faerbung.pdf
+    date: 2026-05-14
+
