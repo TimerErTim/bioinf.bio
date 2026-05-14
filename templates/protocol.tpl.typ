@@ -34,7 +34,7 @@
   // Set document-wide styles
   set text(font: "Lato", lang: language)
   set table(
-    fill: (_, row) => if calc.even(row) { rgb(230, 230, 230) } else { white },
+    fill: (_, row) => if row == 0 { gray.lighten(50%) } else if calc.even(row) { rgb(240, 240, 240) } else { white },
     align: (col, row) => if col == 0 { right } else { left },
     stroke: 1pt,
   )
