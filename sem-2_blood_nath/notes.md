@@ -10,3 +10,6 @@
 [22:01, 5/14/2026] Tim: Wertvolle Info
 [22:01, 5/14/2026] Nathalie ❤: vll a vergleich von de Werte bzw hoit sogn wiso neutrophile de meisten sind etc oba i glb des is e logisch
 
+# Self Ideas
+
+Use heatmap to visualize chi-square test results

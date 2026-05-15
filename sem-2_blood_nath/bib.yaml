@@ -47,3 +47,45 @@ src_doccheck_differential_blutbild:
     value: https://flexikon.doccheck.com/de/Differentialblutbild
     date: 2026-05-14
 
+src_leukozyt_type:
+  type: artwork
+  title: "Leukozyten-Arten - so wie sie nach Einfärbung unter dem Mikroskop erscheinen"
+  url:
+    value: https://www.blutwert.net/leukozyten/werte-tabelle.php
+    date: 2026-05-17
+  archive: Blutwert.net
+  note: |
+    Hinweis zur Nutzung der Bilder: Für Schüler*innen und Lehrkräfte ist eine kostenlose Nutzung der Inhalte im schulischen Kontext (!) gestattet. Das betrifft insbesondere die Verwendung der Bilder und Grafiken.
+  
+src_blutwert_net:
+  type: web
+  title: Blutwert.net
+  url:
+    value: https://www.blutwert.net
+    date: 2026-05-17
+  author: Martin Mißfeldt
+  date: 2024
+
+src_kenhub:
+  type: blog
+  title: Blut
+  author: Dr. med. Christopher A. Becker
+  url: 
+    value: https://www.kenhub.com/de/library/anatomie/blut
+    date: 2026-05-17
+
+src_doccheck_lymphozyt:
+  type: web
+  title: Lymphozyt
+  publisher: DocCheck Flexikon
+  url: 
+    value: https://flexikon.doccheck.com/de/Lymphozyt
+    date: 2026-05-17
+
+src_doccheck_basophil:
+  type: web
+  title: Basophiler Granulozyt
+  publisher: DocCheck Flexikon
+  url: 
+    value: https://flexikon.doccheck.com/de/Basophiler_Granulozyt
+    date: 2026-05-17

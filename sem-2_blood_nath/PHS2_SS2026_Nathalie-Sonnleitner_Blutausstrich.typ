@@ -65,7 +65,7 @@
       image("assets/bloodsmear_micro.jpg")
     },
     boundary: contour.margin(5mm),
-    dy: -1cm,
+    dy: 0cm,
   )
 
   container()
@@ -76,6 +76,8 @@
 
     In @bloodsmear-microscopy ist ein Blutausstrich mit saurem und basischem Farbstoff zu sehen. Es sind sowohl Erythrozyten als auch Leukozyten gut erkennbar. Häufig werden die Leukozyten gezählt, um eine Infektion oder eine Entzündung zu diagnostizieren. @src_angabe
 
+    Die verschiedenen Leukozytenarten sind in @leukozyt-types dargestellt. Diese können so unter dem Mikroskop nach der Färbung klassifiziert werden.
+
     == Erweiterte Theorie zur Zellfärbung <extended-theory-of-cell-staining>
 
     - *Basophile Strukturen:* Saure Zellbestandteile, wie beispielsweise die DNA im Zellkern oder die RNA im Zytoplasma, ziehen basische (kationische) Farbstoffe an. Farbstoffe wie Methylenblau binden an diese Strukturen und färben sie intensiv blau bis violett. @src_hämatologische_standardfärbung @src_angabe
@@ -84,9 +86,79 @@
     Erythrozyten und bestimmte Leukozytengranula werden von den basischen Farbstoffen unterschiedlich intensiv angefärbt. In diesem Protokoll werden die Blutzellen nach Pappenheim gefärbt, einer sogenannten panoptischen Färbung, die eine Kombination aus der May-Grünwald- und der Giemsa-Färbung darstellt. Der Begriff „panoptisch“ (alles sichtbar machend) bedeutet in diesem Zusammenhang, dass durch die Kombination der beiden Lösungen ein besonders breites Spektrum an Zellbestandteilen angefärbt wird. Dies ist entscheidend, um das Differenzialblutbild exakt auszuwerten und die verschiedenen Arten von Leukozyten (wie Lymphozyten, Monozyten und die verschiedenen Granulozyten) voneinander zu unterscheiden. @src_hämatologische_standardfärbung @src_angabe
 
     - *May-Grünwald-Lösung:* Diese enthält eosinsaures Methylenblau gelöst in Methanol. Das Methanol dient dabei gleichzeitig als Fixiermittel, um die Zellstrukturen vor der eigentlichen Färbung zu stabilisieren und zu erhalten. @src_angabe
+
     - *Giemsa-Lösung:* Diese enthält Methylenazur, Methylenviolett, Methylenblau und Eosin, welche in Methanol und Glycerin gelöst sind. @src_angabe
+
+    == Referenzwerte aus Literatur <reference-values-from-literature>
+    
+    #{
+      show: it => [#it <reference-values-adult-table>]
+      show: figure.with(
+        caption: [Referenzwerte für die relative Zellanzahl bei Erwachsenen. @src_doccheck_differential_blutbild],
+      )
+      let data = json("analysis/data/reference_values.json")
+      let adult-data = data.at("Erwachsene")
+      table(
+        columns: 3,
+        table.header[*Zelltyp*][*Relativer Anteil [%]*][*Absoluter Anteil [Zellen/µl]*],
+        ..for (cell-type, values) in adult-data {
+          ([#cell-type], [#values.at("relativer_anteil_prozent").map(str).join(" - ")], [#values.at("absolute_anzahl_pro_ul").map(str).join(" - ")])
+        },
+      )
+    }
   ])
 })
+
+#{
+  show: it => [#it <leukozyt-reference-sizes>]
+  show: figure.with(caption: [Referenzgrößen der verschiedenen Typen von Leukozyten.],)
+  table(
+    columns: 2,
+    table.header[*Zelltyp*][*Größenbereich [#sym.mu\m]*],
+    [Neutrophile], [12 - 15 @src_kenhub],
+    [Eosinophile], [15 - 18 @src_kenhub],
+    [Basophile], [\~10 @src_doccheck_basophil],
+    [Monozyten], [12 - 20 @src_kenhub],
+    [Lymphozyten], [8 - 10 @src_doccheck_lymphozyt],
+  )
+}
+
+#{
+  show: it => [#it <leukozyt-types>]
+  show: figure.with(caption: [@src_leukozyt_type Leukozyten-Arten - so wie sie nach Einfärbung unter dem Mikroskop erscheinen.],)
+  show: rect.with(inset: 0pt)
+  image("assets/leukozytarten.png")
+}
+
+== Relevanz in der Klinik <relevance-in-the-hospital>
+
+Blutausstriche sind in der klinischen Diagnostik von großer Bedeutung, da sie eine schnelle und differenzierte Beurteilung der verschiedenen Blutzellarten ermöglichen. Sie unterstützen die Erkennung und Überwachung von Infektionen, Entzündungsreaktionen, Allergien und hämatologischen Erkrankungen wie Leukämien. Die relative und absolute Verteilung der Leukozyten liefert dabei wertvolle Hinweise auf akute oder chronische Krankheitsprozesse sowie auf den aktuellen Zustandsverlauf eines Patienten. Die Blutausstrich-Analyse ist damit ein unverzichtbares Werkzeug in der hämatologischen Routinediagnostik.
+@src_doccheck_differential_blutbild @src_blutwert_net
+
+Die Aufgaben und die typische Verteilung der Leukozytenarten im peripheren Blut ergeben sich aus ihren jeweiligen Funktionen im Immunsystem:
+- *Neutrophile Granulozyten*  
+  Häufigster Zelltyp. Sie stellen die „erste Abwehrlinie“ gegen bakterielle Infektionen dar und können rasch in großer Zahl bereitgestellt werden. @src_blutwert_net @src_doccheck_differential_blutbild
+- *Lymphozyten*  
+  Teil des adaptiven Immunsystems. Sie ermöglichen gezielte Immunantworten gegen bestimmte Erreger. @src_blutwert_net @src_doccheck_differential_blutbild
+- *Monozyten*  
+  Vorläufer der Makrophagen und an der Phagozytose beteiligt. Tragen so ebenfalls zur Krankheitsabwehr bei. @src_blutwert_net @src_doccheck_differential_blutbild
+- *Eosinophile Granulozyten*  
+  Übernehmen spezielle Funktionen, hauptsächlich bei der Abwehr von Parasiten. Treten daher seltener auf. @src_blutwert_net @src_doccheck_differential_blutbild
+- *Basophile Granulozyten*  
+  Sind wichtig bei allergischen Reaktionen. Kommen ebenfalls seltener vor. @src_blutwert_net @src_doccheck_differential_blutbild
+
+Diese funktionellen Unterschiede spiegeln sich im typischen prozentualen Verhältnis der Leukozytenarten im Blut wider. @src_blutwert_net @src_doccheck_differential_blutbild
+
+Eine Allergie ist oft die Ursache von:
+- erhöhter basophiler Granulozytenanteil. @src_blutwert_net
+- erhöhter eosinophiler Granulozytenanteil. @src_blutwert_net
+- kurzzeitig verringerter basophiler Granulozytenanteil. @src_blutwert_net
+
+Hingegen sind akute Erkrankungen oft die Ursache von:
+- erhöhter neutrophiler Granulozytenanteil. @src_blutwert_net
+- verringerter eosinophiler Granulozytenanteil. @src_blutwert_net
+- erhöhter Anteil an Monozyten in der Abheilungsphase. @src_blutwert_net
+- erhöhter Lymphozytenanteil (viral). @src_blutwert_net
 
 #pagebreak()
 
@@ -168,7 +240,7 @@
     + *Fixierung:* Die Präparate für 3 Minuten in eine Färbewanne mit May-Grünwald-Lösung legen.
     + *Erster Waschschritt:* Die Objektträger 1 Minute lang in eine 1:1-Mischung aus May-Grünwald-Lösung und destilliertem Wasser legen und anschließend die Farblösung rasch abgießen.
     + *Giemsa-Färbung:* Die Präparate direkt in eine Färbewanne mit frisch angesetzter, verdünnter Giemsa-Lösung (10 ml Wasser + 10 Tropfen Giemsa) legen und 15 Minuten inkubieren.
-    + *Hinweis:* Während des Färbeprozesses darauf achten, dass stets genügend Färbelösung vorhanden ist und der Objektträger vollständig bedeckt bleibt – das Präparat darf nicht austrocknen! Bei Bedarf Farblösung nachgeben.
+    + *Hinweis:* Während des Färbeprozesses darauf achten, dass stets genügend Färbelösung vorhanden ist und der Objektträger vollständig bedeckt bleibt - das Präparat darf nicht austrocknen! Bei Bedarf Farblösung nachgeben.
     + *Abschluss:* Nach der Färbung die Objektträger mit destilliertem Wasser abspülen, die Unterseite reinigen, die Gläser aufrecht aufstellen und an der Luft trocknen lassen.
 
     @bloodsmear-staining zeigt den Vorgang der Färbung.
@@ -178,46 +250,108 @@
     - *Beobachtung:* Die ungefärbten sowie die gefärbten Blutausstriche sorgfältig mikroskopisch betrachten und fotografisch dokumentieren.
     - *Auszählung:* Die Leukozyten durch systematisches Führen des Sichtfelds in „Schlangenlinien“ über das Präparat auszählen.
     - *Differenzierung:* Anhand eines histologischen Atlas oder Vergleichspräparaten die verschiedenen Leukozytentypen identifizieren. Die Ergebnisse (mononukleäre Zellen: Lymphozyten, Monozyten; Granulozyten: Neutrophile, Eosinophile, Basophile) in eine Tabelle und in ein Liniendiagramm eintragen.
-    - *Statistik:* Die absolute Anzahl und prozentuale Verteilung der Leukozytenarten erfassen, Bilder der Zelltypen ins Protokoll aufnehmen und die eigenen Werte mit Literaturangaben vergleichen (z. B. mittels Chi-Quadrat-Test).
-    - *Messungen:* Die Zellgröße für jede Zellart an mehreren Zellen ermitteln und Mittelwerte berechnen.
+    - *Statistik:* Die absolute Anzahl und prozentuale Verteilung der Leukozytenarten erfassen, Bilder der Zelltypen ins Protokoll aufnehmen und die eigenen Werte mit Literaturangaben vergleichen.
   ])
 })
 
 #pagebreak()
 = Ergebnisse
 
+#pdf.attach(
+  "analysis/data/UE_Blut_Ergebnisse.xlsx - Blutausstrich.tsv",
+  mime-type: "text/tab-separated-values",
+  relationship: "data",
+  description: "Ergebnisse der Blutausstrich-Messungen",
+)
+
+#import "../lib/maths/statistics.typ": chi-square-teststatistic, chi-square-ablehnungsbereich, chisq-pvalue
+#import "analysis/calculations/plots.typ": heatmap-leukozyten-difference, table-descriptive-statistics, boxplot-leukozyten
+#import "analysis/calculations/data-processing.typ": data-dict
+
 == Beobachtung
 
-== Statistik
+== Statistiken
+
+Grundlegend werden nur verarbeitbare#footnote[Alle Zelltypzählungen als Zahl interpretierbar und Summe $> 0$.] Einzelpersondaten ausgewertet. Eine leere Zelltypanzahl in den Rohdaten wird als 0 interpretiert.
+
+Wenn sinnvoll werden nachfolgende Statistiken und Grafiken auf vier verschiedene Datengruppen durchgeführt:
++ Alle Daten
++ Der MBI Studiengang mit Startsemester 2025
++ Alle Personen mit Allergien
++ Alle Personen mit akuten Erkrankungen
+
+=== Beschreibende Statistik <descriptive-statistics>
+
+@table-descriptive-statistics zeigt sowohl die gesamten Leukozytenzahlen als auch die Verteilung der Zelltypen bezogen auf die gezählte Gesamtzahl. Diese Darstellung vereinfacht die Interpretation, da genau diese zwei Größen von Relevanz sind. Die absoluten Zählungen der einzelnen Leukozytenarten sind kaum von Bedeutung für unsere Analyse.
+
+Durch die Aufteilung in unterschiedliche Gruppen lässt sich beispielsweise erkennen, dass die Gruppe mit kürzlich akuten Erkrankungen einen höheren Durchschnittsanteil an neutrophilen Granulozyten hat als die Grundgesamtheit. Bei Allergikern ist das durchschnittliche Vorkommen der basophilen und eosinophilen Granulozyten höher als bei der Grundgesamtheit.
+
+Dieser Trend ist auch in @boxplot-leukozyten erkennbar. Diese Darstellung zeigt die Verteilung der Leukozytentypen ohne Gesamtanzahl. Dabei ist der Median von basophilen und eosinophilen Granulozyten in allen Gruppen 0%.
 
 #{
-  show: it => [#it <reference-values-adult-table>]
-  show: figure.with(
-    caption: [Referenzwerte für die relative Zellanzahl bei Erwachsenen. @src_doccheck_differential_blutbild],
-  )
-  let data = json("analysis/data/reference_values.json")
-  let adult-data = data.at("Erwachsene")
-  table(
-    columns: 2,
-    table.header[*Zelltyp*][*Relativer Anteil [%]*],
-    ..for (cell-type, values) in adult-data {
-      ([#cell-type], [#values.at("relativer_anteil_prozent").map(str).join(" - ")])
-    },
-  )
+  show: it => [#it <table-descriptive-statistics>]
+  show: figure.with(caption: [Beschreibende Statistik der Leukozytenzahlen. Gesamtleukozyten in absoluten Zellzählungen angegeben. Verteilung der Zelltypen in relativen Anteilen zur Gesamtleukozytenzahl angegeben.])
+  set par(justify: false)
+  show: pad.with(right: -1cm)
+  table-descriptive-statistics
+}
+
+#{
+  show: it => [#it <boxplot-leukozyten>]
+  show: figure.with(caption: [Boxplot der Leukozytenzahlen.],)
+  show: rect
+  boxplot-leukozyten
+}
+
+=== Hypothesentests <hypothesis-tests>
+
+Folgende Hypothesen sollen durch das Widerlegen ihrere Alternativhypothese überprüft werden:
+- Alle MBI Studenten haben eine signifikant andere Verteilung der Leukozytenarten als die Referenzliteratur.
+- Allergiker haben eine signifikant andere Verteilung der Leukozytenarten als die Grundgesamtheit.
+- Akute Erkrankungen haben eine signifikant andere Verteilung der Leukozytenarten als die Grundgesamtheit.
+- Der Erwartungswert der eosinophilen Anteile in Allergikern ist signifikant höher als der in der Grundgesamtheit.
+- Der Erwartungswert der basophilen Anteile in Allergikern ist signifikant höher als der in der Grundgesamtheit.
+- Der Erwartungswert der neutrophilen Anteile in akuten Erkrankungen ist signifikant höher als der in der Grundgesamtheit.
+- Der Erwartungswert der Monozytenanteile in akuten Erkrankungen ist signifikant höher als der in der Grundgesamtheit.
+
+Die in @reference-values-adult-table angegebenen Referenzwerte für die relative Zellanzahl bei Erwachsenen wurden für die Auswertung herangezogen#footnote[konkret: Mittelwert des Referenzbereichs]. Sämtliche statistischen Tests wurden mit einem Signifikanzniveau von #sym.alpha = 5% durchgeführt.
+
+#{
+
+}
+
+#{
+  show: figure.with(caption: [Heatmap der relativen Abweichungen der Leukozytenzahlen von den Referenzwerten.])
+  show: rect
+  heatmap-leukozyten-difference(height: 6cm, data-transform: it => it.filter(it => it.has-allergy))
+}
+
+#{
+  show: figure.with(caption: [Heatmap der relativen Abweichungen der Leukozytenzahlen von den Referenzwerten.])
+  show: rect
+  heatmap-leukozyten-difference(data-transform: it => it.filter(it => it.has-acute-erkrankung))
 }
 
 == Messungen
 
-#pagebreak()
+Messungen der Zellgrößen konnten im Rahmen des Experiments nicht durchgeführt werden. Stattdessen wird auf @leukozyt-reference-sizes in @reference-values-from-literature verwiesen. Diese zeigt die Größenbereiche der verschiedenen Leukozytenarten. Trotz fehlender konkreter Messung können diese Werte experimentell plausibilisiert werden: Die einzelnen Zellen wären sonst im Mikroskop nicht klar erkkenbar gewesen.
 
+#pagebreak()
+= Interpretation
+
+== Gegenüberstellung der Messwerte mit Referenzwerten <comparison-of-measurements-with-reference-values>
+
+#pagebreak()
 #set heading(numbering: none)
 #show heading.where(level: 1): box
 = Anhang <appendix>
 
 #show bibliography: set heading(level: 2)
-#show outline: set heading(level: 2)
+#show outline: set heading(level: 2, outlined: true)
 #bibliography("bib.yaml", title: "Literaturverzeichnis", style: "ieee")
 
+#colbreak()
 #outline(target: figure.where(kind: image), title: "Abbildungsverzeichnis")
 
+#colbreak()
 #outline(target: figure.where(kind: table), title: "Tabellenverzeichnis")

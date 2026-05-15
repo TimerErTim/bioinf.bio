@@ -5,3 +5,8 @@ typst = "0.14.2"
 [env]
 TYPST_FONT_PATHS = "{{config_root}}/templates/fonts"
 TYPST_ROOT = "{{config_root}}"
+
+[tasks."fmt:typst"]
+description = "Format Typst files"
+tools.typstyle = "latest"
+run = ""
