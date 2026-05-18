@@ -274,7 +274,7 @@ Akute Erkrankungen führen häufig zu:
   boxplot-leukozyten, heatmap-leukozyten-difference,
   table-chi-square-anpassungstest, table-chi-square-independence-test,
   table-descriptive-statistics, table-one-sample-t-tests,
-  table-two-sample-t-tests,
+  table-two-sample-t-tests, piecharts-for-known-groups,
 )
 #import "analysis/calculations/data-processing.typ": (
   data-acute-erkrankungen-group, data-all-group, data-allergies-group,
@@ -296,7 +296,7 @@ Sämtliche Statistiken und Grafiken werden, sofern sinnvoll, für folgende Daten
 
 Durch die Gruppierung wird sichtbar, dass Studierende mit akuten Erkrankungen einen höheren Anteil neutrophiler Granulozyten aufweisen als die Gesamtheit. Bei Allergikern treten basophile und eosinophile Granulozyten im Schnitt häufiger auf.
 
-Dieser Trend ist in @boxplot-leukozyten erkennbar. Die Darstellung zeigt die Verteilung der Zelltypen relativ, jeweils ohne Gesamtzahl. In allen Gruppen liegt der Median für basophile und eosinophile Granulozyten bei 0%.
+Dieser Trend ist in @boxplot-leukozyten und auch ein wenig in @piecharts-for-known-groups erkennbar. Die Darstellung zeigt die Verteilung der Zelltypen relativ, jeweils ohne Gesamtzahl. In allen Gruppen liegt der Median für basophile und eosinophile Granulozyten bei 0%.
 
 #{
   show: it => [#it <table-descriptive-statistics>]
@@ -315,6 +315,15 @@ Dieser Trend ist in @boxplot-leukozyten erkennbar. Die Darstellung zeigt die Ver
   )
   show: rect
   boxplot-leukozyten
+}
+
+#{
+  show: it => [#it <piecharts-for-known-groups>]
+  show: figure.with(
+    caption: [Piechart der relativen Anteile der Leukozytenarten im Bezug auf die Gesamtleukozytenzahl für alle Datengruppen.],
+  )
+  show: rect
+  piecharts-for-known-groups
 }
 
 == Hypothesentests <hypothesis-tests>

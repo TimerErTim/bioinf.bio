@@ -1,4 +1,6 @@
 #import "@preview/lilaq:0.6.0" as lq
+#import "@preview/cetz:0.4.2"
+#import "@preview/cetz-plot:0.1.3": chart
 #import "data-processing.typ": (
   adult-leukozyten-reference-data-probs, data-acute-erkrankungen-group,
   data-all-group, data-allergies-group, data-current-year-group, data-dict,
@@ -286,4 +288,46 @@
       )
     },
   )
+}
+
+
+#let piecharts-for-known-groups = {
+  cetz.canvas({
+    import cetz.draw: *
+
+    let color-map = lq.color.map.petroff10
+    let relevant-cells = data-all-group.first().chi-square-deviations.keys().chunks(2).map(it => it.rev()).flatten()
+    let radius = 2.5
+
+
+    content((0, radius * 1.5))[Alle Gruppen]
+    chart.piechart(
+      relevant-cells.map(key => (key, stats-all-group.at(key).mean)),
+      value-key: 1,
+      slice-style: color-map,
+      radius: radius,
+      label-key: 0,
+      outer-label: (content: "%"),
+      legend: (position: "south-west")
+    )
+    for (i, (label, data)) in (
+      ("MBI 2025", stats-current-year-group),
+      ("mit Allergien", stats-allergies-group),
+      ("Akute Erkrankungen", stats-acute-erkrankungen-group),
+    ).enumerate() {
+      translate(x: radius * 1.5 * 2 * if calc.rem(i, 2) == 0 { -1 } else { 1 }, y: radius * 1.75 * 2 * if calc.rem(i, 2) == 0 { 0 } else { 1 })
+      content((0, radius * 1.5))[#label]
+      chart.piechart(
+      relevant-cells.map(key => (key, data.at(key).mean)),
+      value-key: 1,
+      slice-style: color-map,
+      radius: radius,
+      label-key: none,
+      outer-label: (content: (value, label) => [
+        #calc.round(digits: 0, value)%
+        ]),
+    )
+    }
+    
+  })
 }
