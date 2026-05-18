@@ -255,7 +255,7 @@ Hingegen sind akute Erkrankungen oft die Ursache von:
 
     == Auswertung und Analyse <evaluation-and-analysis>
 
-    - *Beobachtung:* Die ungefärbten sowie die gefärbten Blutausstriche sorgfältig mikroskopisch betrachten und fotografisch dokumentieren.
+    - *Beobachtung:* Die ungefärbten sowie die gefärbten Blutausstriche sorgfältig mikroskopisch betrachten.
     - *Auszählung:* Die Leukozyten durch systematisches Führen des Sichtfelds in „Schlangenlinien“ über das Präparat auszählen.
     - *Differenzierung:* Anhand eines histologischen Atlas oder Vergleichspräparaten die verschiedenen Leukozytentypen identifizieren. Die Ergebnisse (mononukleäre Zellen: Lymphozyten, Monozyten; Granulozyten: Neutrophile, Eosinophile, Basophile) in eine Tabelle eintragen.
     - *Statistik:* Die absolute Anzahl und prozentuale Verteilung der Leukozytenarten erfassen, Bilder der Zelltypen ins Protokoll aufnehmen und die eigenen Werte mit Literaturangaben vergleichen.
@@ -278,10 +278,6 @@ Hingegen sind akute Erkrankungen oft die Ursache von:
 )
 #import "analysis/calculations/data-processing.typ": data-all-group, data-current-year-group, data-allergies-group, data-acute-erkrankungen-group, stats-all-group, stats-current-year-group, stats-allergies-group, stats-acute-erkrankungen-group, stats-for-set
 
-== Beobachtung
-
-== Statistiken
-
 Grundlegend werden nur verarbeitbare#footnote[Alle Zelltypzählungen als Zahl interpretierbar und Summe $> 0$.] Einzelpersondaten ausgewertet. Eine leere Zelltypanzahl in den Rohdaten wird als 0 interpretiert.
 
 Wenn sinnvoll werden nachfolgende Statistiken und Grafiken auf vier verschiedene Datengruppen durchgeführt:
@@ -290,7 +286,7 @@ Wenn sinnvoll werden nachfolgende Statistiken und Grafiken auf vier verschiedene
 + Alle Personen mit Allergien
 + Alle Personen mit akuten Erkrankungen
 
-=== Beschreibende Statistik <descriptive-statistics>
+== Beschreibende Statistik <descriptive-statistics>
 
 @table-descriptive-statistics zeigt sowohl die gesamten Leukozytenzahlen als auch die Verteilung der Zelltypen bezogen auf die gezählte Gesamtzahl. Diese Darstellung vereinfacht die Interpretation, da genau diese zwei Größen von Relevanz sind. Die absoluten Zählungen der einzelnen Leukozytenarten sind kaum von Bedeutung für unsere Analyse.
 
@@ -315,7 +311,7 @@ Dieser Trend ist auch in @boxplot-leukozyten erkennbar. Diese Darstellung zeigt 
   boxplot-leukozyten
 }
 
-=== Hypothesentests <hypothesis-tests>
+== Hypothesentests <hypothesis-tests>
 
 Folgende Hypothesen sollen durch das Widerlegen ihrere Alternativhypothese überprüft werden:
 - Alle MBI Studenten haben eine signifikant andere Verteilung der Leukozytenarten als die Referenzliteratur.
@@ -329,7 +325,7 @@ Folgende Hypothesen sollen durch das Widerlegen ihrere Alternativhypothese über
 
 Die in @reference-values-adult-table angegebenen Referenzwerte für die relative Zellanzahl bei Erwachsenen werden für die Auswertung herangezogen#footnote[konkret: Mittelwert des Referenzbereichs]. Sämtliche statistischen Tests werden mit einem Signifikanzniveau von #sym.alpha = 5% durchgeführt.
 
-==== MBI Studenten vs. Referenzliteratur <mbi-students-vs-reference-literature>
+=== MBI Studenten vs. Referenzliteratur <mbi-students-vs-reference-literature>
 
 Es wird ein $chi^2$-Anpassungstest durchgeführt, um zu prüfen, ob die Verteilung der Leukozytenarten in den MBI Studenten signifikant aus der Referenzliteratur abweicht. Mit diesem Test lässt sich eine Gleichheit der Verteilung nicht signifikant bestätigen. Sie könnte nur widerlegt werden. Dies ist für diesen Test naturbedingt akzeptabel @src_dreiseitl.
 
@@ -373,7 +369,7 @@ Die Ergebnisse des t-Tests in @t-tests-all-vs-reference bestätigen die Ergebnis
 
 Dieses Kapitel dient als Referenz für weiteres statistisches Vorgehen in den nachfolgenden Abschnitten. Abweichungen und neu etablierte Standardvorgehen werden in diesen bei Bedarf erläutert. 
 
-==== MBI 2025 vs. Referenzliteratur <mbi-2025-vs-reference-literature>
+=== MBI 2025 vs. Referenzliteratur <mbi-2025-vs-reference-literature>
 
 #let (plot, test-results) = table-chi-square-anpassungstest(data: data-current-year-group)
 #{
@@ -395,7 +391,7 @@ Gleiches Vorgehen zeigt bei @table-chi-square-anpassungstest-mbi-2025-vs-referen
 }
 
 
-==== Allergiker vs. restliche MBI Studenten <allergies-vs-mbi-students>
+=== Allergiker vs. restliche MBI Studenten <allergies-vs-mbi-students>
 
 #let (plot, test-results) = table-chi-square-independence-test((
   label: "Allergiker",
@@ -415,7 +411,7 @@ Die Unabhängigkeit der beiden Gruppen wird durch einen $chi^2$-Unabhängigkeits
   plot
 }
 
-==== akute Erkrankungen vs. restliche MBI Studenten <acute-erkrankungen-vs-mbi-students>
+=== akute Erkrankungen vs. restliche MBI Studenten <acute-erkrankungen-vs-mbi-students>
 
 #let (plot, test-results) = table-chi-square-independence-test((
   label: "Akute Erkrankungen",
@@ -451,7 +447,7 @@ Auch ein vergleich der @heatmap-leukozyten-difference-healthy-vs-reference mit @
   }))
 }
 
-==== Zelltypen bei Allergien vs. restliche MBI Studenten <celltypes-allergies-vs-mbi-students>
+=== Zelltypen bei Allergien vs. restliche MBI Studenten <celltypes-allergies-vs-mbi-students>
 
 Der Zwei-Stichproben-t-Test wird herangezogen, um signfikante Unterschiede im Erwartungswert zweier empirischer Verteilungen zu testen. Wir verwenden ihn hier als Standarvorgehen für den Vergleich einer gesonderten Gruppe mit der Grundgesamtheit. 
 
@@ -473,7 +469,7 @@ Dadurch werden gleich zwei der in @hypothesis-tests genannten Hypothesen widerle
   ))
 }
 
-==== Zelltypen bei akuten Erkrankungen vs. restliche MBI Studenten <celltypes-acute-erkrankungen-vs-mbi-students>
+=== Zelltypen bei akuten Erkrankungen vs. restliche MBI Studenten <celltypes-acute-erkrankungen-vs-mbi-students>
 
 Auch die beiden Hypothesen im Zusammenhang mit akuten Erkrankungen können durch die Tests in @t-tests-acute-erkrankungen-vs-mbi-students nicht bestaätigt werden. Es ist kein groß genuger Unterschied zwischen den Erwartungswerten der verschiedenen Zelltypen zu erkennen.
 
@@ -498,7 +494,46 @@ Messungen der Zellgrößen konnten im Rahmen des Experiments nicht durchgeführt
 #pagebreak()
 = Interpretation
 
-== Gegenüberstellung der Messwerte mit Referenzwerten <comparison-of-measurements-with-reference-values>
+== Gegenüberstellung der Messwerte mit Referenzwerten
+
+Die statistische Auswertung der Gesamtgruppe aller MBI-Studierenden ($N = 173$) zeigt im $chi^2$-Anpassungstest eine hochsignifikante Abweichung von der klassischen Referenzliteratur ($chi^2 = 1395.18$, $p = 0%$). Die Nullhypothese einer identischen Verteilung muss somit strikt abgelehnt werden. Auch für die Teilgruppe des Jahrgangs „MBI 2025“ bestätigt sich diese signifikante Abweichung ($p = 0.04%$).
+
+Bei genauerer Betrachtung der transformierten Ein-Stichproben-t-Tests treten markante Verschiebungstrends zu Tage:
+
+- *Neutrophile Granulozyten:* Der empirische Mittelwert liegt mit $43.41%$ dramatisch unter dem Literaturwert von $59.81%$.
+- *Lymphozyten, Monozyten und Basophile:* Diese weisen allesamt signifikant erhöhte Werte im Vergleich zur Norm auf (Lymphozyten: $38.39%$ vs. $32.71%$; Monozyten: $12%$ vs. $4.67%$; Basophile: $4.14%$ vs. $0.47%$).
+
+*Das Konzept der statistischen Power bei großen Stichproben:*\
+Aus klinischer Sicht ist eine kollektive, derartige Verschiebung bei fast 200 gesunden Probanden unwahrscheinlich. Hier greift ein zentrales statistisches Konzept: Aufgrund der Aggregation der absoluten Zellzahlen über alle Testpersonen hinweg ($N = 173$) besitzt der Anpassungstest eine extrem hohe statistische Power. Selbst winzige, biologisch völlig unbedeutende systematische Abweichungen oder methodische Artefakte bei der manuellen Auszählung führen unweigerlich zu einem $p$-Wert von fast exakt $0%$.
+
+Eine interessante Ausnahme bildet der Jahrgang MBI 2025 ($n = 9$): Hier weichen die eosinophilen Granulozyten als einziger Zelltyp *nicht* signifikant von der Literatur ab ($1.96%$ vs. $2.34%$, $p = 16.86%$). Dies liegt an der geringen Gruppengröße, welche die statistische Power dämpft und zufällige Schwankungen toleriert. Basophile konnten in diesem Jahrgang gar nicht erfasst werden ($0%$).
+
+== Sondersituationen: Allergiker und akut Erkrankte
+
+Der wohl überraschendste Befund der Auswertung ist, dass weder Allergien noch akute Erkrankungen einen statistisch nachweisbaren Einfluss auf das Differentialblutbild der Studierenden hatten:
+
+- *Allergiker vs. Restliche Studierende:* Der $chi^2$-Unabhängigkeitstest liefert einen $p$-Wert von $56.79%$. Auch die nachfolgenden Zwei-Stichproben-t-Tests zeigen für keinen einzigen Zelltyp (einschließlich Eosinophiler und Basophiler) einen signifikanten Unterschied ($p > 0.05$). Die Hypothesen, dass Allergiker mehr Eosinophile ($2.73%$) oder Basophile ($4.63%$) aufweisen, konnten somit nicht nachgewiesen werden.
+- *Akut Erkrankte vs. Restliche Studierende:* Der Unabhängigkeitstest verfehlt mit $p = 31.55%$ ebenfalls die Signifikanzschwelle. Weder die erwartete neutrophile Kampfphase (Neutrophilenerhöhung) noch eine akute virale Lymphozytose lassen sich in den Mittelwerten mathematisch sichern.
+
+
+*Biologische Erwartung vs. studentische Realität:*\
+Klinisch-pathophysiologisch müssten akute bakterielle Infektionen zu einer Neutrophilie mit Linksverschiebung und Allergien zu einer Eosinophilie/Basophilie führen. Dass dieser Effekt hier völlig verpufft, liegt primär an der Natur der Datenerhebung. Das binäre Abfragefeld „vor kurzem krank“ oder „Allergie“ differenziert weder nach Schweregrad, Reaktivität noch nach dem exakten zeitlichen Verlauf. Ein abklingender, milder Schnupfen vor zwei Wochen hinterlässt im Blutausstrich schlicht keine Spuren einer akuten Leukozytose mehr, verwässert jedoch die statistische Gruppe „Akute Erkrankungen“.
+
+== Fehlerbetrachtung und methodische Einschränkungen
+
+Das Verfehlen klinisch erwarteter Trends und die extremen Abweichungen zur Literatur lassen sich durch eine Reihe massiver, methodischer Fehlerquellen im Experimentaufbau erklären:
+
+- *Enorme Varianz bei den Gesamt-Zellzahlen:* Ein Blick auf die beschreibende Statistik zeigt bei der Gesamtanzahl gezählter Zellen pro Person einen Mittelwert von $31.36 plus.minus 25.5$ Zellen bei einem Minimum von nur $1$ und einem Maximum von $191$ Zellen. Mathematisch ist eine prozentuale Differenzierung auf Basis von teilweise unter 10 oder gar nur einer einzigen gezählten Zelle pro Objektträger absolut fehlerhaft. Das Gesetz der großen Zahlen wird hier komplett verletzt, was zu extremen, zufälligen Verzerrungen in der relativen Verteilung führt. 
+- *Subjektive Fehlklassifikation beim Mikroskopieren:* Da die Zellgrößen im Experiment nicht exakt vermessen werden konnten (fehlendes Okularmikrometer) , basierte die Unterscheidung der Leukozytenarten rein auf der visuellen, subjektiven Beurteilung des Färbemusters. Große Lymphozyten (Reizformen) werden von ungeübten Augen leicht mit Monozyten verwechselt, was den künstlich erhöhten Monozytenwert ($12%$ vs. $4.67%$) in der Auswertung erklären könnte.
+- *Mängel in der Ausstrichtechnik:* Laut Vorgabe führt ein zu schnelles Streichen zu ungleichmäßigen Filmen , während zu langsames Streichen die Erythrozyten deformiert (Stechapfelform) oder verklumpen lässt. Schlecht ausgestrichene Präparate erschweren die Identifikation in den Randbereichen („Snaking Lines“) erheblich.
+- *Qualität der Pappenheim-Färbung:* Die panoptische Färbung steht und fällt mit den Zeiten und der Feuchtigkeit. Kam es während der 15-minütigen Giemsa-Inkubation zu einem partiellen Antrocknen der Farblösung auf dem Objektträger , verändern sich die Färbeeigenschaften von Eosin und Methylenblau dramatisch. Basophile Strukturen erscheinen dann unzureichend blau/violett oder neutrophile Granula werden azidophil überfärbt.
+
+== Zusammenfassende Bedeutung
+
+Zusammenfassend lässt sich sagen, dass das studentische Experiment „Blutausstrich“ zwar hervorragend geeignet ist, um die handwerklichen Grundlagen der Hämatologie (Ausstrichtechnik, Pappenheim-Färbung) und die morphologische Vielfalt der Leukozyten kennenzulernen. Für eine valide epidemiologische oder klinische Auswertung ist die Datenbasis jedoch ungeeignet.
+
+Durch die fehlende Standardisierung der Zellzählung und subjektive Unsicherheiten bei der manuellen Identifikation werden tatsächliche biologische Effekte oft überdeckt. Automatisierte Verfahren wie Hämatologie-Analyzer liefern hier deutlich zuverlässigere und objektivere Ergebnisse und sind daher in der modernen Diagnostik sinnvoll und etabliert @src_doccheck_differential_blutbild.
+
 
 #pagebreak()
 #set heading(numbering: none)
