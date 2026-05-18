@@ -9,4 +9,5 @@ TYPST_ROOT = "{{config_root}}"
 [tasks."fmt:typst"]
 description = "Format Typst files"
 tools.typstyle = "latest"
-run = ""
+sources = ["**/*.typ"]
+run = ["typstyle -i ./ --timing"]

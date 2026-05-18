@@ -53,7 +53,10 @@
   #place(
     right + top,
   )[
-    #figure(image("assets/hemoglobin_structure.png", width: 75%), caption: "Structure of hemoglobin") <hemoglobin-structure>
+    #figure(
+      image("assets/hemoglobin_structure.png", width: 75%),
+      caption: "Structure of hemoglobin",
+    ) <hemoglobin-structure>
   ]
 ]
 
@@ -68,7 +71,10 @@ regenerate functional hemoglobin. However, if someone is exposed to certain oxid
 well water, benzocaine, or dapsone), the rate of $"Fe"^(2+) arrow "Fe"^(3+)$ conversion can overwhelm the repair
 enzymes.
 
-#figure(image("assets/methemoglobin_cycle.png", width: 95%), caption: "Methemoglobin regeneration cycle") <methemoglobin-cycle>
+#figure(
+  image("assets/methemoglobin_cycle.png", width: 95%),
+  caption: "Methemoglobin regeneration cycle",
+) <methemoglobin-cycle>
 
 The result is methemoglobinemia, where a significant fraction of hemoglobin is stuck in the $"Fe"^(3+)$ form. Blood with
 high methemoglobin turns a chocolate-brown color and can cause symptoms of hypoxia (like cyanosis, fatigue or even
@@ -87,7 +93,7 @@ cyanide then binds to $"MetHb"$ to form $"HiCN"$.
 
 $
   "Hb" + upright("K")_3 "Fe"^(3+)("CN")_6 + upright("K")^+ &arrow "MetHb" + upright("K")_4 "Fe"^(2+)("CN")_6 \
-  "MetHb" + "KCN"                                          &arrow "HiCN" + upright("K")^+
+  "MetHb" + "KCN" &arrow "HiCN" + upright("K")^+
 $ <drabkin-reaction>
 
 The resulting $"HiCN"$ complex is stable and has a specific absorbance peak at wavelengths around $540 - 546"nm"$. This
@@ -97,10 +103,10 @@ hemoglobin concentration is determined based on the Beer–Lambert law, shown in
 $
   A = epsilon * c * ell \ \
   #block[
-    $A       & ... "total absorbance" \
+    $A & ... "total absorbance" \
     epsilon & ... "molar absorptivity of the substance" \
-    c       & ... "concentration of substance in the sample" \
-    ell     & ... "path length through sample"$
+    c & ... "concentration of substance in the sample" \
+    ell & ... "path length through sample"$
   ]
 $ <beer-lambert-law>
 
@@ -137,23 +143,27 @@ substance. Be mindful of proper waste disposal.
 
 #block(width: 100%)[
   #block(
-    width: 70%, height: 21em
+    width: 70%,
+    height: 21em,
   )[
-  + Prepare sample and reference cuvettes.
-    + Fill both cuvettes with 5mL of Drabkin's reagent.
-    + Add 20µL of blood to the sample cuvette.
-  + Gently shake the sample cuvette to mix the contents.
-  + Incubate for #sym.gt.eq 5 minutes in the dark for full conversion to cyanmethemoglobin $"HiCN"$.
-  + Set the spectrophotometer to 546 nm.
-  + Zero the device using the reference cuvette.
-  + Insert the sample cuvette and record the absorbance (E#sub("546") = $A$).
-  + Calculate the hemoglobin concentration using @instructor-concentration-formula.
+    + Prepare sample and reference cuvettes.
+      + Fill both cuvettes with 5mL of Drabkin's reagent.
+      + Add 20µL of blood to the sample cuvette.
+    + Gently shake the sample cuvette to mix the contents.
+    + Incubate for #sym.gt.eq 5 minutes in the dark for full conversion to cyanmethemoglobin $"HiCN"$.
+    + Set the spectrophotometer to 546 nm.
+    + Zero the device using the reference cuvette.
+    + Insert the sample cuvette and record the absorbance (E#sub("546") = $A$).
+    + Calculate the hemoglobin concentration using @instructor-concentration-formula.
   ]
 
-  
-#place(right + top)[
-  #figure(align(right, image("assets/filled_cuvette.jpg", width: 21%)), caption: "Cuvette with Drabkin's Reagent - blood mixture (wrong amount)") <example-cuvette>
-]
+
+  #place(right + top)[
+    #figure(
+      align(right, image("assets/filled_cuvette.jpg", width: 21%)),
+      caption: "Cuvette with Drabkin's Reagent - blood mixture (wrong amount)",
+    ) <example-cuvette>
+  ]
 ]
 
 == Calculation of Hemoglobin Concentration
@@ -168,8 +178,8 @@ We can calculate our absorptivity $epsilon$ of $"HiCN"$ for the total sample:
 
 $
   epsilon_"total" &= epsilon_"HiCN"/("MG"_"Hb") times (V_"probe")/(V_"total") \
-                  &= (44thin\000 "L"/("mol" dot "cm"))/(64thin\458 "g"/"mol") times (20 mu\L)/(5.02\m\L) \
-                  &tilde.eq 0.272 m^2 / "kg" = 2.72 "L"/("kg" dot "cm")
+  &= (44thin\000 "L"/("mol" dot "cm"))/(64thin\458 "g"/"mol") times (20 mu\L)/(5.02\m\L) \
+  &tilde.eq 0.272 m^2 / "kg" = 2.72 "L"/("kg" dot "cm")
 $
 
 This was calculated using the following values:
@@ -181,11 +191,11 @@ This was calculated using the following values:
 Since we know that our cuvette has a thickness of $ell = 1"cm"$ we can calculate the concentration of $"Hb"$ in the sample:
 
 $
-  \cspace["kg"slash"L"]                &= A / epsilon_"total" times 1/ell \
-                                       &= A / (2.72 "L"/("kg" dot "cm")) times 1/(0.01"m") \
-                                       &= A times 1 / (2.72 "L"/("kg" dot "cm") times 1"cm") \
-                                       &= A times 1 / (2.72 ) space "kg"/L \
-                                       &tilde.eq A times 0.368 "kg"/L \
+  \cspace["kg"slash"L"] &= A / epsilon_"total" times 1/ell \
+  &= A / (2.72 "L"/("kg" dot "cm")) times 1/(0.01"m") \
+  &= A times 1 / (2.72 "L"/("kg" dot "cm") times 1"cm") \
+  &= A times 1 / (2.72 ) space "kg"/L \
+  &tilde.eq A times 0.368 "kg"/L \
   arrow.r.double \cspace["g"slash"dL"] &= A times 36.77 "g"/("d"L) \
 $
 
@@ -197,7 +207,7 @@ $
   \cspace["g"slash"dL"] = A times 14.746 "g"/"dL" \
 $ <instructor-concentration-formula>
 
-We will use this factor in all further applications, even though there seems to be no explanation for the significant difference between the two formulas. Plugging in the values in their formula $A times "MG"_"Hb"/"epsilon"_"HiCN" times "V"_"total"/"V"_"probe" times 1/d [g/l] $ does not yield the same result for me.
+We will use this factor in all further applications, even though there seems to be no explanation for the significant difference between the two formulas. Plugging in the values in their formula $A times "MG"_"Hb"/"epsilon"_"HiCN" times "V"_"total"/"V"_"probe" times 1/d [g/l]$ does not yield the same result for me.
 
 Example calculation using placeholder values:\
 $A = 1.21$\
@@ -221,15 +231,15 @@ We analyzed the data from
     [Male], [10], [10.9 #sym.dash 23.0], [16.7 #sym.plus.minus 3.5], [13.5],
     [Female], [12], [10.1 #sym.dash 17.3], [12.1 #sym.plus.minus 4.3], [19.9],
   ),
-  caption: "MBI24 results summary male vs. female"
+  caption: "MBI24 results summary male vs. female",
 ) <current-year-table-overview-results>
 
 #box[
   #figure(
     image("assets/boxplot-male-female.svg", width: 75%),
-    caption: [Boxplot male vs female $"c"_"Hb" ["g"/"dL"]$ in MBI24]
+    caption: [Boxplot male vs female $"c"_"Hb" ["g"/"dL"]$ in MBI24],
   ) <boxplot-current-male-female>
-] 
+]
 #h(1em)
 #box(width: 1fr, baseline: -0.5em)[
   We expect the difference in $"c"_"Hb"$ between males and females to be statistically significant. Therefore we performed a two-sample t-test with different variances using an #math.alpha of 5% to test the null hypothesis that the difference in $"c"_"Hb"$ between males and females is zero.
@@ -254,7 +264,7 @@ We analyzed the data from
       [*p-value*], [0.81%],
       [*Cohen's d*], [0.32],
     ),
-    caption: "MBI24 t-test values"
+    caption: "MBI24 t-test values",
   ) <class-key-values>
 ]
 
@@ -267,28 +277,32 @@ The analysis is repeated for the years 2015 to 2024 (including MBI24). The resul
     columns: (1fr, 1fr, 1fr, 1fr, 1fr),
     table.header[*Group*][*Amount*][*Range ($"g"/"dL"$)*][*Mean #sym.plus.minus SD ($"g"/"dL"$)*][*Variance*],
     [Male], [117], [2.32 #sym.dash 53.2], [16.72 #sym.plus.minus 7.83], [61.36],
-    [Female], [126], [0.37 #sym.dash 59.8], [14.87 #sym.plus.minus 7.24], [52.35],
+    [Female],
+    [126],
+    [0.37 #sym.dash 59.8],
+    [14.87 #sym.plus.minus 7.24],
+    [52.35],
   ),
-  caption: "All years results summary male vs. female"
+  caption: "All years results summary male vs. female",
 ) <all-years-table-overview-results>
 
 #box[
   #figure(
     image("assets/boxplot-all-years-male-female.svg", width: 75%),
-    caption: [Boxplot male vs female $"c"_"Hb" ["g"/"dL"]$ in all years]
+    caption: [Boxplot male vs female $"c"_"Hb" ["g"/"dL"]$ in all years],
   ) <boxplot-all-male-female>
-] 
+]
 #h(1em)
 #box(width: 1fr, baseline: -3em)[
-  For this dataset we also performed a two-sample t-test with different variances using an #math.alpha of 5%. 
-  
+  For this dataset we also performed a two-sample t-test with different variances using an #math.alpha of 5%.
+
   The results are shown in @all-years-key-values. The t-statistic is 1.66, the critical t-value is 1.65, the p-value is 4.98% and the Cohen's d is 0.026.
 ]
 
 #box(width: 1fr, baseline: 0em)[
   Since the p-value is less than the chosen #math.alpha = 5%, we reject the null hypothesis and conclude that the difference in $"c"_"Hb"$ between males and females is statistically significant. This is also supported by the t-statistic of 1.66 being slightly greater than the critical t-value of 1.65.
 
-  The Cohen's d of 0.026 indicates a very small effect size, which means that the difference in $"c"_"Hb"$ between males and females is tiny. 
+  The Cohen's d of 0.026 indicates a very small effect size, which means that the difference in $"c"_"Hb"$ between males and females is tiny.
 ]
 #h(1em)
 #box(width: 38%)[
@@ -302,7 +316,7 @@ The analysis is repeated for the years 2015 to 2024 (including MBI24). The resul
       [*p-value*], [4.98%],
       [*Cohen's d*], [0.026],
     ),
-    caption: "All years t-test values"
+    caption: "All years t-test values",
   ) <all-years-key-values>
 ]
 
@@ -325,13 +339,21 @@ In @mbi24-results covering the class of the current year (MBI24), we can observe
   + "#title" at #link(url) (#date)
 ]
 
-#source("Hemoglobin - Wikipedia", "https://en.wikipedia.org/wiki/Hemoglobin", "2025-05-26")
+#source(
+  "Hemoglobin - Wikipedia",
+  "https://en.wikipedia.org/wiki/Hemoglobin",
+  "2025-05-26",
+)
 #source(
   "Cyanmethemoglobin Method For The Estimation Of Hemoglobin",
   "https://laboratorytests.org/cyanmethemoglobin-method/",
   "2025-05-26",
 )
-#source("Methemoglobinemia - Wikipedia", "https://en.wikipedia.org/wiki/Methemoglobinemia", "2025-05-26")
+#source(
+  "Methemoglobinemia - Wikipedia",
+  "https://en.wikipedia.org/wiki/Methemoglobinemia",
+  "2025-05-26",
+)
 #source(
   "Hemoglobin and its measurement",
   "https://acutecaretesting.org/en/articles/hemoglobin-and-its-measurement",
@@ -342,7 +364,11 @@ In @mbi24-results covering the class of the current year (MBI24), we can observe
   "https://www.sigmaaldrich.com/deepweb/assets/sigmaaldrich/product/documents/139/718/d5941dat.pdf?srsltid=AfmBOoru-9lYL7u5ha3B3y4N6n8y0q4yk6dqfKOusmH2VnBURns0na9F",
   "2025-05-26",
 )
-#source("Reflotron®", "https://photos.labwrench.com/equipmentManuals/11023-6349.pdf", "2025-05-26")
+#source(
+  "Reflotron®",
+  "https://photos.labwrench.com/equipmentManuals/11023-6349.pdf",
+  "2025-05-26",
+)
 #source(
   "Low Hemoglobin: Causes, Signs & Treatment",
   "https://my.clevelandclinic.org/health/symptoms/17705-low-hemoglobin",

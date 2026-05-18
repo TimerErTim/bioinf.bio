@@ -19,7 +19,11 @@
   (pl - pkleft) / (pkright - pkleft)
 }
 
-#let (empiric-val-gly-average, empiric-val-gly-intercept, empiric-val-gly-derivative) = (
+#let (
+  empiric-val-gly-average,
+  empiric-val-gly-intercept,
+  empiric-val-gly-derivative,
+) = (
   gly.pl_average.at(1),
   gly.pl_intercept.at(1),
   gly.pl_derivative.at(1),
@@ -29,7 +33,11 @@
   "pl": it,
 ))
 
-#let (empiric-val-hist-average, empiric-val-hist-intercept, empiric-val-hist-derivative) = (
+#let (
+  empiric-val-hist-average,
+  empiric-val-hist-intercept,
+  empiric-val-hist-derivative,
+) = (
   hist.pl_average.at(1),
   hist.pl_intercept.at(1),
   hist.pl_derivative.at(1),
@@ -43,15 +51,30 @@
 #let corr-table = (
   "Average": (
     correlation(empiric-val-gly-average.values(), expected-values-gly.values()),
-    correlation(empiric-val-hist-average.values(), expected-values-hist.values()),
+    correlation(
+      empiric-val-hist-average.values(),
+      expected-values-hist.values(),
+    ),
   ),
   "Intercept": (
-    correlation(empiric-val-gly-intercept.values(), expected-values-gly.values()),
-    correlation(empiric-val-hist-intercept.values(), expected-values-hist.values()),
+    correlation(
+      empiric-val-gly-intercept.values(),
+      expected-values-gly.values(),
+    ),
+    correlation(
+      empiric-val-hist-intercept.values(),
+      expected-values-hist.values(),
+    ),
   ),
   "Derivative": (
-    correlation(empiric-val-gly-derivative.values(), expected-values-gly.values()),
-    correlation(empiric-val-hist-derivative.values(), expected-values-hist.values()),
+    correlation(
+      empiric-val-gly-derivative.values(),
+      expected-values-gly.values(),
+    ),
+    correlation(
+      empiric-val-hist-derivative.values(),
+      expected-values-hist.values(),
+    ),
   ),
 )
 #let _min-comp-val = corr-table.values().flatten().reduce(calc.min)
@@ -62,7 +85,9 @@
     .pairs()
     .map(((label, values)) => (
       label,
-      values.map(it => (it - _min-comp-val) * (_max-comp-val / (_max-comp-val - _min-comp-val))),
+      values.map(it => (
+        (it - _min-comp-val) * (_max-comp-val / (_max-comp-val - _min-comp-val))
+      )),
     ))
     .to-dict()
 )
@@ -78,11 +103,17 @@
 )
 
 #let comp-q-gly(expected, empiric) = {
-  calc.abs(q-factor-pl(empiric.at("pl"), empiric.at("pk1"), empiric.at("pk2")) - q-factor-pl(expected.at("pl"), expected.at("pk1"), expected.at("pk2")))
+  calc.abs(
+    q-factor-pl(empiric.at("pl"), empiric.at("pk1"), empiric.at("pk2"))
+      - q-factor-pl(expected.at("pl"), expected.at("pk1"), expected.at("pk2")),
+  )
 }
 
 #let comp-q-hist(expected, empiric) = {
-  calc.abs(q-factor-pl(empiric.at("pl"), empiric.at("pk3"), empiric.at("pk2")) - q-factor-pl(expected.at("pl"), expected.at("pk3"), expected.at("pk2")))
+  calc.abs(
+    q-factor-pl(empiric.at("pl"), empiric.at("pk3"), empiric.at("pk2"))
+      - q-factor-pl(expected.at("pl"), expected.at("pk3"), expected.at("pk2")),
+  )
 }
 
 #let q-factor-table = (
@@ -104,14 +135,26 @@
 #let normalized-q-factor-table = (
   q-factor-table
     .pairs()
-    .map(((label, values)) => (label, values.map(it => (it - _min-comp-q-val) * (_max-comp-q-val / (_max-comp-q-val - _min-comp-q-val)))))
+    .map(((label, values)) => (
+      label,
+      values.map(it => (
+        (it - _min-comp-q-val)
+          * (_max-comp-q-val / (_max-comp-q-val - _min-comp-q-val))
+      )),
+    ))
     .to-dict()
 )
 
-#let mixed-normalized-table = normalized-corr-table.pairs().zip(normalized-q-factor-table.values()).map((((label, corr-val), q-val)) => (
-  label,
-  (mean(corr-val), mean(q-val))
-)).to-dict()
+#let mixed-normalized-table = (
+  normalized-corr-table
+    .pairs()
+    .zip(normalized-q-factor-table.values())
+    .map((((label, corr-val), q-val)) => (
+      label,
+      (mean(corr-val), mean(q-val)),
+    ))
+    .to-dict()
+)
 
 #table(
   columns: 3,

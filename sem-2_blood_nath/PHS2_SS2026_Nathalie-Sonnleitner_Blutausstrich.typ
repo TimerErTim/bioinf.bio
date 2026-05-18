@@ -90,7 +90,7 @@
     - *Giemsa-Lösung:* Diese enthält Methylenazur, Methylenviolett, Methylenblau und Eosin, welche in Methanol und Glycerin gelöst sind. @src_angabe
 
     == Referenzwerte aus Literatur <reference-values-from-literature>
-    
+
     #{
       show: it => [#it <reference-values-adult-table>]
       show: figure.with(
@@ -102,7 +102,11 @@
         columns: 3,
         table.header[*Zelltyp*][*Relativer Anteil [%]*][*Absoluter Anteil [Zellen/µl]*],
         ..for (cell-type, values) in adult-data {
-          ([#cell-type], [#values.at("relativer_anteil_prozent").map(str).join(" - ")], [#values.at("absolute_anzahl_pro_ul").map(str).join(" - ")])
+          (
+            [#cell-type],
+            [#values.at("relativer_anteil_prozent").map(str).join(" - ")],
+            [#values.at("absolute_anzahl_pro_ul").map(str).join(" - ")],
+          )
         },
       )
     }
@@ -111,7 +115,9 @@
 
 #{
   show: it => [#it <leukozyt-reference-sizes>]
-  show: figure.with(caption: [Referenzgrößen der verschiedenen Typen von Leukozyten.],)
+  show: figure.with(
+    caption: [Referenzgrößen der verschiedenen Typen von Leukozyten.],
+  )
   table(
     columns: 2,
     table.header[*Zelltyp*][*Größenbereich [#sym.mu\m]*],
@@ -125,7 +131,9 @@
 
 #{
   show: it => [#it <leukozyt-types>]
-  show: figure.with(caption: [@src_leukozyt_type Leukozyten-Arten - so wie sie nach Einfärbung unter dem Mikroskop erscheinen.],)
+  show: figure.with(
+    caption: [@src_leukozyt_type Leukozyten-Arten - so wie sie nach Einfärbung unter dem Mikroskop erscheinen.],
+  )
   show: rect.with(inset: 0pt)
   image("assets/leukozytarten.png")
 }
@@ -136,15 +144,15 @@ Blutausstriche sind in der klinischen Diagnostik von großer Bedeutung, da sie e
 @src_doccheck_differential_blutbild @src_blutwert_net
 
 Die Aufgaben und die typische Verteilung der Leukozytenarten im peripheren Blut ergeben sich aus ihren jeweiligen Funktionen im Immunsystem:
-- *Neutrophile Granulozyten*  
+- *Neutrophile Granulozyten*
   Häufigster Zelltyp. Sie stellen die „erste Abwehrlinie“ gegen bakterielle Infektionen dar und können rasch in großer Zahl bereitgestellt werden. @src_blutwert_net @src_doccheck_differential_blutbild
-- *Lymphozyten*  
+- *Lymphozyten*
   Teil des adaptiven Immunsystems. Sie ermöglichen gezielte Immunantworten gegen bestimmte Erreger. @src_blutwert_net @src_doccheck_differential_blutbild
-- *Monozyten*  
+- *Monozyten*
   Vorläufer der Makrophagen und an der Phagozytose beteiligt. Tragen so ebenfalls zur Krankheitsabwehr bei. @src_blutwert_net @src_doccheck_differential_blutbild
-- *Eosinophile Granulozyten*  
+- *Eosinophile Granulozyten*
   Übernehmen spezielle Funktionen, hauptsächlich bei der Abwehr von Parasiten. Treten daher seltener auf. @src_blutwert_net @src_doccheck_differential_blutbild
-- *Basophile Granulozyten*  
+- *Basophile Granulozyten*
   Sind wichtig bei allergischen Reaktionen. Kommen ebenfalls seltener vor. @src_blutwert_net @src_doccheck_differential_blutbild
 
 Diese funktionellen Unterschiede spiegeln sich im typischen prozentualen Verhältnis der Leukozytenarten im Blut wider. @src_blutwert_net @src_doccheck_differential_blutbild
@@ -264,8 +272,13 @@ Hingegen sind akute Erkrankungen oft die Ursache von:
   description: "Ergebnisse der Blutausstrich-Messungen",
 )
 
-#import "../lib/maths/statistics.typ": chi-square-teststatistic, chi-square-ablehnungsbereich, chisq-pvalue
-#import "analysis/calculations/plots.typ": heatmap-leukozyten-difference, table-descriptive-statistics, boxplot-leukozyten
+#import "../lib/maths/statistics.typ": (
+  chi-square-ablehnungsbereich, chi-square-teststatistic, chisq-pvalue,
+)
+#import "analysis/calculations/plots.typ": (
+  boxplot-leukozyten, heatmap-leukozyten-difference,
+  table-descriptive-statistics,
+)
 #import "analysis/calculations/data-processing.typ": data-dict
 
 == Beobachtung
@@ -290,7 +303,9 @@ Dieser Trend ist auch in @boxplot-leukozyten erkennbar. Diese Darstellung zeigt 
 
 #{
   show: it => [#it <table-descriptive-statistics>]
-  show: figure.with(caption: [Beschreibende Statistik der Leukozytenzahlen. Gesamtleukozyten in absoluten Zellzählungen angegeben. Verteilung der Zelltypen in relativen Anteilen zur Gesamtleukozytenzahl angegeben.])
+  show: figure.with(
+    caption: [Beschreibende Statistik der Leukozytenzahlen. Gesamtleukozyten in absoluten Zellzählungen angegeben. Verteilung der Zelltypen in relativen Anteilen zur Gesamtleukozytenzahl angegeben.],
+  )
   set par(justify: false)
   show: pad.with(right: -1cm)
   table-descriptive-statistics
@@ -298,7 +313,7 @@ Dieser Trend ist auch in @boxplot-leukozyten erkennbar. Diese Darstellung zeigt 
 
 #{
   show: it => [#it <boxplot-leukozyten>]
-  show: figure.with(caption: [Boxplot der Leukozytenzahlen.],)
+  show: figure.with(caption: [Boxplot der Leukozytenzahlen.])
   show: rect
   boxplot-leukozyten
 }
@@ -316,20 +331,26 @@ Folgende Hypothesen sollen durch das Widerlegen ihrere Alternativhypothese über
 
 Die in @reference-values-adult-table angegebenen Referenzwerte für die relative Zellanzahl bei Erwachsenen wurden für die Auswertung herangezogen#footnote[konkret: Mittelwert des Referenzbereichs]. Sämtliche statistischen Tests wurden mit einem Signifikanzniveau von #sym.alpha = 5% durchgeführt.
 
-#{
+#{}
 
+#{
+  show: figure.with(
+    caption: [Heatmap der relativen Abweichungen der Leukozytenzahlen von den Referenzwerten.],
+  )
+  show: rect
+  heatmap-leukozyten-difference(height: 6cm, data-transform: it => it.filter(
+    it => it.has-allergy,
+  ))
 }
 
 #{
-  show: figure.with(caption: [Heatmap der relativen Abweichungen der Leukozytenzahlen von den Referenzwerten.])
+  show: figure.with(
+    caption: [Heatmap der relativen Abweichungen der Leukozytenzahlen von den Referenzwerten.],
+  )
   show: rect
-  heatmap-leukozyten-difference(height: 6cm, data-transform: it => it.filter(it => it.has-allergy))
-}
-
-#{
-  show: figure.with(caption: [Heatmap der relativen Abweichungen der Leukozytenzahlen von den Referenzwerten.])
-  show: rect
-  heatmap-leukozyten-difference(data-transform: it => it.filter(it => it.has-acute-erkrankung))
+  heatmap-leukozyten-difference(data-transform: it => it.filter(it => {
+    it.has-acute-erkrankung
+  }))
 }
 
 == Messungen

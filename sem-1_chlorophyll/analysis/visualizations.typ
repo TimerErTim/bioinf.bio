@@ -12,7 +12,15 @@
     [Filter extract],
     [Measure absorbance],
   )
-  let nodes = contents.enumerate(start: 0).map(((ix, ct)) => fl.node((0, ix), ct, fill: color-map.at(calc.rem(ix, color-map.len())).lighten(90%), stroke: color-map.at(calc.rem(ix, color-map.len())), width: 5cm))
+  let nodes = contents
+    .enumerate(start: 0)
+    .map(((ix, ct)) => fl.node(
+      (0, ix),
+      ct,
+      fill: color-map.at(calc.rem(ix, color-map.len())).lighten(90%),
+      stroke: color-map.at(calc.rem(ix, color-map.len())),
+      width: 5cm,
+    ))
   let diagram-data = nodes.intersperse(fl.edge(marks: "-|>"))
 
   fl.diagram(
@@ -158,7 +166,9 @@
 #let plot-difference-raw-final-values(raw-values, final-values) = {
   let combined-values = raw-values.zip(final-values) //.sorted(key: it => it.at(1)).rev()
   let sorted-raw-values = combined-values.map(it => it.at(0))
-  let sorted-final-values = combined-values.map(it => it.at(1) / mean(combined-values.map(it => it.at(1))))
+  let sorted-final-values = combined-values.map(it => (
+    it.at(1) / mean(combined-values.map(it => it.at(1)))
+  ))
 
   let color-map = lq.color.map.petroff10
 
@@ -204,7 +214,7 @@
       edge.label,
       inset: (left: -1em),
       width: 2.5em,
-      fill: edge.label-fill
+      fill: edge.label-fill,
     ),
     fl.node((0, 0), [Extinction coefficients], width: 4cm),
     fl.node((0, 1), [Individual concentrations in solution], width: 4cm),
@@ -234,28 +244,51 @@
     fl.node((1, 1), [Total concentration in solution], width: 4cm),
     fl.node((1, 0), [Individual concentrations in solution], width: 4cm),
 
-
     fl.edge((0, 0), (0, 1), "-|>", label: [???], stroke: color-map.at(2)),
-    fl.edge((0, 0), (1, 0), "-|>", label: [Instructor's formula], stroke: color-map.at(0)),
-    fl.edge((0, 0), (1, 1), "-|>", label: [$652"nm"$ formula], stroke: color-map.at(1)),
+    fl.edge(
+      (0, 0),
+      (1, 0),
+      "-|>",
+      label: [Instructor's formula],
+      stroke: color-map.at(0),
+    ),
+    fl.edge(
+      (0, 0),
+      (1, 1),
+      "-|>",
+      label: [$652"nm"$ formula],
+      stroke: color-map.at(1),
+    ),
     fl.edge((0, 1), (1, 1), "-|>", label: [Addition], stroke: color-map.at(2)),
     fl.edge((1, 0), (1, 1), "-|>", label: [Addition], stroke: color-map.at(0)),
-    fl.edge((1, 1), (2, 1), "-|>", label: align(right)[Dilution factor], stroke: color-map.at(0), shift: 0.15),
+    fl.edge(
+      (1, 1),
+      (2, 1),
+      "-|>",
+      label: align(right)[Dilution factor],
+      stroke: color-map.at(0),
+      shift: 0.15,
+    ),
     fl.edge((1, 1), (2, 1), "-|>", stroke: color-map.at(1), shift: 0),
     fl.edge((1, 1), (2, 1), "-|>", stroke: color-map.at(2), shift: -0.15),
   )
   place(
-    top + right
+    top + right,
   )[
     #grid(
       columns: 2,
       align: horizon,
       column-gutter: 1em,
       row-gutter: 1.5mm,
-        [Freshly calculated concentrations],[#line(length: 2em, stroke: color-map.at(0) + 2pt)],
-        [Instructor's $652"nm"$ formula],[#line(length: 2em, stroke: color-map.at(1) + 2pt)],
-        [Filled out concentrations],[#line(length: 2em, stroke: color-map.at(2) + 2pt)],
-      )
+      [Freshly calculated concentrations],
+      [#line(length: 2em, stroke: color-map.at(0) + 2pt)],
+
+      [Instructor's $652"nm"$ formula],
+      [#line(length: 2em, stroke: color-map.at(1) + 2pt)],
+
+      [Filled out concentrations],
+      [#line(length: 2em, stroke: color-map.at(2) + 2pt)],
+    )
   ]
 }
 
@@ -292,7 +325,10 @@
   )
 }
 
-#let plot-filled-out-vs-freshly-calculated(filled-out-values, freshly-calculated-values) = {
+#let plot-filled-out-vs-freshly-calculated(
+  filled-out-values,
+  freshly-calculated-values,
+) = {
   show: lq.set-errorbar(stroke: red, cap: 1em)
   lq.diagram(
     yaxis: (
@@ -327,7 +363,10 @@
 }
 
 
-#let plot-652nm-instructor-vs-freshly-calculated(instructor-values, freshly-calculated-values) = {
+#let plot-652nm-instructor-vs-freshly-calculated(
+  instructor-values,
+  freshly-calculated-values,
+) = {
   show: lq.set-errorbar(stroke: red, cap: 1em)
   lq.diagram(
     yaxis: (

@@ -9,7 +9,12 @@
 }
 
 #let illustration(body) = {
-  set page(fill: white.transparentize(100%), width: auto, height: auto, margin: 1mm)
+  set page(
+    fill: white.transparentize(100%),
+    width: auto,
+    height: auto,
+    margin: 1mm,
+  )
   set text(fill: or-preview(white, black), size: 8pt, font: "Lato")
   show math.equation: set text(font: "Fira Math")
 

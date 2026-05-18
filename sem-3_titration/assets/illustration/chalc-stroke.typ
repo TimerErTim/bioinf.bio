@@ -36,8 +36,8 @@
           angle: 0deg,
           stroke: stroke(paint: transp-color, thickness: 0.5pt),
         ))
-      }
+      },
     ),
-    thickness: width
+    thickness: width,
   )
 }

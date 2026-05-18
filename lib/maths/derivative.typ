@@ -9,8 +9,11 @@
 /// degree: degree of fitting polynomial (must be >= order).
 #let diff-smooth(data, order: 1, window: 7, degree: 3) = {
   assert(window >= degree + 1, message: "Window must be larger than degree.")
-  assert(degree >= order, message: "Degree must be >= requested derivative order.")
-  
+  assert(
+    degree >= order,
+    message: "Degree must be >= requested derivative order.",
+  )
+
   let result = ()
   let half-win = calc.floor(window / 2)
   let n = data.len()
@@ -19,12 +22,12 @@
     // 1. Identify Window Indices (clamp to edges)
     let start-idx = calc.max(0, i - half-win)
     let end-idx = calc.min(n, start-idx + window)
-    
+
     // Adjust start if we hit the right edge to keep window size constant-ish
     if (end-idx - start-idx < window) and (start-idx > 0) {
       start-idx = calc.max(0, end-idx - window)
     }
-    
+
     let subset = data.slice(start-idx, end-idx)
     let center-x = data.at(i).at(0)
 
@@ -37,10 +40,12 @@
     for point in subset {
       let dx = point.at(0) - center-x
       let dy = point.at(1)
-      
+
       // Precompute powers of dx for the Vandermonde row
-      let powers = range(mat-size * 2).map(p => if p == 0 { 1.0 } else { calc.pow(dx, p) })
-      
+      let powers = range(mat-size * 2).map(p => if p == 0 { 1.0 } else {
+        calc.pow(dx, p)
+      })
+
       // Fill AtA (Symmetric)
       for r in range(mat-size) {
         for c in range(mat-size) {
@@ -60,7 +65,7 @@
     // f'''(0) = 3! * c3
     let fact = (1, 1, 2, 6, 24).at(order)
     let val = coeffs.at(order) * fact
-    
+
     result.push((center-x, val))
   }
   result

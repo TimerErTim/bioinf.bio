@@ -44,13 +44,13 @@ The experiment uses phenolphthalein indicator in an alkaline milk solution. Phen
 
 == Experimental Rationale
 
-This protocol demonstrates the fundamental principle that pancreatic lipase cleaves milk triglycerides to free fatty acids and glycerol, and that free fatty acids cause a measurable drop in pH (observed via phenolphthalein) when hydrolysis occurs. The contrast with boiled (inactive) enzyme and with low-fat milk reinforces the roles of enzyme activity and substrate availability. The experiment models intestinal fat digestion in vitro, showing that only active lipase can catalyze the reaction, and that more substrate (fat) yields more acid for neutralization. 
+This protocol demonstrates the fundamental principle that pancreatic lipase cleaves milk triglycerides to free fatty acids and glycerol, and that free fatty acids cause a measurable drop in pH (observed via phenolphthalein) when hydrolysis occurs. The contrast with boiled (inactive) enzyme and with low-fat milk reinforces the roles of enzyme activity and substrate availability. The experiment models intestinal fat digestion in vitro, showing that only active lipase can catalyze the reaction, and that more substrate (fat) yields more acid for neutralization.
 
 #figure(
   image("assets/lipase_functioning.png", width: 50%),
   caption: [
-     Lipase acts like scissors, cutting a fat molecule (triglyceride) into three fatty acids and one glycerol.
-  ]
+    Lipase acts like scissors, cutting a fat molecule (triglyceride) into three fatty acids and one glycerol.
+  ],
 ) <lipase-functioning>
 
 #pagebreak()
@@ -101,16 +101,26 @@ Repeat as needed: For comparison, repeat the experiment using low-fat milk (e.g.
 = Data Analysis & Results
 
 // Load data from CSV files
-#let stats_overall = csv("assets/descriptive_statistics_overall.csv", row-type: dictionary)
-#let stats_menge = csv("assets/descriptive_statistics_mengen.csv", row-type: dictionary)
+#let stats_overall = csv(
+  "assets/descriptive_statistics_overall.csv",
+  row-type: dictionary,
+)
+#let stats_menge = csv(
+  "assets/descriptive_statistics_mengen.csv",
+  row-type: dictionary,
+)
 #let stats_tests = csv("assets/statistical_analysis.csv", row-type: dictionary)
 
 // Extract key values for easy reference
 #let t_test_row = stats_tests.at(0)
 #let anova_row = stats_tests.at(1)
 
-#let boiled_stats = stats_overall.map(row => (row.at(""), row.at("drop_gekocht"))).to-dict()
-#let unboiled_stats = stats_overall.map(row => (row.at(""), row.at("drop_ungekocht"))).to-dict()
+#let boiled_stats = (
+  stats_overall.map(row => (row.at(""), row.at("drop_gekocht"))).to-dict()
+)
+#let unboiled_stats = (
+  stats_overall.map(row => (row.at(""), row.at("drop_ungekocht"))).to-dict()
+)
 
 == Descriptive Statistics
 
@@ -127,9 +137,9 @@ Repeat as needed: For comparison, repeat the experiment using low-fat milk (e.g.
         [#calc.round(float(row.at("drop_gekocht")), digits: 2)],
         [#calc.round(float(row.at("drop_ungekocht")), digits: 2)],
       )
-    }
+    },
   ),
-  caption: [Overall descriptive statistics for the total pH drop. Values are rounded to two decimal places.]
+  caption: [Overall descriptive statistics for the total pH drop. Values are rounded to two decimal places.],
 ) <table-desc-overall>
 
 @table-desc-menge breaks down the pH drop by the amount of enzyme solution added. While the ANOVA test did not find a statistically significant effect, this table reveals a weak trend: larger volumes of unboiled lipase tend to correspond to a greater average pH drop. For instance, the mean drop for 200 #sym.mu\L was #calc.round(float(stats_menge.find(row => row.at("Menge") == "200" and row.at("Group") == "ungekocht").at("mean")), digits: 2), while for 600 #sym.mu\L it was #calc.round(float(stats_menge.find(row => row.at("Menge") == "600" and row.at("Group") == "ungekocht").at("mean")), digits: 2). The high standard deviation in each group likely contributed to the non-significant ANOVA result.
@@ -138,25 +148,34 @@ Repeat as needed: For comparison, repeat the experiment using low-fat milk (e.g.
   table(
     columns: (1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
     align: center,
-    table.header([*Menge (µL)*], [*Group*], [*N*], [*Mean Drop*], [*Std. Dev.*], [*Max Drop*]),
+    table.header(
+      [*Menge (µL)*],
+      [*Group*],
+      [*N*],
+      [*Mean Drop*],
+      [*Std. Dev.*],
+      [*Max Drop*],
+    ),
     ..for row in stats_menge {
       let is_boiled = row.at("Group") == "gekocht"
       let menge = int(row.at("Menge"))
       let group_label = if is_boiled { "Boiled" } else { "Unboiled" }
-      
+
       if calc.rem(int(row.at("Menge")), 50) == 0 or int(row.at("Menge")) < 300 {
         (
-          if is_boiled {table.cell(rowspan: 2)[#menge]},
+          if is_boiled { table.cell(rowspan: 2)[#menge] },
           [#group_label],
           [#row.at("count")],
           [#calc.round(float(row.at("mean")), digits: 2)],
-          [#if row.at("std") != "" { calc.round(float(row.at("std")), digits: 2) } else { "-" }],
+          [#if row.at("std") != "" {
+            calc.round(float(row.at("std")), digits: 2)
+          } else { "-" }],
           [#calc.round(float(row.at("max")), digits: 2)],
         ).slice(if is_boiled { 0 } else { 1 })
       }
-    }
+    },
   ),
-  caption: [Descriptive statistics for pH drop grouped by enzyme volume. Values are rounded.]
+  caption: [Descriptive statistics for pH drop grouped by enzyme volume. Values are rounded.],
 ) <table-desc-menge>
 
 == Visualizations and Statistical Interpretation
@@ -165,7 +184,7 @@ The plot of the average pH over time for all groups (@fig-avg-ph) clearly visual
 
 #figure(
   image("assets/plots/average_ph_verlauf.png", width: 80%),
-  caption: [Smoothed average pH vs. time for all groups, comparing boiled (inactive) and unboiled (active) lipase.]
+  caption: [Smoothed average pH vs. time for all groups, comparing boiled (inactive) and unboiled (active) lipase.],
 ) <fig-avg-ph>
 
 The plots in @fig-vergleich-menge illustrate the dose-response relationship, or lack thereof. For the unboiled enzyme, there is a visible trend where larger amounts of lipase lead to a faster and deeper pH drop. The plot for the boiled enzyme shows no such trend, with all lines clustered together. This visual evidence supports the ANOVA result: while a trend exists for the active enzyme, the high variance within each group prevents the differences from being statistically significant.
@@ -178,26 +197,26 @@ The plots in @fig-vergleich-menge illustrate the dose-response relationship, or 
     image("assets/plots/vergleich_gekocht_nach_menge.png", width: 90%),
   ),
   caption: [Comparison of smoothed pH drop over time, grouped by enzyme amount.\
-  *Top:* Unboiled (active) lipase. \
-  *Bottom:* Boiled (inactive) lipase.]
+    *Top:* Unboiled (active) lipase. \
+    *Bottom:* Boiled (inactive) lipase.],
 ) <fig-vergleich-menge>
 
 An individual group's plot, like the one in @fig-group-example, shows the raw data behind the averages, capturing the real-time progress of the experiment.
 
 #figure(
   image("assets/plots/MBI24_Gr1_Gruppe_A.png", width: 80%),
-  caption: [Example of a pH vs. time plot for a single experimental group (MBI24, Group 1A).]
+  caption: [Example of a pH vs. time plot for a single experimental group (MBI24, Group 1A).],
 ) <fig-group-example>
 
 == Statistical Tests
 
 To validate these observations, two main statistical tests were performed:
 
-1.  *Paired T-Test (Active vs. Inactive Lipase):*
-    A paired t-test was used to compare the pH drop between the unboiled and boiled samples from the same experimental run. The test yielded a _p-value of #t_test_row.at("p-value")_, which is far below the standard significance level of 0.05. This result is *highly statistically significant* and confirms that the active, unboiled lipase produces a much greater pH drop than the denatured, boiled lipase.
+1. *Paired T-Test (Active vs. Inactive Lipase):*
+  A paired t-test was used to compare the pH drop between the unboiled and boiled samples from the same experimental run. The test yielded a _p-value of #t_test_row.at("p-value")_, which is far below the standard significance level of 0.05. This result is *highly statistically significant* and confirms that the active, unboiled lipase produces a much greater pH drop than the denatured, boiled lipase.
 
-2.  *ANOVA (Effect of Enzyme Amount):*
-    An ANOVA test was conducted to determine if the amount of lipase added (from 200 #sym.mu\L to 600 #sym.mu\L) had a statistically significant effect on the magnitude of the pH drop. The p-value from this test was _#calc.round(float(anova_row.at("p-value")), digits: 2)_. Since this value is greater than 0.05, we conclude that there is *no statistically significant difference* in the pH drop between the different amounts of enzyme used in this set of experiments. While a trend is visible in the data and plots, the high variability in the data prevented this trend from being statistically significant.
+2. *ANOVA (Effect of Enzyme Amount):*
+  An ANOVA test was conducted to determine if the amount of lipase added (from 200 #sym.mu\L to 600 #sym.mu\L) had a statistically significant effect on the magnitude of the pH drop. The p-value from this test was _#calc.round(float(anova_row.at("p-value")), digits: 2)_. Since this value is greater than 0.05, we conclude that there is *no statistically significant difference* in the pH drop between the different amounts of enzyme used in this set of experiments. While a trend is visible in the data and plots, the high variability in the data prevented this trend from being statistically significant.
 
 #pagebreak()
 = Conclusion
@@ -216,12 +235,36 @@ While there was a visible trend suggesting that a higher concentration of lipase
   + "#title" at #link(url) (#date)
 ]
 
-#source("Roles of Milk Fat Globule Membrane on Fat Digestion and Infant Nutrition - PMC", "https://pmc.ncbi.nlm.nih.gov/articles/PMC9108948/", "2025-07-10")
-#source("Fatty acids in bovine milk fat - PubMed", "https://pubmed.ncbi.nlm.nih.gov/19109654/", "2025-07-10")
-#source("Short- and medium-chain fatty acids in energy metabolism: the cellular perspective - PMC", "https://pmc.ncbi.nlm.nih.gov/articles/PMC4878196/", "2025-07-10")
-#source("Biochemistry, Lipase - StatPearls - NCBI Bookshelf", "https://www.ncbi.nlm.nih.gov/books/NBK537346/", "2025-07-10")
-#source("Free fatty acid profiles of emulsified lipids during in vitro digestion with pancreatic lipase - PubMed", "https://pubmed.ncbi.nlm.nih.gov/23561123/", "2025-07-10")
-#source("wjec.co.uk", "https://www.wjec.co.uk/media/vithrt5f/tg07in-1.pdf", "2025-07-10")
+#source(
+  "Roles of Milk Fat Globule Membrane on Fat Digestion and Infant Nutrition - PMC",
+  "https://pmc.ncbi.nlm.nih.gov/articles/PMC9108948/",
+  "2025-07-10",
+)
+#source(
+  "Fatty acids in bovine milk fat - PubMed",
+  "https://pubmed.ncbi.nlm.nih.gov/19109654/",
+  "2025-07-10",
+)
+#source(
+  "Short- and medium-chain fatty acids in energy metabolism: the cellular perspective - PMC",
+  "https://pmc.ncbi.nlm.nih.gov/articles/PMC4878196/",
+  "2025-07-10",
+)
+#source(
+  "Biochemistry, Lipase - StatPearls - NCBI Bookshelf",
+  "https://www.ncbi.nlm.nih.gov/books/NBK537346/",
+  "2025-07-10",
+)
+#source(
+  "Free fatty acid profiles of emulsified lipids during in vitro digestion with pancreatic lipase - PubMed",
+  "https://pubmed.ncbi.nlm.nih.gov/23561123/",
+  "2025-07-10",
+)
+#source(
+  "wjec.co.uk",
+  "https://www.wjec.co.uk/media/vithrt5f/tg07in-1.pdf",
+  "2025-07-10",
+)
 
 
 

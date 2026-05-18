@@ -2,7 +2,9 @@
 #show: illustration
 #set text(font: "Love Ya Like A Sister")
 #show math.equation: set text(font: "Love Ya Like A Sister")
-#import "../calculations/histidin.typ": d2y, d3y, dy, pk1, pk2, pk3, pl_average, pl_derivative, pl_intercept, x, y
+#import "../calculations/histidin.typ": (
+  d2y, d3y, dy, pk1, pk2, pk3, pl_average, pl_derivative, pl_intercept, x, y,
+)
 #import "../calculations/comparison.typ": expected-values-hist
 
 #import "@preview/lilaq:0.5.0" as lq
@@ -18,7 +20,7 @@
           height: 0.15cm,
           stroke: or-preview(white, green) + 0.5pt,
           align: center + horizon,
-          label: pad(top: 1mm)[pl mittels $(#[pk]_3 + #[pk]_2) / 2$],
+          label: pad(top: 1mm)[pl mittels $(#[pk] _3 + #[pk] _2) / 2$],
         )
       } else if it == 1 {
         lq.ellipse(
@@ -41,7 +43,7 @@
       }
 
       let iep-value = if it == 0 [
-        $(#[pk]_3 + #[pk]_2) / 2$\
+        $(#[pk] _3 + #[pk] _2) / 2$\
         $= #calc.round(digits: 2, pl_average.at(1))$
       ] else if it == 1 [
         Schnittpunkt\

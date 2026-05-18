@@ -108,8 +108,8 @@ While transmittance describes the fraction of light passing through the sample, 
 
 The experimental procedure begins with selecting the diagnostic wavelengths relevant to the pigments of interest—most notably the red absorption maxima for chlorophylls—and allowing the spectrophotometer to warm up to ensure a stable light source. A baseline is established by "blanking" the instrument using a cuvette filled with pure solvent (e.g., 80% acetone), which defines $I_0$ and accounts for any absorption or reflection by the cuvette and solvent itself @src_spectrophotometry.
 
-Once the baseline is set, the sample extract is measured to determine the transmitted intensity $I$, from which the absorbance $A$ is calculated. It is critical to ensure that the measured absorbance stays within the instrument's linear dynamic range (typically between 0.1 and 1.0); samples exceeding this range must be diluted and remeasured to preserve accuracy. For mixtures like leaf extracts, measurements are taken at multiple wavelengths (e.g., $647"nm"$ and $664"nm"$) to resolve the individual contributions of $"Chl"_"a"$ and $"Chl"_"b"$ using simultaneous equations based on the principle of additivity (see @mixtures-additivity). In cases where turbidity or light scattering from cell debris is suspected, a measurement at a non-absorbing wavelength such as $750"nm"$ is performed to subtract the background noise from the pigment readings. 
-@src_chlorophyll-lichtenthaler 
+Once the baseline is set, the sample extract is measured to determine the transmitted intensity $I$, from which the absorbance $A$ is calculated. It is critical to ensure that the measured absorbance stays within the instrument's linear dynamic range (typically between 0.1 and 1.0); samples exceeding this range must be diluted and remeasured to preserve accuracy. For mixtures like leaf extracts, measurements are taken at multiple wavelengths (e.g., $647"nm"$ and $664"nm"$) to resolve the individual contributions of $"Chl"_"a"$ and $"Chl"_"b"$ using simultaneous equations based on the principle of additivity (see @mixtures-additivity). In cases where turbidity or light scattering from cell debris is suspected, a measurement at a non-absorbing wavelength such as $750"nm"$ is performed to subtract the background noise from the pigment readings.
+@src_chlorophyll-lichtenthaler
 @src_chlorophyll-extraction-protocol
 Finally, the calculated concentrations in the extract are converted to fresh weight values by accounting for the initial sample weight and extraction volume @src_spectrophotometry.
 
@@ -125,10 +125,10 @@ For example $"Chl"_"a"$ has $epsilon_420 = 85thin 000 space "l" thin "mol"^(-1) 
 
 === Mixtures and additivity
 
-In an extract, total absorbance at a given wavelength is the sum of each pigment's absorbance: 
+In an extract, total absorbance at a given wavelength is the sum of each pigment's absorbance:
 
 $
-E_lambda = d dot limits(sum)_i epsilon_(i, lambda) dot c_i
+  E_lambda = d dot limits(sum)_i epsilon_(i, lambda) dot c_i
 $ <mixtures-additivity>
 
 @mixtures-additivity must be taken into account when calculating concentrations of real world samples, since there is rarely any purely isolated sample available. @src_photoplethysmography
@@ -155,7 +155,9 @@ Here $c ["g"/"l"_E]$ is the mass concentration of the substance $S$ in the extra
 
 *Note*: We can use the same approach as for removing the dilution factor $V_E / V_P$ to convert from $"g"/"l"_E$ to $"mg"/"g"_P$ by multiplying with the dilution factor $V_E / M_P$, as shown in @mass-concentration-equation-mg.
 
-$ c space ["mg"/"g"_P] = c space ["g"/"l"_E] dot V_E / M_P dot 1000 $ <mass-concentration-equation-mg>
+$
+  c space ["mg"/"g"_P] = c space ["g"/"l"_E] dot V_E / M_P dot 1000
+$ <mass-concentration-equation-mg>
 
 Where $M_P$ is the mass of the biological source material in $"g"$, and $c space ["mg"/"g"_P]$ is the mass of the substance $S$ per weight of biological source material. This is often used to determine the concentration in fresh weight.
 
@@ -172,28 +174,28 @@ The experiment was performed in two variants, where the first variant was perfor
   ) <execution-steps-diagram>
 ])[
 
-== Preparation
+  == Preparation
 
-=== Materials needed <execution-materials>
+  === Materials needed <execution-materials>
 
-According to the instruction sheet, we need the following materials:
+  According to the instruction sheet, we need the following materials:
 
-- Scissors
-- Mortar and pestle
-- Spatula
-- Paper filter
-- Funnel
-- Beaker glass
-- Glass cuvettes
-- Spectrophotometer
+  - Scissors
+  - Mortar and pestle
+  - Spatula
+  - Paper filter
+  - Funnel
+  - Beaker glass
+  - Glass cuvettes
+  - Spectrophotometer
 
-*Chemicals:*
-- Acetone ($~20"ml"$)
-- Sea sand
-- Calcium carbonate
-- Plant material ($2-5"g"$)
+  *Chemicals:*
+  - Acetone ($~20"ml"$)
+  - Sea sand
+  - Calcium carbonate
+  - Plant material ($2-5"g"$)
 
-Instead of sea sand and calcium carbonate, we used quartz sand for the mortar, as the experiment was set up that way in our lab session.
+  Instead of sea sand and calcium carbonate, we used quartz sand for the mortar, as the experiment was set up that way in our lab session.
 ]
 
 === Chlorophyll extraction
@@ -222,9 +224,18 @@ Various analysis tasks were performed to better understand the data and the resu
 We decided to take a detailed full spectrum sample using a mixture of brussels sprouts and maggi herbs #footnote[File group 1, subgroup 6 from the results sheet]. We will use this sample for all single sample analysis, especially in @calculation-with-instructor-formula and @calculation-with-beer-lambert-law. We refer to this sample as "ours" going forward.
 
 == Spectral Analysis
-#let results-spect-data = csv("../data/results.absorption.txt", delimiter: "\t").slice(1)
-#let chla-spect-data = csv("../data/chla.absorption.txt", delimiter: "\t").slice(1)
-#let chlb-spect-data = csv("../data/chlb.absorption.txt", delimiter: "\t").slice(1)
+#let results-spect-data = csv(
+  "../data/results.absorption.txt",
+  delimiter: "\t",
+).slice(1)
+#let chla-spect-data = csv(
+  "../data/chla.absorption.txt",
+  delimiter: "\t",
+).slice(1)
+#let chlb-spect-data = csv(
+  "../data/chlb.absorption.txt",
+  delimiter: "\t",
+).slice(1)
 
 The full spectrum data was derived by sampling absorption rates at $10"nm"$ intervals from the spectrophotometer's automatic full spectrum curve. The results are shown in @spectral-analysis-sample.
 
@@ -234,7 +245,10 @@ We compare our full spectrum data with the reference spectra of chlorophyll a an
 acetone in our experiment, because we failed to find other publicly available full spectrum reference data.
 
 #figure(
-  rect(inset: 0.5cm, pad(visualize-reference-absorption(chla-spect-data, chlb-spect-data), right: 1em)),
+  rect(inset: 0.5cm, pad(
+    visualize-reference-absorption(chla-spect-data, chlb-spect-data),
+    right: 1em,
+  )),
   caption: [Reference Chlorophyll Absorption Spectra in Diethyl Ether @src_chlorophyll-a-photochem @src_chlorophyll-b-photochem. Blue shows $"Chl"_"a"$ and red shows $"Chl"_"b"$],
 ) <spectral-analysis-reference>
 
@@ -252,7 +266,11 @@ Therefore, we conclude the found dataset to be a viable and accurate source of r
 === Sample spectrum
 
 #figure(
-  rect(inset: 0.5cm, visualize-results-absorption(results-spect-data, chla-spect-data, chlb-spect-data)),
+  rect(inset: 0.5cm, visualize-results-absorption(
+    results-spect-data,
+    chla-spect-data,
+    chlb-spect-data,
+  )),
   caption: [Absorption Spectrum of the Sample (shown in blue) and combined $"Chl"_"a" + "Chl"_"b"$ Reference from @spectral-analysis-reference (shown in dotted black)],
 ) <spectral-analysis-sample>
 
@@ -267,7 +285,9 @@ One possible explanation for this is the presence of other pigments in the sampl
 
 == Chlorophyll Concentration with Instructor's Formula <calculation-with-instructor-formula>
 
-#let results-spect-dict = results-spect-data.map(it => (it.at(0), float(it.at(1)))).to-dict()
+#let results-spect-dict = (
+  results-spect-data.map(it => (it.at(0), float(it.at(1)))).to-dict()
+)
 
 The instructor provided us with a formula to calculate the chlorophyll concentration:
 
@@ -283,9 +303,17 @@ Plugging in the concrete values, shown in @results-important-wavelengths-given-f
 #let calc-instructor-chlb-mg(E_647, E_664) = 20.05 * E_647 - 4.77 * E_664
 #let calc-instructor-total-mg(E_652) = 27.8 * E_652
 
-#let chla-given-formula = calc-instructor-chla-mg(results-spect-dict.at("647"), results-spect-dict.at("664"))
-#let chlb-given-formula = calc-instructor-chlb-mg(results-spect-dict.at("647"), results-spect-dict.at("664"))
-#let total-given-formula = calc-instructor-total-mg(results-spect-dict.at("652"))
+#let chla-given-formula = calc-instructor-chla-mg(
+  results-spect-dict.at("647"),
+  results-spect-dict.at("664"),
+)
+#let chlb-given-formula = calc-instructor-chlb-mg(
+  results-spect-dict.at("647"),
+  results-spect-dict.at("664"),
+)
+#let total-given-formula = calc-instructor-total-mg(
+  results-spect-dict.at("652"),
+)
 
 $c_a space ["mg"/"l"] = 11.78 dot #results-spect-dict.at("664") - 2.29 dot #results-spect-dict.at("647") = bold(#str(chla-given-formula))$ <results-chla-given-formula>
 
@@ -354,10 +382,12 @@ By plugging the values from @concentration-value-table-beer-lambert into these e
 #let V_E = 19.98  // ml
 
 #let calc-lambert-chla-mol(E_647, E_664) = (
-  (E_664 * epsilon_b_647 - E_647 * epsilon_b_664) / (epsilon_a_664 * epsilon_b_647 - epsilon_a_647 * epsilon_b_664)
+  (E_664 * epsilon_b_647 - E_647 * epsilon_b_664)
+    / (epsilon_a_664 * epsilon_b_647 - epsilon_a_647 * epsilon_b_664)
 )
 #let calc-lambert-chlb-mol(E_647, E_664) = (
-  (E_647 * epsilon_a_664 - E_664 * epsilon_a_647) / (epsilon_a_664 * epsilon_b_647 - epsilon_a_647 * epsilon_b_664)
+  (E_647 * epsilon_a_664 - E_664 * epsilon_a_647)
+    / (epsilon_a_664 * epsilon_b_647 - epsilon_a_647 * epsilon_b_664)
 )
 #let calc-chla-mol-to-mg(c_a_mol) = c_a_mol * MG_a * 1000
 #let calc-chlb-mol-to-mg(c_b_mol) = c_b_mol * MG_b * 1000
@@ -452,7 +482,9 @@ With the calculated concentration value in fresh weight for our sample, we want 
 #figure(
   table(
     columns: common-leafy-vegetables-concentrations.len(),
-    table.header(..common-leafy-vegetables-concentrations.map(it => [#it.at(0)])),
+    table.header(..common-leafy-vegetables-concentrations.map(it => [#it.at(
+      0,
+    )])),
     ..common-leafy-vegetables-concentrations.map(it => [#it.at(1)]),
   ),
   caption: [Known concentrations of common leafy vegetables, queried from Gemini 2025, normalized to $"mg"slash"g"$ of fresh weight.],
@@ -525,13 +557,19 @@ We analyze the results of all groups in our class and compare them to our own re
 
 @descriptive-statistics-table-all-groups shows all descriptive statistics of the total chlorophyll concentration in fresh weight for all groups. We can use this information to put our group's results in context.
 
-#let c_total_instructor_undil = calc-undilute-mg_l-mg_g(chla-given-formula + chlb-given-formula, M_P, V_E)
+#let c_total_instructor_undil = calc-undilute-mg_l-mg_g(
+  chla-given-formula + chlb-given-formula,
+  M_P,
+  V_E,
+)
 
 Based on the instructor's formula for the total chlorophyll concentration, our total chlorophyll concentration in fresh weight is $#(calc.round(digits: 4, c_total_instructor_undil)) "mg"slash"g"$. This value lies at the higher end of our data range but is not an outlier; it indicates a result consistent with our experiment. The high value makes sense, as @known-concentrations-normalized shows that brussels sprouts have a very high concentration of chlorophyll.
 
 #figure(
   rect(inset: 0.5cm, boxplot-all-with-our-value(
-    groups-results-addedformula-concentration.map(it => it.total_added_mg_freshweight),
+    groups-results-addedformula-concentration.map(it => {
+      it.total_added_mg_freshweight
+    }),
     c_total_instructor_undil,
   )),
   caption: [Boxplot of all groups' results compared to our results],
@@ -544,7 +582,9 @@ Based on the instructor's formula for the total chlorophyll concentration, our t
 #figure(
   rect(inset: 0.5cm, boxplot-all-per-type(
     groups-results-addedformula-concentration.map(it => it.sample_source),
-    groups-results-addedformula-concentration.map(it => it.total_added_mg_freshweight),
+    groups-results-addedformula-concentration.map(it => {
+      it.total_added_mg_freshweight
+    }),
   )),
   caption: [Boxplot of all groups' results per source material],
 ) <boxplot-all-groups-per-source-material>
@@ -571,8 +611,12 @@ We do not conclude that the calculations or values are catastrophically wrong; a
 
 #figure(
   rect(inset: 0.5cm, plot-difference-raw-final-values(
-    groups-results-addedformula-concentration.map(it => it.total_instructor_mg_l),
-    groups-results-addedformula-concentration.map(it => it.total_added_mg_freshweight),
+    groups-results-addedformula-concentration.map(it => {
+      it.total_instructor_mg_l
+    }),
+    groups-results-addedformula-concentration.map(it => {
+      it.total_added_mg_freshweight
+    }),
   )),
   caption: [Difference between chlorophyll concentration in solution and in fresh weight for all groups, showing the diverge],
 ) <difference-raw-final-values-plot>
@@ -602,18 +646,23 @@ Afterwards, we compare the freshly recalculated total concentration with a total
 
 #figure(
   rect(inset: 0.5cm, plot-calculation-sources-comparisons(
-    groups-results-addedformula-concentration.map(it => it.concentration_freshweight),
-    groups-results-addedformula-concentration.map(it => it.total_instructor_mg_freshweight),
-    groups-results-addedformula-concentration.map(it => it.total_added_mg_freshweight),
+    groups-results-addedformula-concentration.map(it => {
+      it.concentration_freshweight
+    }),
+    groups-results-addedformula-concentration.map(it => {
+      it.total_instructor_mg_freshweight
+    }),
+    groups-results-addedformula-concentration.map(it => {
+      it.total_added_mg_freshweight
+    }),
   )),
   caption: [Comparison between freshly calculated concentrations and other sources using a scatter plot for correlation visualization, showing strong linear correlation between the sources],
 ) <concentration-sources-comparison-plot>
 
 #figure(
-  rect(inset: 0.5cm, scale(85%, visualize-calculation-paths(
-  ), reflow: true)),
+  rect(inset: 0.5cm, scale(85%, visualize-calculation-paths(), reflow: true)),
   caption: [Diagram of the different calculation paths for the total chlorophyll concentration in fresh weight],
-  placement: bottom
+  placement: bottom,
 ) <calculation-paths-diagram>
 
 The different calculation paths are visualized in @calculation-paths-diagram. It shows the different steps of the calculation process and the different sources of data used. It especially highlights the difference between individual concentrations used for the freshly calculated concentrations and filled out concentrations paths.
@@ -628,8 +677,12 @@ Furthermore, @concentration-sources-comparison-plot implies a strong linear corr
 
 #figure(
   rect(inset: 0.5cm, plot-filled-out-vs-freshly-calculated(
-    groups-results-addedformula-concentration.map(it => it.concentration_freshweight),
-    groups-results-addedformula-concentration.map(it => it.total_added_mg_freshweight),
+    groups-results-addedformula-concentration.map(it => {
+      it.concentration_freshweight
+    }),
+    groups-results-addedformula-concentration.map(it => {
+      it.total_added_mg_freshweight
+    }),
   )),
   caption: [Comparison between filled out concentrations and freshly calculated concentrations],
 ) <filled-out-vs-freshly-calculated-plot>
@@ -642,15 +695,19 @@ The instructor's formulas in @instructor-formula-equations  for calculating the 
 
 #figure(
   rect(inset: 0.5cm, plot-652nm-instructor-vs-freshly-calculated(
-    groups-results-addedformula-concentration.map(it => it.total_instructor_mg_freshweight),
-    groups-results-addedformula-concentration.map(it => it.total_added_mg_freshweight),
+    groups-results-addedformula-concentration.map(it => {
+      it.total_instructor_mg_freshweight
+    }),
+    groups-results-addedformula-concentration.map(it => {
+      it.total_added_mg_freshweight
+    }),
   )),
   caption: [Comparison between 652nm instructor's formula and freshly calculated concentrations],
 ) <652nm-instructor-vs-freshly-calculated-plot>
 
-@652nm-instructor-vs-freshly-calculated-plot shows that there is only a small difference between the two sources. Apart from the same outlier as in @filled-out-vs-freshly-calculated-comparison, there seems to be a positive offset in regards to the $652"nm"$ formula. This offset seems to grow proportionally to the concentration and therefore classifies it as a proportional offset. 
+@652nm-instructor-vs-freshly-calculated-plot shows that there is only a small difference between the two sources. Apart from the same outlier as in @filled-out-vs-freshly-calculated-comparison, there seems to be a positive offset in regards to the $652"nm"$ formula. This offset seems to grow proportionally to the concentration and therefore classifies it as a proportional offset.
 
-Interestingly enough, at closer observation of @concentration-sources-comparison-plot, a strong correlation between the 652nm instructor's formula and the filled out concentrations is visible. Indeed, the correlation coefficient is $#(calc.round(digits: 6, correlation(groups-results-addedformula-concentration.map(it => it.total_instructor_mg_freshweight), groups-results-addedformula-concentration.map(it => it.concentration_freshweight))))$, which is practically equivalent to $1$. 
+Interestingly enough, at closer observation of @concentration-sources-comparison-plot, a strong correlation between the 652nm instructor's formula and the filled out concentrations is visible. Indeed, the correlation coefficient is $#(calc.round(digits: 6, correlation(groups-results-addedformula-concentration.map(it => it.total_instructor_mg_freshweight), groups-results-addedformula-concentration.map(it => it.concentration_freshweight))))$, which is practically equivalent to $1$.
 
 All of the above observations lead us to conclude that the instructor's formula is very precise, but has a certain constant percentage accuracy offset. Slightly lowering the factor of $27.8$ in the $E_652$ formula might result in a more accurate calculation (assuming the addition of $"Chl"_a$ and $"Chl"_b$ is the accurate baseline).
 

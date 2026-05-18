@@ -34,7 +34,9 @@
   // Set document-wide styles
   set text(font: "Lato", lang: language)
   set table(
-    fill: (_, row) => if row == 0 { gray.lighten(50%) } else if calc.even(row) { rgb(240, 240, 240) } else { white },
+    fill: (_, row) => if row == 0 { gray.lighten(50%) } else if calc.even(row) {
+      rgb(240, 240, 240)
+    } else { white },
     align: (col, row) => if col == 0 { right } else { left },
     stroke: 1pt,
   )
@@ -144,7 +146,9 @@
   set page(
     header: context [
       #let next-footer = query(selector(<_footer>).after(here())).first()
-      #let top-heading = query(selector(heading.where(level: 1)).before(next-footer.location())).last(default: none)
+      #let top-heading = query(
+        selector(heading.where(level: 1)).before(next-footer.location()),
+      ).last(default: none)
       #set text(size: 9pt)
       #document.title
       #h(1fr)

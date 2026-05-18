@@ -96,10 +96,13 @@ and contribute to broader, less detailed touch perception.
   ]
 
   #place(right + top)[
-    #figure(image("assets/tactile_experiment_scetch.jpg", width: 40%), caption: [
-      Sketch of the experiment\
-      execution
-    ])
+    #figure(
+      image("assets/tactile_experiment_scetch.jpg", width: 40%),
+      caption: [
+        Sketch of the experiment\
+        execution
+      ],
+    )
   ]
 ]
 
@@ -127,41 +130,42 @@ and contribute to broader, less detailed touch perception.
 #let participants-table(male: 0, female: 0) = {
   table(
     columns: (auto, auto),
-    [Participants],
-    [*Amount*],
-    [*Male*],
-    [#male],
-    [*Female*],
-    [#female],
-    [*Total*],
-    [#(male + female)],
+    [Participants], [*Amount*],
+    [*Male*], [#male],
+    [*Female*], [#female],
+    [*Total*], [#(male + female)],
   )
 }
 
 During our analysis, we decided to examine two different datasets:
 
-#stack(dir: ltr, spacing: 5em, [
+#stack(
+  dir: ltr,
+  spacing: 5em,
+  [
 
-  *Our class:*\
-  From year 2025\
-  Class MBI2024
-  #[
-    #show figure: set align(left)
-    #align(left, figure(participants-table(male: 5, female: 5), caption: [
-      Participants of our class
-    ])) <participants-table-our-class>
-  ]
-], [
-  *All years:*\
-  From year 2015 #sym.dash 2025
-  #v(1.25em)
-  #[
-    #show figure: set align(left)
-    #align(left, figure(participants-table(male: 175, female: 186), caption: [
-      Participants of all years
-    ])) <participants-table-all-years>
-  ]
-])
+    *Our class:*\
+    From year 2025\
+    Class MBI2024
+    #[
+      #show figure: set align(left)
+      #align(left, figure(participants-table(male: 5, female: 5), caption: [
+        Participants of our class
+      ])) <participants-table-our-class>
+    ]
+  ],
+  [
+    *All years:*\
+    From year 2015 #sym.dash 2025
+    #v(1.25em)
+    #[
+      #show figure: set align(left)
+      #align(left, figure(participants-table(male: 175, female: 186), caption: [
+        Participants of all years
+      ])) <participants-table-all-years>
+    ]
+  ],
+)
 
 We mainly focused on the analysis of the "Our class" dataset, as it is the most recent dataset and more personal to us.
 The analysis of the "All years" dataset is only for sanity checking and comparison purposes.
@@ -195,9 +199,14 @@ The analysis of the "All years" dataset is only for sanity checking and comparis
 
 === Overview <our-class-overview>
 
-#figure(descriptive-statistics("../analysis/out/current-year/descriptive_statistics.csv"), caption: [
-  Descriptive statistics of our class
-]) <descriptive-statistics-our-class>
+#figure(
+  descriptive-statistics(
+    "../analysis/out/current-year/descriptive_statistics.csv",
+  ),
+  caption: [
+    Descriptive statistics of our class
+  ],
+) <descriptive-statistics-our-class>
 
 @descriptive-statistics-our-class shows the descriptive analysis of our class dataset. Displayed values are rounded to
 two decimal places. We observe that the highest standard deviation is in the forearm region, which could be explained by
@@ -211,17 +220,25 @@ the fact that forearm sensitivity varies greatly depending on the radial distanc
   @our-class-body-regions-boxplot clearly demonstrates the differences in tactile sensitivity between the various body
   regions. The regions can be ordered from highest to lowest sensitivity as follows:
 
-  #align(top, grid(columns: 2, gutter: 1em, box(width: auto)[
-    + Fingertip
-    + Palm
-    + Back of hand
-    + Forearm
-    + Upper back
-  ], box(width: 1fr)[
-    #figure(image("assets/our-class_body_regions_boxplot.png", width: 100%), caption: [
-      Boxplot of tactile sensitivity in our class per body region
-    ]) <our-class-body-regions-boxplot>
-  ]))
+  #align(top, grid(
+    columns: 2,
+    gutter: 1em,
+    box(width: auto)[
+      + Fingertip
+      + Palm
+      + Back of hand
+      + Forearm
+      + Upper back
+    ],
+    box(width: 1fr)[
+      #figure(
+        image("assets/our-class_body_regions_boxplot.png", width: 100%),
+        caption: [
+          Boxplot of tactile sensitivity in our class per body region
+        ],
+      ) <our-class-body-regions-boxplot>
+    ],
+  ))
 ]
 
 #let t-test-body-regions(csv-path) = {
@@ -236,7 +253,10 @@ the fact that forearm sensitivity varies greatly depending on the radial distanc
       row.region1 = row.at("Region 1")
       row.region2 = row.at("Region 2")
       row.p_value = calc.round(float(row.at("p-value")), digits: 3)
-      row.t_statistic = calc.abs(calc.round(float(row.at("t-statistic")), digits: 3))
+      row.t_statistic = calc.abs(calc.round(
+        float(row.at("t-statistic")),
+        digits: 3,
+      ))
       row.significant = row.at("Significant").contains("True")
 
       let colored-cell(content) = if row.significant {
@@ -245,7 +265,12 @@ the fact that forearm sensitivity varies greatly depending on the radial distanc
         table.cell(fill: red.transparentize(70%), content)
       }
 
-      ([#row.region1], [#row.region2], [#sym.tilde.op #row.t_statistic], colored-cell[#sym.tilde.op #row.p_value],)
+      (
+        [#row.region1],
+        [#row.region2],
+        [#sym.tilde.op #row.t_statistic],
+        colored-cell[#sym.tilde.op #row.p_value],
+      )
     },
   )
 }
@@ -259,9 +284,12 @@ between:
 - back of hand and forearm
 - back and forearm
 
-#figure(t-test-body-regions("../analysis/out/current-year/region_comparisons.csv"), caption: [
-  t-test of tactile sensitivity in our class comparing body regions
-]) <t-test-body-regions-our-class>
+#figure(
+  t-test-body-regions("../analysis/out/current-year/region_comparisons.csv"),
+  caption: [
+    t-test of tactile sensitivity in our class comparing body regions
+  ],
+) <t-test-body-regions-our-class>
 
 Despite our relatively small sample size, the results are consistent with our expectations that different regions have
 different tactile sensitivities.
@@ -280,7 +308,10 @@ different tactile sensitivities.
     ..for row in data {
       row.region = row.at("Body Region")
       row.p_value = calc.round(float(row.at("p-value")), digits: 3)
-      row.t_statistic = calc.abs(calc.round(float(row.at("t-statistic")), digits: 3))
+      row.t_statistic = calc.abs(calc.round(
+        float(row.at("t-statistic")),
+        digits: 3,
+      ))
       row.significant = row.at("Significant").contains("True")
 
       row.mean_male = calc.round(float(row.at("Male Mean")), digits: 2)
@@ -294,13 +325,19 @@ different tactile sensitivities.
         table.cell(fill: red.transparentize(70%), content)
       }
 
-      ([#row.region], [
-        #row.n_male Samples\
-        Mean: #row.mean_male mm
-      ], [
-        #row.n_female Samples\
-        Mean: #row.mean_female mm
-      ], [#sym.tilde.op #row.t_statistic], colored-cell[#sym.tilde.op #row.p_value],)
+      (
+        [#row.region],
+        [
+          #row.n_male Samples\
+          Mean: #row.mean_male mm
+        ],
+        [
+          #row.n_female Samples\
+          Mean: #row.mean_female mm
+        ],
+        [#sym.tilde.op #row.t_statistic],
+        colored-cell[#sym.tilde.op #row.p_value],
+      )
     },
   )
 }
@@ -313,9 +350,14 @@ To analyze differences between genders, we performed a t-test for each body regi
 shows the results of the t-test, all test results are rounded to three decimal places, and group means are rounded to
 two decimal places. The results show no significant differences between genders in any of the body regions.
 
-#figure(gender-comparison-table("../analysis/out/current-year/gender_comparisons.csv"), caption: [
-  t-test of tactile sensitivity in our class comparing gender per body region
-]) <gender-comparison-table-our-class>
+#figure(
+  gender-comparison-table(
+    "../analysis/out/current-year/gender_comparisons.csv",
+  ),
+  caption: [
+    t-test of tactile sensitivity in our class comparing gender per body region
+  ],
+) <gender-comparison-table-our-class>
 
 We were unable to process the back region, as data was available only from male participants.
 
@@ -329,9 +371,14 @@ reliable results.
 @descriptive-statistics-all-years shows the descriptive statistics of the all-years dataset. There is a higher standard
 deviation in the all-years dataset, which is expected due to the larger sample size.
 
-#figure(descriptive-statistics("../analysis/out/all-years/descriptive_statistics.csv"), caption: [
-  Descriptive statistics of all years
-]) <descriptive-statistics-all-years>
+#figure(
+  descriptive-statistics(
+    "../analysis/out/all-years/descriptive_statistics.csv",
+  ),
+  caption: [
+    Descriptive statistics of all years
+  ],
+) <descriptive-statistics-all-years>
 
 @all-years-body-regions-distribution displays the distribution of tactile sensitivity in all years per body region. It
 supports our general conclusion from @our-class-overview regarding the order of regions from highest to lowest
@@ -347,9 +394,12 @@ sensitivity.
 sensitivities. Displayed values are again rounded to three decimal places. We suspect that the larger sample size of the
 all-years dataset accounts for the higher accuracy and more pronounced features of the results.
 
-#figure(t-test-body-regions("../analysis/out/all-years/region_comparisons.csv"), caption: [
-  t-test of tactile sensitivity in all years comparing body regions
-]) <t-test-body-regions-all-years>
+#figure(
+  t-test-body-regions("../analysis/out/all-years/region_comparisons.csv"),
+  caption: [
+    t-test of tactile sensitivity in all years comparing body regions
+  ],
+) <t-test-body-regions-all-years>
 
 === Gender comparison
 
@@ -357,9 +407,12 @@ Performing the gender analysis on the all-years dataset led to the same results 
 found no significant differences between genders in any of the body regions. @all-years-gender-comparison-table shows
 the detailed results of the t-tests.
 
-#figure(gender-comparison-table("../analysis/out/all-years/gender_comparisons.csv"), caption: [
-  t-test of tactile sensitivity in all years comparing gender per body region
-]) <all-years-gender-comparison-table>
+#figure(
+  gender-comparison-table("../analysis/out/all-years/gender_comparisons.csv"),
+  caption: [
+    t-test of tactile sensitivity in all years comparing gender per body region
+  ],
+) <all-years-gender-comparison-table>
 
 Various studies have shown that female participants tend to have higher tactile sensitivity than male participants. This
 could not be replicated in our analysis. Possible explanations include an insufficient sample size in the all-years
@@ -386,7 +439,11 @@ neuroscience, clinical practice, evolutionary biology, and technology design.
   + "#title" at #link(url) (#date)
 ]
 
-#source("Merkel nerve ending - Wikipedia", "https://en.wikipedia.org/wiki/Merkel_nerve_ending", "2025-06-16")
+#source(
+  "Merkel nerve ending - Wikipedia",
+  "https://en.wikipedia.org/wiki/Merkel_nerve_ending",
+  "2025-06-16",
+)
 #source(
   "Touch: The Skin – Foundations of Neuroscience",
   "https://openbooks.lib.msu.edu/neuroscience/chapter/touch-the-skin/",
@@ -397,8 +454,16 @@ neuroscience, clinical practice, evolutionary biology, and technology design.
   "https://www.ncbi.nlm.nih.gov/books/NBK518980/",
   "2025-06-16",
 )
-#source("Pacinian corpuscle - Wikipedia", "https://en.wikipedia.org/wiki/Pacinian_corpuscle", "2025-06-16")
-#source("Two-point discrimination - Wikipedia", "https://en.wikipedia.org/wiki/Two-point_discrimination", "2025-06-16")
+#source(
+  "Pacinian corpuscle - Wikipedia",
+  "https://en.wikipedia.org/wiki/Pacinian_corpuscle",
+  "2025-06-16",
+)
+#source(
+  "Two-point discrimination - Wikipedia",
+  "https://en.wikipedia.org/wiki/Two-point_discrimination",
+  "2025-06-16",
+)
 #source(
   "Neuroscience for Kids - Two Point Discrimination",
   "https://faculty.washington.edu/chudler/twopt.html",

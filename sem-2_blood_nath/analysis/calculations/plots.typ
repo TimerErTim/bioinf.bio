@@ -1,13 +1,20 @@
 #import "@preview/lilaq:0.6.0" as lq
 #import "data-processing.typ": (
-  data-acute-erkrankungen-group, data-all-group, data-allergies-group, data-current-year-group, data-dict,
-  stats-acute-erkrankungen-group, stats-all-group, stats-allergies-group, stats-current-year-group,
+  data-acute-erkrankungen-group, data-all-group, data-allergies-group,
+  data-current-year-group, data-dict, stats-acute-erkrankungen-group,
+  stats-all-group, stats-allergies-group, stats-current-year-group,
 )
 #import "../../../lib/maths/statistics.typ": mean, median, stddev
 
-#let heatmap-leukozyten-difference(width: 60%, height: 100%, data-transform: it => it) = {
+#let heatmap-leukozyten-difference(
+  width: 60%,
+  height: 100%,
+  data-transform: it => it,
+) = {
   show: lq.set-diagram(width: width, height: height)
-  let filtered-data = data-dict.filter(it => it.at("unprocessable", default: false) == false).rev()
+  let filtered-data = data-dict
+    .filter(it => it.at("unprocessable", default: false) == false)
+    .rev()
   let data = data-transform(filtered-data)
 
   let mesh = lq.colormesh(
@@ -32,9 +39,12 @@
           .enumerate(),
       ),
       xaxis: (
-        ticks: data.at(0).chi-square-deviations.keys()
+        ticks: data
+          .at(0)
+          .chi-square-deviations
+          .keys()
           .map(rotate.with(-60deg, reflow: true))
-        .enumerate(),
+          .enumerate(),
       ),
       mesh,
     ),
@@ -77,27 +87,39 @@
   let relevant-keys = stats-all-group.keys().filter(it => it != "Gesamt")
   let color-map = lq.color.map.petroff10
   let boxplots = for (i, (label, subset)) in group-labels
-      .zip((stats-all-group, stats-current-year-group, stats-allergies-group, stats-acute-erkrankungen-group))
-      .enumerate() {
-      (lq.hboxplot(
+    .zip((
+      stats-all-group,
+      stats-current-year-group,
+      stats-allergies-group,
+      stats-acute-erkrankungen-group,
+    ))
+    .enumerate() {
+    (
+      lq.hboxplot(
         label: [#label],
         stroke: color-map.at(i).darken(25%),
         fill: color-map.at(i).lighten(10%),
         median: color-map.at(i).darken(75%),
-        y: range(relevant-keys.len()).map(it => it + (1 - i / (group-labels.len() - 1) - 0.5) * 0.6),
+        y: range(relevant-keys.len()).map(it => (
+          it + (1 - i / (group-labels.len() - 1) - 0.5) * 0.6
+        )),
         width: 0.75 / group-labels.len(),
         cap-length: 0.5 / group-labels.len(),
         outlier-size: 2pt,
         outlier-stroke: color-map.at(i).darken(50%),
         ..relevant-keys.map(key => subset.at(key).values),
-      ),)
-    }
+      ),
+    )
+  }
 
   lq.diagram(
     height: 10cm,
     width: 100%,
     yaxis: (
-      ticks: relevant-keys.map(rotate.with(-40deg, reflow: true)).map(text.with(size: 8pt)).enumerate(),
+      ticks: relevant-keys
+        .map(rotate.with(-40deg, reflow: true))
+        .map(text.with(size: 8pt))
+        .enumerate(),
     ),
     ..boxplots,
   )

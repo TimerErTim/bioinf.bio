@@ -20,15 +20,18 @@
 }
 
 /// Calculates the variance of a numeric array.
-/// - population: if true, calculates population variance (division by N), 
+/// - population: if true, calculates population variance (division by N),
 ///               otherwise calculates sample variance (division by N-1).
 #let variance(data, population: false) = {
   let n = data.len()
-  assert(n > (if population { 0 } else { 1 }), message: "Insufficient data points for variance calculation.")
-  
+  assert(
+    n > (if population { 0 } else { 1 }),
+    message: "Insufficient data points for variance calculation.",
+  )
+
   let avg = mean(data)
   let sum-sq-diff = data.map(x => calc.pow(x - avg, 2)).sum()
-  
+
   let divisor = if population { n } else { n - 1 }
   sum-sq-diff / divisor
 }
@@ -62,16 +65,19 @@
 #let covariance(data-x, data-y, population: false) = {
   let n = data-x.len()
   assert(n == data-y.len(), message: "Datasets must have the same length.")
-  assert(n > (if population { 0 } else { 1 }), message: "Insufficient data points for covariance calculation.")
-  
+  assert(
+    n > (if population { 0 } else { 1 }),
+    message: "Insufficient data points for covariance calculation.",
+  )
+
   let avg-x = mean(data-x)
   let avg-y = mean(data-y)
-  
+
   let sum-prod-diff = 0.0
   for i in range(n) {
     sum-prod-diff += (data-x.at(i) - avg-x) * (data-y.at(i) - avg-y)
   }
-  
+
   let divisor = if population { n } else { n - 1 }
   sum-prod-diff / divisor
 }
@@ -81,11 +87,11 @@
   let cov = covariance(data-x, data-y)
   let std-x = stddev(data-x)
   let std-y = stddev(data-y)
-  
+
   if std-x == 0 or std-y == 0 {
     return 0
   }
-  
+
   cov / (std-x * std-y)
 }
 
@@ -102,14 +108,14 @@
       counts.insert(key, 1)
     }
   }
-  
+
   let max-count = 0
   for val in counts.values() {
     if val > max-count {
       max-count = val
     }
   }
-  
+
   let modes = ()
   for (key, count) in counts {
     if count == max-count {
@@ -142,18 +148,22 @@
 }
 
 #let chi-square-teststatistic(expected, observed) = {
-  let deviations = observed.zip(expected).map(((observed, expected)) => calc.pow((observed - expected), 2) / expected)
+  let deviations = observed
+    .zip(expected)
+    .map(((observed, expected)) => (
+      calc.pow((observed - expected), 2) / expected
+    ))
   let t = deviations.sum()
   (
     "deviations": deviations,
-    "t": t
+    "t": t,
   )
 }
 
 #let normal-cdf-upper(z) = {
   // Berechnet das obere Ende (1 - Phi(z)) der Standardnormalverteilung
   let abs-z = calc.abs(z)
-  
+
   // Konstanten nach Abramowitz & Stegun (Formel 26.2.17)
   let p = 0.2316419
   let b1 = 0.319381530
@@ -161,22 +171,25 @@
   let b3 = 1.781477937
   let b4 = -1.821255978
   let b5 = 1.330274429
-  
+
   let t = 1 / (1 + p * abs-z)
-  
+
   // Dichtefunktion Z(z)
   let pi = 3.141592653589793
   let Z-val = calc.exp(-calc.pow(abs-z, 2) / 2) / calc.sqrt(2 * pi)
-  
+
   // Approximation des oberen Schleifenendes
-  let upper-tail = Z-val * (
-    b1 * t 
-    + b2 * calc.pow(t, 2) 
-    + b3 * calc.pow(t, 3) 
-    + b4 * calc.pow(t, 4) 
-    + b5 * calc.pow(t, 5)
+  let upper-tail = (
+    Z-val
+      * (
+        b1 * t
+          + b2 * calc.pow(t, 2)
+          + b3 * calc.pow(t, 3)
+          + b4 * calc.pow(t, 4)
+          + b5 * calc.pow(t, 5)
+      )
   )
-  
+
   if z >= 0 {
     return upper-tail
   } else {
@@ -188,7 +201,7 @@
   // Sicherheitsabfragen für unzulässige Werte
   if x2 < 0 or df <= 0 { return 1.0 }
   if x2 == 0 { return 1.0 }
-  
+
   if df == 1 {
     // Exact shortcut: Chi-square(1) is just Z^2
     let z = calc.sqrt(x2)
@@ -197,7 +210,7 @@
     // Wilson-Hilferty-Transformation for df >= 2
     let v = 2 / (9 * df)
     let ratio = x2 / df
-    let z = (calc.pow(ratio, 1/3) - (1 - v)) / calc.sqrt(v)
+    let z = (calc.pow(ratio, 1 / 3) - (1 - v)) / calc.sqrt(v)
     return normal-cdf-upper(z)
   }
 }
@@ -210,24 +223,27 @@
   // Compute the inverse error function approx for z_alpha based on Abramowitz & Stegun (7.1.26)
   // We need z_alpha = sqrt(2) * erfinv(2 * (1 - alpha) - 1)
   // We'll use the approximation for erfinv.
-  let a = 0.207  // Magic constant for erfinv approximation
+  let a = 0.207 // Magic constant for erfinv approximation
   let p = 2 * (1 - alpha) - 1
   // avoid edge cases
   let sign = if p >= 0 { 1 } else { -1 }
   let ln1mp2 = calc.ln(1 - p * p)
-  let erfinv = sign * calc.sqrt(
-      calc.sqrt(
-        calc.pow((2 / (calc.pi * a)) + (ln1mp2 / 2), 2)
-        - (ln1mp2 / a)
-      ) - ((2 / (calc.pi * a)) + (ln1mp2 / 2))
-    )
+  let erfinv = (
+    sign
+      * calc.sqrt(
+        calc.sqrt(
+          calc.pow((2 / (calc.pi * a)) + (ln1mp2 / 2), 2) - (ln1mp2 / a),
+        )
+          - ((2 / (calc.pi * a)) + (ln1mp2 / 2)),
+      )
+  )
 
   let z_alpha = calc.sqrt(2) * erfinv
 
   // Wilson-Hilferty Formel
   let v = 2 / (9 * df)
   let critical-value = df * calc.pow(1 - v + z_alpha * calc.sqrt(v), 3)
-  
+
   return critical-value
 }
 
@@ -265,13 +281,25 @@
 )
 
 #let relative-error(entries-expected, entries-observed) = {
-  let errors = entries-expected.zip(entries-observed).map(((expected, observed)) => calc.abs(expected - observed) / expected)
+  let errors = entries-expected
+    .zip(entries-observed)
+    .map(((expected, observed)) => calc.abs(expected - observed) / expected)
   errors.sum() / errors.len()
 }
 
-#let is-difference-significant(entries-expected, entries-observed, alpha: 0.05) = {
-  let test-statistics = chi-square-teststatistic(entries-expected, entries-observed)
-  let critical-value = chi-square-ablehnungsbereich(df: entries-expected.len() - 1, alpha: alpha)
+#let is-difference-significant(
+  entries-expected,
+  entries-observed,
+  alpha: 0.05,
+) = {
+  let test-statistics = chi-square-teststatistic(
+    entries-expected,
+    entries-observed,
+  )
+  let critical-value = chi-square-ablehnungsbereich(
+    df: entries-expected.len() - 1,
+    alpha: alpha,
+  )
   test-statistics.t > critical-value
 }
 
@@ -293,9 +321,17 @@
       expected-rows.at(y).at(x) = total-horizontal * total-vertical / total-sum
     }
   }
-  
-  let test-statistics = rows.zip(expected-rows).map(((observed, expected)) => chi-square-teststatistic(expected, observed).t).sum()
-  let critical-value = chi-square-ablehnungsbereich(df: (rows.len() - 1) * (rows.at(0).len() - 1), alpha: alpha)
+
+  let test-statistics = rows
+    .zip(expected-rows)
+    .map(((observed, expected)) => {
+      chi-square-teststatistic(expected, observed).t
+    })
+    .sum()
+  let critical-value = chi-square-ablehnungsbereich(
+    df: (rows.len() - 1) * (rows.at(0).len() - 1),
+    alpha: alpha,
+  )
   test-statistics > critical-value
 }
 
