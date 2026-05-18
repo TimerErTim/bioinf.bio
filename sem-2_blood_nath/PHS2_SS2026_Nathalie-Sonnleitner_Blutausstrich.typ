@@ -388,7 +388,7 @@ Dieses Kapitel dient als methodische Referenz für nachfolgende statistische Ver
   plot
 }
 
-Bei @table-chi-square-anpassungstest-mbi-2025-vs-reference zeigt der p-Wert von #calc.round(digits: 2, test-results.p-value * 100)% erneut signifikante Abweichungen. @t-tests-mbi-2025-vs-reference zeigt, dass lediglich die eosinophilen Granulozyten nicht signifikant differieren, im Gegensatz zum Gesamtkollektiv. Basophile traten im Jahrgang 2025 nicht auf und konnten nicht getestet werden.
+Bei @table-chi-square-anpassungstest-mbi-2025-vs-reference ergibt der $chi^2$-Wert von #calc.round(digits: 2, test-results.t-value) einen p-Wert von #calc.round(digits: 2, test-results.p-value * 100)%, der erneut signifikante Abweichungen bedeutet. @t-tests-mbi-2025-vs-reference zeigt, dass lediglich die eosinophilen Granulozyten nicht signifikant differieren, im Gegensatz zum Gesamtkollektiv. Basophile traten im Jahrgang 2025 nicht auf und konnten nicht getestet werden.
 
 #{
   show: it => [#it <t-tests-mbi-2025-vs-reference>]
