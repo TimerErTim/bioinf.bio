@@ -1,5 +1,5 @@
 #import "../../../lib/maths/statistics.typ": (
-  chi-square-ablehnungsbereich, chi-square-teststatistic, mean, median, stddev,
+  chi-square-anpassungstest, chi-square-teststatistic, mean, median, stddev, chi-square-pvalue
 )
 
 #let reference-data = json("../data/reference_values.json")
@@ -19,7 +19,7 @@
   "Monozyten": (adult-leukozyten-reference-data.at("Monozyten"),),
   "Lymphozyten": (adult-leukozyten-reference-data.at("Lymphozyten"),),
 )
-#let adult-leukozyten-reference-data-observed-format = {
+#let adult-leukozyten-reference-data-probs = {
   let unnormalized = _observed-to-reference-lable-map
     .pairs()
     .map(((key, values)) => (
@@ -31,7 +31,7 @@
 }
 
 #let chi-square-teststatistic-adult-leukozyten(entries-observed) = {
-  let reference-probs = adult-leukozyten-reference-data-observed-format
+  let reference-probs = adult-leukozyten-reference-data-probs
   let observed-counts = reference-probs
     .pairs()
     .map(((key, _)) => entries-observed.at(key))
@@ -48,11 +48,7 @@
   alpha: 0.05,
 ) = {
   (
-    chi-square-teststatistic-adult-leukozyten(entries-observed).t
-      > chi-square-ablehnungsbereich(
-        df: entries-observed.len() - 1,
-        alpha: alpha,
-      )
+    chi-square-pvalue(chi-square-teststatistic-adult-leukozyten(entries-observed).t, df: entries-observed.len() - 1) < alpha
   )
 }
 

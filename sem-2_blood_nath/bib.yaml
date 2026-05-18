@@ -89,3 +89,22 @@ src_doccheck_basophil:
   url: 
     value: https://flexikon.doccheck.com/de/Basophiler_Granulozyt
     date: 2026-05-17
+
+src_dreiseitl:
+  type: misc
+  author: FH-Prof. PD DI Dr. Stephan Dreiseitl
+  language: de
+  date: 2026-05-05
+  location: Softwarepark, Hagenberg
+  parent: 
+    type: conference
+    title: Statistics Lecture
+  
+src_arcsin_squareroot_transform:
+  type: report
+  title: "Arcsine Square Root Transform"
+  publisher: MetricGate
+  url:
+    value: https://metricgate.com/docs/arcsine-square-root-transform/
+    date: 2026-05-18
+  date: 2024-10-16

@@ -257,7 +257,7 @@ Hingegen sind akute Erkrankungen oft die Ursache von:
 
     - *Beobachtung:* Die ungefärbten sowie die gefärbten Blutausstriche sorgfältig mikroskopisch betrachten und fotografisch dokumentieren.
     - *Auszählung:* Die Leukozyten durch systematisches Führen des Sichtfelds in „Schlangenlinien“ über das Präparat auszählen.
-    - *Differenzierung:* Anhand eines histologischen Atlas oder Vergleichspräparaten die verschiedenen Leukozytentypen identifizieren. Die Ergebnisse (mononukleäre Zellen: Lymphozyten, Monozyten; Granulozyten: Neutrophile, Eosinophile, Basophile) in eine Tabelle und in ein Liniendiagramm eintragen.
+    - *Differenzierung:* Anhand eines histologischen Atlas oder Vergleichspräparaten die verschiedenen Leukozytentypen identifizieren. Die Ergebnisse (mononukleäre Zellen: Lymphozyten, Monozyten; Granulozyten: Neutrophile, Eosinophile, Basophile) in eine Tabelle eintragen.
     - *Statistik:* Die absolute Anzahl und prozentuale Verteilung der Leukozytenarten erfassen, Bilder der Zelltypen ins Protokoll aufnehmen und die eigenen Werte mit Literaturangaben vergleichen.
   ])
 })
@@ -272,14 +272,11 @@ Hingegen sind akute Erkrankungen oft die Ursache von:
   description: "Ergebnisse der Blutausstrich-Messungen",
 )
 
-#import "../lib/maths/statistics.typ": (
-  chi-square-ablehnungsbereich, chi-square-teststatistic, chisq-pvalue,
-)
 #import "analysis/calculations/plots.typ": (
   boxplot-leukozyten, heatmap-leukozyten-difference,
-  table-descriptive-statistics,
+  table-descriptive-statistics, table-chi-square-anpassungstest, table-one-sample-t-tests, table-chi-square-independence-test, table-two-sample-t-tests
 )
-#import "analysis/calculations/data-processing.typ": data-dict
+#import "analysis/calculations/data-processing.typ": data-all-group, data-current-year-group, data-allergies-group, data-acute-erkrankungen-group, stats-all-group, stats-current-year-group, stats-allergies-group, stats-acute-erkrankungen-group, stats-for-set
 
 == Beobachtung
 
@@ -313,7 +310,7 @@ Dieser Trend ist auch in @boxplot-leukozyten erkennbar. Diese Darstellung zeigt 
 
 #{
   show: it => [#it <boxplot-leukozyten>]
-  show: figure.with(caption: [Boxplot der Leukozytenzahlen.])
+  show: figure.with(caption: [Boxplot der relativen Anteile der verschiedenen Leukozytenarten im Bezug auf der Gesamtleukozytenzahl.])
   show: rect
   boxplot-leukozyten
 }
@@ -322,35 +319,176 @@ Dieser Trend ist auch in @boxplot-leukozyten erkennbar. Diese Darstellung zeigt 
 
 Folgende Hypothesen sollen durch das Widerlegen ihrere Alternativhypothese überprüft werden:
 - Alle MBI Studenten haben eine signifikant andere Verteilung der Leukozytenarten als die Referenzliteratur.
-- Allergiker haben eine signifikant andere Verteilung der Leukozytenarten als die Grundgesamtheit.
-- Akute Erkrankungen haben eine signifikant andere Verteilung der Leukozytenarten als die Grundgesamtheit.
-- Der Erwartungswert der eosinophilen Anteile in Allergikern ist signifikant höher als der in der Grundgesamtheit.
-- Der Erwartungswert der basophilen Anteile in Allergikern ist signifikant höher als der in der Grundgesamtheit.
-- Der Erwartungswert der neutrophilen Anteile in akuten Erkrankungen ist signifikant höher als der in der Grundgesamtheit.
-- Der Erwartungswert der Monozytenanteile in akuten Erkrankungen ist signifikant höher als der in der Grundgesamtheit.
+- Der Jahrgang "MBI 2025" hat eine signifikant andere Verteilung der Leukozytenarten als die Referenzliteratur.
+- Allergiker haben eine signifikant andere Verteilung der Leukozytenarten als alle MBI Studenten.
+- Akute Erkrankungen haben eine signifikant andere Verteilung der Leukozytenarten als alle MBI Studenten.
+- Der Erwartungswert der eosinophilen Anteile in Allergikern ist signifikant höher als der in allen MBI Studenten.
+- Der Erwartungswert der basophilen Anteile in Allergikern ist signifikant höher als der in allen MBI Studenten.
+- Der Erwartungswert der neutrophilen Anteile in akuten Erkrankungen ist signifikant höher als der in allen MBI Studenten.
+- Der Erwartungswert der Monozytenanteile in akuten Erkrankungen ist signifikant höher als der in allen MBI Studenten.
 
-Die in @reference-values-adult-table angegebenen Referenzwerte für die relative Zellanzahl bei Erwachsenen wurden für die Auswertung herangezogen#footnote[konkret: Mittelwert des Referenzbereichs]. Sämtliche statistischen Tests wurden mit einem Signifikanzniveau von #sym.alpha = 5% durchgeführt.
+Die in @reference-values-adult-table angegebenen Referenzwerte für die relative Zellanzahl bei Erwachsenen werden für die Auswertung herangezogen#footnote[konkret: Mittelwert des Referenzbereichs]. Sämtliche statistischen Tests werden mit einem Signifikanzniveau von #sym.alpha = 5% durchgeführt.
 
-#{}
+==== MBI Studenten vs. Referenzliteratur <mbi-students-vs-reference-literature>
+
+Es wird ein $chi^2$-Anpassungstest durchgeführt, um zu prüfen, ob die Verteilung der Leukozytenarten in den MBI Studenten signifikant aus der Referenzliteratur abweicht. Mit diesem Test lässt sich eine Gleichheit der Verteilung nicht signifikant bestätigen. Sie könnte nur widerlegt werden. Dies ist für diesen Test naturbedingt akzeptabel @src_dreiseitl.
+
+Bei der Durchführung des Tests werden die absoluten Zellzählungen über alle Testpersonen aufaddiert. Diese Kategorienwerte werden für den Anpassungstest genutzt.
+
+#let (plot, test-results) = table-chi-square-anpassungstest(data: data-all-group)
+#{
+  show: it => [#it <table-chi-square-anpassungstest-all-vs-reference>]
+  show: figure.with(
+    caption: [Tabelle des $chi^2$-Anpassungstests für die Verteilung der Leukozytenarten aller MBI Studenten in Bezug auf die Referenzliteratur.],
+  )
+  plot
+}
+
+@table-chi-square-anpassungstest-all-vs-reference ergibt einen $chi^2$-Wert von #calc.round(digits: 2, test-results.t-value) und einen p-Wert von #calc.round(digits: 2, test-results.p-value * 100)%. Da $#calc.round(digits: 2, test-results.p-value * 100)% < alpha =5%$, wird die Nullhypothese, dass die Verteilung der Leukozytenarten in den MBI Studenten gleich der Referenzliteratur ist, abgelehnt. Auch @heatmap-leukozyten-difference-all-vs-reference zeigt recht klare Abweuchungstrends über den Großteil der Probanten hinweg.
 
 #{
+  show: it => [#it <heatmap-leukozyten-difference-all-vs-reference>]
   show: figure.with(
-    caption: [Heatmap der relativen Abweichungen der Leukozytenzahlen von den Referenzwerten.],
+    caption: [Heatmap der relativen Abweichungen der Leukozytenzahlen aller individuellen MBI Studenten von den Referenzwerten.],
+    placement: auto
   )
   show: rect
-  heatmap-leukozyten-difference(height: 6cm, data-transform: it => it.filter(
-    it => it.has-allergy,
+  heatmap-leukozyten-difference(
+    title: [Abweichungen aller MBI Studenten von den Referenzwerten.],
+    height: 12cm, width: 100%)
+}
+
+Alternativ zum $chi^2$-Anpassungstest wird folgend auch ein t-Test für jeden Zelltyp durchgeführt, um zu prüfen, ob dessen Erwartungswert signifikant von der Referenzliteratur abweicht. Da dieser Test normalverteilte Daten vorraussetzt, müssen die prozentualen Anteile $p$ mit $p^* = arcsin(sqrt(p))$ transformiert werden @src_arcsin_squareroot_transform.
+
+#{
+  show: it => [#it <t-tests-all-vs-reference>]
+  show: figure.with(
+    caption: [Tabelle der t-Tests für die Verteilung der Leukozytenarten aller MBI Studenten in Bezug auf die Referenzliteratur.],
+    //placement: auto
+  )
+  table-one-sample-t-tests(stats: stats-all-group)
+}
+
+Die Ergebnisse des t-Tests in @t-tests-all-vs-reference bestätigen die Ergebnisse des $chi^2$-Anpassungstests. Alle Leukozytentypen weichen signifikant von der Referenzliteratur ab.
+
+Dieses Kapitel dient als Referenz für weiteres statistisches Vorgehen in den nachfolgenden Abschnitten. Abweichungen und neu etablierte Standardvorgehen werden in diesen bei Bedarf erläutert. 
+
+==== MBI 2025 vs. Referenzliteratur <mbi-2025-vs-reference-literature>
+
+#let (plot, test-results) = table-chi-square-anpassungstest(data: data-current-year-group)
+#{
+  show: it => [#it <table-chi-square-anpassungstest-mbi-2025-vs-reference>]
+  show: figure.with(
+    caption: [Tabelle des $chi^2$-Anpassungstests für die Verteilung der Leukozytenarten des Jahrgangs "MBI 2025" in Bezug auf die Referenzliteratur.],
+  )
+  plot
+}
+
+Gleiches Vorgehen zeigt bei @table-chi-square-anpassungstest-mbi-2025-vs-reference einen p-Wert von #calc.round(digits: 2, test-results.p-value * 100)%. Auch der MBI 2025 Jahrgang weicht signifikant von der Referenzliteratur ab. Betrachted man @t-tests-mbi-2025-vs-reference, stellt man fest, dass die eosinophilen Granulozyten konträr zu @mbi-students-vs-reference-literature nicht signifikant von den Refrenzwerten in der Literatur abweichen. Basophile konnten nicht getestet werden, da sie nicht im Jahrgang vertreten sind.
+
+#{
+  show: it => [#it <t-tests-mbi-2025-vs-reference>]
+  show: figure.with(
+    caption: [Tabelle der t-Tests für die Verteilung der Leukozytenarten des Jahrgangs "MBI 2025" in Bezug auf die Referenzliteratur.],
+  )
+  table-one-sample-t-tests(stats: stats-current-year-group)
+}
+
+
+==== Allergiker vs. restliche MBI Studenten <allergies-vs-mbi-students>
+
+#let (plot, test-results) = table-chi-square-independence-test((
+  label: "Allergiker",
+  data: data-allergies-group,
+), (
+  label: "Restliche Probanten",
+  data: data-all-group.filter(it => not it.has-allergy),
+))
+
+Die Unabhängigkeit der beiden Gruppen wird durch einen $chi^2$-Unabhängigkeitstest überprüft und soll verworfen werden. Angewandt auf @chi-square-independence-test-allergies-vs-mbi-students ergibt sich bei diesem Standardvorgehen ein $chi^2$-Wert von #calc.round(digits: 2, test-results.test-statistics) und ein p-Wert von #calc.round(digits: 2, test-results.p-value * 100)%. Da $#calc.round(digits: 2, test-results.p-value * 100)% lt.not alpha = 5%$, wird die Nullhypothese, dass die Verteilung der Leukozytenarten in den Allergikern und restlichen Probanten unabhängig ist, _nicht_ verworfen.
+
+#{
+  show: it => [#it <chi-square-independence-test-allergies-vs-mbi-students>]
+  show: figure.with(
+    caption: [Kontingenztabelle der Leukozytenzahlen aller Allergiker und restlichen Probanten für einen $chi^2$-Unabhängigkeitstest.],
+  )
+  plot
+}
+
+==== akute Erkrankungen vs. restliche MBI Studenten <acute-erkrankungen-vs-mbi-students>
+
+#let (plot, test-results) = table-chi-square-independence-test((
+  label: "Akute Erkrankungen",
+  data: data-acute-erkrankungen-group,
+), (
+  label: "Restliche Probanten",
+  data: data-all-group.filter(it => not it.has-acute-erkrankung),
+))
+
+Auch hier ergibt sich mit @chi-square-independence-test-acute-erkrankungen-vs-mbi-students ein $chi^2$-Wert von #calc.round(digits: 2, test-results.test-statistics) und ein p-Wert von #calc.round(digits: 2, test-results.p-value * 100)%, der dadurch kein Verwerfen der Unabhängigkeitshypothese ermöglicht.
+
+#{
+  show: it => [#it <chi-square-independence-test-acute-erkrankungen-vs-mbi-students>]
+  show: figure.with(
+    caption: [Kontingenztabelle der Leukozytenzahlen aller akuten Erkrankungen und restlichen Probanten für einen $chi^2$-Unabhängigkeitstest.],
+  )
+  plot
+}
+
+Auch ein vergleich der @heatmap-leukozyten-difference-healthy-vs-reference mit @heatmap-leukozyten-difference-all-vs-reference zeigt kaum erkennbare Unterschiede. Das unterstreicht die Ergebnisse der statistischen Tests.
+
+#{
+  show: it => [#it <heatmap-leukozyten-difference-healthy-vs-reference>]
+  show: figure.with(
+    caption: [Heatmap der relativen Abweichungen der Leukozytenzahlen ohne Allergiker oder akuten Erkrankungen von den Referenzwerten.],
+    placement: auto
+  )
+  show: rect
+  heatmap-leukozyten-difference(
+    title: [Abweichungen aller gesunden#footnote[nicht allergisch und nicht akut erkrankt] MBI Studenten von den Referenzwerten.],
+    height: 10cm, width: 100%, data-transform: it => it.filter(it => {
+    not it.has-allergy and not it.has-acute-erkrankung
+  }))
+}
+
+==== Zelltypen bei Allergien vs. restliche MBI Studenten <celltypes-allergies-vs-mbi-students>
+
+Der Zwei-Stichproben-t-Test wird herangezogen, um signfikante Unterschiede im Erwartungswert zweier empirischer Verteilungen zu testen. Wir verwenden ihn hier als Standarvorgehen für den Vergleich einer gesonderten Gruppe mit der Grundgesamtheit. 
+
+Dabei zeigt @t-tests-allergies-vs-mbi-students keine signifikanten Unterschiede in den Erwartungswerten der verschiedenen Zelltypen. Durch diese Untersuchung lässt sich also nicht behaupten, dass Allergien einen Einfluss auf das Blutbild haben.
+
+Dadurch werden gleich zwei der in @hypothesis-tests genannten Hypothesen widerlegt.
+
+#{
+  show: it => [#it <t-tests-allergies-vs-mbi-students>]
+  show: figure.with(
+    caption: [Tabelle der t-Tests für die Verteilung der verschiedenen Zelltypen bei Allergikern verglichen mit den restlichen MBI Studenten.],
+  )
+  table-two-sample-t-tests((
+    label: "Allergiker",
+    statistics: stats-allergies-group,
+  ), (
+    label: "Restliche Probanten",
+    statistics: stats-for-set(data-all-group.filter(it => not it.has-allergy)),
   ))
 }
 
+==== Zelltypen bei akuten Erkrankungen vs. restliche MBI Studenten <celltypes-acute-erkrankungen-vs-mbi-students>
+
+Auch die beiden Hypothesen im Zusammenhang mit akuten Erkrankungen können durch die Tests in @t-tests-acute-erkrankungen-vs-mbi-students nicht bestaätigt werden. Es ist kein groß genuger Unterschied zwischen den Erwartungswerten der verschiedenen Zelltypen zu erkennen.
+
 #{
+  show: it => [#it <t-tests-acute-erkrankungen-vs-mbi-students>]
   show: figure.with(
-    caption: [Heatmap der relativen Abweichungen der Leukozytenzahlen von den Referenzwerten.],
+    caption: [Tabelle der t-Tests für die Verteilung der verschiedenen Zelltypen bei akuten Erkrankungen verglichen mit den restlichen MBI Studenten.],
   )
-  show: rect
-  heatmap-leukozyten-difference(data-transform: it => it.filter(it => {
-    it.has-acute-erkrankung
-  }))
+  table-two-sample-t-tests((
+    label: "Akute Erkrankungen",
+    statistics: stats-acute-erkrankungen-group,
+  ), (
+    label: "Restliche Probanten",
+    statistics: stats-for-set(data-all-group.filter(it => not it.has-acute-erkrankung)),
+  ))
 }
 
 == Messungen

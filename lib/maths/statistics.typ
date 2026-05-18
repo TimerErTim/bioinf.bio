@@ -197,7 +197,7 @@
   }
 }
 
-#let chisq-pvalue(x2, df: 1) = {
+#let chi-square-pvalue(x2, df: 1) = {
   // Sicherheitsabfragen für unzulässige Werte
   if x2 < 0 or df <= 0 { return 1.0 }
   if x2 == 0 { return 1.0 }
@@ -215,76 +215,107 @@
   }
 }
 
-#let chi-square-ablehnungsbereich(df: 1, alpha: 0.05) = {
-  // Using Wilson-Hilferty approximation for the quantile of the chi-square distribution
-  // Q ≈ df * (1 - 2/(9*df) + sqrt(2/(9*df)) * z_alpha )^3
-  // where z_alpha is the quantile of the standard normal for 1-alpha
-
-  // Compute the inverse error function approx for z_alpha based on Abramowitz & Stegun (7.1.26)
-  // We need z_alpha = sqrt(2) * erfinv(2 * (1 - alpha) - 1)
-  // We'll use the approximation for erfinv.
-  let a = 0.207 // Magic constant for erfinv approximation
-  let p = 2 * (1 - alpha) - 1
-  // avoid edge cases
-  let sign = if p >= 0 { 1 } else { -1 }
-  let ln1mp2 = calc.ln(1 - p * p)
-  let erfinv = (
-    sign
-      * calc.sqrt(
-        calc.sqrt(
-          calc.pow((2 / (calc.pi * a)) + (ln1mp2 / 2), 2) - (ln1mp2 / a),
-        )
-          - ((2 / (calc.pi * a)) + (ln1mp2 / 2)),
-      )
-  )
-
-  let z_alpha = calc.sqrt(2) * erfinv
-
-  // Wilson-Hilferty Formel
-  let v = 2 / (9 * df)
-  let critical-value = df * calc.pow(1 - v + z_alpha * calc.sqrt(v), 3)
-
-  return critical-value
-}
-
-#let _chi-square-ref-ablehnungsbereich = (
-  (df: 1, alpha: 0.3, threshold: 1.07),
-  (df: 1, alpha: 0.25, threshold: 1.32),
-  (df: 1, alpha: 0.2, threshold: 1.64),
-  (df: 1, alpha: 0.15, threshold: 2.07),
-  (df: 1, alpha: 0.1, threshold: 2.71),
-  (df: 1, alpha: 0.05, threshold: 3.84),
-  (df: 2, alpha: 0.3, threshold: 2.41),
-  (df: 2, alpha: 0.25, threshold: 2.77),
-  (df: 2, alpha: 0.2, threshold: 3.22),
-  (df: 2, alpha: 0.15, threshold: 3.79),
-  (df: 2, alpha: 0.1, threshold: 4.61),
-  (df: 2, alpha: 0.05, threshold: 5.99),
-  (df: 3, alpha: 0.3, threshold: 3.66),
-  (df: 3, alpha: 0.25, threshold: 4.11),
-  (df: 3, alpha: 0.2, threshold: 4.64),
-  (df: 3, alpha: 0.15, threshold: 5.32),
-  (df: 3, alpha: 0.1, threshold: 6.25),
-  (df: 3, alpha: 0.05, threshold: 7.81),
-  (df: 4, alpha: 0.3, threshold: 4.88),
-  (df: 4, alpha: 0.25, threshold: 5.39),
-  (df: 4, alpha: 0.2, threshold: 5.99),
-  (df: 4, alpha: 0.15, threshold: 6.74),
-  (df: 4, alpha: 0.1, threshold: 7.78),
-  (df: 4, alpha: 0.05, threshold: 9.49),
-  (df: 5, alpha: 0.3, threshold: 6.06),
-  (df: 5, alpha: 0.25, threshold: 6.63),
-  (df: 5, alpha: 0.2, threshold: 7.29),
-  (df: 5, alpha: 0.15, threshold: 8.12),
-  (df: 5, alpha: 0.1, threshold: 9.24),
-  (df: 5, alpha: 0.05, threshold: 11.07),
-)
-
 #let relative-error(entries-expected, entries-observed) = {
   let errors = entries-expected
     .zip(entries-observed)
     .map(((expected, observed)) => calc.abs(expected - observed) / expected)
   errors.sum() / errors.len()
+}
+
+#let student-t-pvalue(t, df, alternative: "two-sided") = {
+  // 1. Fallback für sehr große Freiheitsgrade (t-Verteilung konvergiert gegen Normalverteilung)
+  if df > 500 {
+    let p-two = 2 * normal-cdf-upper(calc.abs(t))
+    if alternative == "two-sided" { return p-two }
+    if alternative == "greater" { return if t >= 0 { p-two / 2 } else { 1 - (p-two / 2) } }
+    if alternative == "less" { return if t <= 0 { p-two / 2 } else { 1 - (p-two / 2) } }
+  }
+
+  // 2. Exakte analytische Berechnung über trigonometrische Reihen
+  let theta = calc.atan(t / calc.sqrt(df))
+  let cdf = 0.0
+
+  if calc.even(df) {
+    // Symmetrische Reihe für gerade Freiheitsgrade
+    let m = int((df - 2) / 2)
+    let term_sum = 1.0
+    let prod = 1.0
+    
+    if m >= 1 {
+      for i in range(1, m + 1) {
+        prod *= (2 * i - 1) / (2 * i)
+        term_sum += calc.pow(calc.cos(theta), 2 * i) * prod
+      }
+    }
+    cdf = 0.5 + (calc.sin(theta) / 2) * term_sum
+  } else {
+    // Symmetrische Reihe für ungerade Freiheitsgrade
+    if df == 1 {
+      cdf = 0.5 + theta / calc.pi
+    } else {
+      let m = int((df - 3) / 2)
+      let term_sum = calc.cos(theta)
+      let prod = 1.0
+      
+      if m >= 1 {
+        for i in range(1, m + 1) {
+          prod *= (2 * i) / (2 * i + 1)
+          term_sum += calc.pow(calc.cos(theta), 2 * i + 1) * prod
+        }
+      }
+      cdf = 0.5 + (theta.rad() + calc.sin(theta) * term_sum) / calc.pi
+    }
+  }
+
+  // Rückgabe basierend auf der gewünschten Hypothesenrichtung
+  if alternative == "two-sided" {
+    return 2 * calc.min(cdf, 1 - cdf)
+  } else if alternative == "greater" {
+    return 1 - cdf
+  } else if alternative == "less" {
+    return cdf
+  }
+}
+
+#let one-sample-t-test(values, expected-mu: 0, alpha: 0.05, alternative: "two-sided") = {
+  let (mean, stddev) = mean-stddev(values)
+  let t = (mean - expected-mu) / (stddev / calc.sqrt(values.len()))
+  let df = values.len() - 1
+  let p-value = student-t-pvalue(t, df)
+  (
+    "t-value": t,
+    "p-value": p-value,
+    "is-significant": p-value < alpha,
+  )
+}
+
+#let two-sample-t-test(values1, values2, expected-mu: 0, alpha: 0.05, alternative: "two-sided") = {
+  let (mean1, stddev1) = mean-stddev(values1)
+  let (mean2, stddev2) = mean-stddev(values2)
+  let t = (mean1 - mean2) / calc.sqrt(
+    stddev1 * stddev1 / calc.sqrt(values1.len()) + stddev2 * stddev2 / calc.sqrt(values2.len())
+  )
+  let df = calc.min(values1.len() - 1, values2.len() - 1)
+  let p-value = student-t-pvalue(t, df)
+  (
+    "t-value": t,
+    "p-value": p-value,
+    "is-significant": p-value < alpha,
+  )
+}
+
+#let chi-square-anpassungstest(observed, distr, alpha: 0.05) = {
+  assert(observed.len() == distr.len(), message: "Observed and distribution must have the same length.")
+  let total-observed = observed.sum()
+  let expected = distr.map(it => it * total-observed)
+  let test-statistics = chi-square-teststatistic(expected, observed)
+  let p-value = chi-square-pvalue(test-statistics.t, df: observed.len() - 1)
+  (
+    "expected": expected,
+    "t-value": test-statistics.t,
+    "p-value": p-value,
+    "is-significant": p-value < alpha,
+  )
 }
 
 #let is-difference-significant(
@@ -328,10 +359,11 @@
       chi-square-teststatistic(expected, observed).t
     })
     .sum()
-  let critical-value = chi-square-ablehnungsbereich(
-    df: (rows.len() - 1) * (rows.at(0).len() - 1),
-    alpha: alpha,
+  let p-value = chi-square-pvalue(test-statistics, df: (rows.len() - 1) * (rows.at(0).len() - 1))
+  (
+    "test-statistics": test-statistics,
+    "p-value": p-value,
+    "is-significant": p-value < alpha,
   )
-  test-statistics > critical-value
 }
 
