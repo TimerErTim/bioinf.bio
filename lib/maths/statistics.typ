@@ -227,8 +227,12 @@
   if df > 500 {
     let p-two = 2 * normal-cdf-upper(calc.abs(t))
     if alternative == "two-sided" { return p-two }
-    if alternative == "greater" { return if t >= 0 { p-two / 2 } else { 1 - (p-two / 2) } }
-    if alternative == "less" { return if t <= 0 { p-two / 2 } else { 1 - (p-two / 2) } }
+    if alternative == "greater" {
+      return if t >= 0 { p-two / 2 } else { 1 - (p-two / 2) }
+    }
+    if alternative == "less" {
+      return if t <= 0 { p-two / 2 } else { 1 - (p-two / 2) }
+    }
   }
 
   // 2. Exakte analytische Berechnung über trigonometrische Reihen
@@ -240,7 +244,7 @@
     let m = int((df - 2) / 2)
     let term_sum = 1.0
     let prod = 1.0
-    
+
     if m >= 1 {
       for i in range(1, m + 1) {
         prod *= (2 * i - 1) / (2 * i)
@@ -256,7 +260,7 @@
       let m = int((df - 3) / 2)
       let term_sum = calc.cos(theta)
       let prod = 1.0
-      
+
       if m >= 1 {
         for i in range(1, m + 1) {
           prod *= (2 * i) / (2 * i + 1)
@@ -277,7 +281,12 @@
   }
 }
 
-#let one-sample-t-test(values, expected-mu: 0, alpha: 0.05, alternative: "two-sided") = {
+#let one-sample-t-test(
+  values,
+  expected-mu: 0,
+  alpha: 0.05,
+  alternative: "two-sided",
+) = {
   let (mean, stddev) = mean-stddev(values)
   let t = (mean - expected-mu) / (stddev / calc.sqrt(values.len()))
   let df = values.len() - 1
@@ -289,11 +298,21 @@
   )
 }
 
-#let two-sample-t-test(values1, values2, expected-mu: 0, alpha: 0.05, alternative: "two-sided") = {
+#let two-sample-t-test(
+  values1,
+  values2,
+  expected-mu: 0,
+  alpha: 0.05,
+  alternative: "two-sided",
+) = {
   let (mean1, stddev1) = mean-stddev(values1)
   let (mean2, stddev2) = mean-stddev(values2)
-  let t = (mean1 - mean2) / calc.sqrt(
-    stddev1 * stddev1 / calc.sqrt(values1.len()) + stddev2 * stddev2 / calc.sqrt(values2.len())
+  let t = (
+    (mean1 - mean2)
+      / calc.sqrt(
+        stddev1 * stddev1 / calc.sqrt(values1.len())
+          + stddev2 * stddev2 / calc.sqrt(values2.len()),
+      )
   )
   let df = calc.min(values1.len() - 1, values2.len() - 1)
   let p-value = student-t-pvalue(t, df)
@@ -305,7 +324,10 @@
 }
 
 #let chi-square-anpassungstest(observed, distr, alpha: 0.05) = {
-  assert(observed.len() == distr.len(), message: "Observed and distribution must have the same length.")
+  assert(
+    observed.len() == distr.len(),
+    message: "Observed and distribution must have the same length.",
+  )
   let total-observed = observed.sum()
   let expected = distr.map(it => it * total-observed)
   let test-statistics = chi-square-teststatistic(expected, observed)
@@ -359,7 +381,10 @@
       chi-square-teststatistic(expected, observed).t
     })
     .sum()
-  let p-value = chi-square-pvalue(test-statistics, df: (rows.len() - 1) * (rows.at(0).len() - 1))
+  let p-value = chi-square-pvalue(
+    test-statistics,
+    df: (rows.len() - 1) * (rows.at(0).len() - 1),
+  )
   (
     "test-statistics": test-statistics,
     "p-value": p-value,

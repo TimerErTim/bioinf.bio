@@ -1,5 +1,6 @@
 #import "../../../lib/maths/statistics.typ": (
-  chi-square-anpassungstest, chi-square-teststatistic, mean, median, stddev, chi-square-pvalue
+  chi-square-anpassungstest, chi-square-pvalue, chi-square-teststatistic, mean,
+  median, stddev,
 )
 
 #let reference-data = json("../data/reference_values.json")
@@ -48,7 +49,11 @@
   alpha: 0.05,
 ) = {
   (
-    chi-square-pvalue(chi-square-teststatistic-adult-leukozyten(entries-observed).t, df: entries-observed.len() - 1) < alpha
+    chi-square-pvalue(
+      chi-square-teststatistic-adult-leukozyten(entries-observed).t,
+      df: entries-observed.len() - 1,
+    )
+      < alpha
   )
 }
 

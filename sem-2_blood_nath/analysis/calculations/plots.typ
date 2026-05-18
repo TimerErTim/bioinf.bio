@@ -1,16 +1,20 @@
 #import "@preview/lilaq:0.6.0" as lq
 #import "data-processing.typ": (
-  data-acute-erkrankungen-group, data-all-group, data-allergies-group,
-  data-current-year-group, data-dict, stats-acute-erkrankungen-group,
-  stats-all-group, stats-allergies-group, stats-current-year-group, adult-leukozyten-reference-data-probs,
+  adult-leukozyten-reference-data-probs, data-acute-erkrankungen-group,
+  data-all-group, data-allergies-group, data-current-year-group, data-dict,
+  stats-acute-erkrankungen-group, stats-all-group, stats-allergies-group,
+  stats-current-year-group,
 )
-#import "../../../lib/maths/statistics.typ": mean, median, stddev, chi-square-anpassungstest, one-sample-t-test,  two-sample-t-test, is-contingency-table-significant-independent
+#import "../../../lib/maths/statistics.typ": (
+  chi-square-anpassungstest, is-contingency-table-significant-independent, mean,
+  median, one-sample-t-test, stddev, two-sample-t-test,
+)
 
 #let heatmap-leukozyten-difference(
   width: 75%,
   height: 100%,
   data-transform: it => it,
-  title: none
+  title: none,
 ) = {
   show: lq.set-diagram(width: width, height: height)
   let filtered-data = data-dict
@@ -125,29 +129,43 @@
 }
 
 #let table-chi-square-anpassungstest(data: data-all-group) = {
-  let observed-categories = data.first().chi-square-deviations.pairs().map(((key, _)) => (key, 0)).to-dict()
+  let observed-categories = data
+    .first()
+    .chi-square-deviations
+    .pairs()
+    .map(((key, _)) => (key, 0))
+    .to-dict()
   for entry in data {
     for key in entry.chi-square-deviations.keys() {
       observed-categories.at(key) += entry.at(key)
     }
   }
 
-  let exp-probs-categories = observed-categories.keys().map(key => (key, adult-leukozyten-reference-data-probs.at(key))).to-dict()
+  let exp-probs-categories = observed-categories
+    .keys()
+    .map(key => (key, adult-leukozyten-reference-data-probs.at(key)))
+    .to-dict()
 
-  let test-results = chi-square-anpassungstest(observed-categories.values(), exp-probs-categories.values())
-  
-  (table(
-    columns: 4,
-    table.header[*Kategorie*][*Beobachtet*][*Erwarteter Anteil*][*Erwarteter Betrag*],
-    ..for (i, label) in observed-categories.keys().enumerate() {
-      (
-        [#label],
-        [#observed-categories.at(label)],
-        [#calc.round(digits: 2, exp-probs-categories.at(label) * 100)%],
-        [#calc.round(digits: 2, test-results.expected.at(i))],
-      )
-    }
-  ), test-results)
+  let test-results = chi-square-anpassungstest(
+    observed-categories.values(),
+    exp-probs-categories.values(),
+  )
+
+  (
+    table(
+      columns: 4,
+      table.header[*Kategorie*][*Beobachtet*][*Erwarteter Anteil*][*Erwarteter Betrag*],
+      ..for (i, label) in observed-categories.keys().enumerate() {
+        (
+          [#label],
+          [#observed-categories.at(label)],
+          [#calc.round(digits: 2, exp-probs-categories.at(label) * 100)%],
+          [#calc.round(digits: 2, test-results.expected.at(i))],
+        )
+      },
+    ),
+    test-results,
+  )
 }
 
 #let table-chi-square-independence-test(group1, group2) = {
@@ -169,33 +187,69 @@
     }
   }
 
-  let test-results = is-contingency-table-significant-independent(group1-observed.values(), group2-observed.values())
-  (table(
-    columns: relevant-categories.len() + 1,
-    table.header([*Gruppe*], ..relevant-categories.map(label => [*#label*])),
-    ..for (label, observations) in ((group1-label, group1-observed), (group2-label, group2-observed)) {
-      ([#label], ..observations.values().map(it => [#it]))
-    }
-  ), test-results)
+  let test-results = is-contingency-table-significant-independent(
+    group1-observed.values(),
+    group2-observed.values(),
+  )
+  (
+    {
+      set par(justify: false)
+      table(
+        columns: relevant-categories.len() + 1,
+        table.header([*Gruppe*], ..relevant-categories.map(
+          label => [*#label*],
+        )),
+        ..for (label, observations) in (
+          (group1-label, group1-observed),
+          (group2-label, group2-observed),
+        ) {
+          ([#label], ..observations.values().map(it => [#it]))
+        }
+      )
+    },
+    test-results,
+  )
 }
 
 #let table-one-sample-t-tests(stats: stats-all-group) = {
   let transform-p(p) = calc.asin(calc.sqrt(p)).deg() / 90
 
   let (..stats, Gesamt) = stats
-  let expected-mus = stats.keys().map(key => adult-leukozyten-reference-data-probs.at(key))
+  let expected-mus = stats
+    .keys()
+    .map(key => adult-leukozyten-reference-data-probs.at(key))
   let test-results = for (key, expected-mu) in stats.keys().zip(expected-mus) {
     if stats.at(key).stddev == 0 {
       continue
     }
-    ((key, (expected-mu: expected-mu, ..one-sample-t-test(stats.at(key).values.map(it => it / 100).map(transform-p), expected-mu: expected-mu))),).to-dict()
+    (
+      (
+        key,
+        (
+          expected-mu: expected-mu,
+          ..one-sample-t-test(
+            stats.at(key).values.map(it => it / 100).map(transform-p),
+            expected-mu: expected-mu,
+          ),
+        ),
+      ),
+    ).to-dict()
   }
+
+  set par(justify: false)
   table(
     columns: 6,
-    table.header[*Zelltyp*][*Durchschnittswert*][*Anteil aus Referenz*][*t-Wert*][*p-Wert*][*signifikanter Unterschied?*],
+    table.header[*Zelltyp*][*Durchschnitt*][*Anteil aus Referenz*][*t-Wert*][*p-Wert*][*signifikanter Unterschied?*],
     ..for (label, test-results) in test-results.pairs() {
-      ( [#label], [#calc.round(digits: 2, stats.at(label).mean)%], [#calc.round(digits: 2, test-results.expected-mu * 100)%], [#calc.round(digits: 2, test-results.t-value)], [#calc.round(digits: 5, test-results.p-value * 100)%], if test-results.is-significant [ja #sym.checkmark] else [nein #sym.crossmark] )
-    }
+      (
+        [#label],
+        [#calc.round(digits: 2, stats.at(label).mean)%],
+        [#calc.round(digits: 2, test-results.expected-mu * 100)%],
+        [#calc.round(digits: 2, test-results.t-value)],
+        [#calc.round(digits: 5, test-results.p-value * 100)%],
+        if test-results.is-significant [ja #sym.checkmark] else [nein #sym.crossmark],
+      )
+    },
   )
 }
 
@@ -209,9 +263,14 @@
   let test-results = for key in stats1.keys() {
     let data1 = stats1.at(key)
     let data2 = stats2.at(key)
-    let result = two-sample-t-test(data1.values.map(it => it / 100).map(transform-p), data2.values.map(it => it / 100).map(transform-p))
+    let result = two-sample-t-test(
+      data1.values.map(it => it / 100).map(transform-p),
+      data2.values.map(it => it / 100).map(transform-p),
+    )
     ((key, result),).to-dict()
   }
+
+  set par(justify: false)
   table(
     columns: 6,
     table.header[*Zelltyp*][*Durchschnitt\ (#label1)*][*Durchschnitt\ (#label2)*][*t-Wert*][*p-Wert*][*signifikanter Unterschied?*],
@@ -222,8 +281,8 @@
         [#calc.round(digits: 2, stats2.at(celltype).mean)%],
         [#calc.round(digits: 2, test-results.t-value)],
         [#calc.round(digits: 5, test-results.p-value * 100)%],
-        if test-results.is-significant [ja #sym.checkmark] else [nein #sym.crossmark]
+        if test-results.is-significant [ja #sym.checkmark] else [nein #sym.crossmark],
       )
-    }
+    },
   )
 }
