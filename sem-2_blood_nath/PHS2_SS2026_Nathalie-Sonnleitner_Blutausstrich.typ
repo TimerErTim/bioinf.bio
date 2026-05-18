@@ -434,7 +434,7 @@ Die Unabhängigkeit der Gruppen wird mittels $chi^2$-Unabhängigkeitstest evalui
   ),
 )
 
-Auch in @chi-square-independence-test-acute-erkrankungen-vs-mbi-students ergibt sich kein signifikanter Unterschied (p-Wert > 5%).
+Auch in @chi-square-independence-test-acute-erkrankungen-vs-mbi-students ergibt sich kein signifikanter Unterschied (p-Wert = #calc.round(digits: 2, test-results.p-value * 100)% > 5% mit $chi^2$-Wert = #calc.round(digits: 2, test-results.test-statistics)).
 
 #{
   show: it => [#it <chi-square-independence-test-acute-erkrankungen-vs-mbi-students>]
