@@ -108,3 +108,13 @@ src_arcsin_squareroot_transform:
     value: https://metricgate.com/docs/arcsine-square-root-transform/
     date: 2026-05-18
   date: 2024-10-16
+
+src_pappenheim_staining_forum:
+  type: thread
+  title: "Färbung nach Pappenheim: Von Lösungen, Problemen und Lösungen"
+  date: 2022-01-16
+  author: Peter Ludwig
+  url:
+    value: https://www.mikroskopie-forum.de/index.php?topic=43195.0
+    date: 2026-05-18
+  archive: Mikro-Forum

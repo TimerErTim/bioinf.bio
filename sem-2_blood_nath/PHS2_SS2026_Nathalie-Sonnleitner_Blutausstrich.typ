@@ -41,6 +41,7 @@
   placed(
     top + left,
     {
+      show: pad.with(bottom: 5mm)
       show: box.with(width: 38%)
       show: it => [#it <bloodsmear-macro>]
       show: figure.with(
@@ -73,6 +74,8 @@
     Blutausstriche werden verwendet, um unter dem Mikroskop Zelltypen und Zellzahlen im Blut zu bestimmen. Wie in @bloodsmear-macro dargestellt, wird dazu ein dünner Blutfilm auf einem Objektträger erzeugt. @src_angabe
 
     Typischerweise werden Blutausstriche mit Kombinationen aus sauren und basischen Farbstoffen gefärbt, um unterschiedliche Zellarten und Zellbestandteile besser sichtbar zu machen. In den Zellen reagieren bestimmte Strukturen unterschiedlich auf diese Farbstoffe, wodurch eine charakteristische Anfärbung entsteht, die die Unterscheidung der Zellarten im Mikroskop erleichtert. @src_angabe
+
+    Ein zentrales Prinzip dabei ist der sogenannte Romanowsky-Effekt: Durch die spezielle Mischung aus sauren (z. B. Eosin) und basischen (z. B. Methylenblau, Azuren) Farbstoffen entstehen auf den Zellstrukturen Farbtöne, die weder der einen noch der anderen Farbstoffkomponente alleine zuzuordnen sind, sondern auf spezielle Wechselwirkungen (sog. Polychromasie) zurückgehen. Der Romanowsky-Effekt sorgt beispielsweise für die typische Purpurfärbung der Chromatinstrukturen im Zellkern und erlaubt auf diese Weise eine besonders differenzierte zytologische Diagnostik in Blutausstrichen. @src_pappenheim_staining_forum
 
     In @bloodsmear-microscopy ist ein Blutausstrich nach Färbung mit basischem und saurem Farbstoff abgebildet. Sowohl Erythrozyten als auch Leukozyten sind klar zu erkennen. Die Bestimmung und Zählung der Leukozyten dient häufig zur Diagnose von Infektionen oder Entzündungen. @src_angabe
 
@@ -184,7 +187,7 @@ Akute Erkrankungen führen häufig zu:
     boundary: contour.margin(5mm),
     dy: -1cm,
   )
-  container()
+  container(height: 90%)
 
   pagebreak()
 
