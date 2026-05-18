@@ -33,6 +33,7 @@
   if title != none {
     set text(size: 12pt)
     show: strong
+    set align(center)
     title
   }
   grid(

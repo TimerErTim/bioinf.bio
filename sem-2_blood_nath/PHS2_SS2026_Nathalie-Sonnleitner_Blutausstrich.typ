@@ -352,7 +352,6 @@ Zur Überprüfung, ob die Verteilung der Leukozytenarten bei allen MBI-Studieren
   show: it => [#it <heatmap-leukozyten-difference-all-vs-reference>]
   show: figure.with(
     caption: [Heatmap der relativen Abweichungen der Leukozytenzahlen aller MBI-Studierenden von den Referenzwerten.],
-    placement: auto,
   )
   show: rect
   heatmap-leukozyten-difference(
@@ -412,7 +411,7 @@ Bei @table-chi-square-anpassungstest-mbi-2025-vs-reference zeigt der p-Wert von 
   ),
 )
 
-Die Unabhängigkeit der Gruppen wird mittels $chi^2$-Unabhängigkeitstest evaluiert. Das Ergebnis: @chi-square-independence-test-allergies-vs-mbi-students liefert einen $chi^2$-Wert von #calc.round(digits: 2, test-results.test-statistics) und einen p-Wert von #calc.round(digits: 2, test-results.p-value * 100)%. Die Nullhypothese (Unabhängigkeit) wird _nicht_ verworfen, da $#calc.round(digits: 2, test-results.p-value * 100)% > alpha = 5%$.
+Die Unabhängigkeit der Gruppen wird mittels $chi^2$-Unabhängigkeitstest evaluiert. Er wird als Standardverfahren für den Vergleich zwei empirisch ermittelter Datengruppen verwendet. Das Ergebnis: @chi-square-independence-test-allergies-vs-mbi-students liefert einen $chi^2$-Wert von #calc.round(digits: 2, test-results.test-statistics) und einen p-Wert von #calc.round(digits: 2, test-results.p-value * 100)%. Die Nullhypothese (Unabhängigkeit) wird _nicht_ verworfen, da $#calc.round(digits: 2, test-results.p-value * 100)% > alpha = 5%$.
 
 #{
   show: it => [#it <chi-square-independence-test-allergies-vs-mbi-students>]
@@ -451,7 +450,6 @@ Ein Vergleich der Heatmaps (@heatmap-leukozyten-difference-healthy-vs-reference 
   show: it => [#it <heatmap-leukozyten-difference-healthy-vs-reference>]
   show: figure.with(
     caption: [Heatmap der relativen Abweichungen (ohne Allergiker und Akute) gegenüber Referenzwerten.],
-    placement: auto,
   )
   show: rect
   heatmap-leukozyten-difference(
