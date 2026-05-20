@@ -10,6 +10,7 @@
 #import "../../../lib/maths/statistics.typ": (
   chi-square-anpassungstest, is-contingency-table-significant-independent, mean,
   median, one-sample-t-test, stddev, two-sample-t-test,
+  anova-test,
 )
 
 #let heatmap-leukozyten-difference(
@@ -79,9 +80,9 @@
         ..subset
           .values()
           .map(it => [
-            $#calc.round(digits: 2, it.mean) #sym.plus.minus #calc.round(digits: 1, it.stddev)$\
-            min: #calc.round(digits: 2, it.min)\
-            max: #calc.round(digits: 2, it.max)
+            $#calc.round(digits: 1, it.mean) #sym.plus.minus #calc.round(digits: 1, it.stddev)$\
+            min: #calc.round(digits: 1, it.min)\
+            max: #calc.round(digits: 1, it.max)
           ]),
       )
     }
@@ -107,10 +108,10 @@
         fill: color-map.at(i).lighten(10%),
         median: color-map.at(i).darken(75%),
         y: range(relevant-keys.len()).map(it => (
-          it + (1 - i / (group-labels.len() - 1) - 0.5) * 0.6
+          it + (1 - i / (group-labels.len() - 1) - 0.5) * 0.6 - 0.5
         )),
-        width: 0.75 / group-labels.len(),
-        cap-length: 0.5 / group-labels.len(),
+        width: 0.7 / group-labels.len(),
+        cap-length: 0.6 / group-labels.len(),
         outlier-size: 2pt,
         outlier-stroke: color-map.at(i).darken(50%),
         ..relevant-keys.map(key => subset.at(key).values),
@@ -118,14 +119,23 @@
     )
   }
 
+  show: pad.with(top: -1cm)
   lq.diagram(
-    height: 10cm,
+    height: 16cm,
     width: 100%,
+    title: [Relative Häufigkeit der Zelltypen pro Datengruppe],
+    legend: (
+      position: right + horizon,
+    ),
     yaxis: (
       ticks: relevant-keys
         .map(rotate.with(-40deg, reflow: true))
         .map(text.with(size: 8pt))
-        .enumerate(),
+        .map(pad.with(top: 3cm))
+        .enumerate()
+    ),
+    xaxis: (
+      format-ticks: lq.tick-format.linear.with(suffix: "%"),
     ),
     ..boxplots,
   )
@@ -214,9 +224,9 @@
   )
 }
 
-#let table-one-sample-t-tests(stats: stats-all-group) = {
-  let transform-p(p) = calc.asin(calc.sqrt(p)).deg() / 90
+#let _transform-p(p) = calc.asin(calc.sqrt(p)).deg() / 90 
 
+#let table-one-sample-t-tests(stats: stats-all-group) = {
   let (..stats, Gesamt) = stats
   let expected-mus = stats
     .keys()
@@ -231,7 +241,7 @@
         (
           expected-mu: expected-mu,
           ..one-sample-t-test(
-            stats.at(key).values.map(it => it / 100).map(transform-p),
+            stats.at(key).values.map(it => it / 100).map(_transform-p),
             expected-mu: expected-mu,
           ),
         ),
@@ -246,10 +256,10 @@
     ..for (label, test-results) in test-results.pairs() {
       (
         [#label],
-        [#calc.round(digits: 2, stats.at(label).mean)%],
-        [#calc.round(digits: 2, test-results.expected-mu * 100)%],
-        [#calc.round(digits: 2, test-results.t-value)],
-        [#calc.round(digits: 5, test-results.p-value * 100)%],
+        [#calc.round(digits: 1, stats.at(label).mean)%],
+        [#calc.round(digits: 1, test-results.expected-mu * 100)%],
+        [#calc.round(digits: 1, test-results.t-value)],
+        [#calc.round(digits: 2, test-results.p-value * 100)%],
         if test-results.is-significant [ja #sym.checkmark] else [nein #sym.crossmark],
       )
     },
@@ -257,8 +267,6 @@
 }
 
 #let table-two-sample-t-tests(stats1, stats2) = {
-  let transform-p(p) = calc.asin(calc.sqrt(p)).deg() / 90
-
   let label1 = stats1.label
   let label2 = stats2.label
   let (..stats1, Gesamt) = stats1.statistics
@@ -267,8 +275,8 @@
     let data1 = stats1.at(key)
     let data2 = stats2.at(key)
     let result = two-sample-t-test(
-      data1.values.map(it => it / 100).map(transform-p),
-      data2.values.map(it => it / 100).map(transform-p),
+      data1.values.map(it => it / 100).map(_transform-p),
+      data2.values.map(it => it / 100).map(_transform-p),
     )
     ((key, result),).to-dict()
   }
@@ -280,10 +288,10 @@
     ..for (celltype, test-results) in test-results.pairs() {
       (
         [#celltype],
-        [#calc.round(digits: 2, stats1.at(celltype).mean)%],
-        [#calc.round(digits: 2, stats2.at(celltype).mean)%],
-        [#calc.round(digits: 2, test-results.t-value)],
-        [#calc.round(digits: 5, test-results.p-value * 100)%],
+        [#calc.round(digits: 1, stats1.at(celltype).mean)%],
+        [#calc.round(digits: 1, stats2.at(celltype).mean)%],
+        [#calc.round(digits: 1, test-results.t-value)],
+        [#calc.round(digits: 2, test-results.p-value * 100)%],
         if test-results.is-significant [ja #sym.checkmark] else [nein #sym.crossmark],
       )
     },
@@ -330,4 +338,31 @@
     }
     
   })
+}
+
+
+#let anova-table(..groups) = {
+  let groups = groups.pos()
+  let relevant-celltypes = data-all-group.first().chi-square-deviations.keys()
+  let data = (:)
+  for celltype in relevant-celltypes {
+    let values = groups.map(group => group.at(celltype).values.map(it => it / 100).map(_transform-p).map(it => it * 100))
+    data.insert(celltype, values)
+  }
+
+  table(
+    columns: 6,
+    table.header[*Zelltyp*][*MSW*][*MSB*][*F-Wert*][*p-Wert*][*signifikanter Unterschied?*],
+    ..for (celltype, groups) in data.pairs() {
+      let anova-results = anova-test(..groups)
+      (
+        [#celltype],
+        [#calc.round(digits: 1, anova-results.msw)],
+        [#calc.round(digits: 1, anova-results.msb)],
+        [#calc.round(digits: 2, anova-results.f-value)],
+        [#calc.round(digits: 2, anova-results.p-value * 100)%],
+        if anova-results.is-significant [ja #sym.checkmark] else [nein #sym.crossmark],
+      )
+    }
+  )
 }

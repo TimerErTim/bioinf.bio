@@ -392,3 +392,99 @@
   )
 }
 
+#let mean-squares-within(..groups) = {
+  let groups = groups.pos()
+  let sum = 0
+  let count = 0
+  for group in groups {
+    let group-mean = mean(group)
+    for value in group {
+      sum += calc.pow(value - group-mean, 2)
+    }
+    count += group.len()
+  }
+  sum / (count - groups.len())
+}
+
+#let mean-squares-between(..groups) = {
+  let groups = groups.pos()
+  let groups-mean = mean(groups.flatten())
+  let sum = 0
+  for group in groups {
+    let group-mean = mean(group)
+    sum += calc.pow(group-mean - groups-mean, 2)
+  }
+  sum / (groups.len() - 1)
+}
+
+#let _log-gamma(x) = {
+  let p = (
+    676.5203681218851, -1259.1392167224028, 771.3234287776531,
+    -176.61502916214059, 12.507343278686905, -0.13857109526572012,
+    9.9843695780195716e-6, 1.5056327351493116e-7
+  )
+  if x < 0.5 {
+    return calc.ln(calc.pi / calc.sin(calc.pi * x)) - _log-gamma(1 - x)
+  }
+  let x = x - 1
+  let sum = 0.99999999999980993
+  for i in range(p.len()) { sum += p.at(i) / (x + i + 1) }
+  let t = x + p.len() - 0.5
+  return 0.5 * calc.ln(2 * calc.pi) + (x + 0.5) * calc.ln(t) - t + calc.ln(sum)
+}
+
+#let _beta-incomplete(x, a_param, b_param) = {
+  if x <= 0.0 { return 0.0 }
+  if x >= 1.0 { return 1.0 }
+  
+  let a = float(a_param)
+  let b = float(b_param)
+  
+  // Symmetrie-Eigenschaft nutzen
+  if x > (a + 1.0) / (a + b + 2.0) {
+    return 1.0 - _beta-incomplete(1.0 - x, b, a)
+  }
+  
+  let lbeta = _log-gamma(a) + _log-gamma(b) - _log-gamma(a + b)
+  let front = calc.exp(a * calc.ln(x) + b * calc.ln(1.0 - x) - lbeta) / a
+  
+  // Reihenentwicklung nach Taylor/Abramowitz
+  let sum = 0.0
+  let term = 1.0
+  sum += term
+  
+  for j in range(1, 60) {
+    let j_f = float(j)
+    // Multiplikativer Faktor für das nächste Glied der Reihe
+    term *= ((a + b + j_f - 1.0) * x) / (a + j_f)
+    sum += term
+    if calc.abs(term) < 1e-12 { break }
+  }
+  
+  return calc.min(1.0, calc.max(0.0, front * sum))
+}
+
+#let f-pvalue(f, df1, df2) = {
+  if f <= 0 or df1 <= 0 or df2 <= 0 { return 1.0 }
+  
+  let x = (float(df1) * float(f)) / (float(df1) * float(f) + float(df2))
+  let p_val = 1.0 - _beta-incomplete(x, float(df1) / 2.0, float(df2) / 2.0)
+  
+  return calc.min(1.0, calc.max(0.0, p_val))
+}
+
+#let anova-test(..groups, alpha: 0.05) = {
+  let groups = groups.pos()
+  let mean-squares-within = mean-squares-within(..groups)
+  let mean-squares-between = mean-squares-between(..groups)
+  let f = mean-squares-between / mean-squares-within
+  let N = groups.map(it => it.len()).sum()
+  let p-value = f-pvalue(f, groups.len() - 1, groups.at(0).len() - 1)
+  (
+    "msw": mean-squares-within,
+    "msb": mean-squares-between,
+    "f-value": f,
+    "p-value": p-value,
+    "is-significant": p-value < alpha,
+  )
+}

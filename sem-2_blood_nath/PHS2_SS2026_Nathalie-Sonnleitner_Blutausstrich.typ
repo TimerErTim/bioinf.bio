@@ -274,7 +274,7 @@ Akute Erkrankungen führen häufig zu:
   boxplot-leukozyten, heatmap-leukozyten-difference,
   table-chi-square-anpassungstest, table-chi-square-independence-test,
   table-descriptive-statistics, table-one-sample-t-tests,
-  table-two-sample-t-tests, piecharts-for-known-groups,
+  table-two-sample-t-tests, piecharts-for-known-groups, anova-table,
 )
 #import "analysis/calculations/data-processing.typ": (
   data-acute-erkrankungen-group, data-all-group, data-allergies-group,
@@ -311,7 +311,7 @@ Dieser Trend ist in @boxplot-leukozyten und auch ein wenig in @piecharts-for-kno
 #{
   show: it => [#it <boxplot-leukozyten>]
   show: figure.with(
-    caption: [Boxplot der relativen Anteile der Leukozytenarten im Bezug auf die Gesamtleukozytenzahl.],
+    caption: [Boxplot der relativen Anteile der Leukozytenarten im Bezug auf die Gesamtleukozytenzahl, wobei jede Datengruppe durch eine Farbe repräsentiert wird.],
   )
   show: rect
   boxplot-leukozyten
@@ -518,6 +518,26 @@ Auch für akute Erkrankungen führt der Gruppenvergleich @t-tests-acute-erkranku
     ),
   )
 }
+
+=== Nachprüfung der Zelltypen Ergebnisse mit ANOVA
+
+Um die Ergebnisse der Zwei-Stichproben-t-Tests zu überprüfen, wird ein Ein-Faktor-ANOVA-Test durchgeführt. Dabei handelt es sich um eine Analysis of Variance (ANOVA) Variante, die "mean squares within" $"MSW"$ und "mean squares between" $"MSB"$ vergleicht.
+
+#{
+  show: it => [#it <anova-table-celltypes>]
+  show: figure.with(
+    caption: [Tabelle des ANOVA-Tests: Zellenvergleich zwischen Allergikern, akuten Erkrankungen und restlichen MBI-Studierenden.],
+  )
+  anova-table(
+    stats-for-set(data-all-group.filter(it => {
+      not it.has-allergy and not it.has-acute-erkrankung
+    })),
+    stats-allergies-group,
+    stats-acute-erkrankungen-group,
+  )
+}
+
+@anova-table-celltypes stützt unsere vorher abgeleiteten Ergebnisse, in dem gezeigt wird, dass eine Abweichung der Leukozytenverteilung zwischen Allergikern, akuten Erkrankungen und restlichen MBI-Studierenden statistisch nicht signifikant ist.
 
 == Messungen
 
