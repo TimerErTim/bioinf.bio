@@ -1,0 +1,36 @@
+[
+    {
+        "name": "Tim Peko",
+        "initials": "TP",
+        "number": 1,
+        "enzyme": "EcoRI",
+        "new_charge": false
+    },
+    {
+        "name": "Nathalie Sonnleitner",
+        "initials": "NS",
+        "number": 2,
+        "enzyme": "EcoRI",
+        "new_charge": true
+    },
+    {
+        "name": "Samuel Süss",
+        "initials": "SS",
+        "enzyme": "NaeI",
+        "number": 7,
+        "new_charge": false
+    },
+    {
+        "name": "Sebastian Größwang",
+        "initials": "SG",
+        "number": 3,
+        "enzyme": "PstI",
+        "new_charge": false
+    },{
+        "name": "Leonie Simon",
+        "initials": "LS",
+        "number": 4,
+        "enzyme": "PstI",
+        "new_charge": true
+    }
+]

@@ -1,0 +1,27 @@
+[
+    {
+        "name": "Leonie Simon",
+        "weight_g": 3.92,
+        "initials": "LS"
+    },
+    {
+        "name": "Tim Peko",
+        "weight_g": 3.48,
+        "initials": "TP"
+    },
+    {
+        "name": "Nathalie Sonnleitner",
+        "weight_g": 4.04,
+        "initials": "NS"
+    },
+    {
+        "name": "Samuel Süss",
+        "weight_g": 3.71,
+        "initials": "SS"
+    },
+    {
+        "name": "Sebastian Größwang",
+        "weight_g": 4.43,
+        "initials": "SG"
+    }
+]

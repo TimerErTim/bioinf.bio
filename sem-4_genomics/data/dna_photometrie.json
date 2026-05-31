@@ -1,0 +1,288 @@
+[
+    {
+        "sample_source": "Liver",
+        "trial": 1,
+        "date": "2026-04-23",
+        "with_rnase": [
+            {
+                "name": "Leonie Simon",
+                "initials": "LS",
+                "absorbance": {
+                    "230": 0.155,
+                    "260": 0.277,
+                    "280": 0.196
+                }
+            },
+            {
+                "name": "Tim Peko",
+                "initials": "TP",
+                "absorbance": {
+                    "230": 0.572,
+                    "260": 0.782,
+                    "280": 0.545
+                }
+            },
+            {
+                "name": "Nathalie Sonnleitner",
+                "initials": "NS",
+                "absorbance": {
+                    "230": 0.104,
+                    "260": 0.211,
+                    "280": 0.124
+                }
+            },
+            {
+                "name": "Samuel Süss",
+                "initials": "SS",
+                "absorbance": {
+                    "230": 0.135,
+                    "260": 0.212,
+                    "280": 0.136
+                }
+            },
+            {
+                "name": "Sebastian Größwang",
+                "initials": "SG",
+                "absorbance": {
+                    "230": 0.467,
+                    "260": 0.656,
+                    "280": 0.449
+                }
+            }
+        ],
+        "without_rnase": [
+            {
+                "name": "Leonie Simon",
+                "initials": "LS",
+                "absorbance": {
+                    "230": 0.162,
+                    "260": 0.276,
+                    "280": 0.192
+                }
+            },
+            {
+                "name": "Tim Peko",
+                "initials": "TP",
+                "absorbance": {
+                    "230": 0.197,
+                    "260": 0.273,
+                    "280": 0.205
+                }
+            },
+            {
+                "name": "Nathalie Sonnleitner",
+                "initials": "NS",
+                "absorbance": {
+                    "230": 0.020,
+                    "260": 0.074,
+                    "280": 0.047
+                }
+            },
+            {
+                "name": "Samuel Süss",
+                "initials": "SS",
+                "absorbance": {
+                    "230": 0.286,
+                    "260": 0.408,
+                    "280": 0.264
+                }
+            },
+            {
+                "name": "Sebastian Größwang",
+                "initials": "SG",
+                "absorbance": {
+                    "230": 0.383,
+                    "260": 0.596,
+                    "280": 0.371
+                }
+            }
+        ]
+    },
+    {
+        "sample_source": "Bacteria",
+        "trial": 1,
+        "date": "2026-04-23",
+        "with_rnase": [
+            {
+                "name": "Christopher Bleier",
+                "initials": "CB",
+                "absorbance": {
+                    "230": -0.004,
+                    "260": 0.019,
+                    "280": 0.012
+                }
+            },
+            {
+                "name": "Anastasia Lummerstorfer",
+                "initials": "AL",
+                "absorbance": {
+                    "230": 0.020,
+                    "260": 0.023,
+                    "280": 0.023
+                }
+            },
+            {
+                "name": "Iman Zec",
+                "initials": "IZ",
+                "absorbance": {
+                    "230": 0.123,
+                    "260": 0.140,
+                    "280": 0.081
+                }
+            },{
+                "name": "Laura Haberfellner",
+                "initials": "LH",
+                "absorbance": {
+                    "230": 0.093,
+                    "260": 0.093,
+                    "280": 0.055
+                }
+            }
+        ],
+        "without_rnase": [
+            {
+                "name": "Christopher Bleier",
+                "initials": "CB",
+                "absorbance": {
+                    "230": 0.006,
+                    "260": 0.040,
+                    "280": 0.021
+                }
+            },
+            {
+                "name": "Anastasia Lummerstorfer",
+                "initials": "AL",
+                "absorbance": {
+                    "230": 0.006,
+                    "260": 0.040,
+                    "280": 0.021
+                }
+            },
+            {
+                "name": "Iman Zec",
+                "initials": "IZ",
+                "absorbance": {
+                    "230": 0.015,
+                    "260": 0.037,
+                    "280": 0.033
+                }
+            },
+            {
+                "name": "Eva Luftensteiner",
+                "initials": "EL",
+                "absorbance": {
+                    "230": -0.008,
+                    "260": 0.003,
+                    "280": 0.010
+                }
+            },
+            {
+                "name": "Laura Haberfellner",
+                "initials": "LH",
+                "absorbance": {
+                    "230": 0.092,
+                    "260": 0.091,
+                    "280": 0.055
+                }
+            }
+        ]
+    },{
+        "sample_source": "Bacteria",
+        "trial": 2,
+        "date": "2026-04-23",
+        "with_rnase": [
+            {
+                "name": "Christopher Bleier",
+                "initials": "CB",
+                "absorbance": {
+                    "230": 0.006,
+                    "260": 0.040,
+                    "280": 0.021
+                }
+            },
+            {
+                "name": "Anastasia Lummerstorfer",
+                "initials": "AL",
+                "absorbance": {
+                    "230": 0.004,
+                    "260": 0.013,
+                    "280": 0.014
+                }
+            },
+            {
+                "name": "Iman Zec",
+                "initials": "IZ",
+                "absorbance": {
+                    "230": 0.015,
+                    "260": 0.025,
+                    "280": 0.019
+                }
+            },
+            {
+                "name": "Eva Luftensteiner",
+                "initials": "EL",
+                "absorbance": {
+                    "230": -0.003,
+                    "260": 0.000,
+                    "280": 0.007
+                }
+            },
+            {
+                "name": "Laura Haberfellner",
+                "initials": "LH",
+                "absorbance": {
+                    "230": 0.098,
+                    "260": 0.092,
+                    "280": 0.056
+                }
+            }
+        ],
+        "without_rnase": [
+            {
+                "name": "Christopher Bleier",
+                "initials": "CB",
+                "absorbance": {
+                    "230": 0.006,
+                    "260": 0.040,
+                    "280": 0.021
+                }
+            },
+            {
+                "name": "Anastasia Lummerstorfer",
+                "initials": "AL",
+                "absorbance": {
+                    "230": 0.006,
+                    "260": 0.040,
+                    "280": 0.021
+                }
+            },
+            {
+                "name": "Iman Zec",
+                "initials": "IZ",
+                "absorbance": {
+                    "230": 0.021,
+                    "260": 0.030,
+                    "280": 0.033
+                }
+            },
+            {
+                "name": "Eva Luftensteiner",
+                "initials": "EL",
+                "absorbance": {
+                    "230": -0.009,
+                    "260": -0.002,
+                    "280": 0.004
+                }
+            },
+            {
+                "name": "Laura Haberfellner",
+                "initials": "LH",
+                "absorbance": {
+                    "230": 0.095,
+                    "260": 0.096,
+                    "280": 0.058
+                }
+            } 
+        ]
+    }
+]
