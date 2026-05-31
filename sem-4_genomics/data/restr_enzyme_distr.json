@@ -32,5 +32,26 @@
         "number": 4,
         "enzyme": "PstI",
         "new_charge": true
+    },
+    {
+        "name": "Christopher Bleier",
+        "initials": "CB",
+        "number": 8,
+        "enzyme": "HindIII",
+        "new_charge": false
+    },
+    {
+        "name": "Anastasia Lummerstorfer",
+        "initials": "AL",
+        "number": 5,
+        "enzyme": "XbaI",
+        "new_charge": true
+    },
+    {
+        "name": "Eva Luftensteiner",
+        "initials": "EL",
+        "number": 6,
+        "enzyme": "AluI",
+        "new_charge": true
     }
 ]
