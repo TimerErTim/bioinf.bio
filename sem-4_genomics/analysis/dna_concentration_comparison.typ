@@ -52,17 +52,38 @@
   weight-data.map(it => it.at(0)),
   weight-data.map(it => it.at(1)),
 )
-Leber Gewicht vs. DNA Konzentration$""_(+"RNAse")$ = #calc.round(correlation, digits: 2)
+#lq.diagram(
+  title: [Leber Gewicht vs. DNA Konzentration (\+RNAse)],
+  xaxis: (
+    format-ticks: lq.tick-format.linear.with(suffix: $"g"$),
+    tick-args: (density: 70%),
+    label: [Leber Gewicht],
+  ),
+  yaxis: (
+    format-ticks: lq.tick-format.linear.with(suffix: $mu"g/ml"$),
+    tick-args: (density: 70%),
+    label: [DNA Konzentration],
+  ),
+  lq.scatter(
+    weight-data.map(it => it.at(1)),
+    weight-data.map(it => it.at(0)),
+    size: 6pt,
+    label: [$"Corr"(X, Y)$ = #calc.round(correlation, digits: 2)],
+  ),
+)
 
 #let wilcoxon-rank-sum-statistic = wilcoxon-rank-sum-statistic(
   relevant-data.find(it => it.sample_source == "Leber").with_rnase.measures.map(it => it.concentration),
   relevant-data.find(it => it.sample_source == "Bakterien").with_rnase.measures.map(it => it.concentration),
 )
-Leber Konz vs. Bakterien Konz = #wilcoxon-rank-sum-statistic.w-statistic \~ $W_(#wilcoxon-rank-sum-statistic.n_a, #wilcoxon-rank-sum-statistic.n_b) > 2 => $ nicht gleichverteilt
+Konzentration *Leber* vs. *Bakterien*:\
+Wilcoxon-Rang-Summen-Test = #wilcoxon-rank-sum-statistic.w-statistic \~ $W_(#wilcoxon-rank-sum-statistic.n_a, #wilcoxon-rank-sum-statistic.n_b) lt.eq.not underbrace(2, #place(center)[kritischer Wert]) => $ #underline[*nicht signifikant*]
 
+#v(1cm)
 #let wilcoxon-signed-rank-statistic = wilcoxon-signed-rank-statistic(
   relevant-data.map(it => it.with_rnase.measures.map(it => it.concentration)).flatten().zip(relevant-data.map(it => it.without_rnase.measures.map(it => it.concentration)).flatten()),
 )
-\-RNAse vs. +RNAse = #wilcoxon-signed-rank-statistic.w-statistic \~ $W_(#wilcoxon-signed-rank-statistic.n) > underbrace(8, #place(center)[kritischer Wert]) => $ nicht gleichverteilt
+Konzentration *-RNAse* vs. *+RNAse*:\
+Wilcoxon-Vorzeichen-Rang-Test = #wilcoxon-signed-rank-statistic.w-statistic \~ $W_(#wilcoxon-signed-rank-statistic.n) lt.eq.not underbrace(8, #place(center)[kritischer Wert]) => $ #underline[*nicht signifikant*]
 
 

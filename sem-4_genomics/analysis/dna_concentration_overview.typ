@@ -6,7 +6,7 @@
   ..for sample in photometrie-data {
     (
       table.header(table.cell(colspan: 3)[*#sample.sample_source (#sample.trial)*]),
-      table.header(level: 2)[][*With RNAse*][*Without RNAse*],
+      table.header(level: 2)[][*+RNAse*][*-RNAse*],
       [
         #show: rotate.with(90deg, reflow: true)
         *Stats*

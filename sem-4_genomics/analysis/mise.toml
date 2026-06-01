@@ -17,3 +17,8 @@ run = "typst compile --format png --ppi 600 --pages 1 dna_concentration_comparis
 description = "Compile the DNA concentration statistics visualization"
 depends = ["prepare:asset-dir"]
 run = "typst compile --format png --ppi 600  dna_concentration_statistics.typ ../assets/dna-concentration-statistics.png"
+
+[tasks."visualize:dna-concentration-tests"]
+description = "Compile the DNA concentration tests visualization"
+depends = ["prepare:asset-dir"]
+run = "typst compile --format png --ppi 600  --pages 2 dna_concentration_comparison.typ ../assets/dna-concentration-tests.png"
