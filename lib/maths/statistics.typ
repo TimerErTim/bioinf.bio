@@ -488,3 +488,57 @@
     "is-significant": p-value < alpha,
   )
 }
+
+#let ranks(values, by: it => it) = {
+  let counts = (:)
+  for value in values {
+    let key = str(by(value))
+    if key in counts {
+      counts.at(key).push(value)
+    } else {
+      counts.insert(key, (value,))
+    }
+  }
+  counts = counts.pairs().map(((key, values)) => (eval(key), values))
+  counts = counts.sorted(key: it => it.at(0))
+  let index = 0
+  for (_, values) in counts {
+    let rank = (index + 1 + index + values.len()) / 2
+    index += values.len()
+    for value in values {
+      ((
+        "value": value,
+        "rank": rank,
+      ),)
+    }
+  }
+}
+
+#let wilcoxon-rank-sum-statistic(
+  grp-a,
+  grp-b,
+) = {
+  let n-a = grp-a.len()
+  let n-b = grp-b.len()
+  let n = n-a + n-b
+  let ranks = ranks(grp-a.map(it => (it, "a")) + grp-b.map(it => (it, "b")), by: it => it.at(0))
+  let rank-sum-a = ranks.filter(it => it.value.at(1) == "a").map(it => it.rank).sum()
+  let rank-sum-b = ranks.filter(it => it.value.at(1) == "b").map(it => it.rank).sum()
+  // Return the W statistic (lowest sum of ranks for groups)
+  return (
+    "n_a": n-a,
+    "n_b": n-b,
+    "w-statistic": calc.min(rank-sum-a, rank-sum-b),
+  )
+}
+
+#let wilcoxon-signed-rank-statistic(pairs) = {
+  let diff = pairs.map(((a, b)) => a - b)
+  let ranks = ranks(diff, by: calc.abs)
+  let t-plus = ranks.filter(it => it.value >= 0).map(it => it.rank).sum()
+  let t-minus = ranks.filter(it => it.value < 0).map(it => it.rank).sum()
+  return (
+    "n": pairs.len(),
+    "w-statistic": calc.min(t-plus, t-minus),
+  )
+}

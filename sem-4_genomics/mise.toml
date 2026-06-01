@@ -14,4 +14,8 @@ run = "mise run build"
 [tasks."run:analysis"]
 description = "Runs the analysis"
 dir = "analysis"
-run = "mise run compile"
+run = "mise run visualize"
+
+[tasks."prepare:asset-dir"]
+description = "Create the asset directory"
+run = "mkdir -p assets"

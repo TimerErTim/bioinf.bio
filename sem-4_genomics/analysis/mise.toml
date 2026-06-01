@@ -1,0 +1,19 @@
+[tasks."visualize"]
+description = "Compile all analysis visualizations"
+run = "mise run visualize:*"
+
+
+[tasks."visualize:dna-concentration-overview"]
+description = "Compile the DNA concentration overview visualization"
+depends = ["prepare:asset-dir"]
+run = "typst compile --format png --ppi 600  dna_concentration_overview.typ ../assets/dna-concentration-overview.png"
+
+[tasks."visualize:dna-concentration-comparison"]
+description = "Compile the DNA concentration comparison visualization"
+depends = ["prepare:asset-dir"]
+run = "typst compile --format png --ppi 600 --pages 1 dna_concentration_comparison.typ ../assets/dna-concentration-comparison.png"
+
+[tasks."visualize:dna-concentration-statistics"]
+description = "Compile the DNA concentration statistics visualization"
+depends = ["prepare:asset-dir"]
+run = "typst compile --format png --ppi 600  dna_concentration_statistics.typ ../assets/dna-concentration-statistics.png"
