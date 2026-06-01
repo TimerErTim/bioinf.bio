@@ -16,7 +16,7 @@
   width: 7cm,
   title: [
     *Leber* vs *Bakterien* DNA Konzentration\
-    \+ RNAse
+    \+RNase
   ],
   xlim: (0, auto),
   xaxis: (
@@ -53,7 +53,7 @@
   weight-data.map(it => it.at(1)),
 )
 #lq.diagram(
-  title: [Leber Gewicht vs. DNA Konzentration (\+RNAse)],
+  title: [Leber Gewicht vs. DNA Konzentration (\+RNase)],
   xaxis: (
     format-ticks: lq.tick-format.linear.with(suffix: $"g"$),
     tick-args: (density: 70%),
@@ -83,7 +83,7 @@ Wilcoxon-Rang-Summen-Test = #wilcoxon-rank-sum-statistic.w-statistic \~ $W_(#wil
 #let wilcoxon-signed-rank-statistic = wilcoxon-signed-rank-statistic(
   relevant-data.map(it => it.with_rnase.measures.map(it => it.concentration)).flatten().zip(relevant-data.map(it => it.without_rnase.measures.map(it => it.concentration)).flatten()),
 )
-Konzentration *-RNAse* vs. *+RNAse*:\
+Konzentration *-RNase* vs. *+RNase*:\
 Wilcoxon-Vorzeichen-Rang-Test = #wilcoxon-signed-rank-statistic.w-statistic \~ $W_(#wilcoxon-signed-rank-statistic.n) lt.eq.not underbrace(8, #place(center)[kritischer Wert]) => $ #underline[*nicht signifikant*]
 
 

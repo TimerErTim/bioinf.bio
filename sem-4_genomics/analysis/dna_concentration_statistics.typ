@@ -13,8 +13,8 @@
     },
     ..for sample in photometrie-data {
       (
-        [\+ RNAse],
-        [\- RNAse],
+        [\+ RNase],
+        [\- RNase],
       )
     },
   ),
