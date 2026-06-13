@@ -1,2 +1,151 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/mkdjr/hayagriva/refs/heads/main/hayagriva.schema.json
 
+src_cell-lysis-img:
+  type: artwork
+  title: "A Review on Macroscale and Microscale Cell Lysis Methods - Scientific Figure on ResearchGate"
+  url:
+    value: https://www.researchgate.net/figure/Cell-lysis-using-detergent-to-open-the-cell-membrane-and-release-the-intracellular_fig1_314718923
+    date: 2026-05-31
+  archive: ResearchGate
+
+src_reinigung-na_img:
+  type: chapter
+  title: "Isolierung und Reinigung von Nucleinsäuren"
+  date:  2021-12-10
+  url:
+    value: https://link.springer.com/chapter/10.1007/978-3-662-61707-6_30
+    date: 2026-05-31
+  archive: Springer
+
+src_rna-fällung_img:
+  type: web
+  url:
+    value: https://theory.labster.com/de/dna_isolation/
+    date: 2026-05-31
+  title: Phenol-Chloroform-Extraktion
+  archive: Labster Theory Pages
+
+src_dna-spektrum_img:
+  type: report
+  date: 2013-03
+  title: "Protein-Proben durch photometrische Messungen"
+  author:
+    - Martin Armbrecht
+  organization: Eppendorf AG, Hamburg, Germany
+  url:
+    value: https://www.eppendorf.com/product-media/doc/de/59828/Eppendorf_Detection_Application-Note_279_BioPhotometer-D30_Detection-contamination-DNA-protein-samples-photometric-measurements.pdf
+    date: 2026-05-31
+  page-range: 2
+
+src_restr-enzyme-working_img:
+  type: artwork
+  date: 2016-05-11
+  title: Restriction enzyme (CC BY-NC-SA 2.0)
+  url:
+    value: https://www.flickr.com/photos/yourgenome/26915997776
+    date: 2026-05-31
+  archive: flickr
+
+src_gelelektro-illustr_img:
+  type: web
+  title: Gelelektrophorese
+  url:
+    value: https://studyflix.de/biologie/gelelektrophorese-2584
+    date: 2026-05-31
+  archive: Studyflix
+
+src_csh-protocols-isolation:
+  type: chapter
+  genre: biology
+  title: "Isolation and Quantification of DNA"
+  date: 2018
+  url:
+    value: https://cshprotocols.cshlp.org/content/2018/6/pdb.top093336.abstract
+    date: 2026-06-18
+  serial-number:
+    doi: 10.1101/pdb.top093336
+  parent:
+    type: anthology
+    title: Molecular Cloning
+    author:
+      - Michael R. Green
+      - Joseph Sambrook
+  author:
+    - Michael R. Green
+    - Joseph Sambrook
+  organization: Cold Spring Harbor Laboratory Press
+
+src_csh-bacterial-cell-envelope:
+  type: article
+  title: "The Bacterial Cell Envelope"
+  date: 2010
+  author:
+    - Thomas J. Silhavy
+    - Daniel Kahne
+    - Suzanne Walker
+  url:
+    value: https://cshperspectives.cshlp.org/content/2/5/a000414.full.pdf
+    date: 2026-06-18
+  serial-number:
+    doi: 10.1101/cshperspect.a000414
+  organization: Cold Spring Harbor Laboratory Press
+
+src_molecular-biology-of-the-cell:
+  type: book
+  title: Molecular Biology of the Cell
+  author: Bruce Alberts
+  edition: 6
+  genre: Bioscience
+  date: 2015
+  serial-number:
+    doi: 10.1201/9781315735368
+    isbn: "9781315735368"
+  page-total: 1464
+
+src_brock-mikrobiologie:
+  type: book
+  title: Brock Mikrobiologie
+  author:
+    - Michael T. Madigan
+    - Kelly S. Bender
+    - Daniel H. Buckley
+    - W. Matthew Sattley
+    - David A. Stahl
+  edition: 15
+  date: 2020
+  language: de
+  serial-number:
+    isbn: "978-3-86326-868-8"
+  page-total: 1440
+
+src_lodish-molecular-cell-biology:
+  type: book
+  title: Molecular Cell Biology
+  edition: 8
+  date: 2016-07-08
+  author:
+    - Harvey Lodish
+    - Arnold Berk
+    - Chris A. Kaiser
+    - Angelika Amon
+    - Hidde Ploegh
+    - Anthony Bretscher
+    - Monty Krieger
+    - Kelsey C. Martin
+  url:
+    value: https://books.google.at/books/about/Molecular_Cell_Biology.html?id=Ov7LvQEACAAJ
+    date: 2026-06-18
+  serial-number:
+    isbn: "9781319101572"
+  page-total: 1280
+
+src_wikipedia-molar-extinction-coefficient:
+  type: web
+  url:
+    value: https://en.wikipedia.org/wiki/Molar_absorption_coefficient
+    date: 2025-12-29
+  title: Molar extinction coefficient - Wikipedia
+  organization: Wikipedia
+  parent:
+    type: article
+    
