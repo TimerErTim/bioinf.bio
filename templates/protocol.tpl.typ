@@ -12,7 +12,7 @@
 }
 
 #let new-chapter(title) = [
-  #colbreak(weak: true)
+  #pagebreak(weak: true)
   = #title
 ]
 

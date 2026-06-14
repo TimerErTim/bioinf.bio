@@ -1,11 +1,12 @@
 #import "../../lib/maths/statistics.typ": *
 
 #let photometrie-raw-data = json("../data/dna_photometrie.json")
+#let dilation-factor = 1/100
 #let _process-sample(sample) = {
   let process-measurement(measurement) = {
     (
       ..measurement,
-      "concentration": measurement.absorbance.at("230") * 50,
+      "concentration": measurement.absorbance.at("230") * 50 / dilation-factor,
       "cleaness_proteins": measurement.absorbance.at("260") / measurement.absorbance.at("280"),
       "cleaness_salts": measurement.absorbance.at("260") / measurement.absorbance.at("230"),
     )
@@ -48,3 +49,6 @@
 
 #let liver-weights-raw-data = json("../data/liver_weights.json")
 #let liver-weights-data = liver-weights-raw-data.map(it => (it.initials, it)).to-dict()
+
+#let restr-enzyme-distr-raw-data = json("../data/restr_enzyme_distr.json")
+#let restr-enzyme-distr-data = restr-enzyme-distr-raw-data.map(it => (it.initials, it)).to-dict()

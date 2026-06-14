@@ -61,7 +61,7 @@ src_csh-protocols-isolation:
   date: 2018
   url:
     value: https://cshprotocols.cshlp.org/content/2018/6/pdb.top093336.abstract
-    date: 2026-06-18
+    date: 2026-06-13
   serial-number:
     doi: 10.1101/pdb.top093336
   parent:
@@ -85,7 +85,7 @@ src_csh-bacterial-cell-envelope:
     - Suzanne Walker
   url:
     value: https://cshperspectives.cshlp.org/content/2/5/a000414.full.pdf
-    date: 2026-06-18
+    date: 2026-06-13
   serial-number:
     doi: 10.1101/cshperspect.a000414
   organization: Cold Spring Harbor Laboratory Press
@@ -134,7 +134,7 @@ src_lodish-molecular-cell-biology:
     - Kelsey C. Martin
   url:
     value: https://books.google.at/books/about/Molecular_Cell_Biology.html?id=Ov7LvQEACAAJ
-    date: 2026-06-18
+    date: 2026-06-13
   serial-number:
     isbn: "9781319101572"
   page-total: 1280
@@ -148,4 +148,33 @@ src_wikipedia-molar-extinction-coefficient:
   organization: Wikipedia
   parent:
     type: article
-    
+  
+src_assessment-of-nucleic-purity:
+  type: report
+  author: Brian Matlock
+  title: "Assessment of Nucleic Acid Purity"
+  organization: Thermo Fisher Scientific
+  date: 2015
+  url:
+    value: https://documents.thermofisher.com/TFS-Assets/CAD/Product-Bulletins/TN52646-E-0215M-NucleicAcid.pdf
+    date: 2026-06-14
+
+src_thermo-fischer-gelelectro:
+  type: article
+  title: A Brief Overview and History of Gel Electrophoresis
+  organization: Thermo Fisher Scientific Inc.
+  url:
+    value: https://www.thermofisher.com/at/en/home/life-science/cloning/cloning-learning-center/invitrogen-school-of-molecular-biology/na-electrophoresis-education/na-separation-overview.html
+    date: 2026-06-14
+  note: |
+    Gel Electrophoresis, Länge, Wanderrichtung, Spannung, Prinzip, etc
+
+src_neb-typ2-restr-enzyme:
+  type: article
+  title: "Everything You Ever Wanted to Know About Type II Restriction Enzymes"
+  organization: New England Biolabs
+  url:
+    value: https://www.neb.com/en/tools-and-resources/feature-articles/everything-you-ever-wanted-to-know-about-type-ii-restriction-enzymes
+    date: 2026-06-14
+  note: |
+    Typ-II-Restriktionsenzyme, Prinzip, etc, Alles

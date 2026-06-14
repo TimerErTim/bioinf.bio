@@ -340,23 +340,7 @@
   )
 }
 
-#let is-difference-significant(
-  entries-expected,
-  entries-observed,
-  alpha: 0.05,
-) = {
-  let test-statistics = chi-square-teststatistic(
-    entries-expected,
-    entries-observed,
-  )
-  let critical-value = chi-square-ablehnungsbereich(
-    df: entries-expected.len() - 1,
-    alpha: alpha,
-  )
-  test-statistics.t > critical-value
-}
-
-#let is-contingency-table-significant-independent(..rows, alpha: 0.05) = {
+#let chi-square-independence-test(..rows, alpha: 0.05) = {
   let rows = rows.pos()
   let edge-distr-horizontal = (0,) * rows.len()
   let edge-distr-vertical = (0,) * rows.at(0).len()
@@ -374,22 +358,38 @@
       expected-rows.at(y).at(x) = total-horizontal * total-vertical / total-sum
     }
   }
-
   let test-statistics = rows
     .zip(expected-rows)
     .map(((observed, expected)) => {
       chi-square-teststatistic(expected, observed).t
     })
     .sum()
-  let p-value = chi-square-pvalue(
-    test-statistics,
-    df: (rows.len() - 1) * (rows.at(0).len() - 1),
-  )
+  let p-value = chi-square-pvalue(test-statistics, df: (rows.len() - 1) * (rows.at(0).len() - 1))
   (
     "test-statistics": test-statistics,
     "p-value": p-value,
     "is-significant": p-value < alpha,
   )
+}
+
+#let is-difference-significant(
+  entries-expected,
+  entries-observed,
+  alpha: 0.05,
+) = {
+  let test-statistics = chi-square-teststatistic(
+    entries-expected,
+    entries-observed,
+  )
+  let critical-value = chi-square-ablehnungsbereich(
+    df: entries-expected.len() - 1,
+    alpha: alpha,
+  )
+  test-statistics.t > critical-value
+}
+
+#let is-contingency-table-significant-independent(..rows, alpha: 0.05) = {
+  chi-square-independence-test(..rows, alpha: alpha)
 }
 
 #let mean-squares-within(..groups) = {
