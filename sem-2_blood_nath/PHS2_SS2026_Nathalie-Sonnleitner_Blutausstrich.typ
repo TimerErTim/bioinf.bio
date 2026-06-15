@@ -271,10 +271,10 @@ Akute Erkrankungen führen häufig zu:
 )
 
 #import "analysis/calculations/plots.typ": (
-  boxplot-leukozyten, heatmap-leukozyten-difference,
-  table-chi-square-anpassungstest, table-chi-square-independence-test,
-  table-descriptive-statistics, table-one-sample-t-tests,
-  table-two-sample-t-tests, piecharts-for-known-groups, anova-table,
+  anova-table, boxplot-leukozyten, heatmap-leukozyten-difference,
+  piecharts-for-known-groups, table-chi-square-anpassungstest,
+  table-chi-square-independence-test, table-descriptive-statistics,
+  table-one-sample-t-tests, table-two-sample-t-tests,
 )
 #import "analysis/calculations/data-processing.typ": (
   data-acute-erkrankungen-group, data-all-group, data-allergies-group,

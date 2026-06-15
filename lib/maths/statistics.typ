@@ -364,7 +364,10 @@
       chi-square-teststatistic(expected, observed).t
     })
     .sum()
-  let p-value = chi-square-pvalue(test-statistics, df: (rows.len() - 1) * (rows.at(0).len() - 1))
+  let p-value = chi-square-pvalue(
+    test-statistics,
+    df: (rows.len() - 1) * (rows.at(0).len() - 1),
+  )
   (
     "test-statistics": test-statistics,
     "p-value": p-value,
@@ -419,9 +422,14 @@
 
 #let _log-gamma(x) = {
   let p = (
-    676.5203681218851, -1259.1392167224028, 771.3234287776531,
-    -176.61502916214059, 12.507343278686905, -0.13857109526572012,
-    9.9843695780195716e-6, 1.5056327351493116e-7
+    676.5203681218851,
+    -1259.1392167224028,
+    771.3234287776531,
+    -176.61502916214059,
+    12.507343278686905,
+    -0.13857109526572012,
+    9.9843695780195716e-6,
+    1.5056327351493116e-7,
   )
   if x < 0.5 {
     return calc.ln(calc.pi / calc.sin(calc.pi * x)) - _log-gamma(1 - x)
@@ -436,23 +444,23 @@
 #let _beta-incomplete(x, a_param, b_param) = {
   if x <= 0.0 { return 0.0 }
   if x >= 1.0 { return 1.0 }
-  
+
   let a = float(a_param)
   let b = float(b_param)
-  
+
   // Symmetrie-Eigenschaft nutzen
   if x > (a + 1.0) / (a + b + 2.0) {
     return 1.0 - _beta-incomplete(1.0 - x, b, a)
   }
-  
+
   let lbeta = _log-gamma(a) + _log-gamma(b) - _log-gamma(a + b)
   let front = calc.exp(a * calc.ln(x) + b * calc.ln(1.0 - x) - lbeta) / a
-  
+
   // Reihenentwicklung nach Taylor/Abramowitz
   let sum = 0.0
   let term = 1.0
   sum += term
-  
+
   for j in range(1, 60) {
     let j_f = float(j)
     // Multiplikativer Faktor für das nächste Glied der Reihe
@@ -460,16 +468,16 @@
     sum += term
     if calc.abs(term) < 1e-12 { break }
   }
-  
+
   return calc.min(1.0, calc.max(0.0, front * sum))
 }
 
 #let f-pvalue(f, df1, df2) = {
   if f <= 0 or df1 <= 0 or df2 <= 0 { return 1.0 }
-  
+
   let x = (float(df1) * float(f)) / (float(df1) * float(f) + float(df2))
   let p_val = 1.0 - _beta-incomplete(x, float(df1) / 2.0, float(df2) / 2.0)
-  
+
   return calc.min(1.0, calc.max(0.0, p_val))
 }
 
@@ -506,10 +514,12 @@
     let rank = (index + 1 + index + values.len()) / 2
     index += values.len()
     for value in values {
-      ((
-        "value": value,
-        "rank": rank,
-      ),)
+      (
+        (
+          "value": value,
+          "rank": rank,
+        ),
+      )
     }
   }
 }
@@ -521,9 +531,18 @@
   let n-a = grp-a.len()
   let n-b = grp-b.len()
   let n = n-a + n-b
-  let ranks = ranks(grp-a.map(it => (it, "a")) + grp-b.map(it => (it, "b")), by: it => it.at(0))
-  let rank-sum-a = ranks.filter(it => it.value.at(1) == "a").map(it => it.rank).sum()
-  let rank-sum-b = ranks.filter(it => it.value.at(1) == "b").map(it => it.rank).sum()
+  let ranks = ranks(
+    grp-a.map(it => (it, "a")) + grp-b.map(it => (it, "b")),
+    by: it => it.at(0),
+  )
+  let rank-sum-a = ranks
+    .filter(it => it.value.at(1) == "a")
+    .map(it => it.rank)
+    .sum()
+  let rank-sum-b = ranks
+    .filter(it => it.value.at(1) == "b")
+    .map(it => it.rank)
+    .sum()
   // Return the W statistic (lowest sum of ranks for groups)
   return (
     "n_a": n-a,

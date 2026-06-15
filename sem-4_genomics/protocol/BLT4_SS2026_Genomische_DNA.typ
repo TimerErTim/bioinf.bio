@@ -250,24 +250,29 @@ Verdünnung der extrahierten DNA (_+RNase_ & _-RNase_) in destilliertem *Wasser*
 #place(auto, float: true, {
   show: pad.with(bottom: -1em)
   grid(
-  columns: 2,
-  gutter: 1em,
-  align: top,
-  {
-    show: box
-    show: it => [#it <nornase-spectrum-measured-img>]
-    show: figure.with(caption: [Beispiel für das gemessene Spektrum bei einer Probe _-RNase_.])
-    set rect(inset: 0pt)
-    image("../assets/nathalie_raw_spektrum.png", width: 100%)
-  },
-  {
-    show: box
-    show: it => [#it <rnase-spectrum-measured-img>]
-    show: figure.with(caption: [Beispiel für das gemessene Spektrum bei einer Probe _+RNase_.])
-    set rect(inset: 0pt)
-    image("../assets/nathalie_rnase_spektrum.png", width: 100%)
-  },
-)})
+    columns: 2,
+    gutter: 1em,
+    align: top,
+    {
+      show: box
+      show: it => [#it <nornase-spectrum-measured-img>]
+      show: figure.with(
+        caption: [Beispiel für das gemessene Spektrum bei einer Probe _-RNase_.],
+      )
+      set rect(inset: 0pt)
+      image("../assets/nathalie_raw_spektrum.png", width: 100%)
+    },
+    {
+      show: box
+      show: it => [#it <rnase-spectrum-measured-img>]
+      show: figure.with(
+        caption: [Beispiel für das gemessene Spektrum bei einer Probe _+RNase_.],
+      )
+      set rect(inset: 0pt)
+      image("../assets/nathalie_rnase_spektrum.png", width: 100%)
+    },
+  )
+})
 
 Die Bakterienproben wurden ein zweites Mal gemessen, weil die ersten Messwerte nicht plausibel waren.
 
@@ -283,23 +288,34 @@ Die DNA wird mit den in @table-restr-distr aufgeführten Restriktionsenzymen beh
     columns: 3,
     align: (right, center, center),
     table.header([*Enzym*], [*Alt*], [*Neu*]),
-    ..for enzyme in restr-enzyme-distr-data.values().map(it => it.enzyme).dedup() {
+    ..for enzyme in restr-enzyme-distr-data
+      .values()
+      .map(it => it.enzyme)
+      .dedup() {
       let person-has-liver(initials) = {
         initials in liver-weights-data
       }
-      let found-old-person = restr-enzyme-distr-data.values().find(it => it.enzyme == enzyme and it.new_charge == false)
-      let found-new-person = restr-enzyme-distr-data.values().find(it => it.enzyme == enzyme and it.new_charge == true)
+      let found-old-person = restr-enzyme-distr-data
+        .values()
+        .find(it => it.enzyme == enzyme and it.new_charge == false)
+      let found-new-person = restr-enzyme-distr-data
+        .values()
+        .find(it => it.enzyme == enzyme and it.new_charge == true)
 
       (
         [*#enzyme*],
         if found-new-person != none [
-          #set text(fill: if person-has-liver(found-new-person.initials) { red } else { green })
+          #set text(fill: if person-has-liver(found-new-person.initials) {
+            red
+          } else { green })
           #found-new-person.initials
         ] else [
           #sym.crossmark
         ],
         if found-old-person != none [
-          #set text(fill: if person-has-liver(found-old-person.initials) { red } else { green })
+          #set text(fill: if person-has-liver(found-old-person.initials) {
+            red
+          } else { green })
           #found-old-person.initials
         ] else [
           #sym.crossmark
@@ -352,8 +368,12 @@ Die Gelelektrophorese wird mit einem Agarosegel und einem DNA-Marker durchgefüh
 )
 
 #let relevant-data = (
-  ..photometrie-data.filter(it => it.sample_source == "Leber" and it.trial == 1),
-  ..photometrie-data.filter(it => it.sample_source == "Bakterien" and it.trial == 2),
+  ..photometrie-data.filter(it => (
+    it.sample_source == "Leber" and it.trial == 1
+  )),
+  ..photometrie-data.filter(it => (
+    it.sample_source == "Bakterien" and it.trial == 2
+  )),
 )
 
 Zuerst werden die Ergebnisse visuell interpretiert bevor sie anschließend statistisch ausgewertet werden.
@@ -405,19 +425,26 @@ Der Schmier in der Mitte macht sichtbar, was bereits in @genome-architektur-theo
   ]
 }
 #{
-  show: figure.with(caption: [Annotiertes Gelelektrophorese-Bild der Leberprobe _-RNase_ (#box(stroke: blue, inset: 1em / 2, baseline: 1em / 4)) und _+RNase_ (#box(stroke: green, inset: 1em / 2, baseline: 1em / 4)), beide ohne Restriktionsenzym-Verdau.])
+  show: figure.with(
+    caption: [Annotiertes Gelelektrophorese-Bild der Leberprobe _-RNase_ (#box(stroke: blue, inset: 1em / 2, baseline: 1em / 4)) und _+RNase_ (#box(stroke: green, inset: 1em / 2, baseline: 1em / 4)), beide ohne Restriktionsenzym-Verdau.],
+  )
   set rect(inset: 0pt)
   place(top + left, dx: 8%)[
     Marker
   ]
-  box(image("../assets/leber-unrestr-ref-marker.png", width: 8.7%), baseline: -1mm)
+  box(
+    image("../assets/leber-unrestr-ref-marker.png", width: 8.7%),
+    baseline: -1mm,
+  )
   box(scale(annotated-leber-unrestr-gelelectro, 80%, reflow: true))
 } <annotated-leber-unrestr-gelelectro-img>
 
 Links im Bild wird der Marker aus @genruler-1kb-plus-img in der durchgeführten Gelelektrophorese gezeigt. Die verschiedenen Banden entsprechen den verschiedenen DNA-Fragmenten in der Probe. Dieser endet bei 20 kbp in der oberen Grenze. Die genomische DNA liegt deutlich darüber. Er zeigt aber auch, dass sich die mittlere Schmier sich ungefähr im Bereich 1 - 40 kbp befindet. Das könnte oben erwähnte zerbrochene DNA-Fragmente oder mRNA sein.
 
 #{
-  show: figure.with(caption: [Marker für die Gelelektrophorese: GeneRuler#super[TM] 1 kb Plus DNA Ladder.])
+  show: figure.with(
+    caption: [Marker für die Gelelektrophorese: GeneRuler#super[TM] 1 kb Plus DNA Ladder.],
+  )
   image("../assets/genruler-1kb-plus.png")
 } <genruler-1kb-plus-img>
 
@@ -426,19 +453,30 @@ Links im Bild wird der Marker aus @genruler-1kb-plus-img in der durchgeführten 
     columns: 3,
     align: left,
     ..(
-      table.header(table.cell(colspan: 3, align: left)[*#sample.sample_source (#sample.trial\. Durchlauf)*]),
+      table.header(table.cell(
+        colspan: 3,
+        align: left,
+      )[*#sample.sample_source (#sample.trial\. Durchlauf)*]),
       table.header(level: 2)[][*+RNase*][*-RNase*],
       ..for initials in (
-        sample.with_rnase.measures.map(it => it.initials) + sample.without_rnase.measures.map(it => it.initials)
+        sample.with_rnase.measures.map(it => it.initials)
+          + sample.without_rnase.measures.map(it => it.initials)
       ).dedup() {
-        let with_rnase = sample.with_rnase.measures.find(it => it.initials == initials)
-        let without_rnase = sample.without_rnase.measures.find(it => it.initials == initials)
+        let with_rnase = sample.with_rnase.measures.find(it => (
+          it.initials == initials
+        ))
+        let without_rnase = sample.without_rnase.measures.find(it => (
+          it.initials == initials
+        ))
         (
           [
             #show: rotate.with(-90deg, reflow: true)
             *#initials*
           ],
-          ..for measurement in (if with_rnase != none { with_rnase }, if without_rnase != none { without_rnase }) {
+          ..for measurement in (
+            if with_rnase != none { with_rnase },
+            if without_rnase != none { without_rnase },
+          ) {
             if measurement != none {
               (
                 [
@@ -458,11 +496,15 @@ Links im Bild wird der Marker aus @genruler-1kb-plus-img in der durchgeführten 
 }
 
 #{
-  show: figure.with(caption: [Photometrische Messwerte und umgerechnete Konzentration aller Leberproben.])
-  table-photometrie-results(relevant-data.find(it => it.sample_source == "Leber" and it.trial == 1))
+  show: figure.with(
+    caption: [Photometrische Messwerte und umgerechnete Konzentration aller Leberproben.],
+  )
+  table-photometrie-results(relevant-data.find(it => (
+    it.sample_source == "Leber" and it.trial == 1
+  )))
 } <table-photometrie-results-leber>
 
-@table-photometrie-results-leber zeigt die Einzelmesswerte bzw. Konzentration aus der Photometrie. Dabei fällt auf, dass so gut wie alle Proben stark verunreinigt sind. Die mit Abstand am ehesten nicht verunreinigte Probe ist die von NS +RNase. Bei dieser Probe liegt der $E_260 slash E_280$ Quotient bei 1.7, also nahe dem Idealwert von 1.8 (trotzdem Hinweis auf starke Verunreinigung durch Proteine), der $E_260 slash E_230$ Quotient bei 2.00, also im Idealbereich. 
+@table-photometrie-results-leber zeigt die Einzelmesswerte bzw. Konzentration aus der Photometrie. Dabei fällt auf, dass so gut wie alle Proben stark verunreinigt sind. Die mit Abstand am ehesten nicht verunreinigte Probe ist die von NS +RNase. Bei dieser Probe liegt der $E_260 slash E_280$ Quotient bei 1.7, also nahe dem Idealwert von 1.8 (trotzdem Hinweis auf starke Verunreinigung durch Proteine), der $E_260 slash E_230$ Quotient bei 2.00, also im Idealbereich.
 
 Zudem ist für das bloße Auge kein eindeutiger gepaarter Zusammenhang zwischen _-RNase_ und _+RNase_ Proben zu erkennen. Zu erwarten wäre eine verminderte Konzentration bei der _+RNase_ Probe, da störende Nukleinsäuren aufgrund des RNA Abbaus verringert werden sollten.
 
@@ -487,7 +529,9 @@ Zudem ist für das bloße Auge kein eindeutiger gepaarter Zusammenhang zwischen 
   ]
 }
 #{
-  show: figure.with(caption: [Annotiertes Gelelektrophorese-Bild mit Restriktionsenzymen verdauten Leber-DNA _+RNase_.])
+  show: figure.with(
+    caption: [Annotiertes Gelelektrophorese-Bild mit Restriktionsenzymen verdauten Leber-DNA _+RNase_.],
+  )
   set rect(inset: 0pt)
   annotated-leber-restr-gelelectro
 } <annotated-leber-restr-gelelectro-img>
@@ -555,7 +599,9 @@ Die RNA Menge wird durchwegs gegen 0% geschätzt, da der helle Leuchtstreifen ga
 }
 
 #{
-  show: figure.with(caption: [Annotiertes Gelelektrophorese-Bild der Bakterienprobe _-RNase_ (#box(stroke: blue, inset: 1em / 2, baseline: 1em / 4)) und _+RNase_ (#box(stroke: green, inset: 1em / 2, baseline: 1em / 4)), beide ohne Restriktionsenzym-Verdau.])
+  show: figure.with(
+    caption: [Annotiertes Gelelektrophorese-Bild der Bakterienprobe _-RNase_ (#box(stroke: blue, inset: 1em / 2, baseline: 1em / 4)) und _+RNase_ (#box(stroke: green, inset: 1em / 2, baseline: 1em / 4)), beide ohne Restriktionsenzym-Verdau.],
+  )
   set rect(inset: 0pt)
   annotated-bakterien-unrestr-gelelectro
 } <annotated-bakterien-unrestr-gelelectro-img>
@@ -567,21 +613,29 @@ Ein visueller Vergleich der Proben mit und ohne RNase gestaltet sich aufgrund de
 Auch hier ist der im Gel verwendete Referenzmarker aus @genruler-1kb-plus-img. Zerrissene Stücke sollte man in etwa im 30 kbp - 100 kbp Bereich erkennen. Bei der durchgeführten Gelelektrophorese ist kein Leuchten zu sehen und daher auch kein Abschätzen möglich. Die zwei Proben mit den anomalen Ergebnissen sind vermutlich auf äußere Fehlerquellen zurückzuführen, wie beispielsweise Verwechslung der Probne, falsche Probne oder Verunreinigungen.
 
 #{
-  show: figure.with(caption: [Photometrische Messwerte und umgerechnete Konzentration aller Bakterienproben.])
-  table-photometrie-results(relevant-data.find(it => it.sample_source == "Bakterien" and it.trial == 2))
+  show: figure.with(
+    caption: [Photometrische Messwerte und umgerechnete Konzentration aller Bakterienproben.],
+  )
+  table-photometrie-results(relevant-data.find(it => (
+    it.sample_source == "Bakterien" and it.trial == 2
+  )))
 } <table-photometrie-results-bakterien>
 
 == Statistik
 
 #{
-  show: figure.with(caption: [Beschreibende Statistik der DNA-Konzentrationen und Photometrie-Werte der DNA Proben.])
+  show: figure.with(
+    caption: [Beschreibende Statistik der DNA-Konzentrationen und Photometrie-Werte der DNA Proben.],
+  )
   table(
     columns: relevant-data.len() * 2 + 1,
     table.header(
       table.cell(rowspan: 2, stroke: none, fill: none)[],
       ..for sample in relevant-data {
         (
-          table.cell(colspan: 2)[*#sample.sample_source (#sample.trial\. Durchlauf)*],
+          table.cell(
+            colspan: 2,
+          )[*#sample.sample_source (#sample.trial\. Durchlauf)*],
         )
       },
       ..for sample in relevant-data {
@@ -608,13 +662,19 @@ Auch hier ist der im Gel verwendete Referenzmarker aus @genruler-1kb-plus-img. Z
     ..for sample in relevant-data {
       (
         [
-          #calc.round(sample.with_rnase.stats.cleaness_proteins.mean, digits: 1) #sym.plus.minus #calc.round(
+          #calc.round(
+            sample.with_rnase.stats.cleaness_proteins.mean,
+            digits: 1,
+          ) #sym.plus.minus #calc.round(
             sample.with_rnase.stats.cleaness_proteins.stddev,
             digits: 1,
           )
         ],
         [
-          #calc.round(sample.without_rnase.stats.cleaness_proteins.mean, digits: 1) #sym.plus.minus #calc.round(
+          #calc.round(
+            sample.without_rnase.stats.cleaness_proteins.mean,
+            digits: 1,
+          ) #sym.plus.minus #calc.round(
             sample.without_rnase.stats.cleaness_proteins.stddev,
             digits: 1,
           )
@@ -627,13 +687,19 @@ Auch hier ist der im Gel verwendete Referenzmarker aus @genruler-1kb-plus-img. Z
     ..for sample in relevant-data {
       (
         [
-          #calc.round(sample.with_rnase.stats.cleaness_salts.mean, digits: 1) #sym.plus.minus #calc.round(
+          #calc.round(
+            sample.with_rnase.stats.cleaness_salts.mean,
+            digits: 1,
+          ) #sym.plus.minus #calc.round(
             sample.with_rnase.stats.cleaness_salts.stddev,
             digits: 1,
           )
         ],
         [
-          #calc.round(sample.without_rnase.stats.cleaness_salts.mean, digits: 1) #sym.plus.minus #calc.round(
+          #calc.round(
+            sample.without_rnase.stats.cleaness_salts.mean,
+            digits: 1,
+          ) #sym.plus.minus #calc.round(
             sample.without_rnase.stats.cleaness_salts.stddev,
             digits: 1,
           )
@@ -646,7 +712,9 @@ Auch hier ist der im Gel verwendete Referenzmarker aus @genruler-1kb-plus-img. Z
 Leider lässt sich aus den Daten in @table-descriptive-statistics keine Gesamtausbeute der einzelnen Proben berechnen, da dafür die Information über das Verhältnis der im Photometer gemessenen Menge und der gesamt isolierten Menge fehlt. Die Tabelle zeigt einen Trend, der auch durch @dna-concentration-comparison-diagram verdeutlicht und in sowohl @leberproben als auch in @bakterienproben sichtbar ist: Die DNA Konzentration in Leberproben ist \~12x höher als in Bakterienproben.
 
 #{
-  show: figure.with(caption: [Diagramm der DNA-Konzentrationen und Verteilung der Leber- und Bakterienproben.])
+  show: figure.with(
+    caption: [Diagramm der DNA-Konzentrationen und Verteilung der Leber- und Bakterienproben.],
+  )
   show: rect
   // Diagram for DNA concentration comparison
   lq.diagram(
@@ -662,7 +730,10 @@ Leider lässt sich aus den Daten in @table-descriptive-statistics keine Gesamtau
     ),
     yaxis: (
       //tick-args: (tick-distance: 1.0),
-      ticks: relevant-data.map(it => it.sample_source).map(rotate.with(-45deg, reflow: true)).enumerate(),
+      ticks: relevant-data
+        .map(it => it.sample_source)
+        .map(rotate.with(-45deg, reflow: true))
+        .enumerate(),
     ),
     lq.hbar(
       relevant-data.map(it => it.with_rnase.stats.concentration.mean),
@@ -740,10 +811,18 @@ Sämtliche Hypothesentests werden mit einem Signifikanzniveau von $alpha = 0.05$
 )[*Gibt es einen signifikanten Unterschied ziwschen der DNA-Konzentration in Leber- und Bakterienproben?*]
 
 #let leber-concentrations = (
-  relevant-data.find(it => it.sample_source == "Leber").with_rnase.measures.map(it => it.concentration)
+  relevant-data
+    .find(it => it.sample_source == "Leber")
+    .with_rnase
+    .measures
+    .map(it => it.concentration)
 )
 #let bakterien-concentrations = (
-  relevant-data.find(it => it.sample_source == "Bakterien").with_rnase.measures.map(it => it.concentration)
+  relevant-data
+    .find(it => it.sample_source == "Bakterien")
+    .with_rnase
+    .measures
+    .map(it => it.concentration)
 )
 
 Aufgrund der niedrigen Anzahl an Proben wird zur Beantwortung ein Wilcoxon-Rang-Summen-Test durchgeführt. Dieser liefert eine Teststatistik von $bold(#str(calc.round(wilcoxon-rank-sum-statistic(leber-concentrations, bakterien-concentrations).w-statistic, digits: 2))) ~ W_(#leber-concentrations.len(), #bakterien-concentrations.len())$, der aber #underline[nicht] unterhalb des kritischen Wertes von *2* liegt und daher #underline[*nicht signifikant*] ist.
@@ -752,8 +831,16 @@ Aufgrund der niedrigen Anzahl an Proben wird zur Beantwortung ein Wilcoxon-Rang-
   sticky: true,
 )[*Gibt es einen signifikanten Unterschied ziwschen der DNA-Konzentration in _-RNase_ und _+RNase_ Proben?*]
 
-#let rnase-concentrations = relevant-data.map(it => it.with_rnase.measures.map(it => it.concentration)).flatten()
-#let nornase-concentrations = relevant-data.map(it => it.without_rnase.measures.map(it => it.concentration)).flatten()
+#let rnase-concentrations = (
+  relevant-data
+    .map(it => it.with_rnase.measures.map(it => it.concentration))
+    .flatten()
+)
+#let nornase-concentrations = (
+  relevant-data
+    .map(it => it.without_rnase.measures.map(it => it.concentration))
+    .flatten()
+)
 
 Aufgrund der niedrigen Anzahl an Proben wird zur Beantwortung ein Wilcoxon-Vorzeichen-Rang-Test durchgeführt. Dieser liefert eine Teststatistik von $bold(#str(calc.round(wilcoxon-signed-rank-statistic(rnase-concentrations.zip(nornase-concentrations)).w-statistic, digits: 2))) ~ W_(#rnase-concentrations.len())$, der aber #underline[nicht] unterhalb des kritischen Wertes von *8* liegt und daher #underline[*nicht signifikant*] ist.
 
@@ -764,12 +851,16 @@ Aufgrund der niedrigen Anzahl an Proben wird zur Beantwortung ein Wilcoxon-Vorze
 Da die Gelelektrophoresen bei den Bakterien Proben fehlschlugen, werden hier die erwarteten Sollwerte aus der Literatur diskutiert.
 
 #{
-  show: figure.with(caption: [Erwartetes Gelelektrophorese-Bild der unrestriktierten Bakterien-DNA. @src_unrestr-bakterien-gel-erw_img Verwendert Marker aus @genruler-1kb-plus-img.])
+  show: figure.with(
+    caption: [Erwartetes Gelelektrophorese-Bild der unrestriktierten Bakterien-DNA. @src_unrestr-bakterien-gel-erw_img Verwendert Marker aus @genruler-1kb-plus-img.],
+  )
   image("../assets/erwartung-unrestr-bakterien.png")
 } <erwartung-unrestr-bakterien-gel-img>
 
 #{
-  show: figure.with(caption: [Erwartetes Gelelektrophorese-Bild der durch Restriktionsenzyme verdauten Bakterien-DNA. Die Spalten annotiert mit "E" beziehen sich auf Proben aus E. coli Bakterien. @src_restr-bakterien-gel-erw_img])
+  show: figure.with(
+    caption: [Erwartetes Gelelektrophorese-Bild der durch Restriktionsenzyme verdauten Bakterien-DNA. Die Spalten annotiert mit "E" beziehen sich auf Proben aus E. coli Bakterien. @src_restr-bakterien-gel-erw_img],
+  )
   set rect(inset: 0pt)
   image("../assets/erwartung-restr-bakterien.png")
 } <erwartung-restr-bakterien-gel-img>
@@ -789,13 +880,13 @@ Zu Beginn zu wenig Bakterienflüssigkeit abzentrifugiert, sodass ein extrem klei
 
 #block(
   sticky: true,
-)[*Verunreinigte Leber-DNA*] 
+)[*Verunreinigte Leber-DNA*]
 Das Arbeiten mit DNA erfordert ein hohes Maß an Sorgfalt, reine Laborbedingungen und korrekte Vorgehensweisen. Es könnte die Annahme getroffen werden, dass in einem Studentenlabor, das für persönliche Entwicklung und das Erlauben, Fehler zu machen, vorgesehen ist, diese Vorraussetzungen nicht immer erfüllt sind. Dass dennoch eine recht hoher Reinheitsgrad erzielt werden kann, wird in @leberproben gezeigt. Es wird hier also eher auf menschliche Ungenauigkeiten zurückgeschlossen anstatt auf systematische Fehler.
 
 #block(
   sticky: true,
 )[*Statistische nicht-Signifikanz*]
-Die Ergebnisse in @hypothesentests-chapter sind nicht signifikant. Das liegt höchstwahrscheinlich an dem extrem niedrigen Stichprobenumfang (10 bzw. 5 Datenpunkte), der schlichtweg keine statistisch signifikanten Aussagen ermöglicht. Auch könnten die Tests selbst keinen Fehler sondern ein richtiges Ergebnis liefern und unter den gearbeiteten Laborbedingungen besteht tatsächlich kein relevanter Unterschied zwischen beispielsweise der DNA-Konzentration mit und ohne RNase. Das ist aber aufgrund des Stichprobenumfangs nicht nachweisbar. 
+Die Ergebnisse in @hypothesentests-chapter sind nicht signifikant. Das liegt höchstwahrscheinlich an dem extrem niedrigen Stichprobenumfang (10 bzw. 5 Datenpunkte), der schlichtweg keine statistisch signifikanten Aussagen ermöglicht. Auch könnten die Tests selbst keinen Fehler sondern ein richtiges Ergebnis liefern und unter den gearbeiteten Laborbedingungen besteht tatsächlich kein relevanter Unterschied zwischen beispielsweise der DNA-Konzentration mit und ohne RNase. Das ist aber aufgrund des Stichprobenumfangs nicht nachweisbar.
 
 #set heading(numbering: none)
 #new-chapter("Anhang")

@@ -1,4 +1,9 @@
-#set page(width: auto, height: auto, fill: white.transparentize(100%), margin: 5mm)
+#set page(
+  width: auto,
+  height: auto,
+  fill: white.transparentize(100%),
+  margin: 5mm,
+)
 #import "processing.typ": photometrie-data
 
 #set text(font: "Arial")
@@ -26,7 +31,7 @@
       ],
       [
         #calc.round(sample.without_rnase.stats.concentration.mean, digits: 1) #sym.plus.minus #calc.round(sample.without_rnase.stats.concentration.stddev, digits: 1) #sym.mu\g DNA/ml
-      ]
+      ],
     )
   },
   [
@@ -36,11 +41,23 @@
   ..for sample in photometrie-data {
     (
       [
-        #calc.round(sample.with_rnase.stats.cleaness_proteins.mean, digits: 1) #sym.plus.minus #calc.round(sample.with_rnase.stats.cleaness_proteins.stddev, digits: 1)
+        #calc.round(
+          sample.with_rnase.stats.cleaness_proteins.mean,
+          digits: 1,
+        ) #sym.plus.minus #calc.round(
+          sample.with_rnase.stats.cleaness_proteins.stddev,
+          digits: 1,
+        )
       ],
       [
-        #calc.round(sample.without_rnase.stats.cleaness_proteins.mean, digits: 1) #sym.plus.minus #calc.round(sample.without_rnase.stats.cleaness_proteins.stddev, digits: 1)
-      ]
+        #calc.round(
+          sample.without_rnase.stats.cleaness_proteins.mean,
+          digits: 1,
+        ) #sym.plus.minus #calc.round(
+          sample.without_rnase.stats.cleaness_proteins.stddev,
+          digits: 1,
+        )
+      ],
     )
   },
   [
@@ -50,11 +67,23 @@
   ..for sample in photometrie-data {
     (
       [
-        #calc.round(sample.with_rnase.stats.cleaness_salts.mean, digits: 1) #sym.plus.minus #calc.round(sample.with_rnase.stats.cleaness_salts.stddev, digits: 1)
+        #calc.round(
+          sample.with_rnase.stats.cleaness_salts.mean,
+          digits: 1,
+        ) #sym.plus.minus #calc.round(
+          sample.with_rnase.stats.cleaness_salts.stddev,
+          digits: 1,
+        )
       ],
       [
-        #calc.round(sample.without_rnase.stats.cleaness_salts.mean, digits: 1) #sym.plus.minus #calc.round(sample.without_rnase.stats.cleaness_salts.stddev, digits: 1)
-      ]
+        #calc.round(
+          sample.without_rnase.stats.cleaness_salts.mean,
+          digits: 1,
+        ) #sym.plus.minus #calc.round(
+          sample.without_rnase.stats.cleaness_salts.stddev,
+          digits: 1,
+        )
+      ],
     )
   },
 )

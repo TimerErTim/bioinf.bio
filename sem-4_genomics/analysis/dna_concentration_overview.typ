@@ -1,11 +1,18 @@
-#set page(width: auto, height: auto, fill: white.transparentize(100%), margin: 5mm)
+#set page(
+  width: auto,
+  height: auto,
+  fill: white.transparentize(100%),
+  margin: 5mm,
+)
 #import "processing.typ": photometrie-data
 
 #table(
   columns: 3,
   ..for sample in photometrie-data {
     (
-      table.header(table.cell(colspan: 3)[*#sample.sample_source (#sample.trial)*]),
+      table.header(table.cell(
+        colspan: 3,
+      )[*#sample.sample_source (#sample.trial)*]),
       table.header(level: 2)[][*+RNase*][*-RNase*],
       [
         #show: rotate.with(90deg, reflow: true)
@@ -22,16 +29,24 @@
         $E_260 slash E_230$ = #calc.round(sample.without_rnase.stats.cleaness_salts.mean, digits: 1) #sym.plus.minus #calc.round(sample.without_rnase.stats.cleaness_salts.stddev, digits: 1)\
       ],
       ..for initials in (
-        sample.with_rnase.measures.map(it => it.initials) + sample.without_rnase.measures.map(it => it.initials)
+        sample.with_rnase.measures.map(it => it.initials)
+          + sample.without_rnase.measures.map(it => it.initials)
       ).dedup() {
-        let with_rnase = sample.with_rnase.measures.find(it => it.initials == initials)
-        let without_rnase = sample.without_rnase.measures.find(it => it.initials == initials)
+        let with_rnase = sample.with_rnase.measures.find(it => (
+          it.initials == initials
+        ))
+        let without_rnase = sample.without_rnase.measures.find(it => (
+          it.initials == initials
+        ))
         (
           [
             #show: rotate.with(90deg, reflow: true)
             #initials
           ],
-          ..for measurement in (if with_rnase != none { with_rnase }, if without_rnase != none { without_rnase }) {
+          ..for measurement in (
+            if with_rnase != none { with_rnase },
+            if without_rnase != none { without_rnase },
+          ) {
             if measurement != none {
               (
                 [

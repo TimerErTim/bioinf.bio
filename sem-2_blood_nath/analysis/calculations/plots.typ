@@ -8,9 +8,9 @@
   stats-current-year-group,
 )
 #import "../../../lib/maths/statistics.typ": (
-  chi-square-anpassungstest, is-contingency-table-significant-independent, mean,
-  median, one-sample-t-test, stddev, two-sample-t-test,
-  anova-test,
+  anova-test, chi-square-anpassungstest,
+  is-contingency-table-significant-independent, mean, median, one-sample-t-test,
+  stddev, two-sample-t-test,
 )
 
 #let heatmap-leukozyten-difference(
@@ -132,7 +132,7 @@
         .map(rotate.with(-40deg, reflow: true))
         .map(text.with(size: 8pt))
         .map(pad.with(top: 3cm))
-        .enumerate()
+        .enumerate(),
     ),
     xaxis: (
       format-ticks: lq.tick-format.linear.with(suffix: "%"),
@@ -224,7 +224,7 @@
   )
 }
 
-#let _transform-p(p) = calc.asin(calc.sqrt(p)).deg() / 90 
+#let _transform-p(p) = calc.asin(calc.sqrt(p)).deg() / 90
 
 #let table-one-sample-t-tests(stats: stats-all-group) = {
   let (..stats, Gesamt) = stats
@@ -304,9 +304,14 @@
     import cetz.draw: *
 
     let color-map = lq.color.map.petroff10
-    let relevant-cells = data-all-group.first().chi-square-deviations.keys().chunks(2).map(it => it.rev()).flatten()
+    let relevant-cells = data-all-group
+      .first()
+      .chi-square-deviations
+      .keys()
+      .chunks(2)
+      .map(it => it.rev())
+      .flatten()
     let radius = 2.5
-
 
     content((0, radius * 1.5))[Alle Gruppen]
     chart.piechart(
@@ -316,27 +321,31 @@
       radius: radius,
       label-key: 0,
       outer-label: (content: "%"),
-      legend: (position: "south-west")
+      legend: (position: "south-west"),
     )
     for (i, (label, data)) in (
       ("MBI 2025", stats-current-year-group),
       ("mit Allergien", stats-allergies-group),
       ("Akute Erkrankungen", stats-acute-erkrankungen-group),
     ).enumerate() {
-      translate(x: radius * 1.5 * 2 * if calc.rem(i, 2) == 0 { -1 } else { 1 }, y: radius * 1.75 * 2 * if calc.rem(i, 2) == 0 { 0 } else { 1 })
+      translate(
+        x: radius * 1.5 * 2 * if calc.rem(i, 2) == 0 { -1 } else { 1 },
+        y: radius * 1.75 * 2 * if calc.rem(i, 2) == 0 { 0 } else { 1 },
+      )
       content((0, radius * 1.5))[#label]
       chart.piechart(
-      relevant-cells.map(key => (key, data.at(key).mean)),
-      value-key: 1,
-      slice-style: color-map,
-      radius: radius,
-      label-key: none,
-      outer-label: (content: (value, label) => [
-        #calc.round(digits: 0, value)%
-        ]),
-    )
+        relevant-cells.map(key => (key, data.at(key).mean)),
+        value-key: 1,
+        slice-style: color-map,
+        radius: radius,
+        label-key: none,
+        outer-label: (
+          content: (value, label) => [
+            #calc.round(digits: 0, value)%
+          ],
+        ),
+      )
     }
-    
   })
 }
 
@@ -346,7 +355,12 @@
   let relevant-celltypes = data-all-group.first().chi-square-deviations.keys()
   let data = (:)
   for celltype in relevant-celltypes {
-    let values = groups.map(group => group.at(celltype).values.map(it => it / 100).map(_transform-p).map(it => it * 100))
+    let values = groups.map(group => group
+      .at(celltype)
+      .values
+      .map(it => it / 100)
+      .map(_transform-p)
+      .map(it => it * 100))
     data.insert(celltype, values)
   }
 
@@ -363,6 +377,6 @@
         [#calc.round(digits: 2, anova-results.p-value * 100)%],
         if anova-results.is-significant [ja #sym.checkmark] else [nein #sym.crossmark],
       )
-    }
+    },
   )
 }
