@@ -178,3 +178,37 @@ src_neb-typ2-restr-enzyme:
     date: 2026-06-14
   note: |
     Typ-II-Restriktionsenzyme, Prinzip, etc, Alles
+
+src_unrestr-bakterien-gel-erw_img:  
+  type: artwork
+  title: "Polymer antimicrobial coatings with embedded fine Cu and Cu salt particles - Scientific Figure on ResearchGate"
+  author: See Lang Tay
+  date: 2014-04
+  url:
+    value: https://www.researchgate.net/figure/Agarose-gel-electrophoresis-of-purified-E-coli-DNA-lane-1-is-1kb-GeneRuler-ladder-lane_fig3_261408592
+    date: 2026-06-02
+  archive: ResearchGate
+  note: |
+    source for erwartung-unrestr-bakterien.png
+
+src_restr-bakterien-gel-erw_img:  
+  type: artwork
+  title: "5-Methylcytosine in Eukaryotic DNA - Scientific Figure on ResearchGate"
+  author: Melanie Ehrlich
+  date: 1981-07
+  url:
+    value: https://www.researchgate.net/figure/Agarose-gel-electrophoresis-of-DNA-digested-with-restriction-endonucleases-DNA-2-VLg_fig1_16933196
+    date: 2026-06-02
+  archive: ResearchGate
+  note: |
+    source for erwartung-restr-bakterien.png
+
+src_ecoli-rna-length:
+  type: article
+  title: "Ribosomal RNA Sizes"
+  organization: Thermo Fisher Scientific Inc.
+  url:
+    value: https://www.thermofisher.com/at/en/home/references/ambion-tech-support/rna-isolation/general-articles/ribosomal-rna-sizes.html
+    date: 2026-06-15
+  note: |
+    covers ribosomale rRNA lengths in different organisms

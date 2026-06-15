@@ -32,7 +32,7 @@
   doc,
 ) = {
   // Set document-wide styles
-  set text(font: "Lato", lang: language)
+  set text(font: "Arial", lang: language)
   set table(
     fill: (_, row) => if row == 0 { gray.lighten(50%) } else if calc.even(row) {
       rgb(240, 240, 240)
