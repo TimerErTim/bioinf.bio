@@ -32,7 +32,8 @@
   [ungepaarter Zwei-Stichproben-t-Test],
   [
     $overline(X_"mit Brille") = #num(tests.both-eyes_glasses_vs_no-glasses_unpaired.all-glasses.mean)$\ $overline(X_"ohne Brille") = #num(tests-data.tests.both-eyes_glasses_vs_no-glasses_unpaired.no-glasses.mean)$\
-    $T = #num(tests.both-eyes_glasses_vs_no-glasses_unpaired.test-result.t-value)$
+    $T = #num(tests.both-eyes_glasses_vs_no-glasses_unpaired.test-result.t-value)$\
+    $n_1 = #tests.both-eyes_glasses_vs_no-glasses_unpaired.all-glasses.values.len()\; space n_2 = #tests.both-eyes_glasses_vs_no-glasses_unpaired.no-glasses.values.len()$
   ],
   [
     $p = #num(tests.both-eyes_glasses_vs_no-glasses_unpaired.test-result.p-value)$
@@ -46,7 +47,8 @@
   [gepaarter Zwei-Stichproben-t-Test],
   [
     $overline(X_"mit Brille") = #num(tests.both-eyes_glasses_vs_no-glasses_paired.with-glasses.mean)$\ $overline(X_"ohne Brille") = #num(tests.both-eyes_glasses_vs_no-glasses_paired.no-glasses.mean)$\
-    $T = #num(tests.both-eyes_glasses_vs_no-glasses_paired.test-result.t-value)$
+    $T = #num(tests.both-eyes_glasses_vs_no-glasses_paired.test-result.t-value)$\
+    $n = #tests.both-eyes_glasses_vs_no-glasses_paired.with-glasses.values.len()$
   ],
   [
     $p = #num(tests.both-eyes_glasses_vs_no-glasses_paired.test-result.p-value)$
@@ -60,7 +62,8 @@
   [gepaarter Zwei-Stichproben-t-Test],
   [
     $overline(X_"beide Augen") = #num(tests.best-single-eye_vs_both-eyes.best-both-eyes.mean)$\ $overline(X_"besseres Auge") = #num(tests.best-single-eye_vs_both-eyes.best-single-eye.mean)$\
-    $T = #num(digits: 2, tests.best-single-eye_vs_both-eyes.test-result.t-value)$
+    $T = #num(tests.best-single-eye_vs_both-eyes.test-result.t-value)$\
+    $n = #tests.best-single-eye_vs_both-eyes.best-both-eyes.values.len()$
   ],
   [
     $p = #num(tests.best-single-eye_vs_both-eyes.test-result.p-value)$
@@ -74,7 +77,8 @@
   [gepaarter Zwei-Stichproben-t-Test],
   [
     $overline(X_"beide Augen") = #num(tests.worst-single-eye_vs_both-eyes.best-both-eyes.mean)$\ $overline(X_"schlechteres Auge") = #num(tests.worst-single-eye_vs_both-eyes.worst-single-eye.mean)$\
-    $T = #num(tests.worst-single-eye_vs_both-eyes.test-result.t-value)$
+    $T = #num(tests.worst-single-eye_vs_both-eyes.test-result.t-value)$\
+    $n = #tests.worst-single-eye_vs_both-eyes.best-both-eyes.values.len()$
   ],
   [
     $p = #num(tests.worst-single-eye_vs_both-eyes.test-result.p-value)$
@@ -88,7 +92,8 @@
   [gepaarter Zwei-Stichproben-t-Test],
   [
     $overline(X_"linkes Auge") = #num(tests.left-eye_vs_right-eye.left-eye.mean)$\ $overline(X_"rechtes Auge") = #num(tests.left-eye_vs_right-eye.right-eye.mean)$\
-    $T = #num(tests.left-eye_vs_right-eye.test-result.t-value)$
+      $T = #num(tests.left-eye_vs_right-eye.test-result.t-value)$\
+    $n = #tests.left-eye_vs_right-eye.left-eye.values.len()$
   ],
   [
     $p = #num(tests.left-eye_vs_right-eye.test-result.p-value)$
