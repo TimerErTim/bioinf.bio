@@ -1,7 +1,7 @@
 #import "num/num.typ"
 #import "qty.typ"
 #import "unit.typ" as unit_
-#import "/src/utils.typ": combine-dict
+#import "../utils.typ": combine-dict
 
 
 #let default-options = (

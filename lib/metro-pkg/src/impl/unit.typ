@@ -1,5 +1,5 @@
-#import "/src/dependencies.typ": test
-#import "/src/utils.typ": combine-dict, content-to-string
+#import "../dependencies.typ": test
+#import "../utils.typ": combine-dict, content-to-string
 
 // NULL unicode character as a marker
 #let NULL-after = [\u{FFFF} ]

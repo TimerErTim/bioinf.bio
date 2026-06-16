@@ -1,4 +1,4 @@
-#import "/src/utils.typ": content-to-string
+#import "../../utils.typ": content-to-string
 
 // full: (sign, integer, decimal, exponent, power)
 // (sign, integer, decimal)

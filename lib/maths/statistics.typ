@@ -290,7 +290,7 @@
   let (mean, stddev) = mean-stddev(values)
   let t = (mean - expected-mu) / (stddev / calc.sqrt(values.len()))
   let df = values.len() - 1
-  let p-value = student-t-pvalue(t, df)
+  let p-value = student-t-pvalue(t, df, alternative: alternative)
   (
     "t-value": t,
     "p-value": p-value,
@@ -315,7 +315,26 @@
       )
   )
   let df = calc.min(values1.len() - 1, values2.len() - 1)
-  let p-value = student-t-pvalue(t, df)
+  let p-value = student-t-pvalue(t, df, alternative: alternative)
+  (
+    "t-value": t,
+    "p-value": p-value,
+    "is-significant": p-value < alpha,
+  )
+}
+
+#let paired-t-test(
+  values1,
+  values2,
+  expected-mu: 0,
+  alpha: 0.05,
+  alternative: "two-sided",
+) = {
+  let diff-values = values1.zip(values2).map(((value1, value2)) => value1 - value2)
+  let (mean, stddev) = mean-stddev(diff-values)
+  let t = (mean - expected-mu) / (stddev / calc.sqrt(diff-values.len()))
+  let df = diff-values.len() - 1
+  let p-value = student-t-pvalue(t, df, alternative: alternative)
   (
     "t-value": t,
     "p-value": p-value,

@@ -1,4 +1,4 @@
-#import "/src/utils.typ": combine-dict, content-to-string
+#import "../../utils.typ": combine-dict, content-to-string
 
 #import "process.typ": process
 #import "parse.typ": parse, to-float

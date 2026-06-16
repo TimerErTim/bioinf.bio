@@ -1,0 +1,3 @@
+[tasks."prepare:asset-dir"]
+description = "Create the asset directory"
+run = "mkdir -p assets"

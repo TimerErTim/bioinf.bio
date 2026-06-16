@@ -1,0 +1,19 @@
+[tasks."visualize"]
+description = "Compile all analysis visualizations"
+run = "mise run visualize:?*"
+
+
+[tasks."visualize:dna-concentration-overview"]
+description = "Compile the DNA concentration overview visualization"
+depends = ["prepare:asset-dir"]
+run = "typst compile --format png --ppi 300  descriptive_statistics.typ ../assets/descriptive_statistics.png"
+
+[tasks."visualize:correlations"]
+description = "Compile the correlations visualization"
+depends = ["prepare:asset-dir"]
+run = "typst compile --format png --ppi 300  correlations.typ ../assets/correlations_{p}.png"
+
+[tasks."visualize:hypothesis-testing"]
+description = "Compile the hypothesis testing visualization"
+depends = ["prepare:asset-dir"]
+run = "typst compile --format png --ppi 300  hypothesis_tests.typ ../assets/hypothesis_tests_{p}.png"

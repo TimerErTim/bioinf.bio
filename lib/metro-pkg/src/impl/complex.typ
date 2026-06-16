@@ -1,4 +1,4 @@
-#import "/src/utils.typ": combine-dict
+#import "../utils.typ": combine-dict
 #import "num/num.typ"
 #import "angle.typ": is-angle, parse as parse-angle, to-number as angle-to-number
 #import "unit.typ" as unit_

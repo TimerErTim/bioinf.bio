@@ -1,5 +1,5 @@
-#import "/src/utils.typ": content-to-string, combine-dict
-#import "/src/defs/units.typ": rad, arcminute, arcsecond
+#import "../utils.typ": content-to-string, combine-dict
+#import "../defs/units.typ": rad, arcminute, arcsecond
 #import "num/num.typ"
 
 #let default-options = (
