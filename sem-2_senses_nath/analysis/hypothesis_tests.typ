@@ -12,7 +12,7 @@
 #metro-setup(exponent-mode: "threshold", round-mode: "places", round-precision: 2, output-decimal-marker: ",")
 
 #let show-test-result-significant(test-result) = {
-  if test-result.is-significant [ja #sym.checkmark] else [nein #sym.crossmark]
+  if test-result.is-significant [yes #sym.checkmark] else [no #sym.crossmark]
   linebreak()
   $p #if test-result.is-significant { sym.lt } else { sym.lt.not } alpha = #num(0.05)$
 }
@@ -20,18 +20,18 @@
 #let show-table-for-tests(tests) = table(
   columns: (6cm, 4cm, auto, auto, auto),
   table.header(
-    table.cell(fill: luma(90%))[*Nullhypothese*],
-    table.cell(fill: luma(90%))[*Test*],
-    table.cell(fill: luma(90%))[*Statistik*],
-    table.cell(fill: luma(90%))[*p-Wert*],
-    table.cell(fill: luma(90%))[*signifikant?*],
+    table.cell(fill: luma(90%))[*null hypothesis*],
+    table.cell(fill: luma(90%))[*chosen test*],
+    table.cell(fill: luma(90%))[*test statistic*],
+    table.cell(fill: luma(90%))[*p-value*],
+    table.cell(fill: luma(90%))[*significant?*],
   ),
   [
-    Der Erwartungswert aller gemessenen Sehschärfen mit Brille ist gleich dem Erwartungswert aller gemessenen Sehschärfen ohne Brille.
+    The expected value of all measured visual acuities with glasses is equal to the expected value of all measured visual acuities without glasses.
   ],
-  [ungepaarter Zwei-Stichproben-t-Test],
+  [unpaired two-sample t-test],
   [
-    $overline(X_"mit Brille") = #num(tests.both-eyes_glasses_vs_no-glasses_unpaired.all-glasses.mean)$\ $overline(X_"ohne Brille") = #num(tests-data.tests.both-eyes_glasses_vs_no-glasses_unpaired.no-glasses.mean)$\
+    $overline(X_"with glasses") = #num(tests.both-eyes_glasses_vs_no-glasses_unpaired.all-glasses.mean)$\ $overline(X_"without glasses") = #num(tests-data.tests.both-eyes_glasses_vs_no-glasses_unpaired.no-glasses.mean)$\
     $T = #num(tests.both-eyes_glasses_vs_no-glasses_unpaired.test-result.t-value)$\
     $n_1 = #tests.both-eyes_glasses_vs_no-glasses_unpaired.all-glasses.values.len()\; space n_2 = #tests.both-eyes_glasses_vs_no-glasses_unpaired.no-glasses.values.len()$
   ],
@@ -42,11 +42,11 @@
     #show-test-result-significant(tests.both-eyes_glasses_vs_no-glasses_unpaired.test-result)
   ],
   [
-    Das Tragen einer Brille hat keinen Einfluss auf die Sehschärfe.
+    Wearing glasses has no effect on visual acuity.
   ],
-  [gepaarter Zwei-Stichproben-t-Test],
+  [paired two-sample t-test],
   [
-    $overline(X_"mit Brille") = #num(tests.both-eyes_glasses_vs_no-glasses_paired.with-glasses.mean)$\ $overline(X_"ohne Brille") = #num(tests.both-eyes_glasses_vs_no-glasses_paired.no-glasses.mean)$\
+    $overline(X_"with glasses") = #num(tests.both-eyes_glasses_vs_no-glasses_paired.with-glasses.mean)$\ $overline(X_"without glasses") = #num(tests.both-eyes_glasses_vs_no-glasses_paired.no-glasses.mean)$\
     $T = #num(tests.both-eyes_glasses_vs_no-glasses_paired.test-result.t-value)$\
     $n = #tests.both-eyes_glasses_vs_no-glasses_paired.with-glasses.values.len()$
   ],
@@ -57,11 +57,11 @@
     #show-test-result-significant(tests.both-eyes_glasses_vs_no-glasses_paired.test-result)
   ],
   [
-    Die Sehschärfe mit beiden Augen ist gleich der Sehschärfe mit dem besseren Auge.
+    Visual acuity with both eyes is equal to the visual acuity of the better eye.
   ],
-  [gepaarter Zwei-Stichproben-t-Test],
+  [paired two-sample t-test],
   [
-    $overline(X_"beide Augen") = #num(tests.best-single-eye_vs_both-eyes.best-both-eyes.mean)$\ $overline(X_"besseres Auge") = #num(tests.best-single-eye_vs_both-eyes.best-single-eye.mean)$\
+    $overline(X_"both eyes") = #num(tests.best-single-eye_vs_both-eyes.best-both-eyes.mean)$\ $overline(X_"better eye") = #num(tests.best-single-eye_vs_both-eyes.best-single-eye.mean)$\
     $T = #num(tests.best-single-eye_vs_both-eyes.test-result.t-value)$\
     $n = #tests.best-single-eye_vs_both-eyes.best-both-eyes.values.len()$
   ],
@@ -72,11 +72,11 @@
     #show-test-result-significant(tests.best-single-eye_vs_both-eyes.test-result)
   ],
   [
-    Die Sehschärfe mit beiden Augen ist gleich der Sehschärfe mit dem schlechteren Auge.
+    Visual acuity with both eyes is equal to the visual acuity of the worse eye.
   ],
-  [gepaarter Zwei-Stichproben-t-Test],
+  [paired two-sample t-test],
   [
-    $overline(X_"beide Augen") = #num(tests.worst-single-eye_vs_both-eyes.best-both-eyes.mean)$\ $overline(X_"schlechteres Auge") = #num(tests.worst-single-eye_vs_both-eyes.worst-single-eye.mean)$\
+    $overline(X_"both eyes") = #num(tests.worst-single-eye_vs_both-eyes.best-both-eyes.mean)$\ $overline(X_"worse eye") = #num(tests.worst-single-eye_vs_both-eyes.worst-single-eye.mean)$\
     $T = #num(tests.worst-single-eye_vs_both-eyes.test-result.t-value)$\
     $n = #tests.worst-single-eye_vs_both-eyes.best-both-eyes.values.len()$
   ],
@@ -87,11 +87,11 @@
     #show-test-result-significant(tests.worst-single-eye_vs_both-eyes.test-result)
   ],
   [
-    Die Sehschärfe mit dem linken ist gleich der Sehschärfe mit dem rechten Auge.
+    Visual acuity of the left eye is equal to the visual acuity of the right eye.
   ],
-  [gepaarter Zwei-Stichproben-t-Test],
+  [paired two-sample t-test],
   [
-    $overline(X_"linkes Auge") = #num(tests.left-eye_vs_right-eye.left-eye.mean)$\ $overline(X_"rechtes Auge") = #num(tests.left-eye_vs_right-eye.right-eye.mean)$\
+    $overline(X_"left eye") = #num(tests.left-eye_vs_right-eye.left-eye.mean)$\ $overline(X_"right eye") = #num(tests.left-eye_vs_right-eye.right-eye.mean)$\
       $T = #num(tests.left-eye_vs_right-eye.test-result.t-value)$\
     $n = #tests.left-eye_vs_right-eye.left-eye.values.len()$
   ],

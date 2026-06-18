@@ -18,15 +18,15 @@
     position: top + left,
   ),
   xaxis: (
-    label: [Sehschärfe (linkes Auge)],
+    label: [Visual acuity (left eye)],
   ),
   yaxis: (
-    label: [Sehschärfe (rechtes Auge)],
+    label: [Visual acuity (right eye)],
   ),
   width: 10cm,
   height: 8cm,
   lq.scatter(
-    label: [Linkes vs. Rechtes Auge],
+    label: [Left eye vs. Right eye],
     tests-data.tests.left-eye_vs_right-eye.left-eye.values,
     tests-data.tests.left-eye_vs_right-eye.right-eye.values,
     alpha: 50%,
@@ -36,7 +36,7 @@
   lq.plot(
     (x-min, x-max),
     x => beta_1 * x + beta_0,
-    label: [Pearson Korrelation: #calc.round(digits: 2, correlation-coeff)],
+    label: [Pearson correlation: #calc.round(digits: 2, correlation-coeff)],
     stroke: red + 2pt,
     mark: none,
   )
@@ -54,15 +54,15 @@
     position: top + left,
   ),
   xaxis: (
-    label: [Sehschärfe (mit Brille)],
+    label: [Visual acuity (with glasses)],
   ),
   yaxis: (
-    label: [Sehschärfe (ohne Brille)],
+    label: [Visual acuity (without glasses)],
   ),
   width: 10cm,
   height: 8cm,
   lq.scatter(
-    label: [Mit Brille vs. Ohne Brille],
+    label: [With glasses vs. Without glasses],
     tests-data.tests.both-eyes_glasses_vs_no-glasses_paired.with-glasses.values,
     tests-data.tests.both-eyes_glasses_vs_no-glasses_paired.no-glasses.values,
     alpha: 50%,
@@ -72,7 +72,7 @@
   lq.plot(
     (x-min, x-max),
     x => beta_1 * x + beta_0,
-    label: [Pearson Korrelation: #calc.round(digits: 2, correlation-coeff)],
+    label: [Pearson correlation: #calc.round(digits: 2, correlation-coeff)],
     stroke: red + 2pt,
     mark: none,
   )

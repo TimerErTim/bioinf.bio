@@ -13,13 +13,13 @@
   columns: 4,
   table.header(
     table.cell(stroke: none)[],
-    table.cell(fill: luma(90%))[*beide Augen*],
-    table.cell(fill: luma(90%))[*linkes Auge*],
-    table.cell(fill: luma(90%))[*rechtes Auge*],
+    table.cell(fill: luma(90%))[*both eyes*],
+    table.cell(fill: luma(90%))[*left eye*],
+    table.cell(fill: luma(90%))[*right eye*],
   ),
   ..for (label, key) in (
-    ("mit Brille", "with-visual-aids"),
-    ("ohne Brille", "no-visual-aids"),
+    ("with glasses", "with-visual-aids"),
+    ("without glasses", "no-visual-aids"),
   ) {
     (
       table.cell(fill: luma(90%))[*#label*],
