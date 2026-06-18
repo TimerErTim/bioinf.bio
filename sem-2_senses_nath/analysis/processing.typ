@@ -42,9 +42,8 @@
     "values": data,
   )
 }
-#let stats-data = {
-
-  let stats = (
+#let collect-statistics-for-data(data) = {
+  (
     "with-visual-aids": (
       "both": statistics-for-data(data.map(it => it.with-visual-aids.both).filter(it => it != none)),
       "left": statistics-for-data(data.map(it => it.with-visual-aids.left).filter(it => it != none)),
@@ -54,11 +53,17 @@
       "both": statistics-for-data(data.map(it => it.no-visual-aids.both).filter(it => it != none)),
       "left": statistics-for-data(data.map(it => it.no-visual-aids.left).filter(it => it != none)),
       "right": statistics-for-data(data.map(it => it.no-visual-aids.right).filter(it => it != none)),
+    ),
   )
-  )
+}
+#let stats-data = {
+
+  let stats = collect-statistics-for-data(data)
+  let stats-mbi-2025 = collect-statistics-for-data(data.filter(it => "MBI25" in it.course-of-study))
 
   (
     "stats": stats,
+    "stats-mbi-2025": stats-mbi-2025,
     "data": data,
   )
 }

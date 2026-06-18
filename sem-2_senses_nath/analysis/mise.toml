@@ -6,7 +6,7 @@ run = "mise run visualize:?*"
 [tasks."visualize:dna-concentration-overview"]
 description = "Compile the DNA concentration overview visualization"
 depends = ["prepare:asset-dir"]
-run = "typst compile --format png --ppi 300  descriptive_statistics.typ ../assets/descriptive_statistics.png"
+run = "typst compile --format png --ppi 300  descriptive_statistics.typ ../assets/descriptive_statistics_{p}.png"
 
 [tasks."visualize:correlations"]
 description = "Compile the correlations visualization"

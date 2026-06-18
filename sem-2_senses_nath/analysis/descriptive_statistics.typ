@@ -9,24 +9,33 @@
   $n = #stats.values.len()$
 ]
 
-#table(
-  columns: 4,
-  table.header(
-    table.cell(stroke: none)[],
-    table.cell(fill: luma(90%))[*both eyes*],
-    table.cell(fill: luma(90%))[*left eye*],
-    table.cell(fill: luma(90%))[*right eye*],
-  ),
-  ..for (label, key) in (
-    ("with glasses", "with-visual-aids"),
-    ("without glasses", "no-visual-aids"),
-  ) {
-    (
-      table.cell(fill: luma(90%))[*#label*],
-      ..for eye-key in ("both", "left", "right") {
-        let stats = tests-data.stats.at(key).at(eye-key)
-        (stats-content(stats),)
-      }
-    )
-  }
-)
+#let stats-table(stats) = {
+  table(
+    columns: 4,
+    table.header(
+      table.cell(stroke: none)[],
+      table.cell(fill: luma(90%))[*both eyes*],
+      table.cell(fill: luma(90%))[*left eye*],
+      table.cell(fill: luma(90%))[*right eye*],
+    ),
+    ..for (label, key) in (
+      ("with glasses", "with-visual-aids"),
+      ("without glasses", "no-visual-aids"),
+    ) {
+      (
+        table.cell(fill: luma(90%))[*#label*],
+        ..for eye-key in ("both", "left", "right") {
+          let stat = stats.at(key).at(eye-key)
+          (stats-content(stat),)
+        }
+      )
+    }
+  )
+}
+
+All time:
+#stats-table(tests-data.stats)
+
+#pagebreak()
+MBI 2025:
+#stats-table(tests-data.stats-mbi-2025)

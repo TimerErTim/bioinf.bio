@@ -111,7 +111,7 @@
 
 #pagebreak()
 
-Alle Jahrgänge:
+All time:
 #show-table-for-tests(tests-data.tests)
 
 #pagebreak()
