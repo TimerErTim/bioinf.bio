@@ -1,7 +1,6 @@
 [tasks."visualize"]
 description = "Compile all analysis visualizations"
-run = "mise run visualize:?*"
-
+depends = ["visualize:?*"]
 
 [tasks."visualize:dna-concentration-overview"]
 description = "Compile the DNA concentration overview visualization"
