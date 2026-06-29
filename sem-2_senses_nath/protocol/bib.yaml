@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mkdjr/hayagriva/refs/heads/main/hayagriva.schema.json
+
+src_DockCheck_Leukozytose:
+  type: web
+  title: Leukozytose
+  publisher: DocCheck
+  url: 
+    value: https://flexikon.doccheck.com/de/Leukozytose
+    date: 2026-05-14
+
+src_angabe:
+  type: reference
+  title: Messung der Sehschärfe - Sinne_Landoltring.pdf
+  organization: University of applied sciences Upper Austria
+  archive: E-Learning, University of applied sciences Upper Austria 
+
+src_dreiseitl:
+  type: misc
+  author: FH-Prof. PD DI Dr. Stephan Dreiseitl
+  language: de
+  date: "2026-25-06"
+  location: Softwarepark, Hagenberg
+  parent: 
+    type: conference
+    title: Statistics Lecture
+  
