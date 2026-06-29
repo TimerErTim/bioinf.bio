@@ -1,13 +1,5 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/mkdjr/hayagriva/refs/heads/main/hayagriva.schema.json
 
-src_DockCheck_Leukozytose:
-  type: web
-  title: Leukozytose
-  publisher: DocCheck
-  url: 
-    value: https://flexikon.doccheck.com/de/Leukozytose
-    date: 2026-05-14
-
 src_angabe:
   type: reference
   title: Messung der Sehschärfe - Sinne_Landoltring.pdf
@@ -18,9 +10,160 @@ src_dreiseitl:
   type: misc
   author: FH-Prof. PD DI Dr. Stephan Dreiseitl
   language: de
-  date: "2026-25-06"
+  date: 2026-06-25
   location: Softwarepark, Hagenberg
   parent: 
     type: conference
     title: Statistics Lecture
   
+wikipedia_sehschärfe:
+  type: web
+  title: Sehschärfe
+  author: Wikipedia
+  url:
+    value: https://de.wikipedia.org/wiki/Sehsch%C3%A4rfe
+    date: 2026-06-25
+  organization: Wikipedia
+  parent:
+    type: article
+
+wikipedia_landoltring:
+  type: web
+  title: Landoltring
+  author: Wikipedia
+  url:
+    value: https://de.wikipedia.org/wiki/Landoltring
+    date: 2026-06-25
+  organization: Wikipedia
+  parent:
+    type: article
+
+doccheck_sehschärfe:
+  type: article
+  title: Sehschärfe
+  author: DocCheck Flexikon
+  url:
+    value: https://flexikon.doccheck.com/de/Sehsch%C3%A4rfe
+    date: 2026-06-25
+  organization: DocCheck
+  parent:
+    type: article
+
+doccheck_landoltring:
+  type: article
+  title: Landoltring
+  author: DocCheck Flexikon
+  url:
+    value: https://flexikon.doccheck.com/de/Landoltring
+    date: 2026-06-25
+  organization: DocCheck
+  parent:
+    type: article
+
+kenhub_retina:
+  type: article
+  title: "Retina (Netzhaut)"
+  author: Birte Fanck
+  date: 2023-11-29
+  url:
+    value: https://www.kenhub.com/de/library/anatomie/retina-histologie
+    date: 2026-06-26
+  organization: KenHub
+
+spektrum_landoltring:
+  type: artwork
+  title: "Landolt-Ring"
+  date: 1999
+  url:
+    value: https://www.spektrum.de/lexikon/optik/landolt-ring/1719
+    date: 2026-06-25
+  organization: Spektrum.de
+
+wesemann_din_60_regel:
+  type: report
+  title: "Neue DIN-Normen zur Sehschärfebestimmung"
+  date: 2010-07-09
+  author:
+    - U. Wesemann
+    - U. Schiefer
+    - M. Bach
+  url:
+    value: https://www.wwesemann.de/wp-content/uploads/2018/01/92_2010-Wesemann-Schiefer-Bach-Neue-Normen-zur-Visusbestimmung-Ophthalmologe.pdf
+    date: 2026-06-26
+  serial-number:
+    doi: 10.1007/s00347-010-2228-2
+
+de_straßenzulassung:  
+  type: legislation
+  title: "Verordnung über die Zulassung von Personen zum Straßenverkehr (Fahrerlaubnis-Verordnung - FeV) - § 12 Sehvermögen"
+  organization: Deutsches Bundesministerium der Justiz und für Verbraucherschutz
+  url:
+    value: https://www.gesetze-im-internet.de/fev_2010/__12.html
+    date: 2026-06-26
+
+gelbe-liste_amblyopie:
+  type: article
+  title: "Amblyopie"
+  author: Dr. Christian Kretschmer
+  date: 2023-06-21
+  organization: GELBE LISTE PHARMAINDEX
+  url:
+    value: https://www.gelbe-liste.de/krankheiten/amblyopie
+    date: 2026-06-26
+
+gelbe-liste_optikusneuritis:
+  type: article
+  title: "Optikusneuritis"
+  author: Dr. Christian Kretschmer
+  date: 2023-05-19
+  organization: GELBE LISTE PHARMAINDEX
+  url:
+    value: https://www.gelbe-liste.de/krankheiten/optikusneuritis
+    date: 2026-06-26
+
+gesund-bund_astigmatismus:
+  type: article
+  title: "Hornhautverkrümmung (Astigmatismus)"
+  date: 2025-11-13
+  organization: gesund.bund.de
+  url:
+    value: https://gesund.bund.de/hornhautverkruemmung-astigmatismus
+    date: 2026-06-26
+
+ncbi_presbyopia:
+  type: article
+  title: "Presbyopia"
+  author:
+    - Prabhakar Singh
+    - Marco Zeppieri
+    - Koushik Tripathy
+  date: 2025-06-02
+  organization: National Center for Biotechnology Information
+  url:
+    value: https://www.ncbi.nlm.nih.gov/books/NBK560568/
+    date: 2026-06-26
+
+wikipedia_binocular_summation:
+  type: web
+  title: "Binocular summation"
+  author: Wikipedia
+  url:
+    value: https://en.wikipedia.org/wiki/Binocular_summation
+    date: 2026-06-26
+  organization: Wikipedia
+
+common_eye_health_journal_acuity_measure:
+  type: entry
+  title: "How to measure distance visual acuity"
+  author: 
+    - Janet Marsden
+    - Sue Stevens
+    - Anne Ebri
+  date: 2024-04-07
+  publisher: Common Eye Health Journal
+  volume: 27
+  page-range: 16
+  issue: 85
+  url:
+    value: https://www.commoneyehealthjournal.com/how-to-measure-distance-visual-acuity
+    date: 2026-06-26

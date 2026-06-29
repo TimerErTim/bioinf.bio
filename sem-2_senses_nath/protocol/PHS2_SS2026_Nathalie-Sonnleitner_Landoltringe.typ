@@ -33,12 +33,6 @@
 //)
 #import "@preview/meander:0.4.3"
 
-#pdf.attach(
-  "Sinne_Landoltring.pdf",
-  mime-type: "application/pdf",
-  relationship: "supplement",
-  description: "Angabe",
-)
 #import "@preview/meander:0.4.2"
 
 
@@ -149,7 +143,7 @@ In der klinischen Praxis existieren verschiedene Formen von Optotypen, die je na
   align: left + horizon,
   gutter: 2em, 
 [- *Snellen-Buchstaben / Sloan-Buchstaben:* Standardisierte lateinische Großbuchstaben. Sloan-Buchstaben (C, D, H, K, N, O, R, S, V, Z) wurden speziell so entworfen, dass sie untereinander eine nahezu identische Erkennbarkeit aufweisen. Sie sind im klinischen Alltag sehr beliebt, bergen jedoch das Risiko von Memorierungseffekten und weisen kultur- sowie sprachabhängige Barrieren auf. ],
-figure(image("/assets/image-6.png", width: 50%), caption: [Snellen-E / E-Haken])
+figure(block(fill: red, width: 50%), caption: [Snellen-E / E-Haken])
 )
 - *Kinder-Sehzeichen (z. B. Lea-Symbole):* Einfache geometrische Formen wie Kreis, Quadrat, Haus oder Apfel. Sie dienen der Visusbestimmung im Kleinkindalter, weisen jedoch aufgrund ihrer komplexeren Konturen eine geringere mathematische Präzision auf.
 
@@ -175,7 +169,7 @@ Die Geometrie des Landolt-Rings ist mathematisch streng definiert und absolut pr
 [- *Außendurchmesser ($d_("a")$):* Definiert die Gesamtgröße des Sehzeichens. Er entspricht exakt dem 5-fachen Wert der Strichstärke bzw. Lückenbreite ($5 times a$).
 - *Innendurchmesser ($d_("i")$):* Beschreibt den inneren, weißen Kreis des Ringes. Er entspricht exakt dem 3-fachen Wert der Lückenbreite ($3 times a$).
 ],
-figure(image("/assets/image-7.png", width: 63%), caption: [Landoltenring])
+figure(block(fill: red, width: 63%), caption: [Landoltenring])
 )
 
 
@@ -185,7 +179,7 @@ figure(image("/assets/image-7.png", width: 63%), caption: [Landoltenring])
   import meander: *
   // Obstacles
   placed(top + right, boundary: // Override the default margin
-      contour.margin(5mm), figure(image("/assets/image-10.png", width: 25%,), caption: [Landoltringe in 8 Orientierungen]))
+      contour.margin(5mm), figure(block(fill: red, width: 25%), caption: [Landoltringe in 8 Orientierungen]))
   // Container
   container(margin:5cm)
 
@@ -205,7 +199,7 @@ Die strikte Geometrie des Landolt-Rings ist kein Willkürprodukt, sondern result
   import meander: *
   // Obstacles
   placed(top + right, boundary: // Override the default margin
-      contour.margin(5mm), figure(image("/assets/image-8.png", width: 45%,), caption: [Dimensionierung und Sehwinkel des Landoltringes]))
+      contour.margin(5mm), figure(block(fill: red, width: 45%), caption: [Dimensionierung und Sehwinkel des Landoltringes]))
   // Container
   container(margin:5cm)
 
@@ -317,7 +311,7 @@ In der ophthalmologischen Praxis unterscheidet man grundlegend zwei Konstruktion
   import meander: *
   // Obstacles
   placed(right, boundary: // Override the default margin
-      contour.margin(5mm),figure(image("/assets/image-17.png", width: 45%), caption: [Landolt-Sehtafel mit $D$ und $V$] )
+      contour.margin(5mm),figure(block(fill: red, width: 45%), caption: [Landolt-Sehtafel mit $D$ und $V$] )
 )
   // Container
   container(margin:5cm)
@@ -476,13 +470,9 @@ Die Einhaltung einer strikten Prüfreihenfolge ist für die Validität der Messe
 #pagebreak()
 = Ergebnisse
 
-#import "analysis/correlations.typ": left-vs-right-corr, no-vs-with-glasses-corr
-#import "analysis/descriptive_statistics.typ": all-time as all-time-stats, mbi-2025 as mbi-2025-stats
-#import "analysis/hypothesis_tests.typ": all-time as all-time-tests, mbi-2025 as mbi-2025-tests
-
 == Diskriptive Statistik über alle Jahrgänge
 
-#figure(all-time-stats, caption: [Deskriptive Statistik über alle Jahrgänge])
+#figure(block(fill: red, width: 100%), caption: [Deskriptive Statistik über alle Jahrgänge])
 
 Die Tabelle 2 fasst die erhobenen Daten zur Sehschärfe (Visus) über alle Jahrgänge zusammen. Die Stichprobe ist dabei in zwei Hauptgruppen unterteilt: Probanden mit Brille ($n = 221$) und Probanden ohne Brille ($n = 321$). Für jede Gruppe wurden der Mittelwert samt Standardabweichung ($overline(x) plus.minus s$), die Spannweite (_Range_) sowie die Stichprobengröße ($n$) für beide Augen gemeinsam (binokular) sowie für das linke und rechte Auge getrennt (monokular) dokumentiert.
 
@@ -496,7 +486,7 @@ Beim Betrachten der reinen Zahlenwerte lassen sich folgende unmittelbare Beobach
 
 == Diskriptive Statistik MBI 2025
 
-#figure(mbi-2025-stats, caption: [Deskriptive Statistik MBI 2025])
+#figure(block(fill: red, width: 100%), caption: [Deskriptive Statistik MBI 2025])
 
 Die Tabelle 3 zeigt die deskriptiven statistischen Kennwerte für den spezifischen Jahrgang MBI 2025. Das kleinere Teilkollektiv teilt sich auf in Probanden mit Brille ($n = 9$) und Probanden ohne Brille ($n = 16$). Erhoben wurden analog die Parameter Mittelwert und Standardabweichung ($overline(x) plus.minus s$), die Spannweite (_Range_) sowie die Stichprobengröße ($n$) für die binokulare sowie die beiden monokularen Messungen.
 
@@ -510,7 +500,7 @@ Die rein numerische Betrachtung dieser Daten liefert folgende primäre Beobachtu
 
 == Korrelation zwischen linkem und rechtem Auge
 
-#figure(left-vs-right-corr, caption: [Korrelation zwischen linkem und rechtem Auge])
+#figure(block(fill: red, width: 100%), caption: [Korrelation zwischen linkem und rechtem Auge])
 
 Die Abbildung 5 zeigt ein Streudiagramm (Scatterplot), in dem die Sehschärfe des linken Auges (X-Achse) gegen die Sehschärfe des rechten Auges (Y-Achse) aufgetragen ist. Jeder blaue Datenpunkt repräsentiert die Messwerte eines Probanden. Durch die Farbintensität (Überlagerung von Punkten) wird ersichtlich, wo sich die Messwerte häufen. Zudem ist eine rote lineare Regressionsgerade eingezeichnet.
 
@@ -523,7 +513,7 @@ Die rein optische und numerische Auswertung der Grafik zeigt folgende Beobachtun
 
 == Korrelation zwischen unkorrigiertem und korrigiertem Visus
 
-#figure(no-vs-with-glasses-corr, caption: [Korrelation zwischen unkorrigiertem und korrigiertem Visus])
+#figure(block(fill: red, width: 100%), caption: [Korrelation zwischen unkorrigiertem und korrigiertem Visus])
 
 Die Abbildung 6 zeigt ein weiteres Streudiagramm, bei dem die Sehschärfe mit Brille (X-Achse, korrigierter Visus) gegen die Sehschärfe ohne Brille (Y-Achse, unkorrigierter Visus) aufgetragen ist. Die blauen Punkte zeigen die Verteilung der Probandenwerte, wobei dunklere Punkte durch überlagerte Datenpunkte entstehen. Eine rote lineare Regressionsgerade stellt den Gesamttrend dar.
 
@@ -536,7 +526,7 @@ Bei der reinen Betrachtung der Werte fallen folgende Punkte auf:
 
 == Hypothesenprüfung: alle Jahrgänge
 #pad(x: -2cm)[
-#figure(all-time-tests, caption: [Hypothesenprüfung: alle Jahrgänge])]
+#figure(block(fill: red, width: 100%), caption: [Hypothesenprüfung: alle Jahrgänge])]
 
 Die Tabelle 4 fasst die Ergebnisse der inferenzstatistischen Prüfung (Hypothesentests) für das Gesamtkollektiv über alle Jahrgänge zusammen. Die Tabelle ist in fünf Spalten unterteilt: die aufgestellte *Nullhypothese ($H_0$)*, das gewählte *Testverfahren*, die berechneten *Prüfstatistiken* samt Stichprobengrößen ($n$), der resultierende *p-Wert* sowie die finale Entscheidung über die statistische *Signifikanz* bezogen auf ein vorgegebenes Signifikanzniveau von $alpha = 0,05$.
 
@@ -568,7 +558,7 @@ Die aus den Formeln berechneten $T$-Werte werden anschließend gegen die theoret
 
 == Hypothesenprüfung: MBI 2025
 #pad(x: -2cm)[
-#figure(mbi-2025-tests, caption: [Hypothesenprüfung: MBI 2025])
+#figure(block(fill: red, width: 100%), caption: [Hypothesenprüfung: MBI 2025])
 ]
 Die Tabelle 5 fasst die Ergebnisse der Hypothesentests für das spezifische Teilkollektiv des Jahrgangs MBI 2025 zusammen. Die mathematischen Teststatistiken (Prüfgrößen $T$) sowie die p-Werte basieren auf den identischen Berechnungsformeln des ungepaarten bzw. gepaarten Zwei-Stichproben-t-Tests und der zugehörigen Student-t-Verteilung, wie sie im vorherigen Abschnitt erklärt wurden.
 
@@ -633,7 +623,7 @@ Die Bestimmung der Sehschärfe mittels Landolt-Ringen ist ein subjektives Prüfv
 
 #show bibliography: set heading(level: 2)
 #show outline: set heading(level: 2, outlined: true)
-#bibliography("bib.yaml", title: "Literaturverzeichnis", style: "ieee")
+#bibliography("bib.yaml", title: "Literaturverzeichnis", style: "apa", full: true)
 
 #colbreak()
 #outline(target: figure.where(kind: image), title: "Abbildungsverzeichnis")
