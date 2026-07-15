@@ -61,6 +61,9 @@
     title: [DNA-Konzentration nach RNase-Behandlung],
     xaxis: (
       format-ticks: lq.tick-format.linear.with(suffix: $space mu"g/ml"$),
+      tick-args: (
+        density: 50%,
+      ),
       label: [Konzentration [$mu"g"\/"ml"$]],
     ),
     yaxis: (
@@ -101,13 +104,15 @@
       fill: color-map.at(j).lighten(10%),
       stroke: color-map.at(j).darken(25%),
     ))
-    bar-plots.push(lq.plot(
-      range(metrics.len()).map(i => i + offset),
-      means,
-      yerr: stddevs,
-      color: color-map.at(j).darken(40%),
-      stroke: 1pt,
-    ))
+    for plot in means.enumerate().map(((i, m)) => lq.plot(
+        (i + offset,),
+        (m,),
+        yerr: stddevs.at(i),
+        color: color-map.at(j).darken(40%),
+        stroke: 1pt,
+      )) {
+        bar-plots.push(plot)
+      }
   }
   lq.diagram(
     width: 100%,
@@ -120,7 +125,7 @@
       label: [Wert [$-$]],
       lim: (0, auto),
     ),
-    legend: (position: bottom),
+    legend: (position: top + left),
     ..bar-plots,
   )
 }

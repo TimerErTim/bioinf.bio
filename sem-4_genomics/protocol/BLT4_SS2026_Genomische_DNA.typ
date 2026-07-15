@@ -153,14 +153,30 @@ Dieser Wert dient als sekundäres Maß für die Reinheit von Nukleinsäuren und 
   show: figure.with(
     caption: [Zusammenfassung der für die Beurteilung der Versuchsergebnisse herangezogenen Referenzwerte.],
   )
+  set cite(form: "prose")
   table(
     columns: 3,
     table.header[*Parameter*][*Referenzwert*][*Quelle*],
-    [DNA-Ausbeute (Leber)], [3–4 mg/g Gewebe], [@src_csh-protocols-isolation],
-    [*E. coli*-Chromosom], [≈4,6 Mbp, ringförmig], [@src_brock-mikrobiologie],
-    [$E_260 slash E_280$ (reine DNA)], [≈1,8], [@src_assessment-of-nucleic-purity],
-    [$E_260 slash E_230$ (reine DNA)], [2,0–2,2], [@src_assessment-of-nucleic-purity],
-    [Konzentration aus Photometrie], [$E_260 = 1.0 => 50 mu"g/ml"$ (1 cm)], [@src_dna-spektrum_img],
+    [DNA-Ausbeute (Leber)], [3-4 mg/g Gewebe], [
+      #show super: it => it.body
+      @src_csh-protocols-isolation
+    ],
+    [*E. coli*-Chromosom], [≈4,6 Mbp, ringförmig], [
+      #show super: it => it.body
+      @src_brock-mikrobiologie
+    ],
+    [$E_260 slash E_280$ (reine DNA)], [≈1,8], [
+      #show super: it => it.body
+      @src_assessment-of-nucleic-purity
+    ],
+    [$E_260 slash E_230$ (reine DNA)], [2,0-2,2], [
+      #show super: it => it.body
+      @src_assessment-of-nucleic-purity
+    ],
+    [Konzentration aus Photometrie], [$E_260 = 1.0 => 50 mu"g/ml"$ (1 cm)], [
+      #show super: it => it.body
+      @src_dna-spektrum_img
+    ],
     [Gel unrestriktiert], [Band >20 kbp am Gelanfang], [Theorie, @genome-architektur-theorie],
     [Gel restr.-verdaut], [durchgehender Schmierstreifen], [@restr-enzyme-theorie],
   )
@@ -658,20 +674,20 @@ Der RNA-Nachweis und -Abbau gelang im Gel teilweise. Das Ziel wurde nur bei eine
 === Darstellung
 
 #let annotated-leber-restr-gelelectro = {
-  show: block.with(width: 10cm, height: 5cm + 1em, stroke: 0pt)
+  show: block.with(height: 5cm + 1em, stroke: 0pt)
   {
     show: pad.with(top: 1em)
     box(image("../assets/ss-restr-leber.png", height: 100%))
     box(image("../assets/ls-restr-leber.png", height: 100%))
     box(image("../assets/sg-restr-leber.png", height: 100%))
   }
-  place(top + left, dx: 35%, dy: 1mm)[
+  place(top + left, dx: 5%, dy: 1mm)[
     SS
   ]
-  place(top + left, dx: 45%, dy: 1mm)[
+  place(top + left, dx: 32.5%, dy: 1mm)[
     LS
   ]
-  place(top + left, dx: 56%, dy: 1mm)[
+  place(top + left, dx: 70%, dy: 1mm)[
     SG
   ]
 }
