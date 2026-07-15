@@ -6,7 +6,7 @@
   let process-measurement(measurement) = {
     (
       ..measurement,
-      "concentration": measurement.absorbance.at("230") * 50 / dilation-factor,
+      "concentration": measurement.absorbance.at("260") * 50 / dilation-factor,
       "cleaness_proteins": measurement.absorbance.at("260")
         / measurement.absorbance.at("280"),
       "cleaness_salts": measurement.absorbance.at("260")

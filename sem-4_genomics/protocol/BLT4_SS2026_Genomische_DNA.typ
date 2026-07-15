@@ -41,35 +41,38 @@
 #show image: rect.with(stroke: 0.5pt)
 #show figure: set rect(stroke: 0.5pt)
 #show figure: set place(clearance: 2em)
-#set figure(placement: auto)
+//#set figure(placement: auto)
 
 #import "deps.typ": *
 #import "../analysis/processing.typ": *
+#import "../analysis/plots.typ": boxplot-rnase-concentration, grouped-bar-purity
 
 #new-chapter[Einleitung]
 
-== Ziele
+In der BLT4-Übung *Isolation von genomischer DNA* wurde die Extraktion genomischer DNA (gDNA) aus zwei unterschiedlichen Ausgangsmaterialien durchgeführt: aus Schweineleber als eukaryotischem Gewebe und aus *E. coli*-Kulturen als prokaryotischem Modellorganismus. Die isolierten Proben wurden anschließend hinsichtlich Reinheit und Konzentration photometrisch charakterisiert, der RNA-Abbau durch RNase-Behandlung nachgewiesen und die Integrität der DNA mittels Restriktionsenzym-Verdau sowie Gelelektrophorese beurteilt. Die methodische Grundlage bildet die Angabe zur Isolierung genomischer DNA (Kapitel Durchführung).
+
+#new-chapter[Zielsetzung]
 
 Die Ziele des protokollierten Experiments können wie folgt zusammengefasst werden:
 
 + #[
-    *Isolierung*:
-    Die Extraktion genomischer DNA aus tierischem Gewebe (Schweineleber) und bakteriellen Kulturen (E. coli).
+    *Isolierung* (→ @leber-photometrie, @bakterien-photometrie):
+    Extraktion genomischer DNA aus Schweineleber und *E. coli*-Kulturen. Erfolgskriterium: sichtbare Hochmolekular-DNA im Agarosegel bzw. messbare Absorption bei 260 nm.
   ]
 + #[
-    *RNase-Verdau*:
-    Nachweis des RNA-Abbaus durch den Einsatz von RNase mittels Photometrie und Auswertung des Bandenmusters in der Gelelektrophorese.
+    *RNase-Verdau* (→ @leber-rnase, @bakterien-rnase):
+    Nachweis des RNA-Abbaus durch RNase mittels Photometrie und Gelelektrophorese. Erwartung: Abnahme der RNA-Kontamination (untere Gel-Wolke, erhöhte $E_260$ bei _-RNase_).
   ]
 + #[
-    *Konzentrationsbestimmung*:
-    Photometrische Messung der isolierten DNA, um die Konzentration und Reinheit zu beurteilen.
+    *Konzentrationsbestimmung* (→ @leber-photometrie, @statistik):
+    Photometrische Bestimmung der DNA-Konzentration und Reinheit. Referenzwerte: $E_260 slash E_280 approx 1.8$, $E_260 slash E_230 in 2.0 - 2.2$.
   ]
 + #[
-    *Restriktionsenzym-Verdau*:
-    Einsatz von Restriktionsenzymen, um Qualität zu beurteilen und die Länge der Fragmente zu bestimmen.
+    *Restriktionsenzym-Verdau* (→ @leber-restriktion, @bakterien-rnase):
+    Einsatz von Typ-II-Restriktionsenzymen zur Beurteilung der DNA-Qualität. Erfolgskriterium: Umwandlung der Hochmolekular-Bande in einen durchgehenden Schmierstreifen.
   ]
 
-== Theorie
+#new-chapter[Theoretischer Hintergrund und Referenzwerte]
 
 === Genomarchitektur und Unterschiede zwischen Proben <genome-architektur-theorie>
 
@@ -87,7 +90,23 @@ $ <beer-lambert-equation>
 
 @beer-lambert-equation zeigt die Beziehung zwischen der Extinktion $E_lambda$ bei einer bestimmten Wellenlänge $lambda$ und der Konzentration $c_i$ der $n$ verschiedenen Komponenten indiziert mit $i$. Die Extinktionskoeffizienten $epsilon_(i, lambda)$ sind spezifisch für jede Komponente und Wellenlänge. @src_wikipedia-molar-extinction-coefficient
 
-Bei doppelsträngiger DNA gilt der lineare Zusammenhang $E_260 = 1.0 => "dsDNA" = 50 space upright(mu"g/ml")$. @src_dna-spektrum_img
+Bei doppelsträngiger DNA gilt der lineare Zusammenhang $E_260 = 1.0 => "dsDNA" = 50 space upright(mu"g/ml")$ bei einer Küvettenlichtweg von $d = 1 "cm"$. @src_dna-spektrum_img Daraus folgt für die Konzentrationsberechnung bei bekannter Verdünnung:
+
+$
+  c_"DNA" = E_260 dot 50 space upright(mu"g/ml") dot "Verdünnungsfaktor"
+$ <dna-concentration-equation>
+
+Die Reinheitsquotienten werden als Extinktionsverhältnisse berechnet:
+
+$
+  E_260 slash E_280 = E_260 / E_280
+$ <purity-protein-equation>
+
+$
+  E_260 slash E_230 = E_260 / E_230
+$ <purity-salt-equation>
+
+@dna-concentration-equation, @purity-protein-equation und @purity-salt-equation werden für die Auswertung der Photometriemessungen herangezogen. Im Experiment wurde eine Verdünnung von 1:100 verwendet, sodass der Verdünnungsfaktor 100 beträgt.
 
 #{
   show: figure.with(
@@ -109,25 +128,43 @@ Dieser Wert dient als sekundäres Maß für die Reinheit von Nukleinsäuren und 
 
 #{
   show: figure.with(
-    caption: [Extinktionskoeffizienten von dsDNA, Proteinen und Phenolen. Referenzen von Gemini 3.1 Pro. Sollen ein grobes Gefühl der Verhältnisse geben.],
+    caption: [Extinktionskoeffizienten ($epsilon$) von dsDNA, Proteinen und Phenol bei den für die Reinheitsbeurteilung relevanten Wellenlängen. @src_assessment-of-nucleic-purity],
   )
   table(
     columns: 4,
     table.header[
       *Substanz*
     ][
-      *Wert bei 230 nm*
+      *$epsilon$ bei 230 nm*
     ][
-      *Wert bei 260 nm (DNA-Peak)*
+      *$epsilon$ bei 260 nm*
     ][
-      *Wert bei 280 nm (Protein-Peak)*
+      *$epsilon$ bei 280 nm*
     ],
     [dsDNA], [≈10,0], [20,0], [≈11,1],
-
     [Proteine (BSA)], [≈2,0 bis 3,0], [≈0,4], [0,66],
-    [Phenol], [Sehr hoch (>100)], [≈15,0], [≈12,5],
+    [Phenol], [sehr hoch], [≈15,0], [≈12,5],
   )
-}
+} <extinction-coefficients-table>
+
+=== Referenzwerte <referenzwerte-theorie>
+
+#{
+  show: figure.with(
+    caption: [Zusammenfassung der für die Beurteilung der Versuchsergebnisse herangezogenen Referenzwerte.],
+  )
+  table(
+    columns: 3,
+    table.header[*Parameter*][*Referenzwert*][*Quelle*],
+    [DNA-Ausbeute (Leber)], [3–4 mg/g Gewebe], [@src_csh-protocols-isolation],
+    [*E. coli*-Chromosom], [≈4,6 Mbp, ringförmig], [@src_brock-mikrobiologie],
+    [$E_260 slash E_280$ (reine DNA)], [≈1,8], [@src_assessment-of-nucleic-purity],
+    [$E_260 slash E_230$ (reine DNA)], [2,0–2,2], [@src_assessment-of-nucleic-purity],
+    [Konzentration aus Photometrie], [$E_260 = 1.0 => 50 mu"g/ml"$ (1 cm)], [@src_dna-spektrum_img],
+    [Gel unrestriktiert], [Band >20 kbp am Gelanfang], [Theorie, @genome-architektur-theorie],
+    [Gel restr.-verdaut], [durchgehender Schmierstreifen], [@restr-enzyme-theorie],
+  )
+} <reference-values-table>
 
 === Gelelektrophorese <gelelektrophorese-theorie>
 
@@ -177,9 +214,72 @@ Ursprünglich entwickelten Bakterien Restriktionsenzyme zur Abwehr von eindringe
 
 In @restr-enzyme-working-img werden zwei _Sticky Ends_ erzeugt. Die dadurch entstehenden, einzelsträngigen Überhänge erleichtern aufgrund der Wasserstoffbrückenbindungen die Verknüpfung mit anderen komplementären DNA-Strängen. _Blunt Ends_ besitzen diese Übergänge nicht und entstehen durch Schneiden in der Mitte der Erkennungssequenz. @src_neb-typ2-restr-enzyme
 
-== Relevanz
+#new-chapter[Klinische Relevanz]
 
-Für Standard-PCRs genügen oft einfache Extrakte. Moderne Anwendungen wie Next-Generation Sequencing erfordern jedoch hochmolekulare und extrem reine gDNA. Verunreinigungen durch Proteine oder Phenole/Salze (siehe @photometrie-theorie) hemmen die empfindlichen Polymerasen der Sequenziergeräte, während RNA-Reste zu fehlerhaften Daten bei der Genom-Assemblierung führen können. @src_csh-protocols-isolation
+Die Qualität isolierter genomischer DNA ist eine zentrale Voraussetzung für nahezu alle molekularbiologischen und klinisch-diagnostischen Anwendungen. Während für Standard-PCR-Anwendungen oft einfache Extrakte ausreichen, erfordern moderne Hochdurchsatz-Verfahren wie Next-Generation Sequencing (NGS), Whole-Genome-Sequencing oder klinische Gentests hochmolekulare und extrem reine gDNA. @src_csh-protocols-isolation
+
+*Klinische und diagnostische Anwendungen:*
+- *PCR und qPCR:* Verunreinigungen durch Proteine, Phenol oder EDTA hemmen die Taq-Polymerase und verfälschen Amplifikationsergebnisse.
+- *Next-Generation Sequencing:* RNA-Reste führen zu fehlerhaften Reads und erschweren die Genom-Assemblierung; Salz- und Phenol-Kontaminationen inhibieren Sequenzierpolymerasen.
+- *Forensische Genetik und Identitätsprüfung:* Die Integrität der DNA (Fragmentlänge) bestimmt, ob STR-Analysen oder SNP-Typisierungen erfolgreich sind.
+- *Pharmakogenomik:* Patientenspezifische Genotypisierungen (z. B. CYP450-Varianten) setzen reproduzierbar reine Ausgangsmaterialien voraus.
+
+*Bezug zu den im Experiment gemessenen Parametern:*
+Die im Versuch bestimmten Reinheitsquotienten ($E_260 slash E_280$, $E_260 slash E_230$) und die Sichtbarkeit intakter Hochmolekular-DNA im Gel sind direkte Qualitätsindikatoren, die in klinischen und Forschungslaboren routinemäßig vor kostenintensiven Downstream-Anwendungen geprüft werden. Verunreinigungen durch Proteine oder Phenole/Salze (siehe @photometrie-theorie) hemmen die empfindlichen Polymerasen der Sequenziergeräte, während RNA-Reste zu fehlerhaften Daten bei der Genom-Assemblierung führen können. @src_csh-protocols-isolation
+
+#new-chapter[Materialien]
+
+Für die Durchführung des Experiments gemäß der Angabe zur Isolierung genomischer DNA wurden folgende Materialien verwendet:
+
+*Probematerial:*
+- Frische oder tiefgekühlte *Schweineleber* (ca. 3,5–4,5 g pro Ansatz, siehe @table-liver-weights)
+- Übernacht-*E. coli*-Kultur in LB-Medium
+
+*Reagenzien für Lyse und Reinigung:*
+- Lysis-Puffer (mit Detergens zur Membranauflösung)
+- *Lysozym* (für bakterielle Zellwände)
+- *Proteinase K* (für eukaryotisches Gewebe)
+- *EDTA* (Komplexbildner, Störung der gramnegativen Außermembran)
+- *Phenol* (pH 8,0)
+- *Phenol/Chloroform/Isoamylalkohol* (25:24:1)
+- *Chloroform*
+- *Natriumacetat* (3 M, pH 5,2)
+- *Ethanol* (100 % und 70 %)
+- *TE-Puffer* (10 mM Tris-HCl, 1 mM EDTA, pH 8,0)
+
+*Enzyme:*
+- *RNase A* (RNA-Abbau)
+- Restriktionsenzyme *EcoRI*, *NaeI*, *PstI* mit jeweiligem Standard-Reaktionspuffer (NEB)
+
+*Analytik und Gelelektrophorese:*
+- UV-Photometer mit 1-cm-Küvetten
+- Destilliertes Wasser (Null-Referenz)
+- *Agarose*
+- *Ethidiumbromid* (oder äquivalentes DNA-Färbemittel)
+- DNA-Ladder *GeneRuler#super[TM] 1 kb Plus*
+- TAE- oder TBE-Laufpuffer
+- DNA-Ladepuffer mit Tracking-Dye
+
+*Geräte und Verbrauchsmaterial:*
+- Wasserbad (37 °C und 56 °C)
+- Kühlzentrifuge mit Eppendorf-Adaptern
+- Pipetten und Filterspitzen
+- 1,5-ml- und 2-ml-Reaktionsgefäße
+- Agarose-Gelelektrophorese-Apparat mit UV-Transilluminator
+- Sterile Skalpellklingen und Petrischalen (Gewebehomogenisierung)
+
+#{
+  show: figure.with(
+    caption: [Gewichte der verwendeten Leberproben vor der Extraktion [$g$].],
+  )
+  table(
+    columns: 3,
+    table.header[*Name*][*Kürzel*][*Gewicht [g]*],
+    ..for entry in liver-weights-raw-data {
+      ([#entry.name], [#entry.initials], [#str(entry.weight_g)])
+    },
+  )
+} <table-liver-weights>
 
 #new-chapter[Durchführung]
 
@@ -190,9 +290,15 @@ Für Standard-PCRs genügen oft einfache Extrakte. Moderne Anwendungen wie Next-
   description: "Angabe für die Isolation von genomischer DNA",
 )
 
-Nachfolgend wird die im Labor durchgeführte Vorgehensweise erläutert. Die Durchführung basiert auf den Angaben im eingebetteten Angabendokument.
+Nachfolgend wird die im Labor durchgeführte Vorgehensweise Schritt für Schritt erläutert. Die Durchführung basiert auf den Angaben im eingebetteten Angabendokument.
 
-== Zellaufschluss
+== Sicherheitshinweise <durchfuehrung-chapter>
+
+- *Phenol und Chloroform:* Stark ätzend und toxisch. Nur unter dem Fume Hood arbeiten, Schutzhandschuhe und Laborkittel tragen. Hautkontakt sofort mit Wasser spülen. Phenol verursacht schwere Verbrennungen.
+- *Ethidiumbromid:* Mutagen. Handschuhe tragen, Gelabfälle in Sammelbehälter entsorgen.
+- *Biologisches Material:* Leber und Bakterienkulturen als potenziell infektiöses Material behandeln.
+
+== Zellaufschluss <zellaufschluss-durchfuehrung>
 
 #{
   show: figure.with(
@@ -201,51 +307,67 @@ Nachfolgend wird die im Labor durchgeführte Vorgehensweise erläutert. Die Durc
   image("../assets/cell-lysis.png", width: 100%)
 } <cell-lysis-img>
 
-Um an die DNA im Inneren der Zellen zu kommen, müssen diese aufgebrochen werden. @cell-lysis-img zeigt das grundlegende Prinzip. Ein *Lysis-Puffer* bricht grundsätzlich die Zellmembran. Je nach Probentyp wird
-- _bei Bakterien_ *Lysozym* eingesetzt, um die harte bakterielle Zellwand zu lösen.
-- _beim Lebergewebe_ *Proteinase K* eingesetzt, um Gewebeproteine zu verdauen und Zellen aufzulösen.
+Um an die DNA im Inneren der Zellen zu kommen, müssen diese aufgebrochen werden (@cell-lysis-img). Je nach Probentyp wird unterschiedlich vorgegangen:
 
-Ein Wasserbad bietet eine ideale Umgebungstemperatur für die Reaktionen.
+*Schweineleber:*
++ Leberstück auf einer Petrischale abwiegen (siehe @table-liver-weights) und mit steriler Klinge in kleine Stücke schneiden.
++ Gewebe in Lysis-Puffer überführen und *Proteinase K* zugeben.
++ 1–2 h bei 56 °C im Wasserbad inkubieren, bis das Gewebe vollständig aufgelöst ist.
++ _Qualitätskontrolle:_ Homogenes, klares Lysat ohne sichtbare Gewebereste.
 
-== Reinigung
+*Bakterien (*E. coli*):*
++ 1,5 ml Bakterienkultur abzentrifugieren (10 min, 10.000 × g), Überstand vorsichtig entfernen.
++ Bakterienpellet in Lysis-Puffer resuspendieren, *Lysozym* und *EDTA* zugeben.
++ 30 min bei 37 °C inkubieren, um die gramnegative Zellwand anzugreifen.
++ _Qualitätskontrolle:_ Pellet vollständig aufgelöst; bei zu wenig Ausgangsmaterial ist die DNA-Ausbeute stark reduziert.
 
+== Reinigung <reinigung-durchfuehrung>
 
-Mittels mehreren Reinigungsvorgängen mit
-+ Phenol
-+ Phenol/Chloroform/Isoamylalkohol
-+ Chloroform\
-werden zelluläre Proteine denaturiert. In @reinigung-na-img sammeln sich diese Proteine in einer Interphase; der wässrige Überstand enthält nun nur noch die genomische DNA.
+Mittels mehrstufiger Extraktion mit organischen Lösungsmitteln werden Proteine und Lipide entfernt:
+
++ *Phenol-Extraktion:* Lysat mit gleichem Volumen Phenol (pH 8,0) vermischen, 2 min schütteln, 5 min zentrifugieren (10.000 × g). Wässrigen Überstand (obere Phase) übernehmen.
++ *Phenol/Chloroform/Isoamylalkohol (25:24:1):* Wiederholung der Phasentrennung zur weiteren Proteinentfernung.
++ *Chloroform-Extraktion:* Entfernung restlicher Phenol-Rückstände.
++ _Qualitätskontrolle:_ Saubere Trennung in wässrige Phase, Interphase (denaturierte Proteine) und organische Phase. In @reinigung-na-img sammeln sich die Proteine in der Interphase.
 
 #{
   show: figure.with(
-    caption: [Reinigung von Nukleinsäuren unter Verwendung von Natriumacetat und Ethanol. @src_reinigung-na_img],
+    caption: [Phasentrennung bei der Phenol-Chloroform-Extraktion: wässrige Phase (DNA), Interphase (Proteine), organische Phase. @src_reinigung-na_img],
   )
   image("../assets/reinigung-na.png", width: 100%)
 } <reinigung-na-img>
 
-== Isolierung durch Fällung
+== Isolierung durch Fällung <faellung-durchfuehrung>
 
-Um die DNA zu lagern, wird sie mit *Natriumacetat* und hochprozentigem *Ethanol* gefällt. @rna-fällung-img zeigt, wie das neutralisierte DNA-Pellet in Isopropanol (gleiches Prinzip) ausflockt und sich am Boden des Behälters ansammelt. Die neutralisierte DNA ist in alkoholischen Lösungen nämlich unlöslich. Nach dem Entleeren des Überschusses wird das Pellet mit weniger hochprozentigem Ethanol (\~70%) vorsichtig gereinigt, um restliche Salze wegzuspülen. Gelagert wird die DNA-Probe in einem *TE-Puffer*, worin das Pellet schonend aufgelöst wird.
++ Zum wässrigen Überstand 1/10 Volumen 3 M Natriumacetat (pH 5,2) und 2–2,5 Volumen 100 % Ethanol zugeben.
++ 30 min bei −20 °C oder 10 min bei Raumtemperatur ausfällen lassen.
++ 15 min zentrifugieren (10.000 × g, 4 °C). Das DNA-Pellet sollte als weißer/ durchsichtiger Niederschlag am Boden sichtbar sein.
++ Überstand entfernen, Pellet mit 70 % Ethanol waschen, erneut zentrifugieren.
++ Pellet bei Raumtemperatur trocknen und in *TE-Puffer* aufnehmen (@rna-fällung-img zeigt das Prinzip der Fällung in Isopropanol).
 
 #{
   show: figure.with(
-    caption: [Extraktion und Reinigung von Nukleinsäuren mittels Fällung. @src_rna-fällung_img],
+    caption: [Fällung von Nukleinsäuren: Das Pellet sammelt sich nach Zentrifugation am Boden des Gefäßes (schematisch für Isopropanol-Fällung dargestellt). @src_rna-fällung_img],
   )
   image("../assets/rna-fällung.png", width: 100%)
 } <rna-fällung-img>
 
-== Hinzugabe von RNase
+== Hinzugabe von RNase <rnase-durchfuehrung>
 
-Die zuvor gewonnene DNA wird in zwei Proben geteilt:
-- _+RNase_: Mit Enzym behandelte DNA
-- _-RNase_: Unbehandelte DNA
+Die gewonnene DNA wird in zwei Aliquots aufgeteilt:
+- _+RNase_: Mit RNase A behandelte DNA (Inkubation 30 min bei 37 °C).
+- _-RNase_: Unbehandelte Kontrollprobe.
 
-In den weiterführenden Schritten kann davon ausgegangen werden, dass nur die _+RNase_-Probe verwendet wird, wenn nicht näher spezifiziert.
+In den weiterführenden Schritten wird, sofern nicht anders angegeben, die _+RNase_-Probe verwendet.
 
-== Photometermessung
+== Photometermessung <photometrie-durchfuehrung>
 
-Verdünnung der extrahierten DNA (_+RNase_ & _-RNase_) in destilliertem *Wasser* um 1:100. Das reine Wasser wird auch als *Null-Referenz* verwendet. Die UV-Küvetten entsprechen der Standarddicke von 1cm.
-@rnase-spectrum-measured-img und @nornase-spectrum-measured-img zeigen die gemessenen Spektren und lassen die Zusammensetzung der einzelnen Komponenten aus @dna-spektrum-img erkennen.
++ Extrahierte DNA (_+RNase_ und _-RNase_) im Verhältnis 1:100 in destilliertem Wasser verdünnen.
++ Messung der Absorption bei 230 nm, 260 nm und 280 nm in 1-cm-Küvetten.
++ Destilliertes Wasser als Null-Referenz verwenden.
++ Konzentration nach @dna-concentration-equation und Reinheitsquotienten nach @purity-protein-equation und @purity-salt-equation berechnen.
+
+@rnase-spectrum-measured-img und @nornase-spectrum-measured-img zeigen beispielhafte Spektren. Die Bakterienproben wurden ein zweites Mal gemessen (2. Durchlauf), da die ersten Messwerte nicht plausibel waren.
 
 #place(auto, float: true, {
   show: pad.with(bottom: -1em)
@@ -257,7 +379,7 @@ Verdünnung der extrahierten DNA (_+RNase_ & _-RNase_) in destilliertem *Wasser*
       show: box
       show: it => [#it <nornase-spectrum-measured-img>]
       show: figure.with(
-        caption: [Beispiel für das gemessene Spektrum bei einer Probe _-RNase_.],
+        caption: [UV-Spektrum einer Leberprobe _-RNase_ (Absorption $E$ bei 230, 260 und 280 nm).],
       )
       set rect(inset: 0pt)
       image("../assets/nathalie_raw_spektrum.png", width: 100%)
@@ -266,7 +388,7 @@ Verdünnung der extrahierten DNA (_+RNase_ & _-RNase_) in destilliertem *Wasser*
       show: box
       show: it => [#it <rnase-spectrum-measured-img>]
       show: figure.with(
-        caption: [Beispiel für das gemessene Spektrum bei einer Probe _+RNase_.],
+        caption: [UV-Spektrum einer Leberprobe _+RNase_ (Absorption $E$ bei 230, 260 und 280 nm).],
       )
       set rect(inset: 0pt)
       image("../assets/nathalie_rnase_spektrum.png", width: 100%)
@@ -274,11 +396,13 @@ Verdünnung der extrahierten DNA (_+RNase_ & _-RNase_) in destilliertem *Wasser*
   )
 })
 
-Die Bakterienproben wurden ein zweites Mal gemessen, weil die ersten Messwerte nicht plausibel waren.
+== Restriktionsenzym-Verdau <restriktion-durchfuehrung>
 
-== Restriktionsenzym-Verdau
+Die DNA wird mit den in @table-restr-distr aufgeführten Restriktionsenzymen behandelt. Für jedes Enzym wird der entsprechende Standardpuffer verwendet (@table-restr-enzyme-sequences).
 
-Die DNA wird mit den in @table-restr-distr aufgeführten Restriktionsenzymen behandelt. Dazu wurde für jedes Enzym der entsprechende Standardpuffer verwendet. Diese sind beispielhaft in @table-restr-enzyme-sequences aufgeführt.
++ Reaktionsansatz: DNA, Restriktionsenzym, 10× Reaktionspuffer, Wasser auf Endvolumen bringen.
++ Inkubation 1–2 h bei 37 °C im Wasserbad.
++ Reaktion durch Erhitzen auf 65 °C für 20 min (je nach Enzym) oder direkte Verwendung im Gel stoppen.
 
 #{
   show: figure.with(
@@ -339,12 +463,17 @@ Die DNA wird mit den in @table-restr-distr aufgeführten Restriktionsenzymen beh
   )
 } <table-restr-enzyme-sequences>
 
-== Gelelektrophorese
+== Gelelektrophorese <gelelektrophorese-durchfuehrung>
 
-Die Gelelektrophorese wird mit einem Agarosegel und einem DNA-Marker durchgeführt. Es wurden folgende Kombinationen an Proben verwendet:
-+ *Leber*: _-RNase_, _+RNase_
-+ *Bakterien*: _-RNase_, _+RNase_
-+ *Leber* Restriktionsenzyme: _+RNase_
++ 0,8–1,0 % Agarosegel in TAE/TBE-Puffer gießen, mit Ethidiumbromid anfärben.
++ DNA-Proben mit Ladepuffer anmischen und zusammen mit *GeneRuler 1 kb Plus* Marker laden.
++ Elektrophorese bei ca. 5–8 V/cm für 45–60 min.
++ Dokumentation unter UV-Licht.
+
+Es wurden folgende Probenkombinationen untersucht:
++ *Leber*: _-RNase_, _+RNase_ (unrestriktiert)
++ *Bakterien*: _-RNase_, _+RNase_ (unrestriktiert)
++ *Leber*: _+RNase_ mit Restriktionsenzymen (EcoRI, NaeI, PstI)
 
 #new-chapter[Ergebnisse]
 
@@ -376,17 +505,83 @@ Die Gelelektrophorese wird mit einem Agarosegel und einem DNA-Marker durchgefüh
   )),
 )
 
-Zuerst werden die Ergebnisse visuell interpretiert, bevor sie anschließend statistisch ausgewertet werden.
+Zuerst werden die Ergebnisse je Teilbereich dargestellt und interpretiert. Anschließend folgt die statistische Auswertung. Jeder Abschnitt endet mit einer kurzen Schlussfolgerung.
 
-== Leberproben <leberproben>
+#let table-photometrie-results(sample) = {
+  table(
+    columns: 3,
+    align: left,
+    ..(
+      table.header(table.cell(
+        colspan: 3,
+        align: left,
+      )[*#sample.sample_source (#sample.trial\. Durchlauf)*]),
+      table.header(level: 2)[][*+RNase*][*-RNase*],
+      ..for initials in (
+        sample.with_rnase.measures.map(it => it.initials)
+          + sample.without_rnase.measures.map(it => it.initials)
+      ).dedup() {
+        let with_rnase = sample.with_rnase.measures.find(it => (
+          it.initials == initials
+        ))
+        let without_rnase = sample.without_rnase.measures.find(it => (
+          it.initials == initials
+        ))
+        (
+          [
+            #show: rotate.with(-90deg, reflow: true)
+            *#initials*
+          ],
+          ..for measurement in (
+            if with_rnase != none { with_rnase },
+            if without_rnase != none { without_rnase },
+          ) {
+            if measurement != none {
+              (
+                [
+                  Konz.: #calc.round(measurement.concentration, digits: 1) #sym.mu\g DNA/ml\
+                  $E_260 slash E_280$: #calc.round(measurement.cleaness_proteins, digits: 1)\
+                  $E_260 slash E_230$: #calc.round(measurement.cleaness_salts, digits: 1)\
+                ],
+              )
+            } else {
+              ([],)
+            }
+          },
+        )
+      },
+    ),
+  )
+}
 
-Aufgrund der scheinbar an sich erfolgreichen DNA-Extraktion können Gelelektrophoresen für unrestriktierte und mit Restriktionsenzymen verdaute DNA durchgeführt werden.
+== Isolierung und Photometrie – Leber <leber-photometrie>
 
-=== Unrestriktierte Leber-DNA <unrestriktierte-leber-dna-chapter>
+=== Darstellung
 
-@annotated-leber-unrestr-gelelectro-img bestätigt, dass die DNA-Extraktion grundsätzlich erfolgreich war. Die ganz dicke Schicht am oberen Rand des Gels ist die DNA, die aufgrund der extrem hohen bp-Länge nicht durch die Gelporen passieren konnte. Der Schmier in der Mitte ist vermutlich durch mechanische Belastung (Pipettieren) zerrissene DNA oder eine Überlappung von unterschiedlich langen mRNAs. Die helle Wolke am unteren Rand besteht wahrscheinlich aus sehr kleinen RNA-Fragmenten bzw. -Kontaminationen. Hinzugabe der RNase reduziert diese Kontaminationen und somit auch die Wolke. Das Bild zeigt, dass dies grundsätzlich der Fall ist. Bei den Proben von SG, TP und SS ist dieser Effekt deutlich zu sehen.
+#{
+  show: figure.with(
+    caption: [Photometrische Einzelmesswerte der Leberproben (1. Durchlauf). Konzentration [#sym.mu\g DNA/ml], Reinheitsquotienten [$-$].],
+  )
+  table-photometrie-results(relevant-data.find(it => (
+    it.sample_source == "Leber" and it.trial == 1
+  )))
+} <table-photometrie-results-leber>
 
-Der Schmier in der Mitte macht sichtbar, was bereits in @genome-architektur-theorie erwähnt wurde: Leberzellen sind sehr Stoffwechselaktiv und im Bild abgeschätzt macht dieser Schmier in etwa \~85% der Gesamtmasse der Probe aus (abzüglich der RNA-Kontaminationen am unteren Rand).
+=== Erläuterung
+
+@table-photometrie-results-leber listet die nach @dna-concentration-equation berechneten Konzentrationen sowie die Reinheitsquotienten aller Leberproben. Die Konzentrationen liegen zwischen ca. 10 und 400 #sym.mu\g DNA/ml. Die Absorptionsquotienten $E_260 slash E_280$ und $E_260 slash E_230$ weichen bei den meisten Proben deutlich von den Referenzwerten in @reference-values-table ab.
+
+=== Interpretation
+
+Im Vergleich zum Referenzwert von $E_260 slash E_280 approx 1.8$ sind fast alle Proben verunreinigt. Die Probe NS +RNase weist mit $E_260 slash E_280 = 1.7$ und $E_260 slash E_230 = 2.0$ die geringsten Abweichungen auf und nähert sich den Idealwerten am ehesten. Die hohen Konzentrationen bei TP und SG deuten auf erfolgreiche Extraktion, aber gleichzeitig auf Protein- oder Phenol-Kontamination hin (niedrige $E_260 slash E_280$-Werte).
+
+=== Schlussfolgerung
+
+Die Leber-Extraktion lieferte in allen Fällen nachweisbare DNA in relevanten Konzentrationen. Die Reinheit ist jedoch durchweg suboptimal; nur die Probe NS erfüllt die Referenzwerte annähernd. Das Ziel der Konzentrationsbestimmung wurde erreicht, das Ziel einer hochreinen DNA nur teilweise.
+
+== RNase-Nachweis – Leber <leber-rnase>
+
+=== Darstellung
 
 #let annotated-leber-unrestr-gelelectro = {
   show: block.with(width: 15cm, height: 8.5cm)
@@ -439,8 +634,6 @@ Der Schmier in der Mitte macht sichtbar, was bereits in @genome-architektur-theo
   box(scale(annotated-leber-unrestr-gelelectro, 80%, reflow: true))
 } <annotated-leber-unrestr-gelelectro-img>
 
-Links im Bild wird der Marker aus @genruler-1kb-plus-img in der durchgeführten Gelelektrophorese gezeigt. Die verschiedenen Banden entsprechen den verschiedenen DNA-Fragmenten in der Probe. Dieser endet bei 20 kbp in der oberen Grenze. Die genomische DNA liegt deutlich darüber. Er zeigt aber auch, dass sich der mittlere Schmier ungefähr im Bereich 1 - 40 kbp befindet. Das könnten oben erwähnte zerbrochene DNA-Fragmente oder mRNA sein.
-
 #{
   show: figure.with(
     caption: [Marker für die Gelelektrophorese: GeneRuler#super[TM] 1 kb Plus DNA Ladder.],
@@ -448,67 +641,21 @@ Links im Bild wird der Marker aus @genruler-1kb-plus-img in der durchgeführten 
   image("../assets/genruler-1kb-plus.png")
 } <genruler-1kb-plus-img>
 
-#let table-photometrie-results(sample) = {
-  table(
-    columns: 3,
-    align: left,
-    ..(
-      table.header(table.cell(
-        colspan: 3,
-        align: left,
-      )[*#sample.sample_source (#sample.trial\. Durchlauf)*]),
-      table.header(level: 2)[][*+RNase*][*-RNase*],
-      ..for initials in (
-        sample.with_rnase.measures.map(it => it.initials)
-          + sample.without_rnase.measures.map(it => it.initials)
-      ).dedup() {
-        let with_rnase = sample.with_rnase.measures.find(it => (
-          it.initials == initials
-        ))
-        let without_rnase = sample.without_rnase.measures.find(it => (
-          it.initials == initials
-        ))
-        (
-          [
-            #show: rotate.with(-90deg, reflow: true)
-            *#initials*
-          ],
-          ..for measurement in (
-            if with_rnase != none { with_rnase },
-            if without_rnase != none { without_rnase },
-          ) {
-            if measurement != none {
-              (
-                [
-                  Konz: #calc.round(measurement.concentration, digits: 1) #sym.mu\g DNA/ml\
-                  $E_260 slash E_280$ = #calc.round(measurement.cleaness_proteins, digits: 1)\
-                  $E_260 slash E_230$ = #calc.round(measurement.cleaness_salts, digits: 1)\
-                ],
-              )
-            } else {
-              ([],)
-            }
-          },
-        )
-      },
-    ),
-  )
-}
+=== Erläuterung
 
-#{
-  show: figure.with(
-    caption: [Photometrische Messwerte und umgerechnete Konzentration aller Leberproben.],
-  )
-  table-photometrie-results(relevant-data.find(it => (
-    it.sample_source == "Leber" and it.trial == 1
-  )))
-} <table-photometrie-results-leber>
+@annotated-leber-unrestr-gelelectro-img zeigt die erfolgreich extrahierte Hochmolekular-DNA als breite Band am oberen Gelrand (>20 kbp). Der mittlere Schmier (ca. 1–40 kbp) stammt aus zerrissener DNA und RNA. Die helle Wolke am unteren Rand deutet auf RNA-Kontamination hin; bei SG, TP und SS ist nach RNase-Behandlung eine Abnahme erkennbar.
 
-@table-photometrie-results-leber zeigt die Einzelmesswerte bzw. Konzentration aus der Photometrie. Dabei fällt auf, dass so gut wie alle Proben stark verunreinigt sind. Die mit Abstand am ehesten nicht verunreinigte Probe ist die von NS +RNase. Bei dieser Probe liegt der $E_260 slash E_280$ Quotient bei 1.7, also nahe dem Idealwert von 1.8 (trotzdem Hinweis auf starke Verunreinigung durch Proteine), der $E_260 slash E_230$ Quotient bei 2.00, also im Idealbereich.
+=== Interpretation
 
-Zudem ist für das bloße Auge kein eindeutiger gepaarter Zusammenhang zwischen _-RNase_- und _+RNase_-Proben zu erkennen. Zu erwarten wäre eine verminderte Konzentration bei der _+RNase_-Probe, da störende Nukleinsäuren aufgrund des RNA-Abbaus verringert werden sollten.
+Der Schmier macht den hohen RNA-Anteil in Leberzellen sichtbar (geschätzt ~85 %). Der RNase-Effekt ist gelbildlich bei einzelnen Proben nachweisbar. Photometrisch ist kein konsistenter Konzentrationsrückgang bei _+RNase_ erkennbar (@table-photometrie-results-leber).
 
-=== Restriktionsenzym verdaute Leber-DNA
+=== Schlussfolgerung
+
+Der RNA-Nachweis und -Abbau gelang im Gel teilweise. Das Ziel wurde nur bei einem Teil der Proben klar erreicht.
+
+== Restriktionsverdau – Leber <leber-restriktion>
+
+=== Darstellung
 
 #let annotated-leber-restr-gelelectro = {
   show: block.with(width: 10cm, height: 5cm + 1em, stroke: 0pt)
@@ -536,15 +683,46 @@ Zudem ist für das bloße Auge kein eindeutiger gepaarter Zusammenhang zwischen 
   annotated-leber-restr-gelelectro
 } <annotated-leber-restr-gelelectro-img>
 
-Im Vergleich zur unrestriktierten Leber-DNA ist in @annotated-leber-restr-gelelectro-img zu sehen, dass die dicke Band ganz oben verschwindet und stattdessen ein durchgehender Schmierstreifen im ganzen Gel entsteht. Das impliziert einen erfolgreichen Verdau, da kaum noch große (>20 kbp) ungeschnittene Stücke übrig sind. Die Restriktionsenzyme haben also gearbeitet.
+=== Erläuterung
 
-Aufgrund der Durchtrennung an unzähligen Stellen entstehen hunderttausende DNA-Fragmente in allen erdenklichen Längen. Sie überlappen und bilden ein Schmier. Daher entsteht auch bei jeder Probe ein nahezu identischer Schmierstreifen.
+In @annotated-leber-restr-gelelectro-img verschwindet die Hochmolekular-Bande und es entsteht ein durchgehender Schmierstreifen von ca. 20 kbp bis wenige hundert bp. Die LS-Probe (PstI) zeigt einen verkürzten Schmier.
 
-Dieser Streifen beginnt im intensiven Bereich ab etwa \~20 kbp und endet weit unten bei wenigen hundert bp. Auffällig ist die Verkürzung bei der LS-Probe, die mit dem Enzym PstI behandelt wurde (siehe @table-restr-distr). Vermutlich fand hier nur ein partieller Verdau statt. Die Möglichkeit der geringeren DNA-Ausgangsmenge wird aufgrund der Daten in @table-photometrie-results-leber und einer vergleichsweise gleich starken visuellen Intensität ausgeschlossen.
+=== Interpretation
 
-Die RNA-Menge wird durchwegs gegen 0% geschätzt, da der helle Leuchtstreifen ganz unten fehlt. Zusätzlich kann über den erfolgreichen Verdau auf eine akzeptable Qualität der DNA-Extraktion geschlossen werden, weil Restriktionsenzyme extrem sensibel sind und stark auf chemische Verunreinigungen, die sie inhibitieren können, reagieren.
+Der erfolgreiche Verdau bestätigt enzymatisch verwertbare DNA trotz photometrisch nachgewiesener Verunreinigungen. Der partielle Verdau bei LS (PstI) kann auf Enzym- oder Reaktionsprobleme zurückzuführen sein.
 
-== Bakterienproben <bakterienproben>
+=== Schlussfolgerung
+
+Das Ziel des Restriktionsverdaus wurde bei zwei von drei Proben vollständig und bei LS teilweise erreicht.
+
+== Isolierung und Photometrie – Bakterien <bakterien-photometrie>
+
+=== Darstellung
+
+#{
+  show: figure.with(
+    caption: [Photometrische Einzelmesswerte der Bakterienproben (2. Durchlauf). Konzentration [#sym.mu\g DNA/ml], Reinheitsquotienten [$-$].],
+  )
+  table-photometrie-results(relevant-data.find(it => (
+    it.sample_source == "Bakterien" and it.trial == 2
+  )))
+} <table-photometrie-results-bakterien>
+
+=== Erläuterung
+
+Die Bakterienproben wurden nach unplausiblen Erstmessungen erneut bestimmt. Die Konzentrationen liegen deutlich unter den Leberwerten.
+
+=== Interpretation
+
+Niedrige Konzentrationen und ungünstige Reinheitsquotienten deuten auf unvollständige Lyse und geringe Ausbeute hin.
+
+=== Schlussfolgerung
+
+Die bakterielle DNA-Isolierung war photometrisch nur schwach nachweisbar. Das Isolierungsziel wurde nicht erreicht.
+
+== RNase und Restriktion – Bakterien <bakterien-rnase>
+
+=== Darstellung
 
 #let annotated-bakterien-unrestr-gelelectro = {
   show: block.with(width: 100%, height: 4.82cm + 1em, stroke: 0pt)
@@ -606,26 +784,38 @@ Die RNA-Menge wird durchwegs gegen 0% geschätzt, da der helle Leuchtstreifen ga
   annotated-bakterien-unrestr-gelelectro
 } <annotated-bakterien-unrestr-gelelectro-img>
 
-In @annotated-bakterien-unrestr-gelelectro-img sollte aufgrund der unglaublichen Größe des Bakterienchromosoms ähnlich wie in @unrestriktierte-leber-dna-chapter eine dicke Band ganz oben zu sehen sein, da die extrem lange DNA nicht durch die Gelporen passt. Diese Erwartung konnte bei uns nicht erfüllt werden, was auf eine fehlerhafte DNA-Extraktion hindeuten könnte. Der mittlere Schmier fehlt komplett, was durch zu wenig DNA/RNA, um beim Zerreißen einen sichtbaren Effekt zu erzielen, erklärbar ist. Die leicht helleren Regionen am unteren Rand könnten kleine, restliche RNA oder angesammelter Lauf-Farbstoff aus dem Ladepuffer sein.
-
-Ein visueller Vergleich der Proben mit und ohne RNase gestaltet sich aufgrund der fehlenden Leuchtkraft als schwierig. Prinzipiell haben Bakterien weniger RNA-Masse als stoffwechselaktive Leberzellen. Da allerdings auch in _-RNase_-Proben fast keine Leuchtkraft zu sehen ist, ist anzunehmen, dass die RNA-Menge generell gegen null geht.
-
-Auch hier wird der im Gel verwendete Referenzmarker aus @genruler-1kb-plus-img gezeigt. Zerrissene Stücke sollte man in etwa im 30 kbp - 100 kbp Bereich erkennen. Bei der durchgeführten Gelelektrophorese ist kein Leuchten zu sehen und daher auch keine Abschätzung möglich. Die zwei Proben mit den anomalen Ergebnissen sind vermutlich auf äußere Fehlerquellen zurückzuführen, wie beispielsweise Verwechslung der Probe, falsche Probe oder Verunreinigungen.
-
 #{
   show: figure.with(
-    caption: [Photometrische Messwerte und umgerechnete Konzentration aller Bakterienproben.],
+    caption: [Erwartetes Gelelektrophorese-Bild unrestriktierter Bakterien-DNA (Literatur). @src_unrestr-bakterien-gel-erw_img],
   )
-  table-photometrie-results(relevant-data.find(it => (
-    it.sample_source == "Bakterien" and it.trial == 2
-  )))
-} <table-photometrie-results-bakterien>
-
-== Statistik
+  image("../assets/erwartung-unrestr-bakterien.png")
+} <erwartung-unrestr-bakterien-gel-img>
 
 #{
   show: figure.with(
-    caption: [Beschreibende Statistik der DNA-Konzentrationen und Photometrie-Werte der DNA-Proben.],
+    caption: [Erwartetes Gelelektrophorese-Bild restr.-verdauter Bakterien-DNA (Literatur). Spalten „E“ = *E. coli*. @src_restr-bakterien-gel-erw_img],
+  )
+  set rect(inset: 0pt)
+  image("../assets/erwartung-restr-bakterien.png")
+} <erwartung-restr-bakterien-gel-img>
+
+=== Erläuterung
+
+In @annotated-bakterien-unrestr-gelelectro-img fehlt die erwartete Hochmolekular-Bande am Gelanfang. Es ist nahezu kein Fluoreszenzsignal erkennbar. @erwartung-unrestr-bakterien-gel-img und @erwartung-restr-bakterien-gel-img zeigen die Soll-Befunde aus der Literatur.
+
+=== Interpretation
+
+Die fehlende Bande deutet auf eine fehlgeschlagene bakterielle Extraktion hin (Lyse, zu wenig Ausgangsmaterial). Ein RNase-Vergleich ist aufgrund der geringen Signalintensität nicht möglich. Restriktions-Gele konnten nicht ausgewertet werden.
+
+=== Schlussfolgerung
+
+Weder RNase-Nachweis noch Restriktionsanalyse waren bei Bakterien aussagekräftig. Die Ziele wurden nicht erreicht.
+
+== Statistische Auswertung <statistik>
+
+#{
+  show: figure.with(
+    caption: [Beschreibende Statistik: Mittelwert $plus.minus$ Standardabweichung. Konzentration [#sym.mu\g DNA/ml], Reinheitsquotienten [$-$].],
   )
   table(
     columns: relevant-data.len() * 2 + 1,
@@ -645,7 +835,7 @@ Auch hier wird der im Gel verwendete Referenzmarker aus @genruler-1kb-plus-img g
         )
       },
     ),
-    [Konzentration],
+    [Konzentration [#sym.mu\g DNA/ml]],
     ..for sample in relevant-data {
       (
         [
@@ -709,27 +899,26 @@ Auch hier wird der im Gel verwendete Referenzmarker aus @genruler-1kb-plus-img g
   )
 } <table-descriptive-statistics>
 
-Leider lässt sich aus den Daten in @table-descriptive-statistics keine Gesamtausbeute der einzelnen Proben berechnen, da dafür die Information über das Verhältnis der im Photometer gemessenen Menge und der gesamt isolierten Menge fehlt. Die Tabelle zeigt einen Trend, der auch durch @dna-concentration-comparison-diagram verdeutlicht und sowohl in @leberproben als auch in @bakterienproben sichtbar ist: Die DNA-Konzentration in Leberproben ist \~12x höher als in Bakterienproben.
+Leider lässt sich aus den Daten in @table-descriptive-statistics keine Gesamtausbeute in mg DNA/g Leber berechnen, da das Endvolumen der Aufnahme fehlt. Die Tabelle zeigt einen Trend, der auch durch @dna-concentration-comparison-diagram, @boxplot-rnase-concentration-diagram und @grouped-bar-purity-diagram verdeutlicht wird: Die DNA-Konzentration in Leberproben ist deutlich höher als in Bakterienproben.
 
 #{
   show: figure.with(
-    caption: [Diagramm der DNA-Konzentrationen und Verteilung der Leber- und Bakterienproben.],
+    caption: [Horizontalbalkendiagramm: mittlere DNA-Konzentration [#sym.mu\g DNA/ml, +RNase] von Leber- und Bakterienproben mit Standardabweichung.],
   )
   show: rect
-  // Diagram for DNA concentration comparison
   lq.diagram(
     width: 7cm,
     title: [
-      *Leber* vs. *Bakterien*\ DNA Konzentration
+      *Leber* vs. *Bakterien*\
+      DNA-Konzentration
     ],
     xlim: (0, auto),
     xaxis: (
       format-ticks: lq.tick-format.linear.with(suffix: $mu"g/ml"$),
       tick-args: (density: 70%),
-      label: [DNA Konzentration],
+      label: [DNA-Konzentration [#sym.mu\g DNA/ml]],
     ),
     yaxis: (
-      //tick-args: (tick-distance: 1.0),
       ticks: relevant-data
         .map(it => it.sample_source)
         .map(rotate.with(-45deg, reflow: true))
@@ -749,14 +938,43 @@ Leider lässt sich aus den Daten in @table-descriptive-statistics keine Gesamtau
   )
 } <dna-concentration-comparison-diagram>
 
-Wie bereits in @photometrie-theorie erwähnt, kann schon ein leicht suboptimales Verhältnis $E_260 slash E_280$ oder $E_260 slash E_230$ auf eine äußerst starke Verunreinigung hindeuten. Diese ist im Durchschnitt bei allen Gruppen gegeben. Trotz eines in den Idealbereich fallenden Durchschnitts beim $E_260 slash E_230$-Quotienten der _-RNase_-Leberprobe ist aufgrund der hohen Standardabweichung davon auszugehen, dass bei der Probengruppe eine starke Verunreinigung vorliegt.
+#{
+  show: figure.with(
+    caption: [Boxplot der DNA-Konzentrationen [#sym.mu\g DNA/ml] für +RNase- und -RNase-Proben je Probengruppe.],
+  )
+  show: rect
+  boxplot-rnase-concentration
+} <boxplot-rnase-concentration-diagram>
 
-Interessanterweise ist bei RNase-behandelten Proben der Durchschnittswert für die DNA-Konzentration entgegen der intuitiven Vermutung, dass gemessene Nukleinsäuren aufgrund des RNA-Abbaus verringert werden, höher als bei unbehandelten Proben.
+#{
+  show: figure.with(
+    caption: [Gruppierte Balkendiagramme der mittleren Reinheitsquotienten $E_260 slash E_280$ und $E_260 slash E_230$ [$-$] mit Standardabweichung.],
+  )
+  show: rect
+  grouped-bar-purity
+} <grouped-bar-purity-diagram>
 
+Wie in @photometrie-theorie beschrieben, kann schon ein leicht suboptimales Verhältnis $E_260 slash E_280$ oder $E_260 slash E_230$ auf starke Verunreinigung hindeuten. Interessanterweise ist bei RNase-behandelten Proben der Mittelwert der DNA-Konzentration höher als bei unbehandelten Proben — entgegen der Erwartung, dass RNA-Abbau die gemessene Nukleinsäure-Menge senkt.
+
+=== Schlussfolgerung
+
+Die deskriptive Statistik bestätigt den qualitativen Befund: Leber-DNA in hohen Konzentrationen, aber meist verunreinigt; Bakterien-DNA kaum nachweisbar. Eine RNase-bedingte Konzentrationsänderung ist im Mittel nicht erkennbar.
 
 == Hypothesentests <hypothesentests-chapter>
 
-Sämtliche Hypothesentests werden mit einem Signifikanzniveau von $alpha = 0.05$ durchgeführt. Die kritischen Werte für die nicht-parametrischen Tests werden aus standardisierten, vorberechneten Tabellen entnommen. Es werden, sofern nicht anders angegeben, die Daten aus @table-descriptive-statistics und sowohl @leberproben als auch @bakterienproben verwendet.
+=== Verwendete Testformeln
+
+Für den Zusammenhang zwischen Lebergewicht und DNA-Konzentration wird der Pearson-Korrelationskoeffizient verwendet:
+
+$
+  r = (sum_(i=1)^n (x_i - overline(x))(y_i - overline(y))) / (sqrt(sum_(i=1)^n (x_i - overline(x))^2) sqrt(sum_(i=1)^n (y_i - overline(y))^2))
+$ <pearson-correlation-equation>
+
+Bei kleinen Stichproben ($n < 30$) werden nicht-parametrische Tests eingesetzt. Der *Wilcoxon-Rang-Summen-Test* vergleicht zwei unabhängige Gruppen; die Teststatistik $W$ ist die kleinere Summe der Ränge einer der Gruppen. Der *Wilcoxon-Vorzeichen-Rang-Test* vergleicht gepaarte Messwerte; $W$ ist die kleinere Summe der Ränge der positiven oder negativen Differenzen.
+
+Entscheidungsregel (beide Tests, $alpha = 0.05$): Liegt $W$ oberhalb des tabellierten kritischen Wertes, wird die Nullhypothese (_kein Unterschied_) nicht verworfen.
+
+Sämtliche Hypothesentests werden mit einem Signifikanzniveau von $alpha = 0.05$ durchgeführt. Die kritischen Werte werden aus standardisierten Tabellen entnommen.
 
 #let weight-data = (
   relevant-data
@@ -778,7 +996,7 @@ Sämtliche Hypothesentests werden mit einem Signifikanzniveau von $alpha = 0.05$
 
 #{
   show: figure.with(
-    caption: [Zusammenhang zwischen Gewicht der Leberprobe und der DNA-Konzentration im fertigen Isolat. Pearson-Korrelationskoeffizient: $#calc.round(correlation, digits: 2)$],
+    caption: [Streudiagramm: Lebergewicht [$g$] vs. DNA-Konzentration [#sym.mu\g DNA/ml, +RNase]. Pearson-$r$ = #calc.round(correlation, digits: 2).],
   )
   show: rect
   lq.diagram(
@@ -790,12 +1008,12 @@ Sämtliche Hypothesentests werden mit einem Signifikanzniveau von $alpha = 0.05$
     xaxis: (
       format-ticks: lq.tick-format.linear.with(suffix: $"g"$),
       tick-args: (density: 70%),
-      label: [Leber Gewicht],
+      label: [Lebergewicht [$g$]],
     ),
     yaxis: (
       format-ticks: lq.tick-format.linear.with(suffix: $mu"g/ml"$),
       tick-args: (density: 70%),
-      label: [DNA Konzentration],
+      label: [DNA-Konzentration [#sym.mu\g DNA/ml]],
     ),
     lq.scatter(
       weight-data.map(it => it.at(1)),
@@ -844,49 +1062,74 @@ Aufgrund der niedrigen Anzahl an Proben wird zur Beantwortung ein Wilcoxon-Rang-
 
 Aufgrund der niedrigen Anzahl an Proben wird zur Beantwortung ein Wilcoxon-Vorzeichen-Rang-Test durchgeführt. Dieser liefert eine Teststatistik von $bold(#str(calc.round(wilcoxon-signed-rank-statistic(rnase-concentrations.zip(nornase-concentrations)).w-statistic, digits: 2))) ~ W_(#rnase-concentrations.len())$, der aber #underline[nicht] unterhalb des kritischen Wertes von *8* liegt und daher #underline[*nicht signifikant*] ist.
 
-#new-chapter[Diskussion]
+=== Schlussfolgerung
 
-== Nicht ermittelte Sollwerte
+Keiner der durchgeführten Hypothesentests ergab signifikante Unterschiede. Dies ist vor allem auf den geringen Stichprobenumfang ($n = 5$–$10$) zurückzuführen.
 
-Da die Gelelektrophoresen bei den Bakterienproben fehlschlugen, werden hier die erwarteten Sollwerte aus der Literatur diskutiert.
+#new-chapter[Gesamtinterpretation und Diskussion]
+
+Die Ergebnisse der genomischen DNA-Isolation zeigen ein deutliches Zweiteilungsbild: Die Extraktion aus Schweineleber gelang grundsätzlich, während die bakterielle Isolierung aus *E. coli* weitgehend fehlschlug.
+
+*Leberproben:* Photometrisch wurde DNA in allen Proben nachgewiesen (@leber-photometrie), jedoch mit überwiegend ungünstigen Reinheitsquotienten. Im Agarosegel war Hochmolekular-DNA sichtbar (@leber-rnase); RNase reduzierte die RNA-Kontamination bei einzelnen Proben. Der Restriktionsverdau bestätigte die enzymatische Verwertbarkeit der DNA (@leber-restriktion).
+
+*Bakterienproben:* Weder Gel noch Photometrie lieferten überzeugende Ergebnisse (@bakterien-photometrie, @bakterien-rnase). Die Soll-Befunde aus der Literatur (@erwartung-unrestr-bakterien-gel-img, @erwartung-restr-bakterien-gel-img) konnten nicht reproduziert werden.
 
 #{
   show: figure.with(
-    caption: [Erwartetes Gelelektrophorese-Bild der unrestriktierten Bakterien-DNA. @src_unrestr-bakterien-gel-erw_img Verwendeter Marker aus @genruler-1kb-plus-img.],
+    caption: [Soll-Ist-Vergleich der zentralen Versuchsbefunde.],
   )
-  image("../assets/erwartung-unrestr-bakterien.png")
-} <erwartung-unrestr-bakterien-gel-img>
-
-#{
-  show: figure.with(
-    caption: [Erwartetes Gelelektrophorese-Bild der durch Restriktionsenzyme verdauten Bakterien-DNA. Die Spalten annotiert mit "E" beziehen sich auf Proben aus E. coli Bakterien. @src_restr-bakterien-gel-erw_img],
+  table(
+    columns: 4,
+    table.header[*Befund*][*Erwartung (Soll)*][*Beobachtung (Ist)*][*Wahrscheinliche Ursache*],
+    [Leber-Gel unrestriktiert], [Band >20 kbp], [Band + RNA-Wolke], [RNA-reiches Gewebe, teils erfolgreiche Isolierung],
+    [Leber RNase], [weniger RNA-Signal], [teilweise sichtbar], [RNase wirkt, aber unvollständig],
+    [Leber Restriktion], [Schmier], [Schmier; LS kürzer], [Verdau ok; PstI-Teilverdau bei LS],
+    [Bakterien-Gel], [Band oben], [kaum Signal], [Lyse/Extraktion fehlgeschlagen],
+    [RNase-Konzentration], [+RNase < −RNase], [+RNase höher im Mittel], [Verunreinigungen; kleines $n$; RNA in $E_260$],
+    [Statistik], [—], [nicht signifikant], [Stichprobe zu klein ($n = 5$–$10$)],
   )
-  set rect(inset: 0pt)
-  image("../assets/erwartung-restr-bakterien.png")
-} <erwartung-restr-bakterien-gel-img>
+} <soll-ist-vergleich-table>
 
-In @erwartung-unrestr-bakterien-gel-img sieht man deutlich die in @bakterienproben beschriebene Erwartung, dass die genomische DNA eigentlich viel zu lang ist, um sich durch das Gel zu bewegen. Daher ist der intensivste Strich am oberen Beginn der Gelbahn. Dazwischen befindet sich ein leichter Schleier, vermutlich bestehend aus durch die Handhabung zerbrochener DNA, der sich bis \~20 kbp erstreckt. Am Ende des Schleiers befindet sich eine letzte hellere Band, die wohl die untere Grenze der mechanischen Instabilität darstellt. Eine Länge von etwa 20 kbp ist sowohl zu lang für die mRNA der Gene als auch für die ribosomale RNA. @src_ecoli-rna-length
+*Gesamtbewertung der Zielsetzung:*
++ Isolierung Leber: *erreicht* (DNA nachweisbar, Gel positiv)
++ Isolierung Bakterien: *nicht erreicht*
++ RNase-Nachweis: *teilweise erreicht* (Leber ja, Bakterien nein)
++ Konzentrationsbestimmung: *erreicht* (Leber), *nicht erreicht* (Bakterien)
++ Restriktionsverdau: *erreicht* (Leber), *nicht auswertbar* (Bakterien)
 
-@erwartung-restr-bakterien-gel-img zeigt anschaulich, wie sich der Verdau mit Restriktionsenzymen auf die genomische DNA auswirkt. Band 4 dient als Referenz und wurde nicht mit Enzymen behandelt. Diese deckt sich mit der Erläuterung im obigen Absatz. Die anderen Banden sind die Ergebnisse der verschiedenen Restriktionsenzyme. Es ist deutlich zu sehen, wie die DNA der E. coli-Bakterien in kleinere Fragmente geschnitten wird und somit weiter im Gel nach unten wandert. Die daraus entstehenden Fragmente sind viel kürzer, die Erkennungssequenzen also viel näher aneinander als in den anderen Proben (L = Lymphozyten, P = Slime Mold).
+Das Studentenlabor eignet sich gut, um die Prinzipien der Phenol-Chloroform-Extraktion, Photometrie und Gelelektrophorese zu erlernen. Für quantitative oder klinische Anwendungen wären standardisierte Kits und größere Stichproben erforderlich.
 
-== Potenzielle Fehlerquellen
+#new-chapter[Fehlerquellen]
 
-#block(
-  sticky: true,
-)[*Fehlende Bakterien-DNA*]
-Hauptproblem: Lyse. Aufgrund der extrem zähen Zellwand von Bakterien konnte *Lysozym* diese Barriere nicht durchbrechen und die Bakterien blieben intakt.
+== Probenvorbereitung
 
-Zu Beginn zu wenig Bakterienflüssigkeit abzentrifugiert, sodass ein extrem kleines Start-Pellet zu sehr wenig DNA-Konzentration führte.
+- *Zu wenig Bakterienpellet:* Durch unzureichendes Abzentrifugieren der Kultur war das Ausgangsmaterial zu gering, was die fehlende DNA-Ausbeute erklärt (@bakterien-photometrie).
+- *Gewichtsschwankungen der Leberproben:* Die eingesetzten Massen lagen zwischen 3,5 und 4,4 g (@table-liver-weights); ein Zusammenhang zur Konzentration war statistisch nicht nachweisbar ($r approx #calc.round(correlation, digits: 2)$).
 
-#block(
-  sticky: true,
-)[*Verunreinigte Leber-DNA*]
-Das Arbeiten mit DNA erfordert ein hohes Maß an Sorgfalt, reine Laborbedingungen und korrekte Vorgehensweisen. Es könnte die Annahme getroffen werden, dass in einem Studentenlabor, das für persönliche Entwicklung und das Erlauben, Fehler zu machen, vorgesehen ist, diese Voraussetzungen nicht immer erfüllt sind. Dass dennoch ein recht hoher Reinheitsgrad erzielt werden kann, wird in @leberproben gezeigt. Es wird hier also eher auf menschliche Ungenauigkeiten zurückgeschlossen anstatt auf systematische Fehler zu schließen.
+== Lyse und Extraktion
 
-#block(
-  sticky: true,
-)[*Statistische nicht-Signifikanz*]
-Die Ergebnisse in @hypothesentests-chapter sind nicht signifikant. Das liegt höchstwahrscheinlich an dem extrem niedrigen Stichprobenumfang (10 bzw. 5 Datenpunkte), der schlichtweg keine statistisch signifikanten Aussagen ermöglicht. Auch könnten die Tests selbst keinen Fehler, sondern ein richtiges Ergebnis liefern und unter den gearbeiteten Laborbedingungen besteht tatsächlich kein relevanter Unterschied zwischen beispielsweise der DNA-Konzentration mit und ohne RNase. Das ist aber aufgrund des Stichprobenumfangs nicht nachweisbar.
+- *Gramnegative Zellwand:* Lysozym allein reichte offenbar nicht aus, die LPS-haltige Außermembran von *E. coli* zu durchbrechen (@bakterien-rnase).
+- *Unvollständige Gewebehomogenisierung:* Grobe Gewebefragmente können die Proteinase-K-Lyse verzögern.
+
+== Reinigung und Aufreinigung
+
+- *Phenol-Carryover:* Senkt $E_260 slash E_230$ und hemmt Enzyme; erklärt die photometrisch nachgewiesenen Verunreinigungen bei Leberproben.
+- *Mechanische DNA-Schädigung:* Vorschnelles Pipettieren erzeugt den mittleren Schmier im Gel (@leber-rnase).
+
+== RNase-Behandlung und Photometrie
+
+- *Unvollständiger RNA-Abbau:* RNase wurde erst nach der Extraktion zugesetzt; RNA kann bereits in $E_260$ einfließen.
+- *Falsche Verdünnung oder Küvettenfehler:* Erklärt die Notwendigkeit der zweiten Bakterienmessung.
+
+== Restriktionsverdau und Gelelektrophorese
+
+- *Partieller Verdau (LS, PstI):* Mögliche Ursachen: abgelaufenes Enzym, falscher Puffer oder inhibitorische Verunreinigungen.
+- *Probe verwechselt oder überladen:* Erklärt anomale Bakterien-Gelspuren.
+
+== Statistik
+
+- *Zu kleine Stichprobe:* Mit $n = 5$ (Leber) bzw. $n = 5$ (Bakterien) ist die Teststärke zu gering, um moderate Effekte nachzuweisen (@hypothesentests-chapter).
+- *Ausreißer:* Einzelne Proben (z. B. TP, SG) mit extrem hohen Konzentrationen verzerren Mittelwert und Standardabweichung.
 
 #set heading(numbering: none)
 #new-chapter("Anhang")
