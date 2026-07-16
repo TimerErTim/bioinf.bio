@@ -248,7 +248,7 @@ Die im Versuch bestimmten Reinheitsquotienten ($E_260 slash E_280$, $E_260 slash
 Für die Durchführung des Experiments gemäß der Angabe zur Isolierung genomischer DNA wurden folgende Materialien verwendet:
 
 *Probematerial:*
-- Frische oder tiefgekühlte *Schweineleber* (ca. 3,5–4,5 g pro Ansatz, siehe @table-liver-weights)
+- Frische *Schweineleber* (ca. 3,5–4,5 g pro Ansatz, siehe @table-liver-weights)
 - Übernacht-*E. coli*-Kultur in LB-Medium
 
 *Reagenzien für Lyse und Reinigung:*
@@ -326,7 +326,7 @@ Nachfolgend wird die im Labor durchgeführte Vorgehensweise Schritt für Schritt
 Um an die DNA im Inneren der Zellen zu kommen, müssen diese aufgebrochen werden (@cell-lysis-img). Je nach Probentyp wird unterschiedlich vorgegangen:
 
 *Schweineleber:*
-+ Leberstück auf einer Petrischale abwiegen (siehe @table-liver-weights) und mit steriler Klinge in kleine Stücke schneiden.
++ Leberstück auf einer Petrischale abwiegen (siehe @table-liver-weights) und mit Mixstab pürieren.
 + Gewebe in Lysis-Puffer überführen und *Proteinase K* zugeben.
 + 1–2 h bei 56 °C im Wasserbad inkubieren, bis das Gewebe vollständig aufgelöst ist.
 + _Qualitätskontrolle:_ Homogenes, klares Lysat ohne sichtbare Gewebereste.
@@ -385,7 +385,7 @@ In den weiterführenden Schritten wird, sofern nicht anders angegeben, die _+RNa
 
 @rnase-spectrum-measured-img und @nornase-spectrum-measured-img zeigen beispielhafte Spektren. Die Bakterienproben wurden ein zweites Mal gemessen (2. Durchlauf), da die ersten Messwerte nicht plausibel waren.
 
-#place(auto, float: true, {
+#{
   show: pad.with(bottom: -1em)
   grid(
     columns: 2,
@@ -570,7 +570,7 @@ Zuerst werden die Ergebnisse je Teilbereich dargestellt und interpretiert. Ansch
   )
 }
 
-== Isolierung und Photometrie – Leber <leber-photometrie>
+== Isolierung und Photometrie der Leber <leber-photometrie>
 
 === Darstellung
 
@@ -595,7 +595,7 @@ Im Vergleich zum Referenzwert von $E_260 slash E_280 approx 1.8$ sind fast alle 
 
 Die Leber-Extraktion lieferte in allen Fällen nachweisbare DNA in relevanten Konzentrationen. Die Reinheit ist jedoch durchweg suboptimal; nur die Probe NS erfüllt die Referenzwerte annähernd. Das Ziel der Konzentrationsbestimmung wurde erreicht, das Ziel einer hochreinen DNA nur teilweise.
 
-== RNase-Nachweis – Leber <leber-rnase>
+== RNase-Nachweis bei Leber <leber-rnase>
 
 === Darstellung
 
@@ -669,7 +669,7 @@ Der Schmier macht den hohen RNA-Anteil in Leberzellen sichtbar (geschätzt ~85 %
 
 Der RNA-Nachweis und -Abbau gelang im Gel teilweise. Das Ziel wurde nur bei einem Teil der Proben klar erreicht.
 
-== Restriktionsverdau – Leber <leber-restriktion>
+== Restriktionsverdau der Leber <leber-restriktion>
 
 === Darstellung
 
@@ -711,7 +711,7 @@ Der erfolgreiche Verdau bestätigt enzymatisch verwertbare DNA trotz photometris
 
 Das Ziel des Restriktionsverdaus wurde bei zwei von drei Proben vollständig und bei LS teilweise erreicht.
 
-== Isolierung und Photometrie – Bakterien <bakterien-photometrie>
+== Isolierung und Photometrie von Bakterien <bakterien-photometrie>
 
 === Darstellung
 
@@ -736,7 +736,7 @@ Niedrige Konzentrationen und ungünstige Reinheitsquotienten deuten auf unvollst
 
 Die bakterielle DNA-Isolierung war photometrisch nur schwach nachweisbar. Das Isolierungsziel wurde nicht erreicht.
 
-== RNase und Restriktion – Bakterien <bakterien-rnase>
+== RNase und Restriktion der Bakterien <bakterien-rnase>
 
 === Darstellung
 

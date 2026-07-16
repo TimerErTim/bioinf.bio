@@ -117,7 +117,7 @@
       #if members != none {
         v(1em)
         text(16pt)[
-          *Members*\
+          *#context if text.lang == "de" [ Mitwirkende ] else [ Participants ]*\
           #for member in members {
             [#member\ ]
           }
