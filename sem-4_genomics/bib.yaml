@@ -212,3 +212,10 @@ src_ecoli-rna-length:
     date: 2026-06-15
   note: |
     covers ribosomale rRNA lengths in different organisms
+
+src_dna-leiter-kombi:
+  type: artwork
+  title: DNA-Leiter kombi
+  url:
+    value: https://www.carlroth.com/at/de/dna-marker/dna-leiter-kombi/p/cl22.1
+    date: 2026-07-18
