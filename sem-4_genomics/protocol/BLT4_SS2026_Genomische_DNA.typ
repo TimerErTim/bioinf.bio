@@ -1033,59 +1033,66 @@ Zusammenfassend lässt sich sagen, dass der statistische Vergleich die Limitatio
 
 == Gesamtinterpretation
 
-Die Ergebnisse der genomischen DNA-Isolation zeigen ein deutliches Zweiteilungsbild: Die Extraktion aus Schweineleber gelang grundsätzlich, während die bakterielle Isolierung aus *E. coli* weitgehend fehlschlug.
+Die Ergebnisse der genomischen DNA-Isolation zeigen ein deutliches Zweiteilungsbild: Die Extraktion aus Schweineleber gelang grundsätzlich, während die bakterielle Isolierung aus E. coli weitgehend fehlschlug.
 
-*Leberproben:* Photometrisch wurde DNA in allen Proben nachgewiesen (@leber-photometrie), jedoch mit überwiegend ungünstigen Reinheitsquotienten. Im Agarosegel war Hochmolekular-DNA sichtbar (@leber-rnase); RNase reduzierte die RNA-Kontamination bei einzelnen Proben. Der Restriktionsverdau bestätigte die enzymatische Verwertbarkeit der DNA (@leber-restriktion).
+*Leberproben:* Photometrisch wurde DNA in allen Proben nachgewiesen (@leber-photometrie), jedoch mit überwiegend suboptimalen Reinheitsquotienten ($E_260 / E_280 #sym.approx 1,5$). Im Agarosegel war hochmolekulare DNA sichtbar (@leber-rnase), und der RNase-Verdau reduzierte die RNA-Kontamination bei einzelnen Proben sichtlich. Der Restriktionsverdau bestätigte zudem die enzymatische Verwertbarkeit der gewonnenen DNA (@leber-restriktion). Wissenschaftlich spannend war hierbei das statistische Paradoxon: Die photometrisch gemessene Konzentration stieg nach dem RNase-Verdau scheinbar an, was sich durch den hyperchromen Effekt fragmentierter RNA-Basen und minimale Flüssigkeitsverdunstung bei $37 space °C$ erklären lässt.
 
-*Bakterienproben:* Weder Gel noch Photometrie lieferten überzeugende Ergebnisse (@bakterien-photometrie, @bakterien-rnase). Die Soll-Befunde aus der Literatur (Abbildung 14, Abbildung 15) konnten nicht reproduziert werden.
+*Bakterienproben:* Weder Gel noch Photometrie lieferten verlässliche Ergebnisse (@bakterien-photometrie, @bakterien-rnase). Die Soll-Befunde aus der Literatur (Abbildung 14, Abbildung 15) konnten nicht reproduziert werden. Die statistische Auswertung entlarvte die scheinbar hohen photometrischen Messwerte und die explodierten Salzquotienten ($E_260 / E_230$) vollends als reine Messartefakte. Verursacht durch ein mangelhaftes Blanking des Geräts bei $230 space "nm"$, ging der Nenner rechnerisch gegen Null, obwohl auf dem Gel (mit Ausnahme der RNA bei Probe CB) keinerlei echte Substanzbanden sichtbar waren.
 
-#{
-  show: figure.with(
-    caption: [Soll-Ist-Vergleich der zentralen Versuchsbefunde.],
-  )
-  table-soll-ist-vergleich
-} <soll-ist-vergleich-table>
 
-*Gesamtbewertung der Zielsetzung:*
-+ Isolierung Leber: *erreicht* (DNA nachweisbar, Gel positiv)
-+ Isolierung Bakterien: *nicht erreicht*
-+ RNase-Nachweis: *teilweise erreicht* (Leber ja, Bakterien nein)
-+ Konzentrationsbestimmung: *erreicht* (Leber), *nicht erreicht* (Bakterien)
-+ Restriktionsverdau: *erreicht* (Leber), *nicht auswertbar* (Bakterien)
+== Gesamtbewertung der Zielsetzung
 
-Das Studentenlabor eignet sich gut, um die Prinzipien der Phenol-Chloroform-Extraktion, Photometrie und Gelelektrophorese zu erlernen. Für quantitative oder klinische Anwendungen wären standardisierte Kits und größere Stichproben erforderlich.
++ *Isolierung Leber:* _Erreicht._ Trotz systematischer Protein- und Phenolverunreinigungen konnte hochmolekulare gDNA isoliert und erfolgreich für den Restriktionsverdau genutzt werden.
++ *Isolierung Bakterien:* _Nicht erreicht._ Aufgrund von Lysisdefiziten (gramnegative LPS-Außenschicht) wurde keine qualitativ auswertbare DNA gewonnen.
++ *RNase-Nachweis:* _Teilweise erreicht._ Der qualitative Nachweis gelang im Gel über den Abbau der niedermolekularen RNA-Bande bei Probe CB. Photometrisch wurde der Effekt jedoch durch die in Lösung verbleibenden freien Nukleotide (Hyperchromie) maskiert, was zu statistisch nicht-signifikanten Unterschieden im Vorzeichen-Rang-Test führte.
++ *Konzentrationsbestimmung:* _Teilweise erreicht._ Für die Leberproben lieferte die Photometrie plausible Richtwerte. Für die Bakterienproben waren die Daten aufgrund des instrumentellen Rauschens statistisch und biologisch unbrauchbar.
++ *Restriktionsverdau:* _Erreicht._ Die Leber-DNA zeigte erfolgreiche Schnittmuster, während die Bakterienansätze mangels Ausgangsmaterial nicht auswertbar waren.
 
-== Fehlerquellen
+== Methodenkritik und Ausblick
+
+Das Studentinnen- und Studentenlabor eignet sich hervorragend, um die klassischen Prinzipien der Phenol-Chloroform-Extraktion, Photometrie und Gelelektrophorese von Grund auf zu verstehen. Es zeigt jedoch auch die extreme Anfälligkeit manueller Arbeitsschritte für systematische Fehler. Die statistische Analyse verdeutlichte eindringlich, dass eine größere Probeneinwaage bei der Leber keineswegs linear mit einer höheren Ausbeute korreliert ($r #sym.approx -0,05$), da ohne parallele Pufferanpassung das Lysis-System überlastet wird. Zudem erwies sich die Stichprobengröße ($n = 5$) als zu gering, um mit nicht-parametrischen Tests mathematische Signifikanzen gegen die laborübliche Streuung durchzusetzen.
+
+Für zukünftige quantitative oder klinische Anwendungen, bei denen es auf absolute Reinheit und Reproduzierbarkeit ankommt, sollte von der fehleranfälligen manuellen Phasentrennung auf standardisierte Säulen-Kits (Spin Columns) umgestellt werden. Zudem ist ein penibler Nullabgleich des Photometers zwingend erforderlich, um mathematische Artefakte bei den Reinheitsquotienten zu vermeiden.
+
+
+#pagebreak()
+== Fehlerquellen <fehlerquellen>
+
+Die dokumentierten Abweichungen von den theoretischen Soll-Werten lassen sich auf eine Reihe von methodischen und laborpraktischen Fehlerquellen zurückführen. Da es sich um ein studentisches Praktikum handelt, spielen neben systematischen biochemischen Limitierungen auch stochastische Einflüsse durch das manuelle Handling eine wesentliche Rolle.
 
 === Probenvorbereitung
 
-- *Zu wenig Bakterienpellet:* Durch unzureichendes Abzentrifugieren der Kultur war das Ausgangsmaterial zu gering, was die fehlende DNA-Ausbeute erklärt (@bakterien-photometrie).
-- *Gewichtsschwankungen der Leberproben:* Die eingesetzten Massen lagen zwischen 3,5 und 4,4 g (@table-liver-weights); ein Zusammenhang zur Konzentration war statistisch nicht nachweisbar ($r approx #calc.round(correlation, digits: 2)$).
+- *Zu wenig Bakterienpellet:* Bei der Isolation aus E. coli war die optische Dichte ($O.D._600$) der Ausgangskultur möglicherweise zu gering oder das Abzentrifugieren unzureichend. Ein zu kleines oder kaum sichtbares Zellpellet führt im weiteren Verlauf fast zwangsläufig dazu, dass beim Abdekantieren von Überständen unbemerkt Biomasse verloren geht, was die fehlende DNA-Ausbeute erklärt (@bakterien-photometrie).
+- *Gewichtsschwankungen der Leberproben:* Die eingesetzten Massen bewegten sich in einem engen Fenster zwischen 3,5 g und 4,4 g (@table-liver-weights). Dass statistisch kein deutlicher Zusammenhang zur finalen Konzentration nachweisbar war ($r approx #calc.round(correlation, digits: 2)$), liegt auch an der Gewebebeschaffenheit (z. B. Anteil an Bindegewebe vs. zellreichem Parenchym), wodurch der tatsächliche DNA-Gehalt pro Gramm Einwaage variiert.
+- *Ungleichmäßige Homogenisierung:* Wenn das Gewebe nach dem Pürieren nicht absolut homogen in der Suspension verteilt ist, ziehen die Arbeitsgruppen beim Pipettieren unterschiedlich dichte Aliquots, was zu starken Startunterschieden führt.
 
 === Lyse und Extraktion
 
-- *Gramnegative Zellwand:* Lysozym allein reichte offenbar nicht aus, die LPS-haltige Außermembran von *E. coli* zu durchbrechen (@bakterien-rnase).
-- *Unvollständige Gewebehomogenisierung:* Grobe Gewebefragmente können die Proteinase-K-Lyse verzögern.
+- *Gramnegative Zellwand:* Die äußere Membran von E. coli enthält Lipopolysaccharide (LPS) und wird durch zweiwertige Kationen stabilisiert. Lysozym allein reichte offenbar nicht aus, diese Außermembran zu durchbrechen, wenn das EDTA im Lysepuffer die Ionen nicht ausreichend chelatisiert hat (@bakterien-rnase). Die Zellen bleiben ungeöffnet und die gDNA wird mit dem Zellschutt als Debris verworfen.
+- *Unvollständige Gewebehomogenisierung:* Grobe Gewebefragmente der Leber bieten der Proteinase K eine zu geringe Angriffsfläche. Die Proteolyse verzögert sich oder bleibt unvollständig, sodass ein Großteil der DNA im zellulären Restpellet eingeschlossen bleibt.
+- *Aktivierung endogener Nukleasen:* Wird das Gewebe während des Auftauens oder Homogenisierens nicht konsequent gekühlt, werden zelleigene DNasen aktiv, bevor der Lysepuffer die Proteine denaturieren kann, was zu einer vorzeitigen Degradation der gDNA führt.
 
 === Reinigung und Aufreinigung
 
-- *Phenol-Carryover:* Senkt $E_260 slash E_230$ und hemmt Enzyme; erklärt die photometrisch nachgewiesenen Verunreinigungen bei Leberproben.
-- *Mechanische DNA-Schädigung:* Vorschnelles Pipettieren erzeugt den mittleren Schmier im Gel (@leber-rnase).
+- *Phenol-Carryover (Phenol-Verschleppung):* Bei der Phasentrennung wird oft versucht, möglichst viel der wässrigen Phase abzugeben. Dabei wird leicht Material aus der Interphase oder Phenolphase mitgenommen. Dies senkt den Quotienten $E_260 / E_230$, hemmt nachfolgende Enzyme und erklärt die photometrisch nachgewiesenen Verunreinigungen bei den Leberproben.
+- *Ethanol-Verschleppung:* Wenn das DNA-Pellet nach dem Waschen mit 70%igem Ethanol nicht lang genug an der Luft trocknet, inhibieren die Reste die Aktivität von Restriktionsenzymen oder führen dazu, dass Proben aus den Geltaschen nach oben wegschwimmt.
+- *Mechanische DNA-Schädigung:* Genomische DNA ist als riesiges Makromolekül extrem empfindlich gegenüber Scherkräften. Zu abruptes Pipettieren oder heftiges Vortexen reißt die langen Stränge auseinander und erzeugt den kontinuierlichen, mittleren Schmier im Gel anstelle einer scharfen Bande (@leber-rnase).
 
 === RNase-Behandlung und Photometrie
 
-- *Unvollständiger RNA-Abbau:* RNase wurde erst nach der Extraktion zugesetzt; RNA kann bereits in $E_260$ einfließen.
-- *Falsche Verdünnung oder Küvettenfehler:* Erklärt die Notwendigkeit der zweiten Bakterienmessung.
+- *Unvollständiger oder zu später RNA-Abbau:* Da die RNase A erst nach der Extraktion zugesetzt wurde, lag anfangs eine enorme Menge zellulärer RNA vor. Da RNA ebenfalls bei 260 nm absorbiert, fließt sie voll in den $E_260$-Wert ein und erzeugt massive Scheinkonzentrationen bei der Erstmessung.
+- *Hyperchromer Effekt:* Durch den RNase-Verdau wird die RNA fragmentiert, was die Basenstapelung aufhebt und die UV-Absorption künstlich erhöht. Bleiben diese freien Nukleotide in Lösung, täuscht das Photometer eine höhere Konzentration vor.
+- *Falsche Verdünnung oder Küvettenfehler:* Ein ungenauer optischer Nullabgleich (Fehl-Blanking) oder Verunreinigungen auf der Küvette verschieben die Absorptionskurve. Dies erklärt unter anderem die Notwendigkeit der zweiten Bakterienmessung und die anomalen Salzquotienten.
 
 === Restriktionsverdau und Gelelektrophorese
 
-- *Partieller Verdau (LS, PstI):* Mögliche Ursachen: abgelaufenes Enzym, falscher Puffer oder inhibitorische Verunreinigungen.
-- *Probe verwechselt oder überladen:* Erklärt anomale Bakterien-Gelspuren.
+- *Partieller Verdau (z. B. mit PstI oder HindIII):* Mögliche Ursachen hierfür sind ein temperaturbedingter Aktivitätsverlust des Enzyms, ein falscher Reaktionspuffer oder inhibitorische Verunreinigungen (wie Phenol- oder Ethanolreste), die den vollständigen enzymatischen Schnitt verhindern.
+- *Probe verwechselt oder überladen:* Ungenauigkeiten beim Beladen der Geltaschen oder Verwechslungen beim Pipettieren der Ansätze erklären anomale Bandenverläufe und unklare Spurbelegungen bei den Bakterien-Gelspuren.
 
 === Statistik
 
-- *Zu kleine Stichprobe:* Mit $n = 5$ (Leber) bzw. $n = 5$ (Bakterien) ist die Teststärke zu gering, um moderate Effekte nachzuweisen (@hypothesentests-chapter).
-- *Ausreißer:* Einzelne Proben (z. B. TP, SG) mit extrem hohen Konzentrationen verzerren Mittelwert und Standardabweichung.
+- *Zu kleine Stichprobe:* Mit einem geringen Stichprobenumfang von z. B. $n = 5$ (Leber) bzw. $n = 5$ (Bakterien) ist die statistische Teststärke (Power) der Wilcoxon-Tests viel zu gering, um moderate Effekte oder biologische Unterschiede sauber nachzuweisen (@hypothesentests-chapter).
+- *Ausreißer:* Einzelne Proben mit extrem hohen Scheinkonzentrationen (verursacht durch Puffer- oder Salzrückstände) verzerren den Mittelwert und die Standardabweichung bei so kleinen Gruppen dramatisch und maskieren bestehende Trends.
 
 #set heading(numbering: none)
 #new-chapter("Anhang")
