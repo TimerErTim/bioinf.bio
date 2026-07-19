@@ -617,6 +617,7 @@ Die Ergebnisse sind nach Probengruppe (Leber, Bakterien) und quantitativer Auswe
     @annotated-leber-unrestr-gelelectro-img zeigt das elektrophoretische Trennmuster der unverdauten Nukleinsäureisolate aus Schweineleber im direkten Vergleich mit dem Längenstandard GeneRuler 1 kb Plus (@genruler-1kb-plus-img). In allen Spurpaaren der Studierenden (LS, SG, NS, TP, SS) ist am obersten Probenrand, oberhalb der größten Markerbande von 20 kbp, eine intensiv fluoreszierende, scharfe Hauptbande lokalisiert.
 
     Am unteren Ende des Gels (Vortriebsfront) zeigt sich bei den unbehandelten Proben (blau umrandet, _-RNase_) eine stark leuchtende, gelb-orange fluoreszierende Stoffwolke im extrem niedermolekularen Bereich (< 100 bp). Bei den parallel aufgetragenen, mit RNase A behandelten Ansätzen (grün umrandet, _+RNase_) ist diese niedermolekulare Fluoreszenzwolke signifikant verändert: Bei den Proben (vor allem bei SG, TP und SS) ist eine deutliche Signalabschwächung erkennbar ist. Von den Taschen abwärts zieht sich zudem bei allen Proben ein kontinuierlicher vertikaler Schmierstreifen durch die mittleren Gelbereiche.
+    #pagebreak()
   ],
   interpretation: [
     Die ausgeprägte, scharfe Bande direkt an den Lichttaschen (> 20 kbp) belegt den Erfolg der Isolation: Die genomische DNA liegt hochmolekular und weitgehend unfragmentiert vor, da ihre enorme Molekülgröße das Agarose-Porennetzwerk kaum durchwandern lässt. Der nachfolgende vertikale Schmier (ca. 1–40 kbp) repräsentiert teils mechanisch gescherte gDNA-Fragmente sowie heterogene, höhermolekulare RNA-Spezies (wie mRNA).
@@ -694,6 +695,7 @@ Die Ergebnisse sind nach Probengruppe (Leber, Bakterien) und quantitativer Auswe
   ],
 )
 
+#pagebreak()
 === RNase und Restriktion <bakterien-rnase>
 
 #result-section(
