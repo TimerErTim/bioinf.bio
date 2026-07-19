@@ -217,10 +217,10 @@
     [Lyse/Extraktion fehlgeschlagen],
 
     [RNase-Konzentration],
-    [+RNase < −RNase],
-    [+RNase höher im Mittel],
+    [$+$RNase < $-$RNase],
+    [$+$RNase höher im Mittel],
     [Verunreinigungen; kleines $n$; RNA in $E_260$],
 
-    [Statistik], [—], [nicht signifikant], [Stichprobe zu klein ($n = 5$–$10$)],
+    [Statistik], [—], [nicht signifikant], [Stichprobe zu klein ($n = 5\-10$)],
   )
 }

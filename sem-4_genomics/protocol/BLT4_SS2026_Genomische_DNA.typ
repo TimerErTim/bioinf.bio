@@ -1061,6 +1061,12 @@ Die Ergebnisse der genomischen DNA-Isolation zeigen ein deutliches Zweiteilungsb
 
 *Bakterienproben:* Weder Gel noch Photometrie lieferten verlässliche Ergebnisse (@bakterien-photometrie, @bakterien-rnase). Die Soll-Befunde aus der Literatur (Abbildung 14, Abbildung 15) konnten nicht reproduziert werden. Die statistische Auswertung entlarvte die scheinbar hohen photometrischen Messwerte und die explodierten Salzquotienten ($E_260 / E_230$) vollends als reine Messartefakte. Verursacht durch ein mangelhaftes Blanking des Geräts bei $230 space "nm"$, ging der Nenner rechnerisch gegen Null, obwohl auf dem Gel (mit Ausnahme der RNA bei Probe CB) keinerlei echte Substanzbanden sichtbar waren.
 
+#{
+  show: figure.with(
+    caption: [Soll-Ist-Vergleich der zentralen Versuchsbefunde.],
+  )
+  table-soll-ist-vergleich
+} <soll-ist-vergleich-table>
 
 == Gesamtbewertung der Zielsetzung
 
