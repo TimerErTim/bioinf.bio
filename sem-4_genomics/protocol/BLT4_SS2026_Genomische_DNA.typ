@@ -709,7 +709,7 @@ Der Befund in Spur LS interpretiert sich primär als partieller (unvollständige
     } <table-descriptive-statistics>
 
     Leider lässt sich aus den Daten in @table-descriptive-statistics keine Gesamtausbeute in mg DNA/g Leber berechnen, da das Endvolumen der Aufnahme fehlt. Die Tabelle zeigt einen Trend, der auch durch @dna-concentration-comparison-diagram, @boxplot-rnase-concentration-diagram und @grouped-bar-purity-diagram verdeutlicht wird: Die DNA-Konzentration in Leberproben ist deutlich höher als in Bakterienproben.
-    
+
 *Erläuterung: * \
     @table-descriptive-statistics fasst die berechneten Mittelwerte und deren zugehörige Standardabweichungen ($"Mean" plus.minus "SD"$) für beide Versuchsansätze zusammen. Ein direkter Vergleich zeigt, dass die mittleren DNA-Konzentrationen der Leberproben mit $2138 plus.minus 1355.2 space #sym.mu\g "DNA/ml"$ ($+$RNase) beziehungsweise $1627 plus.minus 963.2 space #sym.mu\g "DNA/ml"$ ($-$RNase) um ein Vielfaches höher liegen als die der Bakterienisolate, welche lediglich $170 plus.minus 178.2 space #sym.mu\g "DNA/ml"$ ($+$RNase) und $204 plus.minus 176.7 space #sym.mu\g "DNA/ml"$ ($-$RNase) erreichen. 
 
@@ -766,6 +766,20 @@ Der Befund in Spur LS interpretiert sich primär als partieller (unvollständige
       )
     } <dna-concentration-comparison-diagram>
 
+  *  Erläuterung: *
+    
+    Das Horizontalbalkendiagramm in Abbildung 16 visualisiert den direkten quantitativen Vergleich der mittleren DNA-Konzentrationen zwischen den Leber- und Bakterienproben nach erfolgtem RNA-Abbau (+RNase). Aufgetragen ist die Konzentration in µg DNA/ml, skaliert über einen wissenschaftlichen Multiplikator von mal $10^3$ (Tausenderbereich). Der blaue Balken für die eukaryotischen Leberproben zeigt eine massive mittlere Ausbeute, die sich knapp oberhalb der 2000 µg/ml-Marke bewegt. Im extremen Kontrast dazu verbleibt der Balken der prokaryotischen Bakterienisolate optisch fast auf der Baseline und erreicht im Mittel lediglich rund 170 µg/ml. Die rot eingezeichneten Fehlerbalken stellen die Standardabweichung dar. Während die absolute Streubreite bei den Bakterienproben klein wirkt, erstreckt sich der Fehlerbalken der Leberproben über ein enormes Spektrum von etwa 800 µg/ml bis hin zu 3500 µg/ml.
+    
+*    Interpretation:*
+
+Die gravierende Asymmetrie der beiden Balken verdeutlicht den fundamentalen Unterschied in der biologischen Ausgangsbasis: Für die Leberisolierung wurde eine beträchtliche Menge an tierischem Gewebe mechanisch zerkleinert, wodurch eine enorme Zelldichte und somit ein gigantischer DNA-Pool zur Verfügung stand. Bei den E. coli-Proben hingegen diente lediglich das winzige Pellet einer 1,5-ml-Kultur als Basis, dessen Aufschluss durch die robuste gramnegative Zellwand zudem methodisch deutlich anspruchsvoller ist.
+    
+Die enorme Ausdehnung des roten Fehlerbalkens bei der Leber ist das klassische Abbild eines studentischen Laborpraktikums. Da die Arbeitsschritte manuell durchgeführt wurden, führen minimale Varianzen bei der mechanischen Gewebehomogenisierung, unterschiedliches Geschick beim vorsichtigen Abpipettieren der oberen wässrigen Phase (um die Proteine in der Interphase nicht zu berühren) sowie unbemerkt weggeschüttete DNA-Pellets beim Dekantieren des Ethanols zu extrem unterschiedlichen Einzelergebnissen. Diese spiegeln sich mathematisch in einer gigantischen Standardabweichung wider, die fast die Hälfte des Gesamtmittelwerts ausmacht.
+
+*Schlussfolgerung:*
+
+Das Diagramm führt dem Betrachter die quantitative Leistungsfähigkeit sowie die Anfälligkeit der gewählten Isolationsmethodik vor Augen. Während das Protokoll für eukaryotisches Gewebe extrem ertragreich ist, stößt es bei den prokaryotischen Systemen unter den gegebenen Bedingungen an seine quantitativen Grenzen. Zudem unterstreicht die Grafik, dass in einem studentischen Versuchsaufbau der reine Mittelwert allein trügerisch ist: Erst die Visualisierung der Standardabweichung offenbart die methodische Volatilität und zeigt, wie stark die finale DNA-Ausbeute vom individuellen laborpraktischen Handling abhängt.
+
     #{
       show: figure.with(
         caption: [Boxplot der DNA-Konzentrationen [#sym.mu\g DNA/ml] für +RNase- und -RNase-Proben je Probengruppe.],
@@ -773,6 +787,18 @@ Der Befund in Spur LS interpretiert sich primär als partieller (unvollständige
       show: rect
       boxplot-rnase-concentration
     } <boxplot-rnase-concentration-diagram>
+
+*Erläuterung:* 
+
+Der Boxplot (Abbildung 17) zeigt die Verteilung der DNA-Konzentrationen. Die Bakterienproben (grau/rot) bilden extrem flache Boxen nahe dem Nullpunkt mit wenigen Ausreißern. Die Leberproben zeigen eine breite Streuung: Die unbehandelte Gruppe ($-$RNase, orange) liegt kompakter (ca. 1100–2200 $#sym.mu\g "/ml"$). Bei der behandelten Gruppe ($+$RNase, blau) bleibt der Median zwar ähnlich, jedoch dehnt sich die Box weit nach rechts aus und die obere Antenne reicht bis fast 4000 $#sym.mu\g "/ml"$.
+
+*Interpretation:*
+
+Die gestauchten Bakterien-Boxen bestätigen das flächendeckende Fehlschlagen der prokaryotischen Isolation im Kurs, meist bedingt durch unvollständigen Zellaufschluss. Die starke Streckung der Leber-Box nach der RNase-Behandlung ($+$RNase) resultiert aus dem hyperchromen Effekt: Durch den Abbau der RNA entstehen freie Ribonukleotide, deren gelockerte Basenstapelung das UV-Licht bei 260 nm intensiver absorbiert als intakte RNA. Dies täuscht dem Photometer bei konzentrierten Proben eine künstlich erhöhte DNA-Menge vor. Da die RNA-Bruchstücke in Lösung verbleiben und mitemittieren, ändert sich der Median kaum.
+
+*Schlussfolgerung:*
+
+Der Boxplot verdeutlicht, dass die photometrische Konzentrationsbestimmung nach einem RNase-Verdau durch den hyperchromen Effekt verzerrt wird. Da das Photometer nicht zwischen intakter gDNA und freien Nukleotiden differenzieren kann, ist eine parallele Gelelektrophorese zwingend notwendig, um den echten Reinigungserfolg zu validieren.
 
     #{
       show: figure.with(
@@ -782,28 +808,103 @@ Der Befund in Spur LS interpretiert sich primär als partieller (unvollständige
       grouped-bar-purity
     } <grouped-bar-purity-diagram>
 
-    Wie in @photometrie-theorie beschrieben, kann schon ein leicht suboptimales Verhältnis $E_260 slash E_280$ oder $E_260 slash E_230$ auf starke Verunreinigung hindeuten. Interessanterweise ist bei RNase-behandelten Proben der Mittelwert der DNA-Konzentration höher als bei unbehandelten Proben — entgegen der Erwartung, dass RNA-Abbau die gemessene Nukleinsäure-Menge senkt.
+
+
+
   ],
   schlussfolgerung: [
-    Die deskriptive Statistik bestätigt den qualitativen Befund: Leber-DNA in hohen Konzentrationen, aber meist verunreinigt; Bakterien-DNA kaum nachweisbar. Eine RNase-bedingte Konzentrationsänderung ist im Mittel nicht erkennbar.
+ 
   ],
 )
+*Erläuterung: *
 
-=== Hypothesentests <hypothesentests-chapter>
+Abbildung 18 zeigt die Reinheitsquotienten $E_{260}/E_{280}$ und $E_{260}/E_{230}$ im Vergleich. Beim Proteinwert ($E_{260}/E_{280}$) liegen beide Lebergruppen (blau/orange) ziemlich konstant bei etwa 1,5, was unter dem theoretischen Idealwert von 1,8 liegt. Die Fehlerbalken sind hier minimal. Die Bakterienproben (rot/grau) fallen im Schnitt auf 1,2 ab. Beim Salzquotienten ($E_{260}/E_{230}$) streuen die Leberwerte nur leicht, während die Werte der Bakterien mit 2,5 ($+$RNase) und 3,2 ($-$RNase) extrem hoch liegen. Die dazugehörigen Standardabweichungen sind riesig und gehen weit über die Skala hinaus.
 
-*Verwendete Testformeln*
+*Interpretation:*
 
-Für den Zusammenhang zwischen Lebergewicht und DNA-Konzentration wird der Pearson-Korrelationskoeffizient verwendet:
+Die geringe Streuung bei den Leber-Proteinwerten spricht für einen systematischen Fehler im Praktikum. Wahrscheinlich haben alle Gruppen auf die gleiche Weise gearbeitet und leichte Phenol- oder Proteinreste mitgeschleppt, die bei 280 nm absorbieren. Die extrem hohen Salzquotienten bei den Bakterien sind biologisch unmöglich (das Maximum liegt bei 2,2). Diese Werte und die riesigen Fehlerbalken liegen sehr wahrscheinlich an einem ungenauen Nullabgleich (Blanking) des Photometers. Wenn der Wert bei 230 nm im Nenner durch Messrauschen oder eine verschmutzte Küvette gegen Null geht, schießt das rechnerische Ergebnis einfach in die Höhe.
 
-$
-  r = (sum_(i=1)^n (x_i - overline(x))(y_i - overline(y))) / (sqrt(sum_(i=1)^n (x_i - overline(x))^2) sqrt(sum_(i=1)^n (y_i - overline(y))^2))
-$ <pearson-correlation-equation>
+*Schlussfolgerung:*
+
+Die Grafik zeigt deutlich, dass die Leberproben leichte Verunreinigungen aufweisen und die photometrischen Bakterienwerte durch Messfehler unbrauchbar sind. Für zukünftige Versuche bedeutet das, dass das Pellet besser gewaschen werden muss und vor allem der Nullabgleich am Messgerät absolut sauber durchgeführt werden muss.
+
+==== Zusammenfassung 
+    Wie in @photometrie-theorie beschrieben, kann schon ein leicht suboptimales Verhältnis $E_260 slash E_280$ oder $E_260 slash E_230$ auf starke Verunreinigung hindeuten. Interessanterweise ist bei RNase-behandelten Proben der Mittelwert der DNA-Konzentration höher als bei unbehandelten Proben — entgegen der Erwartung, dass RNA-Abbau die gemessene Nukleinsäure-Menge senkt.
+
+       Die deskriptive Statistik bestätigt den qualitativen Befund: Leber-DNA in hohen Konzentrationen, aber meist verunreinigt; Bakterien-DNA kaum nachweisbar. Eine RNase-bedingte Konzentrationsänderung ist im Mittel nicht erkennbar.
+
+
+== Hypothesentests <hypothesentests-chapter>
+
+=== Verwendete Testformeln
 
 Bei kleinen Stichproben ($n < 30$) werden nicht-parametrische Tests eingesetzt. Der *Wilcoxon-Rang-Summen-Test* vergleicht zwei unabhängige Gruppen; die Teststatistik $W$ ist die kleinere Summe der Ränge einer der Gruppen. Der *Wilcoxon-Vorzeichen-Rang-Test* vergleicht gepaarte Messwerte; $W$ ist die kleinere Summe der Ränge der positiven oder negativen Differenzen.
 
 Entscheidungsregel (beide Tests, $alpha = 0.05$): Liegt $W$ oberhalb des tabellierten kritischen Wertes, wird die Nullhypothese (_kein Unterschied_) nicht verworfen.
 
 Sämtliche Hypothesentests werden mit einem Signifikanzniveau von $alpha = 0.05$ durchgeführt. Die kritischen Werte werden aus standardisierten Tabellen entnommen.
+
+
+Um die rein visuell beobachteten Trends der Grafiken mathematisch zu überprüfen und abzusichern, werden verschiedene statistische Verfahren eingesetzt. Die Wahl des passenden Testverfahrens hängt dabei maßgeblich von der Skalierung der Daten, der Stichprobengröße und der zugrundeliegenden Verteilung ab.
+
+==== Pearson-Korrelationskoeffizient
+
+Für die Untersuchung des Zusammenhangs zwischen dem kontinuierlichen Metrik-Paar Lebergewicht ($X$) und der DNA-Konzentration ($Y$) wird der Pearson-Produkt-Moment-Korrelationskoeffizient ($r$) verwendet:
+
+$
+  r = (sum_(i=1)^n (x_i - overline(x))(y_i - overline(y))) / (sqrt(sum_(i=1)^n (x_i - overline(x))^2) sqrt(sum_(i=1)^n (y_i - overline(y))^2))
+$ <pearson-correlation-equation>
+
+*Funktionsweise und mathematischer Hintergrund:*\
+Der Pearson-Koeffizient misst die Stärke und Richtung des linearen Zusammenhangs zwischen zwei Variablen. Der mathematische Aufbau der Formel lässt sich in zwei funktionelle Teile zerlegen:
+- *Der Zähler (Kovarianz):* Er berechnet für jeden Datenpunkt das Produkt der Abweichungen von den jeweiligen Mittelwerten ($overline(x)$ und $overline(y)$). Weichen bei einem Datenpunkt beide Variablen gleichzeitig nach oben oder beide gleichzeitig nach unten ab, entsteht ein positives Produkt. Weicht eine Variable nach oben und die andere nach unten ab, wird das Produkt negativ. Die Summe dieser Produkte bildet die Kovarianz und zeigt an, ob sich die Variablen im Gleichlauf oder Gegenlauf bewegen.
+- *Der Nenner (Normierung):* Da die reine Kovarianz von den Maßeinheiten (hier Gramm und $#sym.mu\g / "ml"$) abhängt, wird sie im Nenner durch das Produkt der jeweiligen Standardabweichungen geteilt. Dadurch wird der Koeffizient dimensionslos und auf ein festes Intervall normiert.
+
+Der resultierende Wert für $r$ liegt zwingend im Bereich von $-1$ bis $+1$:
+- $r = +1$: Ein perfekter positiver linearer Zusammenhang (je mehr Gewicht, desto höher die Konzentration).
+- $r = -1$: Ein perfekter negativer linearer Zusammenhang (je mehr Gewicht, desto niedriger die Konzentration).
+- $r = 0$: Absolut kein linearer Zusammenhang (die Punkte streuen völlig ungerichtet).
+
+==== Nicht-parametrische Testverfahren (Wilcoxon-Tests)
+
+Klassische parametrische Verfahren (wie der bekannte $t$-Test) setzen voraus, dass die Daten innerhalb der Grundgesamtheit normalverteilt sind. Bei kleinen Stichproben ($n < 30$), wie sie in studentischen Praktika typisch sind, lässt sich eine Normalverteilung jedoch weder verlässlich überprüfen noch biologisch voraussetzen. Zudem reagieren parametrische Tests extrem empfindlich auf einzelne methodische Ausreißer. 
+
+Aus diesem Grund kommen nicht-parametrische (verteilungsfreie) Tests zum Einsatz. Diese arbeiten nicht mit den echten, metrischen Messwerten, sondern überführen die Daten in eine Rangliste. Dadurch verlieren extreme Ausreißer (z. B. eine künstlich explodierte Salzmessung) ihre verzerrende quantitative Wirkung, da sie lediglich den höchsten Rangplatz einnehmen, unabhängig davon, wie weit sie vom Rest der Daten entfernt sind.
+
+*1. Wilcoxon-Rang-Summen-Test (Mann-Whitney-U-Test)*
+Dieses Verfahren wird für den Vergleich von zwei unabhängigen Gruppen eingesetzt (hier: Leberproben versus Bakterienproben).
+
+*Schritt-für-Schritt-Funktionsweise:*
+1. *Poolen und Sortieren:* Die Messwerte beider Gruppen werden in einen gemeinsamen Datentopf geworfen und strikt der Größe nach aufsteigend sortiert.
+2. *Rangvergabe:* Jeder Messwert erhält entsprechend seiner Position in der Gesamtliste einen Rangplatz (von $1$ für den kleinsten Wert bis $N$ für den größten Wert). Treten identische Messwerte auf (sogenannte Bindungen oder Ties), erhalten sie den gemittelten Rang ihrer Positionen.
+3. *Rangsummenbildung:* Nun werden die Ränge für beide Gruppen separat aufsummiert. Es entstehen die empirischen Rangsummen $R_1$ und $R_2$.
+4. *Berechnung der Teststatistik $W$:* Aus diesen Rangsummen wird die Teststatistik $W$ abgeleitet, welche mathematisch der kleineren der beiden berechneten Rangsummen (bereinigt um die minimale theoretische Rangsumme der Gruppe) entspricht.
+
+*Die statistische Logik dahinter:* \
+Stammen beide Gruppen aus derselben Verteilung (Nullhypothese: kein Unterschied), müssten sich die Messwerte beider Gruppen in der sortierten Gesamtliste rein zufällig und gleichmäßig abwechseln. Die finalen Rangsummen wären dann für beide Gruppen nahezu gleich groß. Unterscheiden sich die Gruppen hingegen massiv (Alternativhypothese), sammeln sich die Werte der einen Gruppe fast ausschließlich auf den vorderen (niedrigen) Rängen und die Werte der anderen Gruppe auf den hinteren (hohen) Rängen.
+
+* 2. Wilcoxon-Vorzeichen-Rang-Test*
+Dieses Verfahren wird für den Vergleich von zwei abhängigen / gepaarten Stichproben eingesetzt (hier: der direkte Vor-und-Nach-Vergleich derselben Probe ohne und mit RNase-Behandlung).
+
+*Schritt-für-Schritt-Funktionsweise:*
+1. *Differenzenbildung:* Für jedes Paar $i$ wird die mathematische Differenz zwischen den beiden Bedingungen berechnet ($d_i = x_{1i} - x_{2i}$).
+2. *Null-Differenzen ausschließen:* Paare, bei denen sich kein Unterschied zeigt ($d_i = 0$), werden komplett aus der Analyse ausgeschlossen, und der effektive Stichprobenumfang verringert sich entsprechend.
+3. *Betrags-Rangliste:* Von den verbleibenden Differenzen wird der Absolutbetrag gebildet (das mathematische Vorzeichen wird ignoriert: aus $-50$ wird $+50$). Diese Beträge werden der Größe nach sortiert und erhalten die Ränge $1$ bis $n$.
+4. *Vorzeichen-Zuordnung und Teststatistik $W$:* Den vergebenen Rängen werden nun die ursprünglichen Vorzeichen der Differenzen wieder angehängt. Der Test summiert anschließend alle Ränge mit positivem Vorzeichen ($W^+$) und alle Ränge mit negativem Vorzeichen ($W^-$) separat auf. Die finale Teststatistik $W$ ist definiert als das Minimum aus diesen beiden Summen: $W = min(W^+, W^-)$.
+
+*Die statistische Logik dahinter:*
+Wenn die RNase-Behandlung absolut keinen Effekt hätte, müssten positive und negative Differenzen rein zufällig und in ähnlicher Stärke auftreten. Die Summe der positiven Ränge wäre dann in etwa genauso groß wie die Summe der negativen Ränge. Gibt es hingegen einen klaren, gerichteten Effekt, weisen fast alle Differenzen dasselbe Vorzeichen auf. Eine der beiden Rangsummen ($W^+$ oder $W^-$) tendiert dann gegen Null.
+
+==== Entscheidungsregel bei Wilcoxon-Tests
+
+Sämtliche Hypothesentests in dieser Arbeit werden mit einem standardisierten Signifikanzniveau von $alpha = 0.05$ durchgeführt. Das bedeutet, dass die maximale Wahrscheinlichkeit, einen Fehler 1. Art zu begehen (also fälschlicherweise einen Unterschied anzunehmen, der in Wahrheit gar nicht existiert), auf 5 % begrenzt wird.
+
+Die Entscheidungsregel für die Wilcoxon-Tests unterscheidet sich aufgrund der Rang-Logik fundamental von klassischen $t$-Tests:
+
+- *Kritischer Wert:* Aus statistischen Tabellen wird anhand der Gruppengrößen der kritische Wert abgelesen. Dieser stellt die Grenze dar, die bei einer reinen Zufallsverteilung der Ränge gerade noch zu erwarten wäre.
+- *Die Regel:* Ein kleinerer empirischer Wert für $W$ steht für einen stärkeren Unterschied zwischen den Gruppen, da dies bedeutet, dass sich eine Gruppe extrem einseitig auf den niedrigsten Rängen konzentriert. 
+- *Entscheidung:* Liegt die berechnete Teststatistik $W$ oberhalb des tabellierten kritischen Wertes , reicht die mathematische Abweichung nicht aus. Die Nullhypothese (_kein signifikanter Unterschied_) kann nicht verworfen werden. Erst wenn gilt, wird das Ergebnis als statistisch signifikant gewertet.
+
 
 #let weight-data = (
   relevant-data
@@ -816,10 +917,10 @@ Sämtliche Hypothesentests werden mit einem Signifikanzniveau von $alpha = 0.05$
   weight-data.map(it => it.at(0)),
   weight-data.map(it => it.at(1)),
 )
-
+#pagebreak()
 #block(
   sticky: true,
-)[*Gibt es einen Zusammenhang zwischen Gewicht der Leberprobe und der DNA-Konzentration im fertigen Isolat?*]
+)[==== Gibt es einen Zusammenhang zwischen Gewicht der Leberprobe und der DNA-Konzentration im fertigen Isolat]
 
 @weight-vs-concentration-diagram zeigt mit einem Korrelationskoeffizienten von $#calc.round(correlation, digits: 2)$ keinen deutlichen Zusammenhang.
 
@@ -852,10 +953,22 @@ Sämtliche Hypothesentests werden mit einem Signifikanzniveau von $alpha = 0.05$
     ),
   )
 } <weight-vs-concentration-diagram>
+*Erläuterung:* \
+Die fünf Datenpunkte im Diagramm liegen wild verstreut: Die höchste Konzentration von fast $4000 space #sym.mu\g "DNA/ml"$ wurde bei einer der leichtesten Proben ($#sym.tilde 3,5 space "g"$) gemessen, während die schwerste Probe ($#sym.tilde 4,4 space "g"$) nur im Mittelfeld landet.
+
+*Interpretation:* \
+Ein Korrelationswert von fast exakt Null zeigt eindeutig, dass das Gewicht der Leber und die finale DNA-Konzentration im Praktikum überhaupt nicht zusammenhängen. Das ist aus mehreren Gründen absolut plausibel:
+
+- *Enger Gewichtsbereich:* Die Gewichte liegen alle recht nah beieinander in einem kleinen Fenster zwischen 3,5 g und 4,4 g. Bei so geringen Gewichtsunterschieden reicht das Gewicht als Hauptfaktor gar nicht aus, um einen klaren Trend zu erzeugen.
+- *Limitierung durch Puffervolumina:* Mehr Gewebe bedeutet im Labor nicht automatisch mehr Ausbeute. Gibt man zu viel Gewebe in die gleiche Menge Lysis-Puffer, kann das System überlastet werden. Die Proteinase K schafft den vollständigen Aufschluss dann eventuell nicht mehr, oder die spätere Interphase bei der Phenol-Extraktion wird so dick und matschig, dass man beim Abpipettieren der wässrigen Phase massenhaft DNA verliert.
+- *Der Faktor Mensch beim Endvolumen:* Da das Pellet am Ende in einem fest vorgegebenen Volumen gelöst wird, haben Pipettierfehler, Verluste beim Waschen und das vorsichtige Dekantieren des Ethanols einen viel größeren Einfluss auf die finale Konzentration als die paar Milligramm Unterschied beim Einwiegen am Anfang.
+
+*Schlussfolgerung:* \
+Dieses Ergebnis macht deutlich, dass eine größere Probeneinwaage keine höhere DNA-Ausbeute garantiert, wenn man die Puffermengen nicht parallel anpasst. Viel entscheidender für eine hohe Konzentration ist das saubere und verlustfreie Arbeiten bei den Fällungs- und Reinigungsschritten im weiteren Versuchsverlauf.
 
 #block(
   sticky: true,
-)[*Gibt es einen signifikanten Unterschied zwischen der DNA-Konzentration in Leber- und Bakterienproben?*]
+)[==== Gibt es einen signifikanten Unterschied zwischen der DNA-Konzentration in Leber- und Bakterienproben?]
 
 #let leber-concentrations = (
   relevant-data
@@ -872,11 +985,24 @@ Sämtliche Hypothesentests werden mit einem Signifikanzniveau von $alpha = 0.05$
     .map(it => it.concentration)
 )
 
+*Erläuterung:* \
 Aufgrund der niedrigen Anzahl an Proben wird zur Beantwortung ein Wilcoxon-Rang-Summen-Test durchgeführt. Dieser liefert eine Teststatistik von $bold(#str(calc.round(wilcoxon-rank-sum-statistic(leber-concentrations, bakterien-concentrations).w-statistic, digits: 2))) ~ W_(#leber-concentrations.len(), #bakterien-concentrations.len())$, der aber #underline[nicht] unterhalb des kritischen Wertes von *2* liegt und daher #underline[*nicht signifikant*] ist.
 
+Um zu überprüfen, ob der optisch deutliche Unterschied in den Konzentrationen auch mathematisch belastbar ist, wurde dieser nicht-parametrische Ränge-Test gewählt. Da die Stichprobengröße mit nur $#leber-concentrations.len()$ Leberproben und $#bakterien-concentrations.len()$ Bakterienproben sehr klein ist und die Werte extrem streuen, wäre ein klassischer, normalverteilungsbasierter $t$-Test methodisch sauber nicht anwendbar gewesen. Rein formal-statistisch kann die Nullhypothese (dass beide Gruppen aus derselben Verteilung stammen) durch das Verfehlen des kritischen Wertes jedoch nicht verworfen werden.
+
+*Interpretation:* \
+Dieses Ergebnis wirkt auf den ersten Blick völlig unlogisch und paradox, da die gemessenen Mittelwerte der Leberproben (über $2000 space #sym.mu\g "DNA/ml"$) augenscheinlich meilenweit über denen der Bakterienproben (rund $170 space #sym.mu\g "DNA/ml"$) liegen. Die biochemische und mathematische Ursache für dieses "Nicht-Signifikant"-Ergebnis lässt sich im Praktikum aber sehr gut erklären:
+
+- *Extrem geringe statistische Power:* Nicht-parametrische Tests basieren nicht auf den echten Messwerten, sondern sortieren diese in einer Rangliste. Bei extrem kleinen Stichprobenzahlen ($n$) fordert der Test mathematisch eine nahezu perfekte, überschneidungsfreie Trennung der Gruppen, um überhaupt ein signifikantes Ergebnis anzeigen zu können.
+- *Verzerrung durch methodische Ausreißer:* Da wir in den vorherigen Abschnitten gesehen haben, dass manche Bakterienproben (wie die Probe LH durch extreme Salz- und Pufferkontaminationen) künstlich erhöhte Scheinkonzentrationen von über $460 space #sym.mu\g "DNA/ml"$ aufweisen, rutschen diese in der gemeinsamen Rangliste weit nach oben. Gleichzeitig fallen Leberproben mit Pipettierverlusten im Rang nach unten. Diese Überlagerung der Rangplätze zerstört die statistische Trennschärfe des Tests komplett.
+
+*Schlussfolgerung:* \
+Man kann daraus schlussfolgern, dass statistische Standardtests in kleinen Praktikumsgruppen extrem schnell an ihre Grenzen stoßen. Das Ergebnis bedeutet keineswegs, dass es keinen biologischen Unterschied zwischen der DNA-Menge in Leber und Bakterien gibt - das haben die Gelbilder eindeutig widerlegt. Es zeigt vielmehr, wie anfällig Ränge-Tests gegenüber einzelnen methodischen Ausreißern (wie Messfehlern durch unsauberes Blanking) sind, wenn die Stichprobe zu klein ist. Für eine saubere statistische Absicherung müsste der Versuch mit deutlich mehr Proben wiederholt werden.
+
+#pagebreak()
 #block(
   sticky: true,
-)[*Gibt es einen signifikanten Unterschied zwischen der DNA-Konzentration in _-RNase_- und _+RNase_-Proben?*]
+)[==== Gibt es einen signifikanten Unterschied zwischen der DNA-Konzentration in _-RNase_- und _+RNase_-Proben?]
 
 #let rnase-concentrations = (
   relevant-data
@@ -888,12 +1014,20 @@ Aufgrund der niedrigen Anzahl an Proben wird zur Beantwortung ein Wilcoxon-Rang-
     .map(it => it.without_rnase.measures.map(it => it.concentration))
     .flatten()
 )
-
+*Erläuterung:* \
 Aufgrund der niedrigen Anzahl an Proben wird zur Beantwortung ein Wilcoxon-Vorzeichen-Rang-Test durchgeführt. Dieser liefert eine Teststatistik von $bold(#str(calc.round(wilcoxon-signed-rank-statistic(rnase-concentrations.zip(nornase-concentrations)).w-statistic, digits: 2))) ~ W_(#rnase-concentrations.len())$, der aber #underline[nicht] unterhalb des kritischen Wertes von *8* liegt und daher #underline[*nicht signifikant*] ist.
 
-#result-label[Schlussfolgerung][
-  Keiner der durchgeführten Hypothesentests ergab signifikante Unterschiede. Dies ist vor allem auf den geringen Stichprobenumfang ($n = 5$–$10$) zurückzuführen.
-]
+Um zu überprüfen, ob der RNA-Abbau einen systematischen Einfluss auf die photometrisch gemessene Konzentration hat, wurden die gepaarten Messwerte (jeweils dieselbe Probe mit und ohne RNase) miteinander verglichen. Da die Daten durch das Zusammenlegen von Leber- und Bakterienproben extrem heterogen sind und keine Normalverteilung vorliegt, kam dieser nicht-parametrische Vorzeichen-Rang-Test zum Einsatz. Rein mathematisch lässt sich die Nullhypothese - dass die RNase-Behandlung keinen gerichteten Unterschied bewirkt - auf Basis dieses Datensatzes nicht verwerfen.
+
+*Interpretation:* \
+Dieses Ergebnis ist biologisch interessant und lässt sich durch das Zusammenspiel von zwei Effekten im Praktikum erklären:
+
+- *Gegensätzliche Trends und Aufhebung der Ränge:* Theoretisch sollte der Abbau von RNA die Absorption bei 260 nm senken, da ein Teil der Nukleinsäuren zerstört wird. Wie jedoch bei den Einzelgruppen festgestellt, führt der hyperchrome Effekt durch die gelockerte Basenstapelung der freien Ribonukleotide zu einer deutlich höheren UV-Absorption. Da dieser Effekt vor allem bei den hochkonzentrierten Leberproben durchschlägt (wo die Werte nach der RNase-Behandlung steigen), während die fehlerhaften Bakterienproben ungerichtete Varianzen zeigen, gibt es keine einheitliche Richtung der Konzentrationsänderung. Beim Vorzeichen-Rang-Test heben sich die positiven und negativen Differenzen dadurch gegenseitig auf.
+- *Messtechnische Blindheit des Photometers:* Das Photometer misst stur die gesamte UV-Absorption bei 260 nm. Da die verdaute RNA nicht physikalisch aus dem Ansatz entfernt wurde (z. B. durch eine erneute Fällung), verbleiben die Bruchstücke in der Küvette. Der Test spiegelt somit die mathematische Tatsache wider, dass die Gesamtmenge an Purin- und Pyrimidinbasen in der Lösung absolut identisch geblieben ist - sie liegen lediglich in fragmentierter Form vor.
+
+*Schlussfolgerung:* \
+Zusammenfassend lässt sich sagen, dass der statistische Vergleich die Limitationen der reinen UV-Photometrie perfekt aufzeigt. Die fehlende Signifikanz bedeutet keineswegs, dass die RNase nicht gearbeitet hat - die Gelbilder haben den RNA-Abbau ja eindeutig bewiesen. Sie beweist vielmehr, dass man den Erfolg einer enzymatischen Reinigung nicht allein anhand von Absorptionswerten überprüfen kann, solange die Abbauprodukte im selben Reaktionsansatz verbleiben. Für zukünftige quantitative Vergleiche müsste vor der Messung zwingend ein Reinigungsschritt eingebaut werden, der die freien Nukleotide sauber abtrennt.
+
 
 #new-chapter[Diskussion]
 
