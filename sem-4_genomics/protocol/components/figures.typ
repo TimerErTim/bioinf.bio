@@ -38,7 +38,10 @@
   )
   set rect(inset: 0pt)
   place(top + left, dx: 0.5%)[Marker]
-  box(image("../../assets/leber-unrestr-ref-marker.png", width: 8.7%), baseline: -1mm)
+  box(
+    image("../../assets/leber-unrestr-ref-marker.png", width: 8.7%),
+    baseline: -1mm,
+  )
   box(scale(annotated-leber-unrestr-gelelectro, 80%, reflow: true))
 }
 

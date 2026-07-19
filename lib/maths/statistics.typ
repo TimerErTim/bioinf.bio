@@ -330,7 +330,9 @@
   alpha: 0.05,
   alternative: "two-sided",
 ) = {
-  let diff-values = values1.zip(values2).map(((value1, value2)) => value1 - value2)
+  let diff-values = values1
+    .zip(values2)
+    .map(((value1, value2)) => value1 - value2)
   let (mean, stddev) = mean-stddev(diff-values)
   let t = (mean - expected-mu) / (stddev / calc.sqrt(diff-values.len()))
   let df = diff-values.len() - 1

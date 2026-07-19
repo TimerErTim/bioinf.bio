@@ -24,7 +24,8 @@
     content-to-string(it.body)
   } else if it.has("text") {
     it.text
-  } else if it.has("base") { // attach
+  } else if it.has("base") {
+    // attach
     content-to-string(it.base) + "^" + content-to-string(it.t)
   }
 }

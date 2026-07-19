@@ -97,7 +97,7 @@
   yotta: yotta,
   ronna: ronna,
   quetta: quetta,
-  
+
   kibi: kibi,
   mebi: mebi,
   gibi: gibi,
@@ -133,7 +133,7 @@
   zetta: 21,
   yotta: 24,
   ronna: 27,
-  quetta: 30
+  quetta: 30,
 )
 
 // #let _dict = (

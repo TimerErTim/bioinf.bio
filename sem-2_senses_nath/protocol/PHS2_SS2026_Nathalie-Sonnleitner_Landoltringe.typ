@@ -26,10 +26,10 @@
 
 // Content
 //#pdf.attach(
- // "Instructions Blood experiments.pdf",
- // mime-type: "application/pdf",
- // relationship: "supplement",
- // description: "Angabe für den Blutausstrich",
+// "Instructions Blood experiments.pdf",
+// mime-type: "application/pdf",
+// relationship: "supplement",
+// description: "Angabe für den Blutausstrich",
 //)
 #import "@preview/meander:0.4.3"
 
@@ -41,15 +41,15 @@
 // ==========================================
 
 // 1. Schöne, hervorgehobene Formeln
-// Gilt nur für abgesetzte Formeln (mit $$ oder leeren Zeilen), 
+// Gilt nur für abgesetzte Formeln (mit $$ oder leeren Zeilen),
 // normale Formeln im Text ($...$) bleiben unberührt!
 #show math.equation.where(block: true): it => block(
-  fill: rgb("f8f9fa"),                 // Sehr helles, edles Grau als Hintergrund
-  width: 100%,                         // Block geht über die ganze Textbreite
-  inset: 12pt,                         // Innenabstand (Luft zum Atmen)
-  radius: 6pt,                         // Leicht abgerundete Ecken
-  stroke: 0.5pt + rgb("ced4da"),       // Dezenter, hellgrauer Rand
-  align(center, it)                    // Formel bleibt schön zentriert
+  fill: rgb("f8f9fa"), // Sehr helles, edles Grau als Hintergrund
+  width: 100%, // Block geht über die ganze Textbreite
+  inset: 12pt, // Innenabstand (Luft zum Atmen)
+  radius: 6pt, // Leicht abgerundete Ecken
+  stroke: 0.5pt + rgb("ced4da"), // Dezenter, hellgrauer Rand
+  align(center, it), // Formel bleibt schön zentriert
 )
 
 #show figure.caption: set align(center)
@@ -58,7 +58,7 @@
 
 == Physiologische Grundlagen der Sehschärfe
 
-Die Sehschärfe (auch Visus genannt) ist das wichtigste Maß für die funktionelle Leistungsfähigkeit des visuellen Systems. Sie beschreibt das räumliche Auflösungsvermögen des Auges, also die Fähigkeit der Netzhaut (Retina), zwei eng nebeneinanderliegende Punkte bei optimalen Kontrastverhältnissen gerade noch als getrennt wahrzunehmen. 
+Die Sehschärfe (auch Visus genannt) ist das wichtigste Maß für die funktionelle Leistungsfähigkeit des visuellen Systems. Sie beschreibt das räumliche Auflösungsvermögen des Auges, also die Fähigkeit der Netzhaut (Retina), zwei eng nebeneinanderliegende Punkte bei optimalen Kontrastverhältnissen gerade noch als getrennt wahrzunehmen.
 
 Aus anatomischer Sicht hängt dieses Auflösungsvermögen maßgeblich von der Dichte und Verschaltung der Photorezeptoren (insbesondere der Zapfen) in der Fovea centralis (dem Ort des schärfsten Sehens) ab. Die Messung des Visus erfolgt über ein subjektives Prüfverfahren, bei dem eine Versuchsperson standardisierte Sehzeichen (Optotypen) aus einer definierten Entfernung ablesen muss.
 
@@ -134,16 +134,18 @@ Einige systemische Langzeittherapien erfordern obligatorische Visuskontrollen au
 == Klassifikation und Physiologie von Sehzeichen (Optotypen)
 
 === Definition und Grundlagen
-Als Optotypen (Sehzeichen) werden standardisierte grafische Symbole bezeichnet, die in der Augenheilkunde und Optometrie zur Messung der Sehschärfe (Visus) herangezogen werden. Ihre Konstruktion basiert auf dem Prinzip, dass kritische Details des Zeichens (z. B. Strichstärken, Zwischenräume oder Lücken) unter einem exakt definierten Sehwinkel erscheinen, wenn sich der Proband in der vorgeschriebenen Prüfdistanz befindet. 
+Als Optotypen (Sehzeichen) werden standardisierte grafische Symbole bezeichnet, die in der Augenheilkunde und Optometrie zur Messung der Sehschärfe (Visus) herangezogen werden. Ihre Konstruktion basiert auf dem Prinzip, dass kritische Details des Zeichens (z. B. Strichstärken, Zwischenräume oder Lücken) unter einem exakt definierten Sehwinkel erscheinen, wenn sich der Proband in der vorgeschriebenen Prüfdistanz befindet.
 
 In der klinischen Praxis existieren verschiedene Formen von Optotypen, die je nach Anwendungsbereich Vor- und Nachteile aufweisen:
 - *Snellen-E (E-Haken / Pflüger-Haken):* Einem „E“ nachempfundenes Zeichen, dessen Balken und Zwischenräume alle dieselbe Breite aufweisen. Der Proband muss die Orientierung (oben, unten, links, rechts) angeben. Häufig eingesetzt bei Kindern oder Analphabeten.
 #grid(
   columns: (2fr, 1fr),
   align: left + horizon,
-  gutter: 2em, 
-[- *Snellen-Buchstaben / Sloan-Buchstaben:* Standardisierte lateinische Großbuchstaben. Sloan-Buchstaben (C, D, H, K, N, O, R, S, V, Z) wurden speziell so entworfen, dass sie untereinander eine nahezu identische Erkennbarkeit aufweisen. Sie sind im klinischen Alltag sehr beliebt, bergen jedoch das Risiko von Memorierungseffekten und weisen kultur- sowie sprachabhängige Barrieren auf. ],
-figure(block(fill: red, width: 50%), caption: [Snellen-E / E-Haken])
+  gutter: 2em,
+  [
+    - *Snellen-Buchstaben / Sloan-Buchstaben:* Standardisierte lateinische Großbuchstaben. Sloan-Buchstaben (C, D, H, K, N, O, R, S, V, Z) wurden speziell so entworfen, dass sie untereinander eine nahezu identische Erkennbarkeit aufweisen. Sie sind im klinischen Alltag sehr beliebt, bergen jedoch das Risiko von Memorierungseffekten und weisen kultur- sowie sprachabhängige Barrieren auf.
+  ],
+  figure(block(fill: red, width: 50%), caption: [Snellen-E / E-Haken]),
 )
 - *Kinder-Sehzeichen (z. B. Lea-Symbole):* Einfache geometrische Formen wie Kreis, Quadrat, Haus oder Apfel. Sie dienen der Visusbestimmung im Kleinkindalter, weisen jedoch aufgrund ihrer komplexeren Konturen eine geringere mathematische Präzision auf.
 
@@ -151,10 +153,10 @@ figure(block(fill: red, width: 50%), caption: [Snellen-E / E-Haken])
 Die Anordnung von Optotypen auf Sehtafeln folgt historisch und methodisch zwei unterschiedlichen mathematischen Prinzipien:
 
 1. *Snellen-Prinzip (Dezimal- und Bruchskalierung):*
-   Die klassische Sehtafel vergrößert die Zeichen von Zeile zu Zeile unregelmäßig. Zudem ändert sich die Anzahl der Optotypen pro Zeile (oben wenige, unten viele). Dies führt zu dem methodischen Problem, dass Fehler in den unteren Zeilen statistisch schwerer ins Gewicht fallen als in den oberen. Zudem ist der relative Schwierigkeitssprung zwischen den Zeilen ungleichmäßig.
+  Die klassische Sehtafel vergrößert die Zeichen von Zeile zu Zeile unregelmäßig. Zudem ändert sich die Anzahl der Optotypen pro Zeile (oben wenige, unten viele). Dies führt zu dem methodischen Problem, dass Fehler in den unteren Zeilen statistisch schwerer ins Gewicht fallen als in den oberen. Zudem ist der relative Schwierigkeitssprung zwischen den Zeilen ungleichmäßig.
 
 2. *LogMAR-Prinzip (Logarithmus des Minimum Angle of Resolution):*
-   Moderne Forschungstafeln (wie die ETDRS-Charts) nutzen eine rein logarithmische Skalierung. Jede Zeile enthält exakt dieselbe Anzahl an Buchstaben (meist 5) und der Zeilenabstand ist proportional zur Buchstabengröße. Ein LogMAR-Wert von $0,0$ entspricht einem Visus von $1,0$. Dieses Design eliminiert statistische Verzerrungen und ist der Goldstandard in wissenschaftlichen Studien.
+  Moderne Forschungstafeln (wie die ETDRS-Charts) nutzen eine rein logarithmische Skalierung. Jede Zeile enthält exakt dieselbe Anzahl an Buchstaben (meist 5) und der Zeilenabstand ist proportional zur Buchstabengröße. Ein LogMAR-Wert von $0,0$ entspricht einem Visus von $1,0$. Dieses Design eliminiert statistische Verzerrungen und ist der Goldstandard in wissenschaftlichen Studien.
 
 == Der Landolt-Ring als internationaler Standard-Optotyp
 
@@ -165,11 +167,12 @@ Die Geometrie des Landolt-Rings ist mathematisch streng definiert und absolut pr
 #grid(
   columns: (2fr, 1fr),
   align: left + horizon,
-  gutter: 2em, 
-[- *Außendurchmesser ($d_("a")$):* Definiert die Gesamtgröße des Sehzeichens. Er entspricht exakt dem 5-fachen Wert der Strichstärke bzw. Lückenbreite ($5 times a$).
-- *Innendurchmesser ($d_("i")$):* Beschreibt den inneren, weißen Kreis des Ringes. Er entspricht exakt dem 3-fachen Wert der Lückenbreite ($3 times a$).
-],
-figure(block(fill: red, width: 63%), caption: [Landoltenring])
+  gutter: 2em,
+  [
+    - *Außendurchmesser ($d_("a")$):* Definiert die Gesamtgröße des Sehzeichens. Er entspricht exakt dem 5-fachen Wert der Strichstärke bzw. Lückenbreite ($5 times a$).
+    - *Innendurchmesser ($d_("i")$):* Beschreibt den inneren, weißen Kreis des Ringes. Er entspricht exakt dem 3-fachen Wert der Lückenbreite ($3 times a$).
+  ],
+  figure(block(fill: red, width: 63%), caption: [Landoltenring]),
 )
 
 
@@ -178,17 +181,24 @@ figure(block(fill: red, width: 63%), caption: [Landoltenring])
 #meander.reflow({
   import meander: *
   // Obstacles
-  placed(top + right, boundary: // Override the default margin
-      contour.margin(5mm), figure(block(fill: red, width: 25%), caption: [Landoltringe in 8 Orientierungen]))
+  placed(
+    top + right,
+    boundary: // Override the default margin
+    contour.margin(5mm),
+    figure(
+      block(fill: red, width: 25%),
+      caption: [Landoltringe in 8 Orientierungen],
+    ),
+  )
   // Container
-  container(margin:5cm)
+  container(margin: 5cm)
 
   // Flowing text
   content[
-- *Die Lücke und Strichstärke ($a$):* Dies ist das kritische Detail, das es aufzulösen gilt. Die Breite der Lücke ist mathematisch identisch mit der Strichstärke des schwarzen Rings und beträgt präzise *1/5* des Außendurchmessers ($a = d_("a") / 5$). 
-=== Richtungspräsentation
-Um ein Erraten zu minimieren, wird der Ring in insgesamt *8 Orientierungen* dargeboten. Neben den vier Hauptkardinalrichtungen (0°, 90°, 180°, 270°) erfolgt die Präsentation auch in den vier 45°-Schräglagen. Dies erhöht die methodische Validität gegenüber dem E-Haken (nur 4 Richtungen) signifikant.
-]
+    - *Die Lücke und Strichstärke ($a$):* Dies ist das kritische Detail, das es aufzulösen gilt. Die Breite der Lücke ist mathematisch identisch mit der Strichstärke des schwarzen Rings und beträgt präzise *1/5* des Außendurchmessers ($a = d_("a") / 5$).
+    === Richtungspräsentation
+    Um ein Erraten zu minimieren, wird der Ring in insgesamt *8 Orientierungen* dargeboten. Neben den vier Hauptkardinalrichtungen (0°, 90°, 180°, 270°) erfolgt die Präsentation auch in den vier 45°-Schräglagen. Dies erhöht die methodische Validität gegenüber dem E-Haken (nur 4 Richtungen) signifikant.
+  ]
 })
 
 == Physiologische und methodische Notwendigkeit der Dimensionen
@@ -198,25 +208,32 @@ Die strikte Geometrie des Landolt-Rings ist kein Willkürprodukt, sondern result
 #meander.reflow({
   import meander: *
   // Obstacles
-  placed(top + right, boundary: // Override the default margin
-      contour.margin(5mm), figure(block(fill: red, width: 45%), caption: [Dimensionierung und Sehwinkel des Landoltringes]))
+  placed(
+    top + right,
+    boundary: // Override the default margin
+    contour.margin(5mm),
+    figure(
+      block(fill: red, width: 45%),
+      caption: [Dimensionierung und Sehwinkel des Landoltringes],
+    ),
+  )
   // Container
-  container(margin:5cm)
+  container(margin: 5cm)
 
   // Flowing text
   content[
-1. *Exakte Definition des kritischen Details:*
-   Damit das Auge ein Sehzeichen auflösen kann, ist nicht die Gesamterscheinung entscheidend, sondern das kleinste, trennende Detail. Beim Landolt-Ring ist dies die Lücke $a$. Beträgt der Visus $1,0$, erscheint diese Lücke dem Auge unter einem Sehwinkel von exakt einer Bogenminute ($1'$). Da die Strichstärke ebenfalls $1'$ misst und der gesamte Ring somit unter einem Sehwinkel von $5'$ erscheint, wird sichergestellt, dass das Zeichen optimal auf der Fovea centralis abgebildet wird, ohne dass es zu Beugungsunschärfen am Rand kommt.
-]
+    1. *Exakte Definition des kritischen Details:*
+      Damit das Auge ein Sehzeichen auflösen kann, ist nicht die Gesamterscheinung entscheidend, sondern das kleinste, trennende Detail. Beim Landolt-Ring ist dies die Lücke $a$. Beträgt der Visus $1,0$, erscheint diese Lücke dem Auge unter einem Sehwinkel von exakt einer Bogenminute ($1'$). Da die Strichstärke ebenfalls $1'$ misst und der gesamte Ring somit unter einem Sehwinkel von $5'$ erscheint, wird sichergestellt, dass das Zeichen optimal auf der Fovea centralis abgebildet wird, ohne dass es zu Beugungsunschärfen am Rand kommt.
+  ]
 })
 2. *Vermeidung von Formwahrnehmung und kortikaler Erkennung:*
-   Buchstaben wie ein „E“ oder „A“ besitzen charakteristische geometrische Außenformen. Das menschliche Gehirn ist durch neuronale Lernprozesse (Top-Down-Verarbeitung) extrem gut darin, unscharfe Buchstabenformen zu erraten, selbst wenn die einzelnen Striche physikalisch gar nicht mehr aufgelöst werden können. Der Landolt-Ring hingegen besitzt in jeder Orientierung eine identische kreisrunde Außenkontur. Das Gehirn kann die Position der Lücke nur dann bestimmen, wenn die Photorezeptoren auf der Retina die Lücke physikalisch rein als Helligkeitsunterschied (Weiß vs. Schwarz) auflösen. Es misst somit die reine physiologische Auflösungsgrenze und nicht die kognitive Kombinationsgabe.
+  Buchstaben wie ein „E“ oder „A“ besitzen charakteristische geometrische Außenformen. Das menschliche Gehirn ist durch neuronale Lernprozesse (Top-Down-Verarbeitung) extrem gut darin, unscharfe Buchstabenformen zu erraten, selbst wenn die einzelnen Striche physikalisch gar nicht mehr aufgelöst werden können. Der Landolt-Ring hingegen besitzt in jeder Orientierung eine identische kreisrunde Außenkontur. Das Gehirn kann die Position der Lücke nur dann bestimmen, wenn die Photorezeptoren auf der Retina die Lücke physikalisch rein als Helligkeitsunterschied (Weiß vs. Schwarz) auflösen. Es misst somit die reine physiologische Auflösungsgrenze und nicht die kognitive Kombinationsgabe.
 
 3. *Detektion von astigmatischen Abbildungsfehlern:*
-   Durch die 8-fache Orientierung der Lücke eignet sich der Landolt-Ring hervorragend zur Aufdeckung eines Astigmatismus (Stabsichtigkeit). Da bei einer Hornhautverkrümmung die Lichtstrahlen in einer Ebene (z. B. vertikal) anders gebrochen werden als in der Ebene senkrecht dazu (z. B. horizontal), verschwimmt das Netzhautbild richtungsabhängig. Ein Proband mit einem unkorrigierten Astigmatismus wird infolgedessen die Lücken bei 12 und 6 Uhr problemlos erkennen, während er die Lücken bei 3 und 9 Uhr völlig übersieht (oder umgekehrt). Konzentrische, regelmäßige Zeichen wie der Landolt-Ring machen diese kortikalen und optischen Asymmetrien sofort messbar.
+  Durch die 8-fache Orientierung der Lücke eignet sich der Landolt-Ring hervorragend zur Aufdeckung eines Astigmatismus (Stabsichtigkeit). Da bei einer Hornhautverkrümmung die Lichtstrahlen in einer Ebene (z. B. vertikal) anders gebrochen werden als in der Ebene senkrecht dazu (z. B. horizontal), verschwimmt das Netzhautbild richtungsabhängig. Ein Proband mit einem unkorrigierten Astigmatismus wird infolgedessen die Lücken bei 12 und 6 Uhr problemlos erkennen, während er die Lücken bei 3 und 9 Uhr völlig übersieht (oder umgekehrt). Konzentrische, regelmäßige Zeichen wie der Landolt-Ring machen diese kortikalen und optischen Asymmetrien sofort messbar.
 
 4. *Kultur- und Sprachunabhängigkeit:*
-   Da der Test keinerlei Alphabetisierung oder Kenntnis spezifischer Schriftzeichen voraussetzt, ist er weltweit universell einsetzbar und schließt sprachlich oder bildungsbedingt verfälschte Messergebnisse vollständig aus. 
+  Da der Test keinerlei Alphabetisierung oder Kenntnis spezifischer Schriftzeichen voraussetzt, ist er weltweit universell einsetzbar und schließt sprachlich oder bildungsbedingt verfälschte Messergebnisse vollständig aus.
 
 == Mathematische Beschreibung und der Sehwinkel
 
@@ -249,7 +266,7 @@ Um das Prinzip des Snellen-Bruchs zu veranschaulichen, werden im Folgenden typis
   *Beispiel 1: Normalsichtigkeit im Praktikumsaufbau*
   - *Prüfdistanz ($d$):* Der Proband steht im vorgeschriebenen, fixen Laborabstand von $d = 4,6$ Metern zur Sehtafel.
   - *Soll-Entfernung ($D$):* Der Proband kann die Lücke des Landolt-Rings in der Zeile auflösen, die für eine Soll-Entfernung von $D = 4,6$ Metern konstruiert wurde.
-  - *Berechnung:* 
+  - *Berechnung:*
     $ V = (4,6 " m") / (4,6 " m") = 1,0 $
     Dies entspricht einer normalen Sehschärfe (Dezimalvisus von $1,0$ bzw. 100 % Sehleistung).
 
@@ -282,44 +299,52 @@ In der ophthalmologischen Praxis unterscheidet man grundlegend zwei Konstruktion
     columns: (1.2fr, 2fr, 2fr),
     align: (center + horizon, left + horizon, left + horizon),
     // Kopfzeile dunkelgrau, danach abwechselnd hellgrau und weiß
-    fill: (col, row) => if row == 0 { luma(90%) } else if calc.even(row) {none } else { none },
+    fill: (col, row) => if row == 0 { luma(90%) } else if calc.even(row) {
+      none
+    } else { none },
     stroke: 0.5pt + rgb("dee2e6"),
-    
+
     table.header(
       [*Kriterium*],
       [*Typ A: Universelle Sehtafeln* ],
-      [*Typ B: Festabstand-Sehtafeln* ]
+      [*Typ B: Festabstand-Sehtafeln* ],
     ),
-    
+
     [*Beschriftung*],
     [Neben den Zeilen sind die Soll-Distanzen ($D$-Werte, z. B. $D=50$, $D=5$) angegeben.],
     [Neben den Zeilen sind direkt die fertigen Visus-Werte ($1,0$, $0,9$, $0,8$ etc.) aufgedruckt.],
-    
+
     [*Flexibilität*],
     [Sehr hoch. Die Tafel kann in beliebig großen Räumen aufgehängt werden, da sich die Prüfdistanz ($d$) frei anpassen lässt.],
     [Starr an eine einzige, vom Hersteller definierte Entfernung gebunden (hier im Praktikum exakt $4,6$ Meter).],
-    
+
     [*Berechnung*],
     [Der Visus ist nicht direkt ablesbar. Er muss nach dem Test manuell über den Snellen-Bruch ($V = d/D$) berechnet werden.],
-    [Keine Umrechnung erforderlich. Der Wert am linken Rand entspricht direkt dem Endergebnis, sofern der Abstand strikt eingehalten wird.]
+    [Keine Umrechnung erforderlich. Der Wert am linken Rand entspricht direkt dem Endergebnis, sofern der Abstand strikt eingehalten wird.],
   ),
-  caption: [Vergleich zwischen Universalsehtafeln und Festabstandsehtafeln.]
+  caption: [Vergleich zwischen Universalsehtafeln und Festabstandsehtafeln.],
 )
 
 
 #meander.reflow({
   import meander: *
   // Obstacles
-  placed(right, boundary: // Override the default margin
-      contour.margin(5mm),figure(block(fill: red, width: 45%), caption: [Landolt-Sehtafel mit $D$ und $V$] )
-)
+  placed(
+    right,
+    boundary: // Override the default margin
+    contour.margin(5mm),
+    figure(
+      block(fill: red, width: 45%),
+      caption: [Landolt-Sehtafel mit $D$ und $V$],
+    ),
+  )
   // Container
-  container(margin:5cm)
+  container(margin: 5cm)
 
   // Flowing text
   content[
-Die Abbildung 5. zeigt eine standardisierte Landolt-Sehtafel (Festabstand-Sehtafel) zur Bestimmung der Sehschärfe. Am linken Rand jeder Zeile ist die Soll-Entfernung ($D$-Wert in Metern) angegeben, während am rechten Rand der direkt resultierende Dezimalvisus ($V$) aufgedruckt ist.
-]
+    Die Abbildung 5. zeigt eine standardisierte Landolt-Sehtafel (Festabstand-Sehtafel) zur Bestimmung der Sehschärfe. Am linken Rand jeder Zeile ist die Soll-Entfernung ($D$-Wert in Metern) angegeben, während am rechten Rand der direkt resultierende Dezimalvisus ($V$) aufgedruckt ist.
+  ]
 })
 #pagebreak()
 = Materialien
@@ -328,7 +353,7 @@ Für die Durchführung des Experiments zur Bestimmung des räumlichen Auflösung
 
 1. *Landolt-Sehtafel (Typ B):* Eine kalibrierte Wandtafel mit standardisierten Optotypen (Landoltringe in 8 verschiedenen Orientierungen). Die Tafel ist speziell für eine fixe Prüfdistanz von exakt $d = 4,6$ Metern ausgelegt, sodass die Visus-Werte direkt am Zeilenrand abgelesen werden können.
 2. *Messband / Distanzmesser:* Zur präzisen Einmessung und Markierung der exakten Prüfdistanz auf dem Boden des Laborraums.
-3. *Oklusionsklappe / Augenklappe:* Ein standardisiertes, lichtundurchlässiges Hilfsmittel zur sauberen Abdeckung des jeweils nicht geprüften Auges, ohne dabei Druck auf den Augapfel auszuüben. Die Hand zur Abdeckung zu nutzen wird nicht geraten, da die Person schummeln könnte. 
+3. *Oklusionsklappe / Augenklappe:* Ein standardisiertes, lichtundurchlässiges Hilfsmittel zur sauberen Abdeckung des jeweils nicht geprüften Auges, ohne dabei Druck auf den Augapfel auszuüben. Die Hand zur Abdeckung zu nutzen wird nicht geraten, da die Person schummeln könnte.
 4. *Eigene Sehhilfen (sofern vorhanden):* Brillen oder Kontaktlinsen der jeweiligen Probanden zur Bestimmung des korrigierten Visus im Vergleich zum unkorrigierten Visus.
 5. *Standardisierte Laborbeleuchtung:* Eine konstante Raumbeleuchtung zur Gewährleistung stabiler Kontrastverhältnisse und einer definierten Pupillenöffnung (Vermeidung extremer alters- oder helligkeitsbedingter Miosis/Mydriasis).
 #pagebreak()
@@ -351,7 +376,13 @@ Die visuelle Akuitätsbestimmung wird nach einem streng standardisierten, klinis
 #pagebreak()
 == Ablaufdiagramm des klinischen Testablaufs
 // Helper-Funktionen für das Ablaufdiagramm (kannst du oben im File oder direkt vor dem Diagramm definieren)
-#let flow-step(num, title, desc, fill: rgb("f8f9fa"), stroke-color: rgb("ced4da")) = {
+#let flow-step(
+  num,
+  title,
+  desc,
+  fill: rgb("f8f9fa"),
+  stroke-color: rgb("ced4da"),
+) = {
   block(
     fill: fill,
     inset: 12pt,
@@ -368,15 +399,19 @@ Die visuelle Akuitätsbestimmung wird nach einem streng standardisierten, klinis
           height: 22pt,
           radius: 11pt,
           fill: rgb("005088"), // Dein edles Blau aus der Präsentation
-          align(center + horizon)[#text(fill: white, weight: "bold", size: 10pt)[#num]]
+          align(center + horizon)[#text(
+            fill: white,
+            weight: "bold",
+            size: 10pt,
+          )[#num]],
         ),
         [
           #text(weight: "bold", size: 10.5pt, fill: rgb("1e293b"))[#title] \
           #v(1pt)
           #text(size: 9pt, fill: rgb("475569"))[#desc]
-        ]
+        ],
       )
-    ]
+    ],
   )
 }
 
@@ -394,8 +429,10 @@ Die visuelle Akuitätsbestimmung wird nach einem streng standardisierten, klinis
     #grid(
       columns: (1fr, 1fr),
       align: center,
-      text(fill: rgb("005088"), size: 14pt)[$arrow.bl$], // bl statt dl
-      text(fill: rgb("005088"), size: 14pt)[$arrow.br$]  // br statt dr
+      text(fill: rgb("005088"), size: 14pt)[$arrow.bl$],
+      // bl statt dl
+      text(fill: rgb("005088"), size: 14pt)[$arrow.br$],
+      // br statt dr
     )
     #v(-2pt)
   ]
@@ -407,8 +444,10 @@ Die visuelle Akuitätsbestimmung wird nach einem streng standardisierten, klinis
     #grid(
       columns: (1fr, 1fr),
       align: center,
-      text(fill: rgb("005088"), size: 14pt)[$arrow.br$], // br statt dr
-      text(fill: rgb("005088"), size: 14pt)[$arrow.bl$]  // bl statt dl
+      text(fill: rgb("005088"), size: 14pt)[$arrow.br$],
+      // br statt dr
+      text(fill: rgb("005088"), size: 14pt)[$arrow.bl$],
+      // bl statt dl
     )
     #v(-2pt)
   ]
@@ -424,33 +463,61 @@ Die visuelle Akuitätsbestimmung wird nach einem streng standardisierten, klinis
     stroke: 0.5pt + rgb("e2e8f0"),
     [
       #align(center)[
-        #text(weight: "bold", size: 12pt, fill: rgb("005088"))[Klinischer Ablaufplan der Visusbestimmung]
+        #text(
+          weight: "bold",
+          size: 12pt,
+          fill: rgb("005088"),
+        )[Klinischer Ablaufplan der Visusbestimmung]
         #v(12pt)
       ]
-      
-      #flow-step("1", "Raumvorbereitung", "Präzises Ausmessen und Markieren der Prüfdistanz von exakt 4,6 Metern am Boden.")
-      
+
+      #flow-step(
+        "1",
+        "Raumvorbereitung",
+        "Präzises Ausmessen und Markieren der Prüfdistanz von exakt 4,6 Metern am Boden.",
+      )
+
       #arrow-down()
-      
-      #flow-step("2", "Positionierung des/der Patient:in", "Aufrechte Ausrichtung an der Markierung; Sicherstellung einer absolut ruhigen Kopf- und Körperhaltung.")
-      
+
+      #flow-step(
+        "2",
+        "Positionierung des/der Patient:in",
+        "Aufrechte Ausrichtung an der Markierung; Sicherstellung einer absolut ruhigen Kopf- und Körperhaltung.",
+      )
+
       #split-arrows()
-      
+
       #grid(
         columns: (1fr, 1fr),
         gutter: 14pt,
-        flow-step("3a", "Monokulare Testung (Rechts)", "Abdeckung des linken Auges. Bestimmung der Abbruchschwelle mittels 60%-Regel."),
-        flow-step("3b", "Monokulare Testung (Links)", "Wechsel der Oklusionsklappe auf das rechte Auge. Identische Abfrage der Ringlücken.")
+        flow-step(
+          "3a",
+          "Monokulare Testung (Rechts)",
+          "Abdeckung des linken Auges. Bestimmung der Abbruchschwelle mittels 60%-Regel.",
+        ),
+        flow-step(
+          "3b",
+          "Monokulare Testung (Links)",
+          "Wechsel der Oklusionsklappe auf das rechte Auge. Identische Abfrage der Ringlücken.",
+        ),
       )
-      
+
       #merge-arrows()
-      
-      #flow-step("4", "Binokulare Testung", "Gleichzeitiger Sehtest mit beiden Augen zur Überprüfung des Effekts der binokularen Summation.")
-      
+
+      #flow-step(
+        "4",
+        "Binokulare Testung",
+        "Gleichzeitiger Sehtest mit beiden Augen zur Überprüfung des Effekts der binokularen Summation.",
+      )
+
       #arrow-down()
-      
-      #flow-step("5", "Optionale Wiederholung mit Sehhilfe", "Trägt der/die Patient:in eine Brille oder Kontaktlinsen, wird der gesamte Ablauf ein zweites Mal mit Korrektur durchlaufen.")
-    ]
+
+      #flow-step(
+        "5",
+        "Optionale Wiederholung mit Sehhilfe",
+        "Trägt der/die Patient:in eine Brille oder Kontaktlinsen, wird der gesamte Ablauf ein zweites Mal mit Korrektur durchlaufen.",
+      )
+    ],
   )
 ]
 
@@ -458,21 +525,24 @@ Die visuelle Akuitätsbestimmung wird nach einem streng standardisierten, klinis
 
 Die Einhaltung einer strikten Prüfreihenfolge ist für die Validität der Messergebnisse von fundamentaler Bedeutung:
 
-1. *Priorität der unkorrigierten Messung:* 
-   Die Testung ohne Sehhilfe muss zwingend vor der Messung mit Sehhilfe durchgeführt werden. Würde man zuerst mit optimaler Korrektur testen, könnte der Proband die kleinsten Optotypen fehlerfrei auflösen. Bei der anschließenden unkorrigierten Messung käme es zu einem starken Memorierungseffekt (Lerneffekt), bei dem das Gehirn die Richtungen der verschwommen wahrgenommenen Ringe unbewusst aus dem Kurzzeitgedächtnis rekonstruiert. Dies würde den Rohvisus systematisch überschätzen.
+1. *Priorität der unkorrigierten Messung:*
+  Die Testung ohne Sehhilfe muss zwingend vor der Messung mit Sehhilfe durchgeführt werden. Würde man zuerst mit optimaler Korrektur testen, könnte der Proband die kleinsten Optotypen fehlerfrei auflösen. Bei der anschließenden unkorrigierten Messung käme es zu einem starken Memorierungseffekt (Lerneffekt), bei dem das Gehirn die Richtungen der verschwommen wahrgenommenen Ringe unbewusst aus dem Kurzzeitgedächtnis rekonstruiert. Dies würde den Rohvisus systematisch überschätzen.
 
 2. *Monokular vor Binokular:*
-   Aus demselben Grund müssen die Einzelaugen vor der beidäugigen (binokularen) Betrachtung getestet werden. Da der Visus unter binokularer Summation am höchsten ist, würde ein Erstkontakt im binokularen Modus die monokularen Einzeltests durch Lerneffekte verfälschen.
+  Aus demselben Grund müssen die Einzelaugen vor der beidäugigen (binokularen) Betrachtung getestet werden. Da der Visus unter binokularer Summation am höchsten ist, würde ein Erstkontakt im binokularen Modus die monokularen Einzeltests durch Lerneffekte verfälschen.
 
 3. *Vermeidung von sequentiellem Wechsel:*
-   Ein ständiger Wechsel zwischen den Zuständen „mit“ und „ohne“ Sehhilfe für jedes einzelne Auge ist zu vermeiden. Die permanente Umstellung erzwingt eine kontinuierliche Akkommodationsänderung des Ziliarmuskels, was zu einer vorzeitigen neuronalen und muskulären Ermüdung (_visuelle Fatigue_) führt und die Genauigkeit der Abbruchschwelle mindert.
+  Ein ständiger Wechsel zwischen den Zuständen „mit“ und „ohne“ Sehhilfe für jedes einzelne Auge ist zu vermeiden. Die permanente Umstellung erzwingt eine kontinuierliche Akkommodationsänderung des Ziliarmuskels, was zu einer vorzeitigen neuronalen und muskulären Ermüdung (_visuelle Fatigue_) führt und die Genauigkeit der Abbruchschwelle mindert.
 
 #pagebreak()
 = Ergebnisse
 
 == Diskriptive Statistik über alle Jahrgänge
 
-#figure(block(fill: red, width: 100%), caption: [Deskriptive Statistik über alle Jahrgänge])
+#figure(
+  block(fill: red, width: 100%),
+  caption: [Deskriptive Statistik über alle Jahrgänge],
+)
 
 Die Tabelle 2 fasst die erhobenen Daten zur Sehschärfe (Visus) über alle Jahrgänge zusammen. Die Stichprobe ist dabei in zwei Hauptgruppen unterteilt: Probanden mit Brille ($n = 221$) und Probanden ohne Brille ($n = 321$). Für jede Gruppe wurden der Mittelwert samt Standardabweichung ($overline(x) plus.minus s$), die Spannweite (_Range_) sowie die Stichprobengröße ($n$) für beide Augen gemeinsam (binokular) sowie für das linke und rechte Auge getrennt (monokular) dokumentiert.
 
@@ -486,7 +556,10 @@ Beim Betrachten der reinen Zahlenwerte lassen sich folgende unmittelbare Beobach
 
 == Diskriptive Statistik MBI 2025
 
-#figure(block(fill: red, width: 100%), caption: [Deskriptive Statistik MBI 2025])
+#figure(
+  block(fill: red, width: 100%),
+  caption: [Deskriptive Statistik MBI 2025],
+)
 
 Die Tabelle 3 zeigt die deskriptiven statistischen Kennwerte für den spezifischen Jahrgang MBI 2025. Das kleinere Teilkollektiv teilt sich auf in Probanden mit Brille ($n = 9$) und Probanden ohne Brille ($n = 16$). Erhoben wurden analog die Parameter Mittelwert und Standardabweichung ($overline(x) plus.minus s$), die Spannweite (_Range_) sowie die Stichprobengröße ($n$) für die binokulare sowie die beiden monokularen Messungen.
 
@@ -500,7 +573,10 @@ Die rein numerische Betrachtung dieser Daten liefert folgende primäre Beobachtu
 
 == Korrelation zwischen linkem und rechtem Auge
 
-#figure(block(fill: red, width: 100%), caption: [Korrelation zwischen linkem und rechtem Auge])
+#figure(
+  block(fill: red, width: 100%),
+  caption: [Korrelation zwischen linkem und rechtem Auge],
+)
 
 Die Abbildung 5 zeigt ein Streudiagramm (Scatterplot), in dem die Sehschärfe des linken Auges (X-Achse) gegen die Sehschärfe des rechten Auges (Y-Achse) aufgetragen ist. Jeder blaue Datenpunkt repräsentiert die Messwerte eines Probanden. Durch die Farbintensität (Überlagerung von Punkten) wird ersichtlich, wo sich die Messwerte häufen. Zudem ist eine rote lineare Regressionsgerade eingezeichnet.
 
@@ -513,7 +589,10 @@ Die rein optische und numerische Auswertung der Grafik zeigt folgende Beobachtun
 
 == Korrelation zwischen unkorrigiertem und korrigiertem Visus
 
-#figure(block(fill: red, width: 100%), caption: [Korrelation zwischen unkorrigiertem und korrigiertem Visus])
+#figure(
+  block(fill: red, width: 100%),
+  caption: [Korrelation zwischen unkorrigiertem und korrigiertem Visus],
+)
 
 Die Abbildung 6 zeigt ein weiteres Streudiagramm, bei dem die Sehschärfe mit Brille (X-Achse, korrigierter Visus) gegen die Sehschärfe ohne Brille (Y-Achse, unkorrigierter Visus) aufgetragen ist. Die blauen Punkte zeigen die Verteilung der Probandenwerte, wobei dunklere Punkte durch überlagerte Datenpunkte entstehen. Eine rote lineare Regressionsgerade stellt den Gesamttrend dar.
 
@@ -526,18 +605,21 @@ Bei der reinen Betrachtung der Werte fallen folgende Punkte auf:
 
 == Hypothesenprüfung: alle Jahrgänge
 #pad(x: -2cm)[
-#figure(block(fill: red, width: 100%), caption: [Hypothesenprüfung: alle Jahrgänge])]
+  #figure(
+    block(fill: red, width: 100%),
+    caption: [Hypothesenprüfung: alle Jahrgänge],
+  )]
 
 Die Tabelle 4 fasst die Ergebnisse der inferenzstatistischen Prüfung (Hypothesentests) für das Gesamtkollektiv über alle Jahrgänge zusammen. Die Tabelle ist in fünf Spalten unterteilt: die aufgestellte *Nullhypothese ($H_0$)*, das gewählte *Testverfahren*, die berechneten *Prüfstatistiken* samt Stichprobengrößen ($n$), der resultierende *p-Wert* sowie die finale Entscheidung über die statistische *Signifikanz* bezogen auf ein vorgegebenes Signifikanzniveau von $alpha = 0,05$.
 
-=== Ungepaarter Zwei-Stichproben-t-Test 
+=== Ungepaarter Zwei-Stichproben-t-Test
 Für den Vergleich aller unkorrigierten und korrigierten Messwerte als unabhängige Gruppen ($n_1 = 221$, $n_2 = 197$) fließt die Formel für unabhängige Stichproben bei ungleichen Stichprobengrößen ein. Die Prüfgröße $T$ berechnet sich aus den Gruppenmittelwerten ($overline(X)_1, overline(X)_2$) und den Gruppenvarianzen ($s_1^2, s_2^2$):
 
 $ T = (overline(X)_1 - overline(X)_2) / sqrt(s_1^2 / n_1 + s_2^2 / n_2) $
 
 Da hier die Gesamtheiten aller Messwerte (über alle Personen hinweg) aggregiert verglichen werden, mitteln sich die individuellen Effekte heraus. Numerisch liegen die Gruppenmittelwerte nahe beieinander ($overline(X_1) = 1,44$ und $overline(X_2) = 1,53$), was zu einem niedrigen $T$-Wert von $-0,68$ führt.
 
-=== Gepaarter Zwei-Stichproben-t-Test 
+=== Gepaarter Zwei-Stichproben-t-Test
 Bei den restlichen Fragestellungen handelt es sich um abhängige Stichproben (Messwiederholungen oder paarweise Organe derselben Person). Hier fließt nicht der Gruppenmittelwert in die mathematische Formel ein, sondern die individuelle Differenz $d_i = X_(1,i) - X_(2,i)$ jedes einzelnen Probanden. Die Prüfgröße $T$ berechnet sich aus dem Mittelwert dieser Differenzen ($overline(d)$) und der Standardabweichung der Differenzen ($s_d$):
 
 $ T = overline(d) / (s_d / sqrt(n)) $
@@ -558,7 +640,7 @@ Die aus den Formeln berechneten $T$-Werte werden anschließend gegen die theoret
 
 == Hypothesenprüfung: MBI 2025
 #pad(x: -2cm)[
-#figure(block(fill: red, width: 100%), caption: [Hypothesenprüfung: MBI 2025])
+  #figure(block(fill: red, width: 100%), caption: [Hypothesenprüfung: MBI 2025])
 ]
 Die Tabelle 5 fasst die Ergebnisse der Hypothesentests für das spezifische Teilkollektiv des Jahrgangs MBI 2025 zusammen. Die mathematischen Teststatistiken (Prüfgrößen $T$) sowie die p-Werte basieren auf den identischen Berechnungsformeln des ungepaarten bzw. gepaarten Zwei-Stichproben-t-Tests und der zugehörigen Student-t-Verteilung, wie sie im vorherigen Abschnitt erklärt wurden.
 
@@ -576,7 +658,7 @@ Die rein numerische Beschreibung der Testergebnisse für diesen Jahrgang stellt 
 Die Analyse der deskriptiven und inferenzstatistischen Ergebnisse liefert tiefere Einblicke in die Physiologie des Sehens sowie in die Funktionsweise optischer Korrekturen. Im Folgenden werden die zentralen Befunde im Kontext der physiologischen Grundlagen diskutiert.
 
 == Okulare Symmetrie des Kollektivs
-Sowohl in der Gesamtstichprobe (Tabelle 2) als auch im spezifischen Jahrgang MBI 2025 (Tabelle 3) zeigt sich eine ausgeprägte numerische Symmetrie zwischen dem linken und rechten Auge. Die Mittelwerte weichen maximal um $0,04$ Visuspunkte voneinander ab. 
+Sowohl in der Gesamtstichprobe (Tabelle 2) als auch im spezifischen Jahrgang MBI 2025 (Tabelle 3) zeigt sich eine ausgeprägte numerische Symmetrie zwischen dem linken und rechten Auge. Die Mittelwerte weichen maximal um $0,04$ Visuspunkte voneinander ab.
 Inferenzstatistisch liefert der gepaarte t-Test für das Gesamtkollektiv (Tabelle 4, Test 5) zwar ein knapp signifikantes Ergebnis ($p = 0,05$), im kleineren Jahrgang MBI 2025 (Tabelle 5, Test 5) ist die Abweichung mit $p = 0,75$ jedoch rein zufällig. Das bedeutet, dass im statistischen Mittel keine relevante biologische Asymmetrie (wie eine systematische Einäugigkeit oder ausgeprägte Anisometropie) im Kollektiv vorliegt. Das Sehvermögen ist auf beiden Augen nahezu identisch verteilt.
 
 == Der Effekt der binokularen Summation
@@ -585,7 +667,7 @@ Ein besonders robuster Trend in allen Tabellen ist der systematische Anstieg des
 Aus physiologischer Sicht lässt sich dies durch die *binokulare Summation* im visuellen Cortex erklären. Das Gehirn addiert nicht einfach die Sehschärfen, sondern fusioniert die separaten neuronalen Signale beider Netzhäute. Durch diese kortikale Überlagerung wird das physiologische "Rauschen" (kleine Rezeptor- oder Signalfehler) herausgefiltert. Das führt zu einer nachweisbaren Steigerung der Kontrastsensitivität und des räumlichen Auflösungsvermögens – der binokulare Visus ist folglich signifikant besser als das mathematisch bessere Einzelauge.
 
 == Effektivität von Sehhilfen (Brille/Kontaktlinse)
-Der direkte Vergleich der Gruppen zeigt die deutliche Auswirkung optischer Korrekturen. Die Probanden mit Sehhilfe erreichen ein deutlich höheres und homogeneres Visusniveau (Mittelwert von $1,44$ binokular über alle Jahrgänge) als jene ohne Brille ($1,19$). 
+Der direkte Vergleich der Gruppen zeigt die deutliche Auswirkung optischer Korrekturen. Die Probanden mit Sehhilfe erreichen ein deutlich höheres und homogeneres Visusniveau (Mittelwert von $1,44$ binokular über alle Jahrgänge) als jene ohne Brille ($1,19$).
 Zudem ist die Standardabweichung in der korrigierten Gruppe signifikant geringer ($s = 0,31$ vs. $s = 0,58$). Das unkorrigierte Kollektiv weist eine enorme Streuung auf, da hier alle Ausprägungen von Kurz-, Weit- oder Stabsichtigkeit unkompensiert einfließen (was auch die Minima der Range von $0$ erklärt). Die Brille bzw. Kontaktlinse gleicht diese physikalischen Abbildungsfehler (Ametropien) aus, indem sie den Brennpunkt des Lichts präzise auf die Netzhautebene zurückwirft. Sie homogenisiert das Leistungsvermögen des Kollektivs auf einem hohen, überdurchschnittlichen Niveau.
 
 == Paradoxon der t-Tests: Ungepaart vs. Gepaart (Zeile 1 vs. Zeile 2)
@@ -596,10 +678,10 @@ Ein scheinbares mathematisches Paradoxon zeigt sich beim Vergleich der ersten be
 Der Grund hierfür liegt im fundamentalen Unterschied der statistischen Testdesigns und der biologischen Varianz:
 
 1. *Wieso der ungepaarte Test (Zeile 1) fehlschlägt:*
-   Der ungepaarte t-Test betrachtet die beiden Gruppen als völlig unabhängig voneinander. In der Gruppe "ohne Brille" befinden sich jedoch zwei fundamental unterschiedliche Typen von Menschen: Emmetrope (von Natur aus Normalsichtige mit einem Visus von oft $1,2$ bis $1,5$) und unkorrigierte Ametrope (Fehlsichtige, die in diesem Moment keine Brille tragen und Werte nahe $0$ haben). Wenn man nun den Mittelwert aller Personen mit Brille ($overline(X) = 1,44$) mit dem Mittelwert aller Personen ohne Brille ($overline(X) = 1,53$) vergleicht, maskieren die natürlich Normalsichtigen den Effekt der Fehlsichtigen. Die Varianz innerhalb der Gruppen ist so riesig, dass der Test keinen systematischen Unterschied zwischen den Gruppenidentitäten erkennt.
+  Der ungepaarte t-Test betrachtet die beiden Gruppen als völlig unabhängig voneinander. In der Gruppe "ohne Brille" befinden sich jedoch zwei fundamental unterschiedliche Typen von Menschen: Emmetrope (von Natur aus Normalsichtige mit einem Visus von oft $1,2$ bis $1,5$) und unkorrigierte Ametrope (Fehlsichtige, die in diesem Moment keine Brille tragen und Werte nahe $0$ haben). Wenn man nun den Mittelwert aller Personen mit Brille ($overline(X) = 1,44$) mit dem Mittelwert aller Personen ohne Brille ($overline(X) = 1,53$) vergleicht, maskieren die natürlich Normalsichtigen den Effekt der Fehlsichtigen. Die Varianz innerhalb der Gruppen ist so riesig, dass der Test keinen systematischen Unterschied zwischen den Gruppenidentitäten erkennt.
 
 2. *Wieso der gepaarte Test (Zeile 2) hochsignifikant ist:*
-   Der gepaarte t-Test eliminiert die interindividuelle Varianz (die Unterschiede zwischen verschiedenen Menschen) vollständig. Er schaut sich isoliert die personenspezifische Differenz an: Wie viel besser sieht dieselbe kurzsichtige Person, wenn sie ihre Brille aufsetzt? Hier vergleicht die Formel den korrigierten Zustand ($overline(X) = 1,50$) mit dem unkorrigierten Zustand ($overline(X) = 0,66$) derselben Probanden. Da sich das Sehvermögen bei jedem Fehlsichtigen durch das Aufsetzen der Sehhilfe drastisch und systematisch verbessert, ist die Varianz dieser Differenzen minimal und der t-Wert schießt nach oben. Der Test besitzt eine ungleich höhere statistische Power und weißt die Effektivität der Brille fehlerfrei nach.
+  Der gepaarte t-Test eliminiert die interindividuelle Varianz (die Unterschiede zwischen verschiedenen Menschen) vollständig. Er schaut sich isoliert die personenspezifische Differenz an: Wie viel besser sieht dieselbe kurzsichtige Person, wenn sie ihre Brille aufsetzt? Hier vergleicht die Formel den korrigierten Zustand ($overline(X) = 1,50$) mit dem unkorrigierten Zustand ($overline(X) = 0,66$) derselben Probanden. Da sich das Sehvermögen bei jedem Fehlsichtigen durch das Aufsetzen der Sehhilfe drastisch und systematisch verbessert, ist die Varianz dieser Differenzen minimal und der t-Wert schießt nach oben. Der Test besitzt eine ungleich höhere statistische Power und weißt die Effektivität der Brille fehlerfrei nach.
 #pagebreak()
 = Mögliche Fehlerquellen
 
@@ -623,7 +705,12 @@ Die Bestimmung der Sehschärfe mittels Landolt-Ringen ist ein subjektives Prüfv
 
 #show bibliography: set heading(level: 2)
 #show outline: set heading(level: 2, outlined: true)
-#bibliography("bib.yaml", title: "Literaturverzeichnis", style: "apa", full: true)
+#bibliography(
+  "bib.yaml",
+  title: "Literaturverzeichnis",
+  style: "apa",
+  full: true,
+)
 
 #colbreak()
 #outline(target: figure.where(kind: image), title: "Abbildungsverzeichnis")

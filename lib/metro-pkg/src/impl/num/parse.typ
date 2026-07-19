@@ -19,29 +19,35 @@
     return (auto,) * if full { 5 } else { 3 }
   }
 
-  let input-decimal-markers = str(options.input-decimal-markers.join("|")).replace(sym.minus, "-").replace(sym.plus, "+")
+  let input-decimal-markers = str(options.input-decimal-markers.join("|"))
+    .replace(sym.minus, "-")
+    .replace(sym.plus, "+")
   let basic-float = "([-+]?\d*(?:(?:" + input-decimal-markers + ")\d*)?)"
-  result = result.replace(sym.minus, "-").replace(sym.plus, "+").replace(" ", "").match(regex({
-    "^"
-    // Sign
-    "([-+])?"
-    // Integer
-    "(\d+)?"
-    // Decimal
-    "(?:"
+  result = result
+    .replace(sym.minus, "-")
+    .replace(sym.plus, "+")
+    .replace(" ", "")
+    .match(regex({
+      "^"
+      // Sign
+      "([-+])?"
+      // Integer
+      "(\d+)?"
+      // Decimal
       "(?:"
-        input-decimal-markers
+      "(?:"
+      input-decimal-markers
       ")"
       "(\d*)"
-    ")?" 
-    if full {
-      // Exponent
-      "(?:[eE](.*?))?"
-      // Power
-      "(?:\^(.*?))?"
-    }
-    "$"
-  }))
+      ")?"
+      if full {
+        // Exponent
+        "(?:[eE](.*?))?"
+        // Power
+        "(?:\^(.*?))?"
+      }
+      "$"
+    }))
 
   return if result == none {
     if options.parse-numbers == true {
@@ -49,7 +55,7 @@
     }
     (auto,) * if full { 5 } else { 3 }
   } else {
-   result.captures
+    result.captures
   }
 }
 

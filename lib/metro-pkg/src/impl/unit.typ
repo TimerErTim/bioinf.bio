@@ -6,9 +6,9 @@
 #let NULL-before = [ \u{FFFF}]
 
 
-#let tothe = (x) => math.attach(NULL-after, t: x)
-#let raiseto = (x) => math.attach(NULL-before, t: x)
-#let qualifier = (x) => math.attach(NULL-after, b: x)
+#let tothe = x => math.attach(NULL-after, t: x)
+#let raiseto = x => math.attach(NULL-before, t: x)
+#let qualifier = x => math.attach(NULL-after, b: x)
 
 #let parse(options, input) = {
   parse = parse.with(options)
@@ -32,7 +32,7 @@
         parse(input.base)
       } else {
         input.base
-      }
+      },
     )
   } else if func == "frac" {
     (
@@ -51,7 +51,7 @@
         input.text
       } else {
         input.body
-      }
+      },
     )
   } else if func == "lr" {
     parse(input.body.children.slice(1, -1).join())
@@ -75,7 +75,11 @@
           } else {
             result.push(out)
           }
-          if options.sticky-per and child.at("is-per", default: false) and body == NULL-before {
+          if (
+            options.sticky-per
+              and child.at("is-per", default: false)
+              and body == NULL-before
+          ) {
             per-stuck = true
           }
           out = (:)
@@ -106,7 +110,6 @@
       result.first()
     }
   }
-
 }
 
 #let display(options, input) = {
@@ -115,7 +118,11 @@
   display = display.with(options)
   let out = if "body" in input {
     if type(input.body) == array {
-      input.body.map(display).filter(x => x != none).join(options.inter-unit-product)
+      input
+        .body
+        .map(display)
+        .filter(x => x != none)
+        .join(options.inter-unit-product)
     } else if type(input.body) == dictionary {
       display(input.body)
     } else {
@@ -128,7 +135,11 @@
   }
 
   if "power" in input or "qualifier" in input {
-    if options.power-half-as-sqrt and "power" in input and calc.abs(calc.fract(input.power)) == 0.5 {
+    if (
+      options.power-half-as-sqrt
+        and "power" in input
+        and calc.abs(calc.fract(input.power)) == 0.5
+    ) {
       input.power -= 0.5
       out = math.sqrt(out)
     }
@@ -137,7 +148,7 @@
     if has-qualifier {
       if options.qualifier-mode == "bracket" {
         out += "(" + input.qualifier + ")"
-      } else if options.qualifier-mode == "phrase"{
+      } else if options.qualifier-mode == "phrase" {
         out += options.qualifier-phrase + input.qualifier
       }
     }
@@ -149,7 +160,7 @@
       },
       b: if has-qualifier and options.qualifier-mode == "subscript" {
         input.qualifier
-      }
+      },
     )
     if has-qualifier and options.qualifier-mode == "combine" {
       out += if out.t != none {
@@ -162,16 +173,22 @@
 
   if "per" in input {
     if options.per-mode == "power" {
-      out += if "body" in input {
-        options.inter-unit-product
-      } + input.per.map(p => {
-        p.power = p.at("power", default: 1) * -1
-        display(p)
-      }).join(options.inter-unit-product)
+      out += (
+        if "body" in input {
+          options.inter-unit-product
+        }
+          + input
+            .per
+            .map(p => {
+              p.power = p.at("power", default: 1) * -1
+              display(p)
+            })
+            .join(options.inter-unit-product)
+      )
     } else if options.per-mode == "fraction" {
       out = math.frac(
         out,
-        input.per.map(display).join(options.inter-unit-product)
+        input.per.map(display).join(options.inter-unit-product),
       )
     } else if options.per-mode == "symbol" {
       let denom = input.per.map(display).join(options.inter-unit-product)
@@ -183,7 +200,13 @@
   }
 
   // Don't add a quantiy-prdouct if its in symbol mode and has a per 1/kg not 1 /kg
-  return if quantity-product != none and (options.per-mode != "symbol" or "body" in input) { quantity-product + h(0pt)} + out
+  return (
+    if quantity-product != none
+      and (options.per-mode != "symbol" or "body" in input) {
+      quantity-product + h(0pt)
+    }
+      + out
+  )
 }
 
 #let default-options = (
@@ -201,14 +224,23 @@
   powers: none,
   qualifiers: none,
 
-  quantity-product: none
+  quantity-product: none,
 )
 
-#let get-options(options) = combine-dict(options, default-options, only-update: true)
+#let get-options(options) = combine-dict(
+  options,
+  default-options,
+  only-update: true,
+)
 
 #let unit(unit, options) = {
   let input = unit
-  assert(type(input) in (str, content), message: "Expected string or content input type, got " + str(type(input)) + " instead.")
+  assert(
+    type(input) in (str, content),
+    message: "Expected string or content input type, got "
+      + str(type(input))
+      + " instead.",
+  )
   options = get-options(options)
 
   if type(input) == str {
@@ -216,30 +248,44 @@
     // The first replace adds quote marks around words attached to underscores otherwise math doesn't capture the qualifier correctly.
     // Second replace removes slashes with pers as they allow no numerator to be present.
     input = eval(
-      input.replace(regex("_(\w+)|(?:(?:_|of)\((.+?)\))"), (m) => {
-        let c = m.captures
-        "_\"" + if c.first() == none {
-          c.last()
-        } else {
-          c.first()
-        } + "\""
-      }).replace("/", " per ").trim(),
+      input
+        .replace(regex("_(\w+)|(?:(?:_|of)\((.+?)\))"), m => {
+          let c = m.captures
+          (
+            "_\""
+              + if c.first() == none {
+                c.last()
+              } else {
+                c.first()
+              }
+              + "\""
+          )
+        })
+        .replace("/", " per ")
+        .trim(),
       mode: "math",
-      scope: options.units + options.prefixes + options.powers + options.qualifiers + (
-        per: math.class("binary", "per"),
-        tothe: tothe,
-        raiseto: raiseto,
-      )
+      scope: options.units
+        + options.prefixes
+        + options.powers
+        + options.qualifiers
+        + (
+          per: math.class("binary", "per"),
+          tothe: tothe,
+          raiseto: raiseto,
+        ),
     )
   }
 
   // When math content is passed directly it comes as an equation which we normally don't want to step into. If the equation is not exactly a known unit or prefix step into it.
-  if test.is-elem(math.equation, input) and not input in options.units.values() and not input in options.prefixes.values() {
+  if (
+    test.is-elem(math.equation, input)
+      and not input in options.units.values()
+      and not input in options.prefixes.values()
+  ) {
     input = input.body
   }
 
   math.upright(math.equation(
-    display(options, parse(options, input))
+    display(options, parse(options, input)),
   ))
-
 }

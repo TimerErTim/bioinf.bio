@@ -1,10 +1,15 @@
-#set page(width: auto, height: auto, fill: white.transparentize(100%), margin: 5mm)
+#set page(
+  width: auto,
+  height: auto,
+  fill: white.transparentize(100%),
+  margin: 5mm,
+)
 #import "processing.typ": tests-data
 
 #set text(font: "Arial")
 
 #let stats-content(stats) = [
-  $overline(x) plus.minus s =  #calc.round(digits: 2, stats.mean) #sym.plus.minus #calc.round(digits: 2, stats.stddev)$\
+  $overline(x) plus.minus s = #calc.round(digits: 2, stats.mean) #sym.plus.minus #calc.round(digits: 2, stats.stddev)$\
   Range: $#calc.round(digits: 1, stats.min) - #calc.round(digits: 1, stats.max)$\
   $n = #stats.values.len()$
 ]
@@ -27,9 +32,9 @@
         ..for eye-key in ("both", "left", "right") {
           let stat = stats.at(key).at(eye-key)
           (stats-content(stat),)
-        }
+        },
       )
-    }
+    },
   )
 }
 

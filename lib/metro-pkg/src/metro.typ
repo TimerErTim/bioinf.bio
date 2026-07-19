@@ -12,7 +12,7 @@
     square: impl.raiseto([2]),
     cubic: impl.raiseto([3]),
     squared: impl.tothe([2]),
-    cubed: impl.tothe([3])
+    cubed: impl.tothe([3]),
   ),
   qualifiers: (:),
 )
@@ -55,8 +55,8 @@
     input,
     combine-dict(
       options.named(),
-      _state.get()
-    )
+      _state.get(),
+    ),
   )
 }
 
@@ -68,19 +68,19 @@
     power: pw,
     combine-dict(
       options.named(),
-      _state.get()
-    )
+      _state.get(),
+    ),
   )
 }
 
 
 #let qty(
-  number, 
-  units, 
-  e: none, 
+  number,
+  units,
+  e: none,
   pm: none,
   pw: none,
-  ..options
+  ..options,
 ) = context {
   return impl.qty(
     number,
@@ -88,7 +88,7 @@
     e: e,
     pm: pm,
     pw: pw,
-    combine-dict(options.named(), _state.get())
+    combine-dict(options.named(), _state.get()),
   )
 }
 
@@ -97,11 +97,14 @@
 ) = context {
   assert(
     numbers-options.pos().len() > 1,
-    message: strfmt("Expected at least two numbers, got {} instead!", numbers-options.pos().len())
+    message: strfmt(
+      "Expected at least two numbers, got {} instead!",
+      numbers-options.pos().len(),
+    ),
   )
   return impl.num-list(
     numbers-options.pos(),
-    combine-dict(numbers-options.named(), _state.get())
+    combine-dict(numbers-options.named(), _state.get()),
   )
 }
 
@@ -110,7 +113,10 @@
 ) = context {
   assert(
     numbers-options.pos().len() > 2,
-    message: strfmt("Expected at least two numbers and a unit, got {} instead!", numbers-options.pos().len())
+    message: strfmt(
+      "Expected at least two numbers and a unit, got {} instead!",
+      numbers-options.pos().len(),
+    ),
   )
   let numbers = numbers-options.pos()
   return impl.qty-list(
@@ -125,11 +131,14 @@
 ) = context {
   assert(
     numbers-options.pos().len() > 1,
-    message: strfmt("Expected at least two numbers, got {} instead!", numbers-options.pos().len())
+    message: strfmt(
+      "Expected at least two numbers, got {} instead!",
+      numbers-options.pos().len(),
+    ),
   )
   return impl.num-product(
     numbers-options.pos(),
-    combine-dict(numbers-options.named(), _state.get())
+    combine-dict(numbers-options.named(), _state.get()),
   )
 }
 
@@ -138,13 +147,16 @@
 ) = context {
   assert(
     numbers-options.pos().len() > 1,
-    message: strfmt("Expected at least two numbers and a unit, got {} instead!", numbers-options.pos().len())
+    message: strfmt(
+      "Expected at least two numbers and a unit, got {} instead!",
+      numbers-options.pos().len(),
+    ),
   )
   let numbers = numbers-options.pos()
   return impl.qty-product(
     unit: numbers.pop(),
     numbers,
-    combine-dict(numbers-options.named(), _state.get())
+    combine-dict(numbers-options.named(), _state.get()),
   )
 }
 
@@ -154,8 +166,9 @@
   ..options,
 ) = context {
   return impl.num-range(
-    n1, n2,
-    combine-dict(options.named(), _state.get())
+    n1,
+    n2,
+    combine-dict(options.named(), _state.get()),
   )
 }
 
@@ -166,8 +179,10 @@
   ..options,
 ) = context {
   return impl.qty-range(
-    n1, n2, unit: unit,
-    combine-dict(options.named(), _state.get())
+    n1,
+    n2,
+    unit: unit,
+    combine-dict(options.named(), _state.get()),
   )
 }
 
@@ -182,14 +197,17 @@
   } else if unit == () {
     unit = none
   } else {
-    panic(strfmt("Expected only one or none positional argument, got {}", unit.len()))
+    panic(strfmt(
+      "Expected only one or none positional argument, got {}",
+      unit.len(),
+    ))
   }
 
   return impl.complex(
     real,
     imag,
     unit,
-    combine-dict(unit-options.named(), _state.get())
+    combine-dict(unit-options.named(), _state.get()),
   )
 }
 
@@ -198,6 +216,6 @@
 ) = context {
   return impl.ang(
     ang-options.pos(),
-    combine-dict(ang-options.named(), _state.get())
+    combine-dict(ang-options.named(), _state.get()),
   )
 }

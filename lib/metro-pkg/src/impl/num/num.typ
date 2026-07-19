@@ -67,10 +67,18 @@
 
 #let build(options, sign, mantissa, exponent, power, uncertainty) = {
   sign += ""
-  let is-negative = "-" in sign and (mantissa != "0" or options.retain-negative-zero)
+  let is-negative = (
+    "-" in sign and (mantissa != "0" or options.retain-negative-zero)
+  )
 
-  let bracket-ambiguous-numbers = options.bracket-ambiguous-numbers and exponent != none and uncertainty != none
-  let bracket-negative-numbers = options.bracket-negative-numbers and is-negative
+  let bracket-ambiguous-numbers = (
+    options.bracket-ambiguous-numbers
+      and exponent != none
+      and uncertainty != none
+  )
+  let bracket-negative-numbers = (
+    options.bracket-negative-numbers and is-negative
+  )
 
   // Return
   return math.equation({
@@ -82,7 +90,11 @@
       output = math.lr("(" + output + ")")
     } else if is-negative {
       output = sym.minus + output
-    } else if options.print-implicit-plus or options.print-mantissa-implicit-plus or ("+" in sign and options.retain-explicit-plus) {
+    } else if (
+      options.print-implicit-plus
+        or options.print-mantissa-implicit-plus
+        or ("+" in sign and options.retain-explicit-plus)
+    ) {
       output = sym.plus + output
     }
 
@@ -110,16 +122,19 @@
   })
 }
 
-#let get-options(options) = combine-dict(options, default-options, only-update: true)
+#let get-options(options) = combine-dict(
+  options,
+  default-options,
+  only-update: true,
+)
 
 #let num(
   number,
-  exponent: none, 
+  exponent: none,
   uncertainty: none,
   power: none,
-  options
+  options,
 ) = {
-
   options = get-options(options)
 
   let (sign, integer, decimal, exp, pwr) = if options.parse-numbers != false {
@@ -128,7 +143,7 @@
     (auto,) * 5
   }
   options.number = number
-  
+
   if exp not in (none, auto) {
     exponent = exp
   }
@@ -136,8 +151,15 @@
     power = pwr
   }
 
-  let (options, sign, mantissa, exponent, power, uncertainty) = process(options, sign, integer, decimal, exponent, power, uncertainty)
+  let (options, sign, mantissa, exponent, power, uncertainty) = process(
+    options,
+    sign,
+    integer,
+    decimal,
+    exponent,
+    power,
+    uncertainty,
+  )
 
   return build(options, sign, mantissa, exponent, power, uncertainty)
-
 }

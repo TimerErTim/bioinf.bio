@@ -1,4 +1,4 @@
-#import "/src/lib.typ": unit, metro-setup, num, qty
+#import "/src/lib.typ": metro-setup, num, qty, unit
 #set page(width: auto, height: auto, margin: 1cm)
 
 $num(sqrt(2))$

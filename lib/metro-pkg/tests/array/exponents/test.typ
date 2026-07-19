@@ -3,7 +3,11 @@
 
 
 #for exponents in ("individual", "combine-bracket", "combine") [
-  #metro-setup(list-exponents: exponents, product-exponents: exponents, range-exponents: exponents)
+  #metro-setup(
+    list-exponents: exponents,
+    product-exponents: exponents,
+    range-exponents: exponents,
+  )
 
   #num-list("5e3", "7e3", "9e3", "1e4")
 

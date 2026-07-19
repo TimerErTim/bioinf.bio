@@ -1,4 +1,4 @@
-#import "/src/lib.typ": unit, units, prefixes
+#import "/src/lib.typ": prefixes, unit, units
 #import units: *
 #import prefixes: *
 #set page(width: auto, height: auto)

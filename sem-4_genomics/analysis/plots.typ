@@ -3,7 +3,9 @@
 
 #let relevant-photometrie-data = (
   photometrie-data.find(it => it.sample_source == "Leber" and it.trial == 1),
-  photometrie-data.find(it => it.sample_source == "Bakterien" and it.trial == 2),
+  photometrie-data.find(it => (
+    it.sample_source == "Bakterien" and it.trial == 2
+  )),
 )
 
 #let boxplot-rnase-concentration = {
@@ -67,7 +69,9 @@
       label: [DNA-Konzentration],
     ),
     yaxis: (
-      ticks: groups.map(it => rotate(-35deg, reflow: true, it.label)).enumerate(),
+      ticks: groups
+        .map(it => rotate(-35deg, reflow: true, it.label))
+        .enumerate(),
     ),
     ..boxplots,
   )
@@ -104,15 +108,17 @@
       fill: color-map.at(j).lighten(10%),
       stroke: color-map.at(j).darken(25%),
     ))
-    for plot in means.enumerate().map(((i, m)) => lq.plot(
+    for plot in means
+      .enumerate()
+      .map(((i, m)) => lq.plot(
         (i + offset,),
         (m,),
         yerr: stddevs.at(i),
         color: color-map.at(j).darken(40%),
         stroke: 1pt,
       )) {
-        bar-plots.push(plot)
-      }
+      bar-plots.push(plot)
+    }
   }
   lq.diagram(
     width: 100%,

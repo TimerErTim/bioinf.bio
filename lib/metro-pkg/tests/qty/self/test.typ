@@ -1,4 +1,4 @@
-#import "/src/lib.typ": qty, metro-setup
+#import "/src/lib.typ": metro-setup, qty
 #set page(width: auto, height: auto)
 
 #qty(1.23, "J/mol/kelvin")

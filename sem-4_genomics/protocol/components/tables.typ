@@ -196,11 +196,31 @@
   table(
     columns: 4,
     table.header[*Befund*][*Erwartung (Soll)*][*Beobachtung (Ist)*][*Wahrscheinliche Ursache*],
-    [Leber-Gel unrestriktiert], [Band >20 kbp], [Band + RNA-Wolke], [RNA-reiches Gewebe, teils erfolgreiche Isolierung],
-    [Leber RNase], [weniger RNA-Signal], [teilweise sichtbar], [RNase wirkt, aber unvollständig],
-    [Leber Restriktion], [Schmier], [Schmier; LS kürzer], [Verdau ok; PstI-Teilverdau bei LS],
-    [Bakterien-Gel], [Band oben], [kaum Signal], [Lyse/Extraktion fehlgeschlagen],
-    [RNase-Konzentration], [+RNase < −RNase], [+RNase höher im Mittel], [Verunreinigungen; kleines $n$; RNA in $E_260$],
+    [Leber-Gel unrestriktiert],
+    [Band >20 kbp],
+    [Band + RNA-Wolke],
+    [RNA-reiches Gewebe, teils erfolgreiche Isolierung],
+
+    [Leber RNase],
+    [weniger RNA-Signal],
+    [teilweise sichtbar],
+    [RNase wirkt, aber unvollständig],
+
+    [Leber Restriktion],
+    [Schmier],
+    [Schmier; LS kürzer],
+    [Verdau ok; PstI-Teilverdau bei LS],
+
+    [Bakterien-Gel],
+    [Band oben],
+    [kaum Signal],
+    [Lyse/Extraktion fehlgeschlagen],
+
+    [RNase-Konzentration],
+    [+RNase < −RNase],
+    [+RNase höher im Mittel],
+    [Verunreinigungen; kleines $n$; RNA in $E_260$],
+
     [Statistik], [—], [nicht signifikant], [Stichprobe zu klein ($n = 5$–$10$)],
   )
 }

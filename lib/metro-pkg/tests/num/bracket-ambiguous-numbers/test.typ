@@ -1,4 +1,4 @@
-#import "/src/lib.typ": num, metro-setup
+#import "/src/lib.typ": metro-setup, num
 #set page(width: auto, height: auto)
 
 #num(1.2, e: 4, pm: 0.3)

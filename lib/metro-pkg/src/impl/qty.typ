@@ -17,23 +17,25 @@
   e: none,
   pm: none,
   pw: none,
-  options
+  options,
 ) = {
   options = get-options(options)
 
   let result = {
     let u = unit_(
       unit,
-      options
+      options,
     )
     num(
       number,
       exponent: e,
       uncertainty: pm,
       power: pw,
-      options + (
-        separate-uncertainty-unit: if options.separate-uncertainty == "repeat" { u }
-      )
+      options
+        + (
+          separate-uncertainty-unit: if options.separate-uncertainty
+            == "repeat" { u },
+        ),
     )
     u
   }
@@ -42,5 +44,4 @@
   } else {
     box(result)
   }
-
 }

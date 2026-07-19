@@ -1,7 +1,11 @@
 #import "defs/units.typ"
 #import "defs/prefixes.typ"
 
-#import "metro.typ": num, unit, qty, metro-setup, declare-unit, declare-prefix, create-prefix, declare-power, declare-qualifier, metro-reset, num-list, num-product, num-range, qty-list, qty-product, qty-range, complex, ang
+#import "metro.typ": (
+  ang, complex, create-prefix, declare-power, declare-prefix, declare-qualifier,
+  declare-unit, metro-reset, metro-setup, num, num-list, num-product, num-range,
+  qty, qty-list, qty-product, qty-range, unit,
+)
 
 #let numlist = num-list
 #let numproduct = num-product

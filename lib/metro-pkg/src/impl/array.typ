@@ -8,7 +8,7 @@
   list-final-separator: [ and ],
   list-pair-separator: [ and ],
   list-separator: [, ],
-  
+
   product-mode: "symbol",
   product-phrase: [ by ],
   product-symbol: sym.times,
@@ -54,9 +54,13 @@
 
   let repeated-unit = if units == "repeat" { unit }
   let result = joiner(numbers.map(n => num.num(n, options) + repeated-unit))
-  
-  if exponents == "combine-bracket" or (unit != none and units == "bracket") { 
-    result = math.lr(options.at(typ + "-open-bracket") + result + options.at(typ + "-close-bracket"))
+
+  if exponents == "combine-bracket" or (unit != none and units == "bracket") {
+    result = math.lr(
+      options.at(typ + "-open-bracket")
+        + result
+        + options.at(typ + "-close-bracket"),
+    )
   }
 
   return result + exponent + if repeated-unit == none { unit }
@@ -64,7 +68,7 @@
 
 
 #let qty-list(numbers, unit: none, options) = {
-  options = combine-dict(options,  default-options)
+  options = combine-dict(options, default-options)
   return process-numbers(
     "list",
     numbers,
@@ -77,11 +81,11 @@
       last
     },
     options,
-    unit: unit
+    unit: unit,
   )
 }
 
-#let num-list = qty-list.with(unit: none) 
+#let num-list = qty-list.with(unit: none)
 
 #let qty-product(numbers, options, unit: none) = {
   options = combine-dict(options, default-options)
@@ -94,7 +98,7 @@
       numbers.join(options.product-phrase)
     },
     options,
-    unit: unit
+    unit: unit,
   )
 }
 
@@ -111,7 +115,7 @@
       numbers.join(options.range-phrase)
     },
     options,
-    unit: unit
+    unit: unit,
   )
 }
 

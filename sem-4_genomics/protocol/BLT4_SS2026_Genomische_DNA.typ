@@ -204,8 +204,13 @@ Für die anschließende quantitative und qualitative Beurteilung der isolierten 
       @src_dna-spektrum_img
     ],
 
-    [Gel unrestriktiert], [Band >20 kbp am Gelanfang], [Theorie, @genome-architektur-theorie],
-    [Gel restr.-verdaut], [durchgehender Schmierstreifen], [@restr-enzyme-theorie],
+    [Gel unrestriktiert],
+    [Band >20 kbp am Gelanfang],
+    [Theorie, @genome-architektur-theorie],
+
+    [Gel restr.-verdaut],
+    [durchgehender Schmierstreifen],
+    [@restr-enzyme-theorie],
   )
 } <reference-values-table>
 
@@ -220,9 +225,12 @@ Für die anschließende quantitative und qualitative Beurteilung der isolierten 
     top + right,
     boundary: // Override the default margin
     contour.margin(5mm),
-    figure(image("../assets/gelelktro-illustr.png", width: 50%), caption: [Bandenmuster bei der Gelelektrophorese.
-      \
-      @src_gelelektro-illustr_img]),
+    figure(
+      image("../assets/gelelktro-illustr.png", width: 50%),
+      caption: [Bandenmuster bei der Gelelektrophorese.
+        \
+        @src_gelelektro-illustr_img],
+    ),
   )
   // Container
   container(margin: 5cm)
@@ -778,7 +786,10 @@ Die mathematische Auswertung bestätigt die qualitativen Befunde der Gelelektrop
       label: [DNA-Konzentration],
     ),
     yaxis: (
-      ticks: relevant-data.map(it => it.sample_source).map(rotate.with(-45deg, reflow: true)).enumerate(),
+      ticks: relevant-data
+        .map(it => it.sample_source)
+        .map(rotate.with(-45deg, reflow: true))
+        .enumerate(),
     ),
     lq.hbar(
       relevant-data.map(it => it.with_rnase.stats.concentration.mean),
@@ -986,10 +997,18 @@ Dieses Ergebnis macht deutlich, dass eine größere Probeneinwaage keine höhere
 )[==== Gibt es einen signifikanten Unterschied zwischen der DNA-Konzentration in Leber- und Bakterienproben?]
 
 #let leber-concentrations = (
-  relevant-data.find(it => it.sample_source == "Leber").with_rnase.measures.map(it => it.concentration)
+  relevant-data
+    .find(it => it.sample_source == "Leber")
+    .with_rnase
+    .measures
+    .map(it => it.concentration)
 )
 #let bakterien-concentrations = (
-  relevant-data.find(it => it.sample_source == "Bakterien").with_rnase.measures.map(it => it.concentration)
+  relevant-data
+    .find(it => it.sample_source == "Bakterien")
+    .with_rnase
+    .measures
+    .map(it => it.concentration)
 )
 
 *Erläuterung:* \
@@ -1012,10 +1031,14 @@ Man kann daraus schlussfolgern, dass statistische Standardtests in kleinen Prakt
 )[==== Gibt es einen signifikanten Unterschied zwischen der DNA-Konzentration in _-RNase_- und _+RNase_-Proben?]
 
 #let rnase-concentrations = (
-  relevant-data.map(it => it.with_rnase.measures.map(it => it.concentration)).flatten()
+  relevant-data
+    .map(it => it.with_rnase.measures.map(it => it.concentration))
+    .flatten()
 )
 #let nornase-concentrations = (
-  relevant-data.map(it => it.without_rnase.measures.map(it => it.concentration)).flatten()
+  relevant-data
+    .map(it => it.without_rnase.measures.map(it => it.concentration))
+    .flatten()
 )
 *Erläuterung:* \
 Aufgrund der niedrigen Anzahl an Proben wird zur Beantwortung ein Wilcoxon-Vorzeichen-Rang-Test durchgeführt. Dieser liefert eine Teststatistik von $bold(#str(calc.round(wilcoxon-signed-rank-statistic(rnase-concentrations.zip(nornase-concentrations)).w-statistic, digits: 2))) ~ W_(#rnase-concentrations.len())$, der aber #underline[nicht] unterhalb des kritischen Wertes von *8* liegt und daher #underline[*nicht signifikant*] ist.

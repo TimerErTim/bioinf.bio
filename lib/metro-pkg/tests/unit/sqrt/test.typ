@@ -1,4 +1,4 @@
-#import "/src/lib.typ": unit, metro-setup
+#import "/src/lib.typ": metro-setup, unit
 #set page(width: auto, height: auto)
 
 #metro-setup(power-half-as-sqrt: true, per-mode: "symbol")
