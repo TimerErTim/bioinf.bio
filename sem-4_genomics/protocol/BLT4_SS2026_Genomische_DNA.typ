@@ -261,7 +261,7 @@ Für die anschließende quantitative und qualitative Beurteilung der isolierten 
     boundary: // Override the default margin
     contour.margin(5mm),
     figure(
-      image("image.png", width: 20%),
+      image("../assets/dna-leiter.png", width: 20%),
       caption: [Logarithmische \ Trennung von DNA-Fragmenten \ in einem Agarosegel. @src_dna-leiter-kombi],
     ),
   )
