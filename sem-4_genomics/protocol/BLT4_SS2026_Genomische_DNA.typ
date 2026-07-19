@@ -616,7 +616,6 @@ Die Ergebnisse sind nach Probengruppe (Leber, Bakterien) und quantitativer Auswe
     #figure-genruler-ladder <genruler-1kb-plus-img>
   ],
   erlaeuterung: [
-
     @annotated-leber-unrestr-gelelectro-img zeigt das elektrophoretische Trennmuster der unverdauten Nukleinsäureisolate aus Schweineleber im direkten Vergleich mit dem Längenstandard GeneRuler 1 kb Plus (@genruler-1kb-plus-img). In allen Spurpaaren der Studierenden (LS, SG, NS, TP, SS) ist am obersten Probenrand, oberhalb der größten Markerbande von 20 kbp, eine intensiv fluoreszierende, scharfe Hauptbande lokalisiert.
 
     Am unteren Ende des Gels (Vortriebsfront) zeigt sich bei den unbehandelten Proben (blau umrandet, _-RNase_) eine stark leuchtende, gelb-orange fluoreszierende Stoffwolke im extrem niedermolekularen Bereich (< 100 bp). Bei den parallel aufgetragenen, mit RNase A behandelten Ansätzen (grün umrandet, _+RNase_) ist diese niedermolekulare Fluoreszenzwolke signifikant verändert: Bei den Proben (vor allem bei SG, TP und SS) ist eine deutliche Signalabschwächung erkennbar ist. Von den Taschen abwärts zieht sich zudem bei allen Proben ein kontinuierlicher vertikaler Schmierstreifen durch die mittleren Gelbereiche.
@@ -827,7 +826,7 @@ Das Diagramm führt dem Betrachter die quantitative Leistungsfähigkeit sowie di
 } <boxplot-rnase-concentration-diagram>
 
 *Erläuterung:*\
-Der Boxplot (Abbildung 17) zeigt die Verteilung der DNA-Konzentrationen. Die Bakterienproben (grau/rot) bilden extrem flache Boxen nahe dem Nullpunkt mit wenigen Ausreißern. Die Leberproben zeigen eine breite Streuung: Die unbehandelte Gruppe ($-$RNase, orange) liegt kompakter (ca. 1100-2200 $#sym.mu\g "/ml"$). Bei der behandelten Gruppe ($+$RNase, blau) bleibt der Median zwar ähnlich, jedoch dehnt sich die Box weit nach rechts aus und die obere Antenne reicht bis fast 4000 $#sym.mu\g "/ml"$.
+Der Boxplot (Abbildung 17) zeigt die Verteilung der DNA-Konzentrationen. Die Bakterienproben (grau/rot) bilden extrem flache Boxen nahe dem Nullpunkt mit wenigen Ausreißern. Die Leberproben zeigen eine breite Streuung: Die unbehandelte Gruppe ($-$RNase, orange) liegt kompakter (ca. 1100-2200 $#sym.mu\gslash"ml"$). Bei der behandelten Gruppe ($+$RNase, blau) bleibt der Median zwar ähnlich, jedoch dehnt sich die Box weit nach rechts aus und die obere Antenne reicht bis fast 4000 $#sym.mu\gslash"ml"$.
 
 *Interpretation:*\
 Die gestauchten Bakterien-Boxen bestätigen das flächendeckende Fehlschlagen der prokaryotischen Isolation im Kurs, meist bedingt durch unvollständigen Zellaufschluss. Die starke Streckung der Leber-Box nach der RNase-Behandlung ($+$RNase) resultiert aus dem hyperchromen Effekt: Durch den Abbau der RNA entstehen freie Ribonukleotide, deren gelockerte Basenstapelung das UV-Licht bei 260 nm intensiver absorbiert als intakte RNA. Dies täuscht dem Photometer bei konzentrierten Proben eine künstlich erhöhte DNA-Menge vor. Da die RNA-Bruchstücke in Lösung verbleiben und mitemittieren, ändert sich der Median kaum.
@@ -846,7 +845,7 @@ Der Boxplot verdeutlicht, dass die photometrische Konzentrationsbestimmung nach 
 } <grouped-bar-purity-diagram>
 
 *Erläuterung:*\
-Abbildung 18 zeigt die Reinheitsquotienten $E_{260}/E_{280}$ und $E_{260}/E_{230}$ im Vergleich. Beim Proteinwert ($E_{260}/E_{280}$) liegen beide Lebergruppen (blau/orange) ziemlich konstant bei etwa 1,5, was unter dem theoretischen Idealwert von 1,8 liegt. Die Fehlerbalken sind hier minimal. Die Bakterienproben (rot/grau) fallen im Schnitt auf 1,2 ab. Beim Salzquotienten ($E_{260}/E_{230}$) streuen die Leberwerte nur leicht, während die Werte der Bakterien mit 2,5 ($+$RNase) und 3,2 ($-$RNase) extrem hoch liegen. Die dazugehörigen Standardabweichungen sind riesig und gehen weit über die Skala hinaus.
+Abbildung 18 zeigt die Reinheitsquotienten $E_260 slash E_280$ und $E_260 slash E_230$ im Vergleich. Beim Proteinwert ($E_260 slash E_280$) liegen beide Lebergruppen (blau/orange) ziemlich konstant bei etwa 1,5, was unter dem theoretischen Idealwert von 1,8 liegt. Die Fehlerbalken sind hier minimal. Die Bakterienproben (rot/grau) fallen im Schnitt auf 1,2 ab. Beim Salzquotienten ($E_260 slash E_230$) streuen die Leberwerte nur leicht, während die Werte der Bakterien mit 2,5 ($+$RNase) und 3,2 ($-$RNase) extrem hoch liegen. Die dazugehörigen Standardabweichungen sind riesig und gehen weit über die Skala hinaus.
 
 *Interpretation:*\
 Die geringe Streuung bei den Leber-Proteinwerten spricht für einen systematischen Fehler im Praktikum. Wahrscheinlich haben alle Gruppen auf die gleiche Weise gearbeitet und leichte Phenol- oder Proteinreste mitgeschleppt, die bei 280 nm absorbieren. Die extrem hohen Salzquotienten bei den Bakterien sind biologisch unmöglich (das Maximum liegt bei 2,2). Diese Werte und die riesigen Fehlerbalken liegen sehr wahrscheinlich an einem ungenauen Nullabgleich (Blanking) des Photometers. Wenn der Wert bei 230 nm im Nenner durch Messrauschen oder eine verschmutzte Küvette gegen Null geht, schießt das rechnerische Ergebnis einfach in die Höhe.
@@ -884,7 +883,7 @@ $ <pearson-correlation-equation>
 *Funktionsweise und mathematischer Hintergrund:*\
 Der Pearson-Koeffizient misst die Stärke und Richtung des linearen Zusammenhangs zwischen zwei Variablen. Der mathematische Aufbau der Formel lässt sich in zwei funktionelle Teile zerlegen:
 - *Der Zähler (Kovarianz):* Er berechnet für jeden Datenpunkt das Produkt der Abweichungen von den jeweiligen Mittelwerten ($overline(x)$ und $overline(y)$). Weichen bei einem Datenpunkt beide Variablen gleichzeitig nach oben oder beide gleichzeitig nach unten ab, entsteht ein positives Produkt. Weicht eine Variable nach oben und die andere nach unten ab, wird das Produkt negativ. Die Summe dieser Produkte bildet die Kovarianz und zeigt an, ob sich die Variablen im Gleichlauf oder Gegenlauf bewegen.
-- *Der Nenner (Normierung):* Da die reine Kovarianz von den Maßeinheiten (hier Gramm und $#sym.mu\g / "ml"$) abhängt, wird sie im Nenner durch das Produkt der jeweiligen Standardabweichungen geteilt. Dadurch wird der Koeffizient dimensionslos und auf ein festes Intervall normiert.
+- *Der Nenner (Normierung):* Da die reine Kovarianz von den Maßeinheiten (hier Gramm und $#sym.mu\gslash"ml"$) abhängt, wird sie im Nenner durch das Produkt der jeweiligen Standardabweichungen geteilt. Dadurch wird der Koeffizient dimensionslos und auf ein festes Intervall normiert.
 
 Der resultierende Wert für $r$ liegt zwingend im Bereich von $-1$ bis $+1$:
 - $r = +1$: Ein perfekter positiver linearer Zusammenhang (je mehr Gewicht, desto höher die Konzentration).
@@ -1048,12 +1047,11 @@ Um zu überprüfen, ob der RNA-Abbau einen systematischen Einfluss auf die photo
 *Interpretation:* \
 Dieses Ergebnis ist biologisch interessant und lässt sich durch das Zusammenspiel von zwei Effekten im Praktikum erklären:
 
-- *Gegensätzliche Trends und Aufhebung der Ränge:* Theoretisch sollte der Abbau von RNA die Absorption bei 260 nm senken, da ein Teil der Nukleinsäuren zerstört wird. Wie jedoch bei den Einzelgruppen festgestellt, führt der hyperchrome Effekt durch die gelockerte Basenstapelung der freien Ribonukleotide zu einer deutlich höheren UV-Absorption. Da dieser Effekt vor allem bei den hochkonzentrierten Leberproben durchschlägt (wo die Werte nach der RNase-Behandlung steigen), während die fehlerhaften Bakterienproben ungerichtete Varianzen zeigen, gibt es keine einheitliche Richtung der Konzentrationsänderung. Beim Vorzeichen-Rang-Test heben sich die positiven und negativen Differenzen dadurch gegenseitig auf.
-- *Messtechnische Blindheit des Photometers:* Das Photometer misst stur die gesamte UV-Absorption bei 260 nm. Da die verdaute RNA nicht physikalisch aus dem Ansatz entfernt wurde (z. B. durch eine erneute Fällung), verbleiben die Bruchstücke in der Küvette. Der Test spiegelt somit die mathematische Tatsache wider, dass die Gesamtmenge an Purin- und Pyrimidinbasen in der Lösung absolut identisch geblieben ist - sie liegen lediglich in fragmentierter Form vor.
+- *Gegensätzliche Trends und Aufhebung der Ränge:* Theoretisch sollte der Abbau von RNA die Absorption bei 260nm senken, da ein Teil der Nukleinsäuren zerstört wird. Wie jedoch bei den Einzelgruppen festgestellt, führt der hyperchrome Effekt durch die gelockerte Basenstapelung der freien Ribonukleotide zu einer deutlich höheren UV-Absorption. Da dieser Effekt vor allem bei den hochkonzentrierten Leberproben durchschlägt (wo die Werte nach der RNase-Behandlung steigen), während die fehlerhaften Bakterienproben ungerichtete Varianzen zeigen, gibt es keine einheitliche Richtung der Konzentrationsänderung. Beim Vorzeichen-Rang-Test heben sich die positiven und negativen Differenzen dadurch gegenseitig auf.
+- *Messtechnische Blindheit des Photometers:* Das Photometer misst stur die gesamte UV-Absorption bei 260nm. Da die verdaute RNA nicht physikalisch aus dem Ansatz entfernt wurde (z. B. durch eine erneute Fällung), verbleiben die Bruchstücke in der Küvette. Der Test spiegelt somit die mathematische Tatsache wider, dass die Gesamtmenge an Purin- und Pyrimidinbasen in der Lösung absolut identisch geblieben ist - sie liegen lediglich in fragmentierter Form vor.
 
 *Schlussfolgerung:* \
 Zusammenfassend lässt sich sagen, dass der statistische Vergleich die Limitationen der reinen UV-Photometrie perfekt aufzeigt. Die fehlende Signifikanz bedeutet keineswegs, dass die RNase nicht gearbeitet hat - die Gelbilder haben den RNA-Abbau ja eindeutig bewiesen. Sie beweist vielmehr, dass man den Erfolg einer enzymatischen Reinigung nicht allein anhand von Absorptionswerten überprüfen kann, solange die Abbauprodukte im selben Reaktionsansatz verbleiben. Für zukünftige quantitative Vergleiche müsste vor der Messung zwingend ein Reinigungsschritt eingebaut werden, der die freien Nukleotide sauber abtrennt.
-
 
 #new-chapter[Diskussion]
 
