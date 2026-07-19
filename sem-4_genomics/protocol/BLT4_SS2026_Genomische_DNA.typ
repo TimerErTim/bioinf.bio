@@ -442,7 +442,7 @@ Mittels mehrstufiger Extraktion mit organischen Lösungsmitteln werden Proteine 
  - *Grund:* Durch die hohe Zentrifugalkraft wird die präzipitierte DNA kompaktiert; die Kühlung schützt die freie DNA vor thermischer Degradation.
 + Überstand entfernen, Pellet mit 70 % Ethanol waschen, erneut zentrifugieren. 
  - *Grund:* Der 70-prozentige Alkohol löst die mitgefällten Salze (Natriumacetat) wieder auf und wäscht sie aus, hält die DNA selbst aufgrund des verbliebenen Alkoholanteils jedoch weiterhin unlöslich im Pellet.
-+ Pellet bei Raumtemperatur an der Luft trocknen lassen und anschließend in *TE-Puffer* aufnehmen (Abbildung 7 zeigt das Prinzip der Fällung). 
++ Pellet bei Raumtemperatur an der Luft trocknen lassen und anschließend in TE-Puffer aufnehmen (Abbildung 7 zeigt das Prinzip der Fällung). 
  - *Grund:* Das Ethanol muss vollständig verdampfen, da Alkoholreste Polymerasen hemmen. Der TE-Puffer sorgt für einen stabilen pH-Wert und schützt die gelöste DNA über das enthaltene EDTA langfristig vor Spuren von Nukleasen.
 ]
 })
