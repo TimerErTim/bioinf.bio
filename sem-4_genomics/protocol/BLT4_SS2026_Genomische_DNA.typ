@@ -428,12 +428,12 @@ Um an die DNA im Inneren der Zellen zu kommen, müssen diese aufgebrochen werden
 + _Qualitätskontrolle:_ Ein homogenes, klares Lysat ohne verbliebene sichtbare Gewebereste zeigt den vollständigen Aufschluss an.
 
 *Bakterien (*E. coli*):*
-+ 1,5 ml Bakterienkultur abzentrifugieren (10 min, 10.000 × g), Überstand vorsichtig entfernen. 
- - *Grund:* Dieser Schritt dient der Konzentrierung der Bakterienzellen und der vollständigen Abtrennung des nährstoffreichen Kulturmediums.
-+ Bakterienpellet in Lysis-Puffer resuspendieren, Lysozym und EDTA zugeben. 
++ 1,5 ml Bakterienkultur abzentrifugieren (10 min, 10.000 × g), Überstand vorsichtig entfernen.
+  - *Grund:* Dieser Schritt dient der Konzentrierung der Bakterienzellen und der vollständigen Abtrennung des nährstoffreichen Kulturmediums.
++ Bakterienpellet in Lysis-Puffer resuspendieren, Lysozym und EDTA zugeben.
   - *Grund:* Als gramnegatives Bakterium besitzt E. coli eine robuste Zellwand. Das Enzym Lysozym spaltet die stabilisierende Mureinschicht, während EDTA die schützende äußere Lipopolysaccharid-Membran durch das Wegfangen von Metallionen destabilisiert und zeitgleich zelleigene DNasen inhibiert.
-+ 30 min bei 37 °C inkubieren, um die gramnegative Zellwand anzugreifen. 
- - *Grund:* Dies stellt die physiologische Optimaltemperatur für die katalytische Aktivität des Lysozyms dar.
++ 30 min bei 37 °C inkubieren, um die gramnegative Zellwand anzugreifen.
+  - *Grund:* Dies stellt die physiologische Optimaltemperatur für die katalytische Aktivität des Lysozyms dar.
 + _Qualitätskontrolle:_ Das Pellet muss vollständig aufgelöst sein. Da Bakterien eine deutlich geringere Biomasse als Gewebe besitzen, führt eine unvollständige Lyse hier sofort zu einem kritischen Verlust der DNA-Ausbeute.
 
 
@@ -475,17 +475,17 @@ Mittels mehrstufiger Extraktion mit organischen Lösungsmitteln werden Proteine 
   // Flowing text
   content[
 
-+ Zum wässrigen Überstand 1/10 Volumen 3 M Natriumacetat (pH 5,2) und 2–2,5 Volumen 100 % Ethanol zugeben. 
- - *Grund:* Das negativ geladene Phosphatrückgrat der DNA ist in Wasser hochlöslich. Die positiv geladenen Natriumionen des Salzes maskieren diese Ladung, während das unpolare Ethanol die schützende Hydrathülle aus Wassermolekülen um die DNA zerstört, wodurch die DNA aggregiert und unlöslich wird.
-+ 30 min bei −20 °C oder 10 min bei Raumtemperatur ausfällen lassen.
- - *Grund:* Die Kälte bzw. die Inkubationszeit begünstigt den Zusammenschluss der neutralisierten DNA-Stränge zu größeren, ausfallenden Komplexen.
-+ 15 min zentrifugieren (10.000 × g, 4 °C). Das DNA-Pellet sollte als weißer oder durchsichtiger Niederschlag am Boden sichtbar sein. 
- - *Grund:* Durch die hohe Zentrifugalkraft wird die präzipitierte DNA kompaktiert; die Kühlung schützt die freie DNA vor thermischer Degradation.
-+ Überstand entfernen, Pellet mit 70 % Ethanol waschen, erneut zentrifugieren. 
- - *Grund:* Der 70-prozentige Alkohol löst die mitgefällten Salze (Natriumacetat) wieder auf und wäscht sie aus, hält die DNA selbst aufgrund des verbliebenen Alkoholanteils jedoch weiterhin unlöslich im Pellet.
-+ Pellet bei Raumtemperatur an der Luft trocknen lassen und anschließend in TE-Puffer aufnehmen (Abbildung 7 zeigt das Prinzip der Fällung). 
- - *Grund:* Das Ethanol muss vollständig verdampfen, da Alkoholreste Polymerasen hemmen. Der TE-Puffer sorgt für einen stabilen pH-Wert und schützt die gelöste DNA über das enthaltene EDTA langfristig vor Spuren von Nukleasen.
-]
+    + Zum wässrigen Überstand 1/10 Volumen 3 M Natriumacetat (pH 5,2) und 2–2,5 Volumen 100 % Ethanol zugeben.
+      - *Grund:* Das negativ geladene Phosphatrückgrat der DNA ist in Wasser hochlöslich. Die positiv geladenen Natriumionen des Salzes maskieren diese Ladung, während das unpolare Ethanol die schützende Hydrathülle aus Wassermolekülen um die DNA zerstört, wodurch die DNA aggregiert und unlöslich wird.
+    + 30 min bei −20 °C oder 10 min bei Raumtemperatur ausfällen lassen.
+      - *Grund:* Die Kälte bzw. die Inkubationszeit begünstigt den Zusammenschluss der neutralisierten DNA-Stränge zu größeren, ausfallenden Komplexen.
+    + 15 min zentrifugieren (10.000 × g, 4 °C). Das DNA-Pellet sollte als weißer oder durchsichtiger Niederschlag am Boden sichtbar sein.
+      - *Grund:* Durch die hohe Zentrifugalkraft wird die präzipitierte DNA kompaktiert; die Kühlung schützt die freie DNA vor thermischer Degradation.
+    + Überstand entfernen, Pellet mit 70 % Ethanol waschen, erneut zentrifugieren.
+      - *Grund:* Der 70-prozentige Alkohol löst die mitgefällten Salze (Natriumacetat) wieder auf und wäscht sie aus, hält die DNA selbst aufgrund des verbliebenen Alkoholanteils jedoch weiterhin unlöslich im Pellet.
+    + Pellet bei Raumtemperatur an der Luft trocknen lassen und anschließend in TE-Puffer aufnehmen (Abbildung 7 zeigt das Prinzip der Fällung).
+      - *Grund:* Das Ethanol muss vollständig verdampfen, da Alkoholreste Polymerasen hemmen. Der TE-Puffer sorgt für einen stabilen pH-Wert und schützt die gelöste DNA über das enthaltene EDTA langfristig vor Spuren von Nukleasen.
+  ]
 })
 #pagebreak()
 == Hinzugabe von RNase <rnase-durchfuehrung>
@@ -625,7 +625,7 @@ Die Ergebnisse sind nach Probengruppe (Leber, Bakterien) und quantitativer Auswe
 
     Die intensiv leuchtende Signalwolke am unteren Gelrand der _-RNase_-Kontrollproben macht den erwartungsgemäß hohen Anteil an co-isolierter zellulärer RNA (vorwiegend kleine ribosomale RNA-Fragmente und tRNAs) sichtbar. Der visuelle Vergleich mit den _+RNase_-Spuren liefert den Beweis für die erfolgreiche enzymatische Aktivität der RNase A. Durch die Hydrolyse der einzelsträngigen RNA in winzige Ribonukleotide verliert diese ihre Fähigkeit, den interkalierenden Fluoreszenzfarbstoff effizient zu binden, oder wandert aufgrund der minimalen Größe vollständig aus der Gelmatrix heraus.
 
-  In den photometrischen Daten (@table-photometrie-results-leber) war nach der RNase-Behandlung kein konsistenter Rückgang der Absorption zu verzeichnen. Da freie Ribonukleotide im Photometer weiterhin bei 260 nm absorbieren und somit fälschlicherweise intakte Nukleinsäuren vortäuschen, liefert erst die Gelelektrophorese den makromolekularen Beweis für den tatsächlichen Abbau der kontaminierenden RNA.
+    In den photometrischen Daten (@table-photometrie-results-leber) war nach der RNase-Behandlung kein konsistenter Rückgang der Absorption zu verzeichnen. Da freie Ribonukleotide im Photometer weiterhin bei 260 nm absorbieren und somit fälschlicherweise intakte Nukleinsäuren vortäuschen, liefert erst die Gelelektrophorese den makromolekularen Beweis für den tatsächlichen Abbau der kontaminierenden RNA.
   ],
   schlussfolgerung: [
     Der qualitative Nachweis des erfolgreichen RNA-Abbaus sowie der Isolation intakter, hochmolekularer gDNA aus Schweineleber wurde mittels Agarose-Gelelektrophorese zweifelsfrei erbracht. Während die rein photometrische Konzentrationsbestimmung durch verbliebene Bruchstücke fehleranfällig bleibt, validiert das Bandenmuster das Erreichen der Kernziele für die eukaryotischen Proben vollständig.
@@ -724,7 +724,7 @@ Die Ergebnisse sind nach Probengruppe (Leber, Bakterien) und quantitativer Auswe
     Das fast vollständige Fehlen von hochmolekularen Banden am oberen Gelrand bei allen Proben beweist das makromolekulare Fehlschlagen der bakteriellen Genom-Isolation. Die biochemischen Ursachen hierfür lassen sich anhand der differenzierten Spurbefunde eingrenzen:
 
     - *Unvollständige Lyse der gramnegativen Zellwand (Proben EL, LH, AL):* Die Signalosigkeit (weder DNA noch RNA sichtbar) deutet darauf hin, dass die bakteriellen Zellen nicht ausreichend aufgeschlossen wurden. Wie in @genome-architektur-theorie beschrieben, blockiert die äußere Lipopolysaccharid-Schicht (LPS) gramnegativer Bakterien den Zugriff des Enzyms Lysozym auf das Mureingerüst. Wenn das EDTA im Lysepuffer unterdosiert war oder die Einwirkzeit nicht ausreichte, um die stabilisierenden Calcium- und Magnesiumionen zu chelatisieren, blieb dieser Schutzschild intakt. Die Zellen wurden beim anschließenden Zentrifugieren ungeöffnet als Debris sedimentiert und verworfen. Alternativ kam es auch hier zu einem vollständigen Verlust des winzigen DNA-Pellets während des Dekantierens bei der Ethanol-Fällung.
-    - *Partieller Aufschluss und enzymatischer Erfolg (Probe CB):* Der intensive niedermolekulare Fluoreszenzschmier in der $-$RNase-Spur von CB belegt, dass hier zumindest ein Teil der Bakterienzellen erfolgreich lysiert wurde, wodurch die massenhaft vorhandene zelluläre RNA (tRNA, 5S/16S/23S rRNA) freigesetzt und isoliert werden konnte. Das vollständige Verschwinden dieses Signals in der $+$RNase-Spur liefert den qualitativen Funktionsbeweis der eingesetzten RNase A. 
+    - *Partieller Aufschluss und enzymatischer Erfolg (Probe CB):* Der intensive niedermolekulare Fluoreszenzschmier in der $-$RNase-Spur von CB belegt, dass hier zumindest ein Teil der Bakterienzellen erfolgreich lysiert wurde, wodurch die massenhaft vorhandene zelluläre RNA (tRNA, 5S/16S/23S rRNA) freigesetzt und isoliert werden konnte. Das vollständige Verschwinden dieses Signals in der $+$RNase-Spur liefert den qualitativen Funktionsbeweis der eingesetzten RNase A.
     - *Warum fehlt bei CB dennoch die genomische DNA?* Da RNA isoliert wurde, war das Pellet physikalisch vorhanden. Das Fehlen der HMW-DNA-Bande lässt sich durch eine mechanische Zerstörung (Scherung) der riesigen, ringförmigen Bakterienchromosome durch zu abruptes Vortexen oder Pipettieren erklären. Fragmentierte DNA läuft als diffuser, schwacher Hintergrundschmier durch das Gel und verliert bei geringen Konzentrationen jegliche visuelle Nachweisgrenze. Zudem führt ein unvollständiges Abfangen von Magnesiumionen durch EDTA dazu, dass bakterielle endogene DNasen reaktiviert werden und die genomische DNA noch während der Lysephase enzymatisch degradieren.
 
     Da im unrestriktionerten Gel bereits keine gDNA nachweisbar war, erübrigte sich die elektrophoretische Auswertung der präparierten Restriktionsansätze; ein künstlich erzeugter Verdau lässt sich ohne detektierbares Ausgangsmaterial analytisch nicht darstellen.
@@ -945,7 +945,7 @@ Die Entscheidungsregel für die Wilcoxon-Tests unterscheidet sich aufgrund der R
 #pagebreak()
 #block(
   sticky: true,
-)[==== Gibt es einen Zusammenhang zwischen Gewicht der Leberprobe und der DNA-Konzentration im fertigen Isolat]
+)[==== Gibt es einen Zusammenhang zwischen Gewicht der Leberprobe und der DNA-Konzentration im fertigen Isolat?]
 
 @weight-vs-concentration-diagram zeigt mit einem Korrelationskoeffizienten von $#calc.round(correlation, digits: 2)$ keinen deutlichen Zusammenhang.
 
@@ -1075,7 +1075,7 @@ Da die Gelelektrophorese das fast vollständige Fehlen intakter gDNA belegt, mü
 
 - *Salz- und Kohlenhydratverschleppung:* Dieses Phänomen erklärt die gegenteiligen, extrem niedrigen Quotienten (wie $E_260 slash E_230 approx 0.9$ bei der Probe LH). Wurde das DNA-Pellet nach der Fällung unzureichend mit 70 % Ethanol gewaschen, verbleibt stark absorbierendes Natriumacetat im Ansatz. Ebenso absorbieren verschleppte Lipopolysaccharide (LPS) der bakteriellen Zellwand im 230-nm-Bereich stark, was den Quotienten nach unten drückt.
 
-== Soll-Ist-Vergleich 
+== Soll-Ist-Vergleich
 #{
   show: figure.with(
     caption: [Soll-Ist-Vergleich der zentralen Versuchsbefunde.],
