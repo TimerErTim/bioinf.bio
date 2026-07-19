@@ -1,11 +1,10 @@
 // Structural helpers for consistent result sections without cluttering the TOC.
 
 #let result-label(title, body) = {
-  block(breakable: true, below: 2em)[
-    #text(weight: "bold", size: 11pt, fill: rgb("#334155"))[#title]
-    #v(-0.5em)
-    #body
+  block(breakable: false, sticky: true)[
+    *#title:*\
   ]
+  body
 }
 
 #let result-section(

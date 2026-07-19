@@ -58,13 +58,13 @@
   }
   lq.diagram(
     width: 100%,
-    title: [DNA-Konzentration nach RNase-Behandlung],
+    title: [DNA-Konzentration vor & nach RNase-Behandlung],
     xaxis: (
       format-ticks: lq.tick-format.linear.with(suffix: $space mu"g/ml"$),
       tick-args: (
         density: 50%,
       ),
-      label: [Konzentration [$mu"g"\/"ml"$]],
+      label: [DNA-Konzentration],
     ),
     yaxis: (
       ticks: groups.map(it => rotate(-35deg, reflow: true, it.label)).enumerate(),
@@ -118,11 +118,11 @@
     width: 100%,
     title: [Mittlere Reinheitsquotienten ($overline(x) plus.minus s$)],
     xaxis: (
-      label: [Quotient [$-$]],
+      label: [Quotient],
       ticks: metrics.map(m => m.label).enumerate(),
     ),
     yaxis: (
-      label: [Wert [$-$]],
+      label: [Wert],
       lim: (0, auto),
     ),
     legend: (position: top + left),
