@@ -17,6 +17,16 @@ src_reinigung-na_img:
     date: 2026-05-31
   archive: Springer
 
+src_dreiseitl:
+  type: misc
+  author: FH-Prof. PD DI Dr. Stephan Dreiseitl
+  language: de
+  date: 2026-06-25
+  location: Softwarepark, Hagenberg
+  parent: 
+    type: conference
+    title: Statistics Lecture
+
 src_rna-fällung_img:
   type: web
   url:
