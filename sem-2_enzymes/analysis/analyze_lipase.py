@@ -15,10 +15,11 @@ Analysis script for Lipase experiment data.
 """
 
 # Paths to data files (adjust if needed)
-LIPASE_CSV = os.path.join('..', 'data', 'UE_Sonstiges_Ergebnisse-Lipase.csv')
-TN_LIST_CSV = os.path.join('..', 'data', 'UE_Sonstiges_Ergebnisse-TN-Liste.csv')
-PLOTS_DIR = 'plots'
-OUT_DIR = 'out'
+THIS_DIR = os.path.dirname(os.path.abspath(__file__))
+LIPASE_CSV = os.path.join(THIS_DIR, '..', 'data', 'UE_Sonstiges_Ergebnisse-Lipase.csv')
+TN_LIST_CSV = os.path.join(THIS_DIR, '..', 'data', 'UE_Sonstiges_Ergebnisse-TN-Liste.csv')
+PLOTS_DIR = os.path.join(THIS_DIR, 'plots')
+OUT_DIR = os.path.join(THIS_DIR, 'out')
 
 
 def load_clean_participant_list(path):

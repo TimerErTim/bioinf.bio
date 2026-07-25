@@ -1,10 +1,12 @@
 #import "../../templates/protocol.tpl.typ": bio-template
 
+#set document(
+  title: "Lipase Activity in Milk",
+  author: "Tim Peko",
+)
 #show: bio-template.with(
   show-cover-page: true,
-  title: "Lipase Activity in Milk",
   subtitle: "Hydrolysis of Milk Fat by Pancreatic Lipase",
-  author: "Tim Peko",
   course: "PHS2",
   semester: "SS 2025",
   language: "en",
