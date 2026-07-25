@@ -1,0 +1,6 @@
+[tasks."build:protocol"]
+description = "Build the protocol document"
+dir = "protocol"
+sources = ["PHS2_SS2026_Nathalie-Sonnleitner_Lipase.typ", "assets/*"]
+outputs = ["PHS2_SS2026_Nathalie-Sonnleitner_Lipase.pdf"]
+run = "typst compile PHS2_SS2026_Nathalie-Sonnleitner_Lipase.typ"

@@ -1,0 +1,3 @@
+Test,Comparison,Statistic,p-value,Significance
+Paired T-test,pH Drop (Ungekocht vs. Gekocht),t = 4.873,7.560e-06,Yes
+ANOVA,Effect of 'Menge' on pH Drop (Ungekocht),F = 1.459,2.001e-01,No

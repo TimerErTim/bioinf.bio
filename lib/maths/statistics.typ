@@ -1,4 +1,5 @@
 // --- Statistics Helpers ---
+#import "interpolation.typ": interpolate-linear
 
 /// Calculates the arithmetic mean of a numeric array.
 #let mean(data) = {
@@ -17,6 +18,21 @@
   } else {
     sorted.at(mid)
   }
+}
+
+#let percentiles(data, p, interpolate: interpolate-linear) = {
+  assert(
+    p >= 0 and p <= 1,
+    message: "Percentile p must be in [0, 1].",
+  )
+  assert(
+    data.len() > 0,
+    message: "Cannot compute percentile of empty data.",
+  )
+  let sorted = data.sorted()
+  let n = sorted.len()
+  let idx = p * (n - 1)
+  interpolate(((sorted.at(calc.floor(idx)), sorted.at(calc.ceil(idx))),), idx - calc.floor(idx))
 }
 
 /// Calculates the variance of a numeric array.
@@ -182,11 +198,7 @@
   let upper-tail = (
     Z-val
       * (
-        b1 * t
-          + b2 * calc.pow(t, 2)
-          + b3 * calc.pow(t, 3)
-          + b4 * calc.pow(t, 4)
-          + b5 * calc.pow(t, 5)
+        b1 * t + b2 * calc.pow(t, 2) + b3 * calc.pow(t, 3) + b4 * calc.pow(t, 4) + b5 * calc.pow(t, 5)
       )
   )
 
@@ -310,8 +322,7 @@
   let t = (
     (mean1 - mean2)
       / calc.sqrt(
-        stddev1 * stddev1 / calc.sqrt(values1.len())
-          + stddev2 * stddev2 / calc.sqrt(values2.len()),
+        stddev1 * stddev1 / calc.sqrt(values1.len()) + stddev2 * stddev2 / calc.sqrt(values2.len()),
       )
   )
   let df = calc.min(values1.len() - 1, values2.len() - 1)
@@ -330,9 +341,7 @@
   alpha: 0.05,
   alternative: "two-sided",
 ) = {
-  let diff-values = values1
-    .zip(values2)
-    .map(((value1, value2)) => value1 - value2)
+  let diff-values = values1.zip(values2).map(((value1, value2)) => value1 - value2)
   let (mean, stddev) = mean-stddev(diff-values)
   let t = (mean - expected-mu) / (stddev / calc.sqrt(diff-values.len()))
   let df = diff-values.len() - 1
@@ -556,14 +565,8 @@
     grp-a.map(it => (it, "a")) + grp-b.map(it => (it, "b")),
     by: it => it.at(0),
   )
-  let rank-sum-a = ranks
-    .filter(it => it.value.at(1) == "a")
-    .map(it => it.rank)
-    .sum()
-  let rank-sum-b = ranks
-    .filter(it => it.value.at(1) == "b")
-    .map(it => it.rank)
-    .sum()
+  let rank-sum-a = ranks.filter(it => it.value.at(1) == "a").map(it => it.rank).sum()
+  let rank-sum-b = ranks.filter(it => it.value.at(1) == "b").map(it => it.rank).sum()
   // Return the W statistic (lowest sum of ranks for groups)
   return (
     "n_a": n-a,

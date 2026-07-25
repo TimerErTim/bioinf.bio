@@ -67,6 +67,20 @@
   coeffs.at(0)
 }
 
+#let interpolate-linear(data, x-target) = {
+  let n = data.len()
+  let closest-idx = 0
+  let min-dist = calc.abs(data.at(0).at(0) - x-target)
+  for i in range(1, n) {
+    let dist = calc.abs(data.at(i).at(0) - x-target)
+    if dist < min-dist {
+      min-dist = dist
+      closest-idx = i
+    }
+  }
+  data.at(closest-idx).at(1)
+}
+
 // --- Main Intersection Function ---
 // Returns an array of x-values where the smoothed data crosses the line y = mx + c
 #let find-linear-intersections(
