@@ -33,9 +33,14 @@
   rect(stroke: 0.5pt, it)
 }
 
-#import "../analysis/plots.typ": average-ph-drop-by-amount-uncooked-plot, average-ph-drop-by-amount-cooked-plot, average-ph-drop-plot
-#import "../analysis/hypothesis.typ": paired-t-tests-active-vs-inactive, anova-tests-amount
-#import "../analysis/statistics.typ": overall-drop-statistics, drop-statistics-by-amount
+#import "../analysis/plots.typ": (
+  average-ph-drop-by-amount-cooked-plot, average-ph-drop-by-amount-uncooked-plot, average-ph-drop-plot,
+)
+#import "../analysis/hypothesis.typ": anova-tests-amount, paired-t-tests-active-vs-inactive
+#import "../analysis/statistics.typ": (
+  drop-by-amount-table-all-years, drop-by-amount-table-current-year, drop-statistics-by-amount, overall-drop-statistics,
+  overall-drop-table,
+)
 
 #pagebreak()
 = Background
@@ -106,6 +111,9 @@ Repeat as needed: For comparison, repeat the experiment using low-fat milk (e.g.
 #pagebreak()
 = Data Analysis & Results
 
+#text(size: 32pt)[*Wichtig für di, Nathalie!*]\
+In allen Auswertung wird bei redundanten Messzeitpunkten einer Messserie, also einer Versuchsgruppe, der spätere auftauchende Wert in den Rohdaten übernommen. Die pH-Wert Abnahme wird ermittelt, in dem die letzte Messung der Messserie, bei dem sowohl der gekochte als auch ungekochte Wert vorhanden sind, von der ersten Messung mit gleichen Vorraussetzungen subtrahiert wird. Messerien ohne Datum werden bei MBI 2025 systematisch nicht berücksicht, jedoch aber bei der Auswertung aller Jahrgänge. In den Diagrammen werden fehlende Werte einfach ignoriert, die Interpolation erfolgt dann linear.
+
 // Load data from CSV files
 #let stats_overall = csv(
   "assets/descriptive_statistics_overall.csv",
@@ -133,57 +141,17 @@ Repeat as needed: For comparison, repeat the experiment using low-fat milk (e.g.
 @table-desc-overall shows a clear difference between the two conditions. The mean pH drop for samples with active (unboiled) lipase was _#calc.round(float(unboiled_stats.at("mean")), digits: 2)_, more than triple the mean drop of _#calc.round(float(boiled_stats.at("mean")), digits: 2)_ for the inactive (boiled) samples. This provides strong initial evidence of enzymatic activity.
 
 #figure(
-  table(
-    columns: (1fr, 1.5fr, 1.5fr),
-    align: center,
-    table.header([], [*Boiled (Inactive)*], [*Unboiled (Active)*]),
-    ..for row in stats_overall {
-      (
-        [#row.at("")],
-        [#calc.round(float(row.at("drop_gekocht")), digits: 2)],
-        [#calc.round(float(row.at("drop_ungekocht")), digits: 2)],
-      )
-    },
-  ),
+  overall-drop-table,
   caption: [Overall descriptive statistics for the total pH drop. Values are rounded to two decimal places.],
 ) <table-desc-overall>
 
 @table-desc-menge breaks down the pH drop by the amount of enzyme solution added. While the ANOVA test did not find a statistically significant effect, this table reveals a weak trend: larger volumes of unboiled lipase tend to correspond to a greater average pH drop. For instance, the mean drop for 200 #sym.mu\L was #calc.round(float(stats_menge.find(row => row.at("Menge") == "200" and row.at("Group") == "ungekocht").at("mean")), digits: 2), while for 600 #sym.mu\L it was #calc.round(float(stats_menge.find(row => row.at("Menge") == "600" and row.at("Group") == "ungekocht").at("mean")), digits: 2). The high standard deviation in each group likely contributed to the non-significant ANOVA result.
 
-#drop-statistics-by-amount()
-#overall-drop-statistics()
-
 #figure(
-  table(
-    columns: (1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
-    align: center,
-    table.header(
-      [*Menge (µL)*],
-      [*Group*],
-      [*N*],
-      [*Mean Drop*],
-      [*Std. Dev.*],
-      [*Max Drop*],
-    ),
-    ..for row in stats_menge {
-      let is_boiled = row.at("Group") == "gekocht"
-      let menge = int(row.at("Menge"))
-      let group_label = if is_boiled { "Boiled" } else { "Unboiled" }
-
-      if calc.rem(int(row.at("Menge")), 50) == 0 or int(row.at("Menge")) < 300 {
-        (
-          if is_boiled { table.cell(rowspan: 2)[#menge] },
-          [#group_label],
-          [#row.at("count")],
-          [#calc.round(float(row.at("mean")), digits: 2)],
-          [#if row.at("std") != "" {
-            calc.round(float(row.at("std")), digits: 2)
-          } else { "-" }],
-          [#calc.round(float(row.at("max")), digits: 2)],
-        ).slice(if is_boiled { 0 } else { 1 })
-      }
-    },
-  ),
+  {
+    drop-by-amount-table-all-years
+    drop-by-amount-table-current-year
+  },
   caption: [Descriptive statistics for pH drop grouped by enzyme volume. Values are rounded.],
 ) <table-desc-menge>
 
